@@ -1,0 +1,64 @@
+<div [formGroup]="form">
+  <h1 mat-dialog-title class="dialog-title">Welcome to Hot Movies Center</h1>
+
+  <h2 mat-dialog-title class="dialog-subtitle">Login to Continue</h2>
+
+  <div>
+
+    <div class="content">
+      <div>
+        <mat-form-field appearance="outline" class="mat-form">
+          <input matInput placeholder="Email Address" formControlName="email">
+        </mat-form-field>
+        <div
+          *ngIf="usernameControl.touched && usernameControl.hasError('required')" class="error">
+          Username is required!
+        </div>
+        <div
+          *ngIf="usernameControl.touched && !usernameControl.hasError('required')
+           && usernameControl.hasError('pattern')" class="error">
+          Please insert a valid email!
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div>
+        <mat-form-field appearance="outline" class="mat-form">
+          <input matInput [type]="hide ? 'password' : 'text' " placeholder="Password" formControlName="password">
+          <button mat-icon-button matSuffix (click)="hide = !hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+        <div
+          *ngIf="passwordControl.touched && passwordControl.hasError('required')" class="error">
+          Password is required!
+        </div>
+        <div
+          *ngIf="passwordControl.touched && !passwordControl.hasError('required') && passwordControlLength() < 5" class="error">
+          Password is too short!
+        </div>
+      </div>
+    </div>
+
+    <div class="remember-me-content">
+      <mat-checkbox class="red-checkbox" formControlName="rememberMe"></mat-checkbox>
+      <label class="remember">Remember me</label>
+      <a routerLink="" class="forgot" (click)="openForgotPasswordDialog()">Forgot password</a>
+    </div>
+
+    <div class="content">
+      <button mat-raised-button class="submit-button" [disabled]="!form.valid || passwordControlLength() < 5" (click)="onSubmit()" >
+        Sign in
+      </button>
+    </div>
+    <div *ngIf="form.valid && !this.account && this.login" class="error1">
+      Account not found!
+    </div>
+    <div class="content">
+      <label class="register-option">Dont't have account? Click <a routerLink="register" class="register-color" (click)="openRegisterDialog()">Register</a></label>
+    </div>
+
+  </div>
+</div>
+
