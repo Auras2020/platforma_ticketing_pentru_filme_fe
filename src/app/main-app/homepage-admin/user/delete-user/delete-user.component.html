@@ -1,0 +1,20 @@
+<div class="dialog-margins">
+  <div class="delete-item-dialog-title">
+    <div class="title-label">
+      Delete
+    </div>
+    <div class="empty-div"></div>
+    <div class="close-button">
+      <button mat-icon-button mat-dialog-close class="dialog-close-button">
+        <mat-icon class="close-icon">close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="dialog-content">
+    Are you sure you want to delete user {{this.user?.name}}?
+  </div>
+  <div mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close class="cancel-button">Cancel</button>
+    <button mat-raised-button (click)="deleteUser()" class="delete-device-button">Delete</button>
+  </div>
+</div>
