@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {LoginComponent} from "../login/login.component";
 import {Router} from "@angular/router";
-import {UserService} from "../../main-app/user/user.service";
+import {UserService} from "../../main-app/homepage-admin/user/user.service";
 
 @Component({
   selector: 'app-register',

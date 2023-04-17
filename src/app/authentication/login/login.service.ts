@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {TokenStorageService} from "../token-storage/token-storage.service";
-import {User} from "../../main-app/user/user.service";
+import {User} from "../../main-app/homepage-admin/user/user.service";
 import {environment} from "../../../environments/environment";
 import {Observable} from "rxjs";
 import {Router} from "@angular/router";
@@ -42,6 +42,15 @@ export class LoginService {
     this.tokenStorage.saveToken(data.token);
     this.tokenStorage.saveUser(data);
     this.tokenStorage.login(true);
-    this.router.navigate(['/homepage']);
+    console.log(data.role);
+    if(data.role === 'ADMIN'){
+      this.router.navigate(['/homepage-admin']);
+    } else if(data.role === 'DISTRIBUITOR') {
+      this.router.navigate(['/homepage-distribuitor']);
+    } else if(data.role === 'CLIENT') {
+      this.router.navigate(['/homepage-client']);
+    } else {
+      this.router.navigate(['/page-not-found']);
+    }
   }
 }

@@ -5,7 +5,7 @@ import {MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogConfig} from "@angula
 import {RegisterComponent} from "../register/register.component";
 import {LoginService} from "./login.service";
 import {ForgotPasswordComponent} from "../forgot-password/forgot-password.component";
-import {User, UserService} from "../../main-app/user/user.service";
+import {User, UserService} from "../../main-app/homepage-admin/user/user.service";
 
 @Component({
   selector: 'app-login',

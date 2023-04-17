@@ -4,6 +4,7 @@ export const environment = {
   apiEndpoints: {
     users: "users/",
     login: "login",
+    logout: "logout-user",
     forgotPassword: "forgot-password",
     resetPassword: "reset-password",
     findAccount: "find-account",

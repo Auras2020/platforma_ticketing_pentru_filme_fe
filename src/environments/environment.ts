@@ -8,10 +8,13 @@ export const environment = {
   apiEndpoints: {
     users: "users/",
     login: "login",
+    logout: "logout-user",
     forgotPassword: "forgot-password",
     resetPassword: "reset-password",
     findAccount: "find-account",
-    findEmail: "find-email/"
+    findEmail: "find-email/",
+    userPage:"users/page",
+    userPageFilter:"users/page/filter"
   }
 };
 

@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {JwtHelperService} from '@auth0/angular-jwt';
+import {Router} from "@angular/router";
 
 const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';
@@ -12,11 +13,16 @@ export class TokenStorageService {
 
   private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.getIsLoggedInStatus());
 
-  constructor() { }
+  constructor(private router: Router) { }
+
+  /*reloadPage(): void {
+    window.location.reload();
+  }*/
 
   public signOut(): void {
     window.localStorage.clear();
     this.loggedIn.next(false);
+    this.router.navigate(['/login']);
   }
 
   private getIsLoggedInStatus(): any {

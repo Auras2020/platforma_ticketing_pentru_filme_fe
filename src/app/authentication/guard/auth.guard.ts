@@ -3,7 +3,6 @@ import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '
 import {Observable} from 'rxjs';
 import {map, take} from 'rxjs/operators';
 import {TokenStorageService} from "../token-storage/token-storage.service";
-import {LoginService} from "../login/login.service";
 
 
 @Injectable()
@@ -16,8 +15,10 @@ export class AuthGuard implements CanActivate {
         return this.tokenStorageService.isLoggedIn.pipe(
             take(1),
             map((isLoggedIn: boolean) => {
+              let userRole: any = JSON.parse(localStorage.getItem("user") + '')
+              console.log(userRole?.role);
                 if (!isLoggedIn) {
-                    this.router.navigate(['/']); //redirect catre login
+                    this.router.navigate(['/']);
                     return false;
                 }
                 return true;

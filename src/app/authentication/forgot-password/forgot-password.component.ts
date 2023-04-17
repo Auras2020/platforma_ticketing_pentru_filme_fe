@@ -5,7 +5,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from "@angula
 import {Email, ForgotPasswordService} from "./forgot-password.service";
 import {LoginComponent} from "../login/login.component";
 import {LoginService} from "../login/login.service";
-import {User} from "../../main-app/user/user.service";
+import {User} from "../../main-app/homepage-admin/user/user.service";
 
 @Component({
   selector: 'app-forgot-password',
