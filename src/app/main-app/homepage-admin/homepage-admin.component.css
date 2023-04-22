@@ -127,6 +127,10 @@ mat-sidenav {
   justify-content: start;
 }
 
+.menu-button:hover{
+  background-color: #ffffe0;
+}
+
 button:focus-visible {
   background-color: rgba(203, 218, 240, 0.4);
 }

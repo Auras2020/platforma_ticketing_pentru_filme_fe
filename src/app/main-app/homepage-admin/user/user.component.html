@@ -57,6 +57,21 @@
             </mat-select>
           </mat-form-field>
         </div>
+
+        <div>
+          <div class="input-label">Age</div>
+          <mat-form-field appearance="outline" class="filter-form">
+            <mat-select
+              [(ngModel)]="filters.ageInterval"
+              (selectionChange)="getAllUsers()"
+              class="form-input"
+            >
+              <mat-option *ngFor="let ageInterval of ageIntervals" [value]="ageInterval">
+                {{ ageInterval }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
       </div>
     </div>
 
@@ -113,6 +128,7 @@
             [matTooltip]="'Delete user'"
             aria-label="Delete"
             matTooltipPosition="before"
+            [disabled]="isCurrentUser(row)"
           >
             <mat-icon
             >delete

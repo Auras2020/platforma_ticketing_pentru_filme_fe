@@ -8,6 +8,15 @@ export const environment = {
     forgotPassword: "forgot-password",
     resetPassword: "reset-password",
     findAccount: "find-account",
-    findEmail: "find-email/"
+    findEmail: "find-email/",
+    userPage:"users/page",
+    userPageFilter:"users/page/filter",
+    theatres: "theatres/",
+    theatrePage:"theatres/page",
+    theatrePageFilter:"theatres/page/filter",
+    movies: "movies/",
+    moviePage:"movies/page",
+    moviePageFilter:"movies/page/filter"/*,
+    currentUser:"users/current"*/
   }
 };

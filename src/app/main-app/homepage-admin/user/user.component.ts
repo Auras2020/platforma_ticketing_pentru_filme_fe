@@ -18,6 +18,7 @@ export class UserComponent implements OnInit{
     name: '',
     email: '',
     role: '',
+    ageInterval: '',
     searchString: ''
   }
   searchString: string = '';
@@ -26,8 +27,10 @@ export class UserComponent implements OnInit{
   pageSize:number = 10
   pageSizeOptions:number[] = [5, 10, 15, 20]
   dataSource = new MatTableDataSource<User>([]);
+  currentUser?:User;
 
   roles = ['ADMIN', 'CLIENT', 'DISTRIBUITOR']
+  ageIntervals = ['<12', '12-15', '15-18', '>=18']
   public displayedColumns = [
     'name',
     'email',
@@ -38,10 +41,23 @@ export class UserComponent implements OnInit{
 
   ngOnInit(): void {
     this.getAllUsers();
+    /*this.getCurrentUser();*/
   }
 
   constructor(private userService: UserService,
               private dialog: MatDialog) {
+  }
+
+ /* getCurrentUser(){
+    this.userService.getCurrentUser().subscribe((user) => {
+      console.log(user);
+      this.currentUser = user;
+    })
+  }*/
+
+  isCurrentUser(user: any): boolean{
+    const currentUser = JSON.parse(localStorage.getItem("user") + '')
+    return user.email === currentUser.username && currentUser?.role === 'ADMIN'
   }
 
   handleSuccess(usersPage: UserPage){
@@ -90,6 +106,7 @@ export class UserComponent implements OnInit{
       name: this.filters.name,
       email: this.filters.email,
       role: this.filters.role,
+      ageInterval: this.filters.ageInterval,
       searchString: this.searchString
     };
   }
@@ -98,7 +115,8 @@ export class UserComponent implements OnInit{
     let isActive: boolean;
     isActive = !((this.filters.name === '') &&
       (this.filters.email === '') &&
-      (this.filters.role === ''));
+      (this.filters.role === '') &&
+      (this.filters.ageInterval === ''));
     return isActive;
   }
 
@@ -106,6 +124,7 @@ export class UserComponent implements OnInit{
     this.filters.name = '';
     this.filters.email = '';
     this.filters.role = '';
+    this.filters.ageInterval = '';
     this.getAllUsers();
   }
 

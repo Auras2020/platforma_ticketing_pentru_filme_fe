@@ -4,23 +4,24 @@ import {Observable} from "rxjs";
 import {environment} from "../../../../environments/environment";
 
 export interface User{
-  name: string,
-  age: number,
-  email: string,
-  password: string,
-  token: string,
-  role: string
+  name: string;
+  age: number;
+  email: string;
+  password: string;
+  token: string;
+  role: string;
 }
 
 export interface UserFilters{
   name: string;
   email: string;
   role: string;
+  ageInterval: string;
   searchString: string;
 }
 
 export class UserFilteredPage{
-  dto: UserFilters = {name:'', email:'', role:'', searchString:''};
+  dto: UserFilters = {name:'', email:'', role:'', ageInterval: '', searchString:''};
   page?: number;
   size?: number;
 }
@@ -41,6 +42,8 @@ export class UserService {
   users =  environment.apiEndpoints.users
   userPage = environment.apiEndpoints.userPage
   userPageFilter = environment.apiEndpoints.userPageFilter
+  /*currentUser = environment.apiEndpoints.currentUser*/
+
   constructor(private http: HttpClient) { }
 
   createUser(user: any): Observable<User> {
@@ -61,4 +64,8 @@ export class UserService {
   getUsersByFiltersPage(usersFilteredPage: UserFilteredPage): Observable<UserPage>{
     return this.http.post<UserPage>(this.url + this.userPageFilter, usersFilteredPage);
   }
+
+  /*getCurrentUser(): Observable<User>{
+    return this.http.get<User>(this.url + this.currentUser);
+  }*/
 }

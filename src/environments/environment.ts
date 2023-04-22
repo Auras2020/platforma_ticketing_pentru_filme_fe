@@ -14,7 +14,14 @@ export const environment = {
     findAccount: "find-account",
     findEmail: "find-email/",
     userPage:"users/page",
-    userPageFilter:"users/page/filter"
+    userPageFilter:"users/page/filter",
+    theatres: "theatres/",
+    theatrePage:"theatres/page",
+    theatrePageFilter:"theatres/page/filter",
+    movies: "movies/",
+    moviePage:"movies/page",
+    moviePageFilter:"movies/page/filter"/*,
+    currentUser:"users/current"*/
   }
 };
 

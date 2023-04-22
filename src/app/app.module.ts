@@ -41,6 +41,8 @@ import { DeleteUserComponent } from './main-app/homepage-admin/user/delete-user/
 import { TheatresComponent } from './main-app/homepage-admin/theatres/theatres.component';
 import { MoviesComponent } from './main-app/homepage-admin/movies/movies.component';
 import { ShowTimingsComponent } from './main-app/homepage-admin/show-timings/show-timings.component';
+import { DeleteTheatreComponent } from './main-app/homepage-admin/theatres/delete-theatre/delete-theatre.component';
+import { AddTheatreComponent } from './main-app/homepage-admin/theatres/add-theatre/add-theatre.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,9 @@ import { ShowTimingsComponent } from './main-app/homepage-admin/show-timings/sho
     DeleteUserComponent,
     TheatresComponent,
     MoviesComponent,
-    ShowTimingsComponent
+    ShowTimingsComponent,
+    DeleteTheatreComponent,
+    AddTheatreComponent
   ],
   imports: [
     BrowserModule,
