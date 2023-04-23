@@ -3,9 +3,7 @@ import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {Theatre, TheatreFilteredPage, TheatreFilters, TheatrePage, TheatresService} from "./theatres.service";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
-import {DeleteUserComponent} from "../user/delete-user/delete-user.component";
 import {AddTheatreComponent} from "./add-theatre/add-theatre.component";
-import {SafeUrl} from "@angular/platform-browser";
 import {DeleteTheatreComponent} from "./delete-theatre/delete-theatre.component";
 
 @Component({

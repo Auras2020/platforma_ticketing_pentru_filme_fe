@@ -43,6 +43,8 @@ import { MoviesComponent } from './main-app/homepage-admin/movies/movies.compone
 import { ShowTimingsComponent } from './main-app/homepage-admin/show-timings/show-timings.component';
 import { DeleteTheatreComponent } from './main-app/homepage-admin/theatres/delete-theatre/delete-theatre.component';
 import { AddTheatreComponent } from './main-app/homepage-admin/theatres/add-theatre/add-theatre.component';
+import { AddMovieComponent } from './main-app/homepage-admin/movies/add-movie/add-movie.component';
+import { DeleteMovieComponent } from './main-app/homepage-admin/movies/delete-movie/delete-movie.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,9 @@ import { AddTheatreComponent } from './main-app/homepage-admin/theatres/add-thea
     MoviesComponent,
     ShowTimingsComponent,
     DeleteTheatreComponent,
-    AddTheatreComponent
+    AddTheatreComponent,
+    AddMovieComponent,
+    DeleteMovieComponent
   ],
   imports: [
     BrowserModule,

@@ -27,7 +27,7 @@ export class UserComponent implements OnInit{
   pageSize:number = 10
   pageSizeOptions:number[] = [5, 10, 15, 20]
   dataSource = new MatTableDataSource<User>([]);
-  currentUser?:User;
+  /*currentUser?:User;*/
 
   roles = ['ADMIN', 'CLIENT', 'DISTRIBUITOR']
   ageIntervals = ['<12', '12-15', '15-18', '>=18']

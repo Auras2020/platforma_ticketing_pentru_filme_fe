@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class MoviesComponent {
 
+  ageRestricts = ['<12', '>=12', '>=15', '>=18'];
+  durationIntervals = ['<1h30m', '1h30m-2h0m', '2h0m-2h30m', '>2h30m']
 }
