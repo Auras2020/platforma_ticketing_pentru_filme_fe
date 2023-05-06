@@ -1,3 +1,7 @@
+.page-content{
+  margin-bottom: 100px;
+}
+
 .filter-card{
   min-height: 156px;
   margin: 24px;
@@ -145,6 +149,7 @@
 
 mat-table {
   width: 100%;
+  border-collapse: collapse;
 }
 
 .mdc-data-table__header-cell{
@@ -158,7 +163,7 @@ mat-table {
 .name-column {
   text-align: left;
   font-weight: 600;
-  width: 8%;
+  width: 10%;
   color: #213555;
   font-size: 14px;
   vertical-align: middle;
@@ -167,17 +172,34 @@ mat-table {
 .delete-column, .edit-column{
   text-align: left;
   font-weight: 600;
-  width: 8%;
+  width: 1%;
   color: #DC4E2A;
   font-size: 14px;
+}
+
+.data-header{
+  width: 20%;
+}
+
+.action-header{
+  width: 1%;
 }
 
 .gray-row {
   background-color: #F6F8F8 !important;
 }
 
-.hovered-row:hover{
+.row:hover{
   background-color: #FFF3E0 !important;
+}
+
+.row{
+  cursor: pointer;
+  border: 2px solid #213555;
+}
+
+.header{
+  border: 2px solid #213555;
 }
 
 .darker{

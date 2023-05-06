@@ -13,6 +13,9 @@ import {UserComponent} from "./main-app/homepage-admin/user/user.component";
 import {TheatresComponent} from "./main-app/homepage-admin/theatres/theatres.component";
 import {MoviesComponent} from "./main-app/homepage-admin/movies/movies.component";
 import {ShowTimingsComponent} from "./main-app/homepage-admin/show-timings/show-timings.component";
+import {MovieDetailsComponent} from "./main-app/homepage-admin/movies/movie-details/movie-details.component";
+import {TheatreDetailsComponent} from "./main-app/homepage-admin/theatres/theatre-details/theatre-details.component";
+import {DashboardComponent} from "./main-app/homepage-admin/dashboard/dashboard.component";
 
 const routes: Routes = [
   {path: 'login', component: MainAppComponent},
@@ -24,9 +27,12 @@ const routes: Routes = [
     path: 'homepage-admin',
     component: HomepageAdminComponent,
     children: [
+      {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard, AdminGuard]},
       {path: 'users', component: UserComponent, canActivate: [AuthGuard, AdminGuard]},
       {path: 'theatres', component: TheatresComponent, canActivate: [AuthGuard, AdminGuard]},
+      {path: 'theatres/:id', component: TheatreDetailsComponent, canActivate: [AuthGuard, AdminGuard]},
       {path: 'movies', component: MoviesComponent, canActivate: [AuthGuard, AdminGuard]},
+      {path: 'movies/:id', component: MovieDetailsComponent, canActivate: [AuthGuard, AdminGuard]},
       {path: 'show-timings', component: ShowTimingsComponent, canActivate: [AuthGuard, AdminGuard]}
   ]
   },

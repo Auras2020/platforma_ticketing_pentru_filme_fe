@@ -44,7 +44,7 @@ export class LoginService {
     this.tokenStorage.login(true);
     console.log(data.role);
     if(data.role === 'ADMIN'){
-      this.router.navigate(['/homepage-admin']);
+      this.router.navigate(['/homepage-admin/dashboard']);
     } else if(data.role === 'DISTRIBUITOR') {
       this.router.navigate(['/homepage-distribuitor']);
     } else if(data.role === 'CLIENT') {

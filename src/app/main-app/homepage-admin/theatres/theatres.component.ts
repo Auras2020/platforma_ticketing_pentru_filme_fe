@@ -5,6 +5,7 @@ import {Theatre, TheatreFilteredPage, TheatreFilters, TheatrePage, TheatresServi
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {AddTheatreComponent} from "./add-theatre/add-theatre.component";
 import {DeleteTheatreComponent} from "./delete-theatre/delete-theatre.component";
+import {Route, Router} from "@angular/router";
 
 @Component({
   selector: 'app-theatres',
@@ -42,7 +43,8 @@ export class TheatresComponent implements OnInit{
   }
 
   constructor(private theatresService: TheatresService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private router: Router) {
   }
 
   handleSuccess(theatrePage: TheatrePage){
@@ -147,12 +149,14 @@ export class TheatresComponent implements OnInit{
     );
   }
 
-  openAddTheatreDialog() {
+  openAddTheatreDialog(event: MouseEvent) {
+    event.stopPropagation();
     const dialogConfig = new MatDialogConfig();
     this.openTheatreDialog(dialogConfig);
   }
 
-  openEditTheatreDialog(theatre: Theatre) {
+  openEditTheatreDialog(event: MouseEvent, theatre: Theatre) {
+    event.stopPropagation();
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
       theatre
@@ -162,6 +166,10 @@ export class TheatresComponent implements OnInit{
 
   getImageUrl(poster: any): any{
     return 'data:image/*;base64,' + poster;
+  }
+
+  public clickOnTheatreRow(id: string) {
+    this.router.navigate(['homepage-admin', 'theatres', id]);
   }
 
 }

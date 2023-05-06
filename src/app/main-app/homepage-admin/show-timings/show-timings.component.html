@@ -1,1 +1,202 @@
-<p>show-timings works!</p>
+<div class="page-content">
+  <mat-card class="filter-card">
+    <div class="line-style">
+      <div class="header-style">
+        <div class="title-and-filter-icon">
+          <label class="title-style">
+            Show timings
+          </label>
+
+          <mat-icon mat-list-icon class="filter-list">
+            filter_list
+            <div class="notification-bubble" [ngClass]="{notification: filterActive()}">
+            </div>
+          </mat-icon>
+        </div>
+
+        <div class="search-box">
+          <span class="fa fa-search"><mat-icon>search</mat-icon></span>
+          <input (keyup)="getAllShowTimings()"
+                 [(ngModel)]="searchString"
+                 matInput
+                 placeholder="Search...">
+          <span *ngIf="searchString" class="fa fa-search-close" (click)="searchString = '';getAllShowTimings()"><mat-icon>close</mat-icon></span>
+          <button mat-raised-button class="add-theatre-button" (click)="openAddShowTimingDialog($event)">Add show timing</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="filters-row">
+      <div class="filters" fxFlex="80">
+        <div class="forms-display">
+          <div>
+            <div class="input-label">Theatre name</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <input matInput [(ngModel)]="filters.theatreName" [ngModelOptions]="{updateOn:'change'}"
+                     (ngModelChange)="getAllShowTimings()" class="form-input">
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="input-label">Movie name</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <input matInput [(ngModel)]="filters.movieName" [ngModelOptions]="{updateOn:'change'}"
+                     (ngModelChange)="getAllShowTimings()" class="form-input">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="forms-display">
+          <div>
+            <div class="input-label">Start date</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <input matInput [(ngModel)]="filters.startDate" [ngModelOptions]="{updateOn:'change'}"
+                     (ngModelChange)="getAllShowTimings()" [matDatepicker]="startdatepicker"/>
+              <mat-datepicker-toggle matSuffix [for]="startdatepicker"></mat-datepicker-toggle>
+              <mat-datepicker #startdatepicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="input-label">End date</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <input matInput [(ngModel)]="filters.endDate" [ngModelOptions]="{updateOn:'change'}"
+                     (ngModelChange)="getAllShowTimings()" [matDatepicker]="enddatepicker"/>
+              <mat-datepicker-toggle matSuffix [for]="enddatepicker"></mat-datepicker-toggle>
+              <mat-datepicker #enddatepicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="input-label">Day</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <input matInput [(ngModel)]="filters.day" [ngModelOptions]="{updateOn:'change'}"
+                     (ngModelChange)="getAllShowTimings()" [matDatepicker]="daypicker"/>
+              <mat-datepicker-toggle matSuffix [for]="daypicker"></mat-datepicker-toggle>
+              <mat-datepicker #daypicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="empty-div"></div>
+
+      <div class="reset-div">
+        <button mat-button class="reset-button" (click)="resetFilters()">Reset filters</button>
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card class="table-card">
+    <div class="container" >
+
+      <mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef class="action-header"><span></span></th>
+          <td mat-cell *matCellDef="let row" class="edit-column">
+            <button mat-icon-button
+                    [matTooltip]="'Edit show timing'"
+                    aria-label="Edit"
+                    matTooltipPosition="before"
+                    (click)="openEditShowTimingDialog($event, row)">
+              <mat-icon class="edit-button">
+                edit
+              </mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="theatre">
+          <th mat-header-cell *matHeaderCellDef class="data-header"><span>Theatre</span></th>
+          <td mat-cell *matCellDef="let row" class="name-column"
+          ><span class="ellipsis">{{ row.theatre.name }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="movie">
+          <th mat-header-cell *matHeaderCellDef class="data-header"><span>Movie</span></th>
+          <td mat-cell *matCellDef="let row" class="name-column"
+          ><span class="ellipsis">{{ row.movie.name }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="startDate">
+          <th mat-header-cell *matHeaderCellDef class="data-header"><span>Start date</span></th>
+          <td mat-cell *matCellDef="let row" class="name-column">
+            <b><label>{{row.startDate | date:'dd'}} </label></b>
+            <label class="start-date-2">{{row.startDate | date:'LLL' | lowercase}} </label>
+            <b><label>{{row.startDate | date:'yyyy'}}</label></b>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="endDate">
+          <th mat-header-cell *matHeaderCellDef class="data-header"><span>End date</span></th>
+          <td mat-cell *matCellDef="let row" class="name-column">
+            <b><label>{{row.endDate | date:'dd'}} </label></b>
+            <label class="end-date-2">{{row.endDate | date:'LLL' | lowercase}} </label>
+            <b><label>{{row.endDate | date:'yyyy'}}</label></b>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="time">
+          <th mat-header-cell *matHeaderCellDef class="data-header"><span>Time</span></th>
+          <td mat-cell *matCellDef="let row" class="name-column"
+          ><span class="ellipsis">{{ row.time }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="day">
+          <th mat-header-cell *matHeaderCellDef class="data-header"><span>Day</span></th>
+          <td mat-cell *matCellDef="let row" class="name-column">
+            <b><label>{{row.day | date:'dd'}} </label></b>
+            <label class="day-2">{{row.day | date:'LLL' | lowercase}} </label>
+            <b><label>{{row.day | date:'yyyy'}}</label></b>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef class="data-header"><span>Price</span></th>
+          <td mat-cell *matCellDef="let row" class="name-column"
+          ><span class="ellipsis">{{ row.price }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef class="action-header"></th>
+          <td mat-cell
+              (click)="$event.stopPropagation()"
+              *matCellDef="let row"
+              class="delete-column"
+          >
+            <button
+              (click)="openDeleteShowTimingDialog(row)"
+              mat-icon-button
+              [matTooltip]="'Delete show timing'"
+              aria-label="Delete"
+              matTooltipPosition="before"
+            >
+              <mat-icon
+              >delete
+              </mat-icon
+              >
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header"></tr>
+        <tr mat-row
+            *matRowDef="let odd = odd; columns: displayedColumns"
+            [ngClass]="{ 'gray-row': odd }"
+            class="row"
+        ></tr>
+      </mat-table>
+      <mat-paginator [pageSizeOptions]="pageSizeOptions"
+                     [pageSize]="pageSize"
+                     (page)="pageChanged($event)"
+                     showFirstLastButtons>
+      </mat-paginator>
+    </div>
+
+  </mat-card>
+
+</div>

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../../../environments/environment";
+import {Dashboard} from "../dashboard/dashboard.service";
 
 export interface User{
   name: string;
@@ -42,7 +43,6 @@ export class UserService {
   users =  environment.apiEndpoints.users
   userPage = environment.apiEndpoints.userPage
   userPageFilter = environment.apiEndpoints.userPageFilter
-  /*currentUser = environment.apiEndpoints.currentUser*/
 
   constructor(private http: HttpClient) { }
 
@@ -65,7 +65,7 @@ export class UserService {
     return this.http.post<UserPage>(this.url + this.userPageFilter, usersFilteredPage);
   }
 
-  /*getCurrentUser(): Observable<User>{
-    return this.http.get<User>(this.url + this.currentUser);
-  }*/
+  getUserByEmail(email: any): Observable<User>{
+    return this.http.get<User>(this.url + this.users + email);
+  }
 }

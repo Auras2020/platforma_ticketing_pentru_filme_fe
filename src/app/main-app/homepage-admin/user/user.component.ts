@@ -41,19 +41,11 @@ export class UserComponent implements OnInit{
 
   ngOnInit(): void {
     this.getAllUsers();
-    /*this.getCurrentUser();*/
   }
 
   constructor(private userService: UserService,
               private dialog: MatDialog) {
   }
-
- /* getCurrentUser(){
-    this.userService.getCurrentUser().subscribe((user) => {
-      console.log(user);
-      this.currentUser = user;
-    })
-  }*/
 
   isCurrentUser(user: any): boolean{
     const currentUser = JSON.parse(localStorage.getItem("user") + '')

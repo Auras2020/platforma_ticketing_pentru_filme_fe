@@ -138,6 +138,7 @@
 
 mat-table {
   width: 100%;
+  border-collapse: collapse;
 }
 
 .mdc-data-table__header-cell{
@@ -146,6 +147,7 @@ mat-table {
   font-size: 18px;
   font-weight: 600;
   padding-top: 18px;
+  width: 25%;
 }
 
 .name-column {
@@ -170,8 +172,12 @@ mat-table {
   background-color: #F6F8F8 !important;
 }
 
-.hovered-row:hover{
+.row:hover{
   background-color: #FFF3E0 !important;
+}
+
+.row, .header{
+  border: 2px solid #213555;
 }
 
 .darker{

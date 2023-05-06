@@ -20,6 +20,15 @@
       <button
         mat-raised-button
         class="menu-button"
+        routerLink="dashboard"
+        routerLinkActive="is-active"
+      >
+        <mat-icon class="material-icons-outlined">dashboard</mat-icon>
+        <mat-label class="menu-page">{{ "Dashboard" }}</mat-label>
+      </button>
+      <button
+        mat-raised-button
+        class="menu-button"
         routerLink="theatres"
         routerLinkActive="is-active"
       >

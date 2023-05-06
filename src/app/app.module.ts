@@ -45,6 +45,15 @@ import { DeleteTheatreComponent } from './main-app/homepage-admin/theatres/delet
 import { AddTheatreComponent } from './main-app/homepage-admin/theatres/add-theatre/add-theatre.component';
 import { AddMovieComponent } from './main-app/homepage-admin/movies/add-movie/add-movie.component';
 import { DeleteMovieComponent } from './main-app/homepage-admin/movies/delete-movie/delete-movie.component';
+import { MovieDetailsComponent } from './main-app/homepage-admin/movies/movie-details/movie-details.component';
+import { AddShowTimingComponent } from './main-app/homepage-admin/show-timings/add-show-timing/add-show-timing.component';
+import { DeleteShowTimingComponent } from './main-app/homepage-admin/show-timings/delete-show-timing/delete-show-timing.component';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
+import { TheatreDetailsComponent } from './main-app/homepage-admin/theatres/theatre-details/theatre-details.component';
+import { DashboardComponent } from './main-app/homepage-admin/dashboard/dashboard.component';
+import {FeedbackToolbarComponent} from "./feedback-toolbar/feedback-toolbar.component";
+import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -67,33 +76,43 @@ import { DeleteMovieComponent } from './main-app/homepage-admin/movies/delete-mo
     DeleteTheatreComponent,
     AddTheatreComponent,
     AddMovieComponent,
-    DeleteMovieComponent
+    DeleteMovieComponent,
+    MovieDetailsComponent,
+    AddShowTimingComponent,
+    DeleteShowTimingComponent,
+    TheatreDetailsComponent,
+    DashboardComponent,
+    FeedbackToolbarComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatDialogModule,
-    MatButtonModule,
-    MatIconModule,
-    HttpClientModule,
-    MatCheckboxModule,
-    MatToolbarModule,
-    FlexLayoutModule,
-    MatSidenavModule,
-    MatListModule,
-    MatCardModule,
-    FormsModule,
-    MatOptionModule,
-    MatSelectModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatTooltipModule
-  ],
-  providers: [AuthGuard, AdminGuard, DistribuitorGuard, ClientGuard],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatDialogModule,
+        MatButtonModule,
+        MatIconModule,
+        HttpClientModule,
+        MatCheckboxModule,
+        MatToolbarModule,
+        FlexLayoutModule,
+        MatSidenavModule,
+        MatListModule,
+        MatCardModule,
+        FormsModule,
+        MatOptionModule,
+        MatSelectModule,
+        MatTableModule,
+        MatSortModule,
+        MatPaginatorModule,
+        MatTooltipModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatSnackBarModule
+    ],
+  providers: [AuthGuard, AdminGuard, DistribuitorGuard, ClientGuard,
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 3000}}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -16,7 +16,11 @@ export const environment = {
     theatrePageFilter:"theatres/page/filter",
     movies: "movies/",
     moviePage:"movies/page",
-    moviePageFilter:"movies/page/filter"/*,
-    currentUser:"users/current"*/
+    moviePageFilter:"movies/page/filter",
+    movieTheatreDay: "movies/movies-and-times",
+    showTimings: "show-timings",
+    showTimingsPage:"show-timings/page",
+    showTimingsPageFilter:"show-timings/page/filter",
+    dashboard: "users/dashboard"
   }
 };
