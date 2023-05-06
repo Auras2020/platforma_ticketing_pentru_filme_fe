@@ -1,0 +1,157 @@
+.page-content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.dashboard-card {
+  margin: 24px 24px 24px 24px;
+  padding-bottom: 24px;
+  min-height: 400px;
+  width: 800px;
+}
+
+.welcome-label{
+  font-size: 30px;
+  font-weight: bold;
+  color: #213555;
+  padding-left: 30px;
+  padding-right: 20px;
+}
+
+.admin-name{
+  font-size: 22px;
+  color: #213555;
+  padding-top: 7px;
+}
+
+.header-style{
+  padding-top: 30px;
+  padding-bottom: 15px;
+  display: inline-flex;
+  border-bottom: 2px solid #AABFDF;
+}
+
+.theatres{
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.theatres-number{
+  width: 200px;
+  height: 160px;
+  border: 6px solid red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.users-number{
+  width: 200px;
+  height: 160px;
+  border: 6px solid green;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.movie-number{
+  width: 200px;
+  height: 160px;
+  border: 6px solid #F0E68C;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.theatres-label{
+  height: 40px;
+  width: 200px;
+  background-color: red;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 6px solid red;
+}
+
+.movies-label{
+  height: 40px;
+  width: 200px;
+  background-color: #F0E68C;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 6px solid #F0E68C;
+}
+
+.users-label{
+  height: 40px;
+  width: 200px;
+  background-color: green;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 6px solid green;
+}
+
+.theatre-icon{
+  height: 70px;
+  width: 70px;
+  font-size: 70px;
+  color: red;
+}
+
+.user-icon{
+  height: 70px;
+  width: 70px;
+  font-size: 70px;
+  color: green;
+}
+
+.movie-icon{
+  height: 70px;
+  width: 70px;
+  font-size: 70px;
+  color: #F0E68C;
+}
+
+.theatres-number-label{
+  color: red;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.movies-number-label{
+  color: #F0E68C;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.users-number-label{
+  color: green;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.cards-display{
+  display: inline-flex;
+  padding-left: 30px;
+  padding-top: 35px;
+}

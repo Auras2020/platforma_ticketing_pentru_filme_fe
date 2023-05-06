@@ -1,0 +1,190 @@
+<div [formGroup]="form" class="dialog-content">
+  <div class="delete-item-dialog-title">
+    <div class="dialog-title">
+      {{title}}
+    </div>
+    <div class="empty-div"></div>
+    <div class="close-button">
+      <button mat-icon-button mat-dialog-close class="dialog-close-button">
+        <mat-icon class="close-icon">close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div>
+    <div>
+      <div class="form" fxLayout="row wrap" fxLayout.xs="column">
+        <div class="form-row form-margin" fxFlex>
+          <div class="name-label-padding">
+            <label class="name-label" [ngClass]="{'asterisk': nameControl.hasError('required')}">Name</label>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" class="mat-form">
+              <input matInput formControlName="name">
+            </mat-form-field>
+            <div
+              *ngIf="nameControl.touched && nameControl.hasError('required')" class="error">
+              Name is required!
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row" fxFlex>
+          <div class="name-label-padding">
+            <label class="name-label" [ngClass]="{'asterisk': durationControl.hasError('required')}">Duration</label>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" class="mat-form">
+              <input matInput type="number" formControlName="duration">
+            </mat-form-field>
+            <div
+              *ngIf="durationControl.touched && durationControl.hasError('required')" class="error">
+              Duration is required!
+            </div>
+            <div
+              *ngIf="durationControl.touched && !durationControl.hasError('required') && durationValue() <= 0" class="error">
+              Duration must be a positive number!
+            </div>
+            <div
+              *ngIf="durationControl.touched && !durationControl.hasError('required') && durationValue() > 0 && !checkIfInteger()" class="error">
+              Duration must be an integer number!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form form-content" fxLayout="row wrap" fxLayout.xs="column">
+        <div class="form-row form-margin" fxFlex>
+          <div class="name-label-padding">
+            <label class="name-label" [ngClass]="{'asterisk': genreControl.hasError('required')}">Genre</label>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" class="mat-form">
+              <mat-select
+                formControlName="genre"
+              >
+                <mat-option *ngFor="let genre of genres" [value]="genre">
+                  {{ genre }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div
+              *ngIf="genreControl.touched && genreControl.hasError('required')" class="error">
+              Genre is required!
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row" fxFlex>
+          <div class="name-label-padding">
+            <label class="name-label" [ngClass]="{'asterisk': recommendedAgeControl.hasError('required')}">
+              Category
+            </label>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" class="mat-form">
+              <mat-select
+                formControlName="recommendedAge"
+              >
+                <mat-option *ngFor="let ageRestrict of ageRestricts" [value]="ageRestrict">
+                  {{ ageRestrict }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div
+              *ngIf="recommendedAgeControl.touched && recommendedAgeControl.hasError('required')" class="error">
+              Category is required!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form form-content" fxLayout="row wrap" fxLayout.xs="column">
+        <div class="form-row form-margin" fxFlex>
+          <div class="name-label-padding">
+            <label class="name-label" [ngClass]="{'asterisk': actorsControl.hasError('required')}">Actors</label>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" class="mat-form">
+              <input matInput formControlName="actors">
+            </mat-form-field>
+            <div
+              *ngIf="actorsControl.touched && actorsControl.hasError('required')" class="error">
+              Actors is required!
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row" fxFlex>
+          <div class="name-label-padding">
+            <label class="name-label" [ngClass]="{'asterisk': directorControl.hasError('required')}">Director</label>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" class="mat-form">
+              <input matInput formControlName="director">
+            </mat-form-field>
+            <div
+              *ngIf="directorControl.touched && directorControl.hasError('required')" class="error">
+              Director is required!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="name-label-padding">
+          <label class="name-label">Synopsis</label>
+        </div>
+        <div>
+          <mat-form-field appearance="outline" class="synopsis-form">
+            <textarea
+              #textarea
+              matInput
+              [maxLength]="2000"
+              class="form-control"
+              formControlName="synopsis"
+              [placeholder]="'Movie description here'"
+              cdkTextareaAutosize
+            ></textarea>
+            <mat-hint align="end" class="hint-padding">{{ textarea.value.length || 0 }}/2000</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="name-label-padding">
+          <label class="name-label" for="file">Poster image</label>
+        </div>
+        <input type="file" class="file-input" id="file" (change)="onPosterFileSelect($event)" #imageUpload>
+        <div class="file-upload">
+          <button mat-flat-button (click)="imageUpload.click()" class="upload-button-style">
+            Choose image
+          </button>
+          <div class="file-name-style">
+            {{posterFileName || "No file chosen"}}
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="name-label-padding">
+          <label class="name-label" for="file1">Trailer video</label>
+        </div>
+        <input type="file" class="file-input" id="file1" (change)="onTrailerFileSelect($event)" #videoUpload>
+        <div class="file-upload">
+          <button mat-flat-button (click)="videoUpload.click()" class="upload-button-style">
+            Choose video
+          </button>
+          <div class="file-name-style">
+            {{getTrailerName()}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div mat-dialog-actions align="end" class="close-actions">
+      <button mat-button mat-dialog-close class="cancel-button">Cancel</button>
+      <button mat-raised-button type="submit" [disabled]="!form.valid" (click)="saveMovie()" class="save-user-button">Save</button>
+    </div>
+  </div>
+</div>

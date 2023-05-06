@@ -1,0 +1,174 @@
+.trailer-card {
+  margin: 24px 24px 24px 24px;
+  padding-bottom: 24px;
+  min-height: 600px;
+}
+
+.details-card {
+  margin: 0 24px 24px 24px;
+  min-height: 350px;
+}
+
+.title-style{
+  color: #213555;
+  font-weight: bold;
+  font-size: 25px;
+  align-self: center;
+}
+
+.arrow-color{
+  color: #DC4E2A;
+}
+
+.video-position{
+  padding-left: 24px;
+  padding-bottom: 24px;
+}
+
+.page-content{
+  margin-bottom: 100px;
+}
+
+.poster{
+  height: 385px;
+  width: 270px;
+}
+
+.movie-details{
+  padding-top: 15px;
+  display: inline-flex;
+}
+
+.divider-style{
+  background-color: #F9B695;
+}
+
+.left-column, .right-column{
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.right-column{
+  padding-top: 15px;
+  padding-left: 24px;
+}
+
+.title{
+  display: inline-flex;
+  border-bottom: 2px solid #AABFDF;
+}
+
+.movie-name{
+  font-size: 21px;
+  font-weight: bold;
+  color: #213555;
+  align-self: center;
+  padding-left: 24px;
+  padding-right: 25px;
+}
+
+.movie-age{
+  align-self: center;
+  border-radius: 50%;
+  font-size: 16px;
+  font-weight: bold;
+  height: 20px;
+  width: 50px;
+  border: 2px solid #DC4E2A;
+  color: #213555;
+  background-color: #FFF3E0;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  display: flex;
+}
+
+.genre-value, .duration-value, .actors-value, .director-value{
+  color: #213555;
+  font-weight: 600;
+  font-size: 21px;
+}
+
+.rating-value, .note-value{
+  color: #213555;
+  font-weight: 600;
+  font-size: 21px;
+}
+
+.note-value-null, .rating-value-null{
+  color: #213555;
+  font-weight: 600;
+  font-size: 21px;
+  align-self: center;
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+  border: 2px solid #213555;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.genre-label, .duration-label, .actors-label, .director-label, .rating-label, .note-label{
+  color: #9DA9AE;
+  font-size: 18px;
+  padding-bottom: 7px;
+}
+
+.movie-details-section{
+  display: flex;
+  justify-content: space-between;
+}
+
+.movie-details-left{
+  align-self: flex-start;
+}
+
+.empty-div{
+  align-self: flex-end;
+}
+
+.movie-details-right{
+  align-self: flex-end;
+  padding-right: 24px;
+}
+
+.synopsis-label{
+  padding-top: 7px;
+  padding-bottom: 7px;
+  font-size: 21px;
+  font-weight: bold;
+  color: #213555;
+}
+
+.synopsis-text{
+  border: 1px solid #839DC3;
+  min-height: 84px;
+  height: auto;
+  padding: 8px;
+  background-color: #F6F8F8;
+  color: #213555;
+  font-size: 18px;
+  width: 100%;
+}
+
+.synopsis-padding{
+  padding-left: 24px;
+  padding-right: 40px;
+}
+
+.main-container{
+  border-bottom: 2px solid #F9B695;
+}
+
+.star-style{
+  color: yellow;
+  margin-right: 5px;
+}
+
+.rating-style, .note-style{
+  display: inline-flex;
+}

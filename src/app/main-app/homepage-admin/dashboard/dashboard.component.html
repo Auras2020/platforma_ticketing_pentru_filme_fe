@@ -1,0 +1,56 @@
+<div class="page-content">
+  <mat-card class="dashboard-card">
+    <div class="header-style">
+      <label class="welcome-label">
+        Welcome
+      </label>
+      <label class="admin-name">
+        {{this.userName}}
+      </label>
+    </div>
+
+    <div class="cards-display">
+      <div class="theatres">
+        <div class="theatres-number">
+          <label>
+            <mat-icon class="material-icons-outlined theatre-icon">theaters</mat-icon>
+          </label>
+          <label class="theatres-number-label">
+            {{info?.theatres}}
+          </label>
+        </div>
+        <div class="theatres-label">
+          Theatres
+        </div>
+      </div>
+
+      <div class="theatres">
+        <div class="movie-number">
+          <label>
+            <mat-icon class="material-icons-outlined movie-icon">movie_creation</mat-icon>
+          </label>
+          <label class="movies-number-label">
+            {{info?.movies}}
+          </label>
+        </div>
+        <div class="movies-label">
+          Movies
+        </div>
+      </div>
+
+      <div class="theatres">
+        <div class="users-number">
+          <label>
+            <mat-icon class="material-icons-outlined user-icon">groups_black</mat-icon>
+          </label>
+          <label class="users-number-label">
+            {{info?.users}}
+          </label>
+        </div>
+        <div class="users-label">
+          Users
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>

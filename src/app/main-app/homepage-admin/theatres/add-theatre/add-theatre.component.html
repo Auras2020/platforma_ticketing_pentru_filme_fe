@@ -1,0 +1,122 @@
+<div [formGroup]="form" class="dialog-content">
+  <div class="delete-item-dialog-title">
+    <div class="dialog-title">
+      {{title}}
+    </div>
+    <div class="empty-div"></div>
+    <div class="close-button">
+      <button mat-icon-button mat-dialog-close class="dialog-close-button">
+        <mat-icon class="close-icon">close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div>
+    <div class="content">
+      <div>
+        <div class="name-label-padding">
+          <label class="name-label" [ngClass]="{'asterisk': nameControl.hasError('required')}">Name</label>
+        </div>
+        <div>
+          <mat-form-field appearance="outline" class="mat-form">
+            <input matInput formControlName="name">
+          </mat-form-field>
+          <div
+            *ngIf="nameControl.touched && nameControl.hasError('required')" class="error">
+            Name is required!
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="name-label-padding">
+          <label class="name-label" [ngClass]="{'asterisk': locationControl.hasError('required')}">Location</label>
+        </div>
+        <div>
+          <mat-form-field appearance="outline" class="mat-form">
+            <input matInput formControlName="location">
+          </mat-form-field>
+          <div
+            *ngIf="locationControl.touched && locationControl.hasError('required')" class="error">
+            Location is required!
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="name-label-padding">
+          <label class="name-label" [ngClass]="{'asterisk': addressControl.hasError('required')}">Address</label>
+        </div>
+        <div>
+          <mat-form-field appearance="outline" class="mat-form">
+            <input matInput formControlName="address">
+          </mat-form-field>
+          <div
+            *ngIf="addressControl.touched && addressControl.hasError('required')" class="error">
+            Address is required!
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="name-label-padding">
+          <label class="name-label" [ngClass]="{'asterisk': emailControl.hasError('required')}">Email</label>
+        </div>
+        <div>
+          <mat-form-field appearance="outline" class="mat-form">
+            <input matInput formControlName="email">
+          </mat-form-field>
+          <div
+            *ngIf="emailControl.touched && emailControl.hasError('required')" class="error">
+            Email is required!
+          </div>
+          <div
+            *ngIf="emailControl.touched && !emailControl.hasError('required')
+             && emailControl.hasError('pattern')" class="error">
+            Please insert a valid email!
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="name-label-padding">
+          <label class="name-label" [ngClass]="{'asterisk': phoneControl.hasError('required')}">Phone</label>
+        </div>
+        <div>
+          <mat-form-field appearance="outline" class="mat-form">
+            <input matInput formControlName="phone">
+          </mat-form-field>
+          <div
+            *ngIf="phoneControl.touched && phoneControl.hasError('required')" class="error">
+            Phone is required!
+          </div>
+          <div
+            *ngIf="phoneControl.touched && !phoneControl.hasError('required')
+             && phoneControl.hasError('pattern')" class="error">
+            Please insert a valid phone number!
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="name-label-padding">
+          <label class="name-label" for="file">Poster image</label>
+        </div>
+        <input type="file" class="file-input" id="file" (change)="onFileSelect($event)" #imageUpload>
+        <div class="file-upload">
+          <button mat-flat-button (click)="imageUpload.click()" class="upload-button-style">
+            Choose image
+          </button>
+          <div class="file-name-style">
+            {{fileName || "No file chosen"}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div mat-dialog-actions align="end" class="close-actions">
+      <button mat-button mat-dialog-close class="cancel-button">Cancel</button>
+      <button mat-raised-button type="submit" [disabled]="!form.valid" (click)="saveTheatre()" class="save-user-button">Save</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,135 @@
+.dialog-content{
+  padding: 24px;
+}
+
+.dialog-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  color: #00133F;
+}
+
+.delete-item-dialog-title{
+  border-bottom: 2px solid #839DC3;
+  font-size: 24px;
+  margin-bottom: 16px;
+  padding-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.close-button{
+  align-items: flex-end;
+}
+
+.empty-div{
+  align-self: flex-start;
+}
+
+.dialog-close-button{
+  height: 30px;
+  width: 30px;
+}
+
+.close-icon{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.mat-form {
+  width: 200px;
+}
+
+.synopsis-form{
+  width: 430px;
+}
+
+.name-label {
+  color: #3E5F8D;
+  font-weight: 500;
+}
+
+.name-label-padding{
+  padding-bottom: 5px;
+}
+
+.error{
+  margin-top: -20px;
+  margin-bottom: 10px;
+  color: red
+}
+
+.cancel-button{
+  color: #DC4E2A;
+  font-weight: bold;
+}
+
+.save-user-button {
+  font-weight: bold;
+  width: 125px;
+}
+
+.asterisk:after {
+  content: "*";
+  color: red;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-upload{
+  display: flex;
+  width: 430px;
+}
+
+.upload-button-style{
+  background-color: #d3d3d3;
+  color: #3E5F8D;
+  border-radius: 0;
+  width: 190px;
+  font-weight: bold;
+}
+
+.file-name-style{
+  font-size: 14px;
+  color: #3E5F8D;
+  border: 1px solid gray;
+  padding: 9px 0 9px 9px;
+  width: 100%;
+}
+
+.content{
+  padding-top: 10px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #FDD5BD;
+}
+
+.form-content{
+  padding-top: 10px;
+  border-bottom: 2px solid #FDD5BD;
+}
+
+.hint-padding{
+  padding-top: 5px;
+}
+
+.close-actions{
+  padding-top: 10px;
+}
+
+.mat-mdc-raised-button.mat-unthemed {
+  --mdc-protected-button-container-color: #DC4E2A;
+  --mdc-protected-button-label-text-color: white;
+}
+
+.form-row{
+  display: inline;
+}
+
+.form-margin{
+  padding-right: 30px;
+}
