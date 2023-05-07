@@ -43,6 +43,8 @@ export class TheatresService {
   theatres =  environment.apiEndpoints.theatres
   theatrePage = environment.apiEndpoints.theatrePage
   theatrePageFilter = environment.apiEndpoints.theatrePageFilter
+  theatreLocations = environment.apiEndpoints.theatreLocations
+  theatresFilterd = environment.apiEndpoints.theatresFilterd
 
   constructor(private http: HttpClient) { }
 
@@ -83,5 +85,13 @@ export class TheatresService {
 
   getTheatre(id: number): Observable<Theatre>{
     return this.http.get<Theatre>(this.url + this.theatres + id);
+  }
+
+  getAllTheatresLocations(): Observable<string[]>{
+    return this.http.get<string[]>(this.url + this.theatreLocations);
+  }
+
+  getTheatresByLocation(location: string): Observable<Theatre[]>{
+    return this.http.get<Theatre[]>(this.url + this.theatresFilterd + location)
   }
 }

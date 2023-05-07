@@ -141,7 +141,11 @@ export class TheatreDetailsComponent implements OnInit{
   }
 
   navigateBackToTheatresPage(): void{
-    this.router.navigate(['homepage-admin', 'theatres']);
+    this.router.navigate(['admin', 'theatres']);
+  }
+
+  getNumber(num: any): any{
+    return !num ? '-' : num;
   }
 
 }

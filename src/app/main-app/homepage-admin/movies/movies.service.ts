@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {environment} from "../../../../environments/environment";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Theatre} from "../theatres/theatres.service";
 
 export interface Movie{
   id: number;
@@ -49,11 +48,6 @@ export class MovieTimes{
   times?: string[];
 }
 
-export class TheatreDay {
-  theatreId?: number;
-  day?: Date;
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -64,6 +58,8 @@ export class MoviesService {
   moviePage = environment.apiEndpoints.moviePage
   moviePageFilter = environment.apiEndpoints.moviePageFilter
   movieTheatreDay = environment.apiEndpoints.movieTheatreDay
+  currentRunning = environment.apiEndpoints.currentRunning
+  soonRunning = environment.apiEndpoints.soonRunning
 
   constructor(private http: HttpClient) { }
 
@@ -109,5 +105,13 @@ export class MoviesService {
 
   getAllMoviesFromATheatreAtAGivenDay(theatreDay: any): Observable<MovieTimes[]>{
     return this.http.post<MovieTimes[]>(this.url + this.movieTheatreDay, theatreDay);
+  }
+
+  getAllMoviesCurrentlyRunning(movieFilters: any): Observable<Movie[]>{
+    return this.http.post<Movie[]>(this.url + this.currentRunning, movieFilters);
+  }
+
+  getAllMoviesRunningSoon(movieFilters: any): Observable<Movie[]>{
+    return this.http.post<Movie[]>(this.url + this.soonRunning, movieFilters);
   }
 }

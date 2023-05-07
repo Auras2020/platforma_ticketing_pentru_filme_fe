@@ -16,6 +16,12 @@ import {ShowTimingsComponent} from "./main-app/homepage-admin/show-timings/show-
 import {MovieDetailsComponent} from "./main-app/homepage-admin/movies/movie-details/movie-details.component";
 import {TheatreDetailsComponent} from "./main-app/homepage-admin/theatres/theatre-details/theatre-details.component";
 import {DashboardComponent} from "./main-app/homepage-admin/dashboard/dashboard.component";
+import {HomepageComponent} from "./main-app/homepage-client/homepage/homepage.component";
+import {ProgramComponent} from "./main-app/homepage-client/program/program.component";
+import {OrdersComponent} from "./main-app/homepage-client/orders/orders.component";
+import {ReviewsComponent} from "./main-app/homepage-client/reviews/reviews.component";
+import {MovieDetails1Component} from "./main-app/homepage-client/homepage/movie-details1/movie-details1.component";
+import {MovieDetails2Component} from "./main-app/homepage-client/program/movie-details2/movie-details2.component";
 
 const routes: Routes = [
   {path: 'login', component: MainAppComponent},
@@ -24,8 +30,9 @@ const routes: Routes = [
   {path: 'reset-password', component: MainAppComponent},
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {
-    path: 'homepage-admin',
+    path: 'admin',
     component: HomepageAdminComponent,
+    canActivate: [AuthGuard, AdminGuard],
     children: [
       {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard, AdminGuard]},
       {path: 'users', component: UserComponent, canActivate: [AuthGuard, AdminGuard]},
@@ -34,10 +41,20 @@ const routes: Routes = [
       {path: 'movies', component: MoviesComponent, canActivate: [AuthGuard, AdminGuard]},
       {path: 'movies/:id', component: MovieDetailsComponent, canActivate: [AuthGuard, AdminGuard]},
       {path: 'show-timings', component: ShowTimingsComponent, canActivate: [AuthGuard, AdminGuard]}
-  ]
-  },
-  {path: 'homepage-distribuitor', component: HomepageDistribuitorComponent, canActivate: [AuthGuard, DistribuitorGuard]},
-  {path: 'homepage-client', component: HomepageClientComponent, canActivate: [AuthGuard, ClientGuard]},
+  ]},
+  {path: 'distribuitor', component: HomepageDistribuitorComponent, canActivate: [AuthGuard, DistribuitorGuard]},
+  {
+    path: 'client',
+    component: HomepageClientComponent,
+    canActivate: [AuthGuard, ClientGuard],
+    children: [
+      {path: 'home', component: HomepageComponent, canActivate: [AuthGuard, ClientGuard]},
+      {path: 'home/movies/:id', component: MovieDetails1Component, canActivate: [AuthGuard, ClientGuard]},
+      {path: 'program', component: ProgramComponent, canActivate: [AuthGuard, ClientGuard]},
+      {path: 'program/movies/:id', component: MovieDetails2Component, canActivate: [AuthGuard, ClientGuard]},
+      {path: 'orders', component: OrdersComponent, canActivate: [AuthGuard, ClientGuard]},
+      {path: 'reviews', component: ReviewsComponent, canActivate: [AuthGuard, ClientGuard]}
+    ]},
   {path: '**', pathMatch: 'full', component: PageNotFoundComponent}
 ];
 

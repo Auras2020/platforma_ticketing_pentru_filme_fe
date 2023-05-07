@@ -1,4 +1,4 @@
-import {Component, Inject} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_SNACK_BAR_DATA} from "@angular/material/snack-bar";
 
 @Component({
@@ -6,7 +6,7 @@ import {MAT_SNACK_BAR_DATA} from "@angular/material/snack-bar";
   templateUrl: './feedback-toolbar.component.html',
   styleUrls: ['./feedback-toolbar.component.css']
 })
-export class FeedbackToolbarComponent {
+export class FeedbackToolbarComponent{
 
   constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) { }
 

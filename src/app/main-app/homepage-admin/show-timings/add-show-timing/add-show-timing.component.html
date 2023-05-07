@@ -203,7 +203,7 @@
 
     <div mat-dialog-actions align="end" class="close-actions">
       <button mat-button mat-dialog-close class="cancel-button">Cancel</button>
-      <button mat-raised-button type="submit" [disabled]="!form.valid" (click)="saveShowTiming()" class="save-user-button">Save</button>
+      <button mat-raised-button type="submit" [disabled]="!form.valid || checkIfSameData()" (click)="saveShowTiming()" class="save-user-button">Save</button>
     </div>
   </div>
 </div>

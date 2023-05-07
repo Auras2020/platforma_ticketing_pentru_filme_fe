@@ -24,7 +24,7 @@ export class MovieDetailsComponent implements OnInit{
   }
 
   navigateBackToMoviesPage(): void{
-    this.router.navigate(['homepage-admin', 'movies']);
+    this.router.navigate(['admin', 'movies']);
   }
 
   getImageUrl(poster: any): any{

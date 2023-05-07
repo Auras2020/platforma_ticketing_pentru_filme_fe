@@ -58,9 +58,6 @@ export class LoginComponent{
         this.dialogRef.close(true);
         const {email, password, rememberMe} = this.form.value;
         this.loginService.login(email, password, rememberMe).subscribe((data) => {
-          console.log(email);
-          console.log(password);
-          console.log(rememberMe);
           this.loginService.handleLogin(data);
           localStorage.setItem('user', JSON.stringify(data));
         });

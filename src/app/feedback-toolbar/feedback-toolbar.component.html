@@ -1,4 +1,8 @@
-<div class="feedback-toolbar">
+<div *ngIf="data.icon === 'check_circle'" class="feedback-toolbar success">
+  <mat-icon *ngIf="data.icon" class="message-icon">{{data.icon}}</mat-icon>
+  <span>{{data.infoMessage}}</span>
+</div>
+<div *ngIf="data.icon === 'error'" class="feedback-toolbar error">
   <mat-icon *ngIf="data.icon" class="message-icon">{{data.icon}}</mat-icon>
   <span>{{data.infoMessage}}</span>
 </div>

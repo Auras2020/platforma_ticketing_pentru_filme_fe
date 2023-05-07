@@ -1,0 +1,174 @@
+mat-toolbar {
+  height: 80px;
+  position: relative;
+  background-color: #0047ab;
+  align-content: center;
+}
+
+.container{
+  display: flex;
+  justify-content: right;
+  align-self: flex-end;
+}
+
+.logout{
+  background-color: yellow;
+  color: black;
+  width: 125px;
+  margin-right: 25px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.logout-button{
+  padding-bottom: 7px;
+}
+
+.admin{
+  color: white;
+  width: 125px;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  display: flex;
+  font-size: 18px;
+  font-weight: 600;
+  padding-bottom: 7px;
+}
+
+.oval-button{
+  border-radius: 50%;
+  background-color: white;
+  height: 50px;
+  width: 150px;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  display: flex;
+  margin-right: 1%;
+  font-style: italic;
+  font-weight: 700;
+  color: #00133F;
+}
+
+.empty-div{
+  align-self: flex-start;
+}
+
+.toolbar-style{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.title-style{
+  align-self: flex-start;
+}
+
+/*.homepage{
+  overflow-x: hidden;
+}*/
+
+.widgets-icon {
+  color: white;
+}
+
+.nav-tool-items {
+  display: flex;
+  width: 100%;
+}
+
+mat-label {
+  font-size: 18px;
+  padding-left: 10px;
+}
+
+mat-sidenav {
+  width: 200px;
+}
+
+.mat-icon-button ::ng-deep .mat-button-focus-overlay {
+  background: none;
+}
+
+.wrapper {
+  overflow: hidden;
+  height: 100%;
+}
+
+.pages-container {
+  background-color: rgb(246, 250, 255);
+  height: 100%;
+  position: fixed;
+  width: 100%;
+}
+
+.button-toggle {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 100px;
+  opacity: 1;
+  background-color: #5C7AA3;
+  border-color: #CBDAF0;
+  z-index: 1000;
+}
+
+
+.side-menu {
+  width: 260px;
+}
+
+.menu-button {
+  opacity: 1;
+  background-color: white;
+  width: 260px;
+  height: 64px;
+  justify-content: start;
+}
+
+.menu-button:hover{
+  background-color: #ffffe0;
+}
+
+button:focus-visible {
+  background-color: rgba(203, 218, 240, 0.4);
+}
+
+.material-icons-outlined {
+  color: #DC4E2A;
+  font-size: 28px;
+}
+
+.material-icons-outlined{
+  height: 28px;
+  width: 28px;
+}
+
+.menu-page {
+  opacity: 1;
+  color: rgba(33, 53, 85, 1);
+  font-weight: 600;
+  font-style: normal;
+  line-height: 20px;
+}
+
+.arrow-button {
+  position: absolute;
+  color: white;
+  top: 2px;
+  left: 3px;
+
+}
+
+::ng-deep .mat-drawer-backdrop.mat-drawer-shown {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+::ng-deep .mat-select-arrow {
+  opacity: 0;
+}
+
+
+
+

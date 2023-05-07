@@ -169,7 +169,7 @@ export class TheatresComponent implements OnInit{
   }
 
   public clickOnTheatreRow(id: string) {
-    this.router.navigate(['homepage-admin', 'theatres', id]);
+    this.router.navigate(['admin', 'theatres', id]);
   }
 
 }

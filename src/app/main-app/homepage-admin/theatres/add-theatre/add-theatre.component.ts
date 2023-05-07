@@ -31,6 +31,8 @@ export class AddTheatreComponent implements OnInit{
   msg: string = '';
   public filePath?: File;
   fileName: string | null | undefined = '';
+  isImageType?: boolean;
+  posterSelected: boolean = false;
 
   constructor(private theatresService: TheatresService,
               private dialogRef: MatDialogRef<AddTheatreComponent>,
@@ -56,21 +58,31 @@ export class AddTheatreComponent implements OnInit{
     }
   }
 
+  checkIfSameData(): boolean{
+    return !this.form.dirty && !this.posterSelected;
+  }
+
   saveTheatre() {
-    if(this.filePath){
-      this.theatresService.createTheatre(this.filePath, this.form.value).subscribe(() => {
-        this.dialogRef.close(true);
-        this.feedbackToolbarService.openSnackBarWithSuccessMessage(this.msg);
-      })
+    if(this.isImageType === false){
+      this.feedbackToolbarService.openSnackBarWithErrorMessage("Poster must be of image type");
     } else {
-      this.theatresService.createTheatre(null, this.form.value).subscribe(() => {
-        this.dialogRef.close(true);
-        this.feedbackToolbarService.openSnackBarWithSuccessMessage(this.msg);
-      })
+      if(this.filePath){
+        this.theatresService.createTheatre(this.filePath, this.form.value).subscribe(() => {
+          this.dialogRef.close(true);
+          this.feedbackToolbarService.openSnackBarWithSuccessMessage(this.msg);
+        })
+      } else {
+        this.theatresService.createTheatre(null, this.form.value).subscribe(() => {
+          this.dialogRef.close(true);
+          this.feedbackToolbarService.openSnackBarWithSuccessMessage(this.msg);
+        })
+      }
     }
   }
 
   onFileSelect(event: any) {
+    this.posterSelected = true;
+    this.isImageType = event.target.files[0]?.type.indexOf("image") > -1;
     this.filePath = event.target.files[0];
     this.fileName = this.filePath?.name;
   }

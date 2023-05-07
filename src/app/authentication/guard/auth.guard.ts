@@ -15,8 +15,6 @@ export class AuthGuard implements CanActivate {
         return this.tokenStorageService.isLoggedIn.pipe(
             take(1),
             map((isLoggedIn: boolean) => {
-              let userRole: any = JSON.parse(localStorage.getItem("user") + '')
-              console.log(userRole?.role);
                 if (!isLoggedIn) {
                     this.router.navigate(['/']);
                     return false;

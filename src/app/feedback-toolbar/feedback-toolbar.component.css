@@ -4,65 +4,24 @@
   min-height: 40px;
 }
 
-.message-icon {
+.success .message-icon {
   padding-right: 10px;
   color: #a8f0c6;
 }
 
-::ng-deep .mdc-snackbar__label{
+::ng-deep .success .mdc-snackbar__label{
   background-color: green;
+}
+
+.error .message-icon {
+  padding-right: 10px;
+  color: #f7a7a3;
+}
+
+::ng-deep .error  .mdc-snackbar__label{
+  background-color: red;
 }
 
 ::ng-deep .mdc-snackbar__surface{
   padding-right: 0;
 }
-/*::ng-deep .mat-snack-bar-container {
-  &.success {
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 3px 3px 3px 3px;
-    border-left:5px solid darken(#a8f0c6,50);
-    background-color: #a8f0c6;
-    color: black;
-
-    .message-icon {
-      padding-right: 10px;
-      color: darken(#a8f0c6,50);
-    }
-  }
-  &.error {
-    padding: 5px;
-    border-radius: 3px 3px 3px 3px;
-    border-left:5px solid darken(#f7a7a3,50);
-    background-color: #f7a7a3;
-    color: black;
-
-    .message-icon {
-      padding-right: 10px;
-      color: darken(#f7a7a3,50);
-    }
-  }
-  &.info {
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 3px 3px 3px 3px;
-    border-left:5px solid darken(rgb(217,237,247),50);
-    background-color: rgb(217,237,247);
-    color: black;
-
-    .message-icon {
-      padding-right: 10px;
-      color: darken(rgb(217,237,247),50);
-    }
-  }
-  &.warn {
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 3px 3px 3px 3px;
-    border-left:5px solid darken(#ffd48a,50);
-    background-color: #ffd48a;
-    color: black;*/
-
-
-/*  }
-}*/

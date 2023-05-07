@@ -54,6 +54,12 @@ import { TheatreDetailsComponent } from './main-app/homepage-admin/theatres/thea
 import { DashboardComponent } from './main-app/homepage-admin/dashboard/dashboard.component';
 import {FeedbackToolbarComponent} from "./feedback-toolbar/feedback-toolbar.component";
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from "@angular/material/snack-bar";
+import { HomepageComponent } from './main-app/homepage-client/homepage/homepage.component';
+import { ProgramComponent } from './main-app/homepage-client/program/program.component';
+import { OrdersComponent } from './main-app/homepage-client/orders/orders.component';
+import { ReviewsComponent } from './main-app/homepage-client/reviews/reviews.component';
+import { MovieDetails1Component } from './main-app/homepage-client/homepage/movie-details1/movie-details1.component';
+import { MovieDetails2Component } from './main-app/homepage-client/program/movie-details2/movie-details2.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +88,13 @@ import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from "@angular/materia
     DeleteShowTimingComponent,
     TheatreDetailsComponent,
     DashboardComponent,
-    FeedbackToolbarComponent
+    FeedbackToolbarComponent,
+    HomepageComponent,
+    ProgramComponent,
+    OrdersComponent,
+    ReviewsComponent,
+    MovieDetails1Component,
+    MovieDetails2Component
   ],
     imports: [
         BrowserModule,

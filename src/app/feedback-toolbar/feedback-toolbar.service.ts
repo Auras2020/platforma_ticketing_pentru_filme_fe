@@ -7,7 +7,7 @@ import {FeedbackToolbarComponent} from "./feedback-toolbar.component";
 })
 export class FeedbackToolbarService {
 
-  private DISPLAY_DURATION = 300000;
+  private DISPLAY_DURATION = 3000;
 
   constructor(private snackBar: MatSnackBar) { }
 
@@ -19,28 +19,11 @@ export class FeedbackToolbarService {
     });
   }
 
-
   public openSnackBarWithSuccessMessage(message: string): void {
     this.snackBar.openFromComponent(FeedbackToolbarComponent, {
       data: {infoMessage: message, icon: 'check_circle'},
       duration: this.DISPLAY_DURATION,
       panelClass: ['success']
-    });
-  }
-
-  public openSnackBarWithInfoMessage(message: string): void {
-    this.snackBar.openFromComponent(FeedbackToolbarComponent, {
-      data: {infoMessage: message,  icon: 'info'},
-      duration: this.DISPLAY_DURATION,
-      panelClass: ['info']
-    });
-  }
-
-  public openSnackBarWithWarningMessage(message: string): void {
-    this.snackBar.openFromComponent(FeedbackToolbarComponent, {
-      data: {infoMessage: message,  icon: 'warning_amber'},
-      duration: this.DISPLAY_DURATION,
-      panelClass: ['warn']
     });
   }
 }

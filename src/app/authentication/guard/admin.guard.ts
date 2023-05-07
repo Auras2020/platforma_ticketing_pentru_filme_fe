@@ -1,7 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Route, Router, RouterStateSnapshot} from '@angular/router';
-import {Observable} from 'rxjs';
-import {map, take} from 'rxjs/operators';
+import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 import {TokenStorageService} from "../token-storage/token-storage.service";
 
 
@@ -13,9 +11,8 @@ export class AdminGuard implements CanActivate {
 
   public canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     let userRole: any = JSON.parse(localStorage.getItem("user") + '')
-    console.log(userRole?.role);
     if (userRole?.role !== 'ADMIN') {
-      this.router.navigate(['/']);
+      this.router.navigate(['/page-not-found']);
       return false;
     }
     return true;

@@ -27,11 +27,15 @@ export class AddMovieComponent implements OnInit{
   public posterPath?: File;
   posterFileName: string | null | undefined = '';
   trailerFileName: string | null | undefined = '';
-  isVideoType: boolean = false;
+  isVideoType?: boolean;
+  isImageType?: boolean;
 
   ageRestricts = ['AG', 'AP12', 'N15', 'IM18'];
   genres = ['Action', 'Adventure', 'Comedy', 'Drama', 'Horror', 'Romance', 'SF', 'Thriller', 'Western'];
   msg: string = '';
+  okToSave?: boolean;
+  posterSelected: boolean = false;
+  trailerSelected: boolean = false;
 
   constructor(private moviesService: MoviesService,
               private dialogRef: MatDialogRef<AddMovieComponent>,
@@ -40,6 +44,7 @@ export class AddMovieComponent implements OnInit{
     this.edit = false
     if(data){
       this.edit = true
+      this.okToSave = true;
       this.form.patchValue(data.movie);
       this.posterFileName = data.movie.posterName;
       this.trailerFileName = data.movie.trailerName;
@@ -59,27 +64,41 @@ export class AddMovieComponent implements OnInit{
     }
   }
 
+  checkIfSameData(): boolean{
+    return !this.form.dirty && !this.posterSelected && !this.trailerSelected;
+  }
+
   saveMovie() {
-    if(this.posterPath){
-      this.moviesService.createMovie(this.posterPath, this.trailerFileName, this.form.value).subscribe(() => {
-        this.dialogRef.close(true);
-        this.feedbackToolbarService.openSnackBarWithSuccessMessage(this.msg);
-      })
+    if(this.isImageType === false){
+      this.feedbackToolbarService.openSnackBarWithErrorMessage("Poster must be of image type");
+    }
+    else if(this.isVideoType === false){
+      this.feedbackToolbarService.openSnackBarWithErrorMessage("Trailer must be of video type");
     } else {
-      this.moviesService.createMovie(null, this.trailerFileName, this.form.value).subscribe(() => {
-        this.dialogRef.close(true);
-        this.feedbackToolbarService.openSnackBarWithSuccessMessage(this.msg);
-      })
+      if(this.posterPath){
+        this.moviesService.createMovie(this.posterPath, this.trailerFileName, this.form.value).subscribe(() => {
+          this.dialogRef.close(true);
+          this.feedbackToolbarService.openSnackBarWithSuccessMessage(this.msg);
+        })
+      } else {
+        this.moviesService.createMovie(null, this.trailerFileName, this.form.value).subscribe(() => {
+          this.dialogRef.close(true);
+          this.feedbackToolbarService.openSnackBarWithSuccessMessage(this.msg);
+        })
+      }
     }
   }
 
   onPosterFileSelect(event: any) {
+    this.posterSelected = true;
+    this.isImageType = event.target.files[0]?.type.indexOf("image") > -1;
     this.posterPath = event.target.files[0];
     this.posterFileName = this.posterPath?.name;
   }
 
   onTrailerFileSelect(event: any) {
-    this.isVideoType = event.target.files[0]?.type.indexOf("video/mp4") > -1;
+    this.trailerSelected = true;
+    this.isVideoType = event.target.files[0]?.type.indexOf("video") > -1;
     this.trailerFileName = event.target.files[0]?.name;
   }
 

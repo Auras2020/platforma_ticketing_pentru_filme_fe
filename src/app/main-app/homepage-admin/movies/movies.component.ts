@@ -195,6 +195,6 @@ export class MoviesComponent implements OnInit{
   }
 
   public clickOnMovieRow(id: string) {
-    this.router.navigate(['homepage-admin', 'movies', id]);
+    this.router.navigate(['admin', 'movies', id]);
   }
 }

@@ -25,7 +25,11 @@ export const environment = {
     showTimings: "show-timings/",
     showTimingsPage:"show-timings/page",
     showTimingsPageFilter:"show-timings/page/filter",
-    dashboard: "users/dashboard"
+    dashboard: "users/dashboard",
+    currentRunning: "movies/current-running",
+    soonRunning: "movies/soon-running",
+    theatreLocations: "theatres/locations",
+    theatresFilterd: "theatres/filtered/"
   }
 };
 

@@ -42,13 +42,12 @@ export class LoginService {
     this.tokenStorage.saveToken(data.token);
     this.tokenStorage.saveUser(data);
     this.tokenStorage.login(true);
-    console.log(data.role);
     if(data.role === 'ADMIN'){
-      this.router.navigate(['/homepage-admin/dashboard']);
+      this.router.navigate(['/admin/dashboard']);
     } else if(data.role === 'DISTRIBUITOR') {
-      this.router.navigate(['/homepage-distribuitor']);
+      this.router.navigate(['/distribuitor']);
     } else if(data.role === 'CLIENT') {
-      this.router.navigate(['/homepage-client']);
+      this.router.navigate(['/client/home']);
     } else {
       this.router.navigate(['/page-not-found']);
     }

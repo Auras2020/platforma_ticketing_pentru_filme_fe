@@ -155,6 +155,7 @@ export class ShowTimingsComponent implements OnInit{
     event.stopPropagation();
     const dialogConfig = new MatDialogConfig();
     dialogConfig.height = "80%";
+    dialogConfig.autoFocus = false
     dialogConfig.disableClose = true
 
     this.openShowTimingDialog(dialogConfig);
@@ -164,6 +165,8 @@ export class ShowTimingsComponent implements OnInit{
     event.stopPropagation();
     const dialogConfig = new MatDialogConfig();
     dialogConfig.height = "80%";
+    dialogConfig.autoFocus = false
+    dialogConfig.disableClose = true
     dialogConfig.data = {
       showTiming
     };

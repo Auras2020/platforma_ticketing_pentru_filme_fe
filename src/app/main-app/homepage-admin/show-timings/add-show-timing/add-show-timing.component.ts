@@ -41,6 +41,7 @@ export class AddShowTimingComponent implements OnInit{
   edit?: boolean;
   title: string = 'Add new show timing';
   msg: string = '';
+  prevParsedValue?: any;
 
   constructor(private showTimingsService: ShowTimingsService,
               private dialogRef: MatDialogRef<AddShowTimingComponent>,
@@ -65,6 +66,10 @@ export class AddShowTimingComponent implements OnInit{
 
   public compareTheatreOptions(t1: Theatre, t2: Theatre): boolean {
     return t1?.id === t2?.id;
+  }
+
+  checkIfSameData(): boolean{
+    return this.edit ? !this.form.dirty : this.prevParsedValue === this.form.value;
   }
 
   ngOnInit(): void {
@@ -95,6 +100,10 @@ export class AddShowTimingComponent implements OnInit{
       ...this.form.value,
       time: this.getHour() +  ":" + this.getMinute()
     }
+    /*console.log(this.prevParsedValue);
+    console.log(this.form.value);
+    console.log();*/
+    this.prevParsedValue = this.form.value;
     this.showTimingsService.createShowTiming(parsedValue).subscribe(() => {
       if(this.edit){
         this.dialogRef.close(true);
