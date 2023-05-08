@@ -1,0 +1,76 @@
+<div class="dialog-content">
+  <div class="delete-item-dialog-title">
+    <div class="dialog-title">
+      {{theatre?.name}}
+    </div>
+    <div class="empty-div"></div>
+    <div class="close-button">
+      <button mat-icon-button mat-dialog-close class="dialog-close-button">
+        <mat-icon class="close-icon">close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div>
+    <div>
+      <div class="form-content" fxLayout="row wrap" fxLayout.xs="column">
+          <img *ngIf="theatre?.poster"
+               [src]="getImageUrl(theatre?.poster)"
+               class="theatre-poster"
+               alt="Poster"/>
+      </div>
+
+      <div class="details">
+        <div class="left-details">
+          <div class="address">
+            <label class="address-value">
+              {{theatre?.address}}
+            </label>
+            <label class="address-label">
+              Address
+            </label>
+          </div>
+          <div class="email">
+            <label class="email-value">
+              {{theatre?.email}}
+            </label>
+            <label class="email-label">
+              Email
+            </label>
+          </div>
+        </div>
+
+        <div class="empty-div"></div>
+
+        <div class="right-details">
+          <div class="location">
+            <div class="location-align">
+              <label class="location-icon">
+                <mat-icon> location_on</mat-icon>
+              </label>
+              <label class="location-value">
+                {{theatre?.location}}
+              </label>
+            </div>
+            <label class="location-label">
+              Location
+            </label>
+          </div>
+          <div class="phone">
+            <div class="phone-align">
+              <label class="phone-icon">
+                <mat-icon> phone</mat-icon>
+              </label>
+              <label class="phone-value">
+                {{theatre?.phone}}
+              </label>
+            </div>
+            <label class="phone-label">
+              Phone
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

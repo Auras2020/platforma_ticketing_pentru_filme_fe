@@ -1,92 +1,60 @@
 <div class="page-content">
-  <mat-card class="calendar-card">
-    <div class="header-section">
-      <!--<div class="first-line">-->
-        <div class="left-header-content">
-          <div class="title">
-            <button mat-icon-button class="arrow-color"
-                    [matTooltip]="'Back to theatres page'"
-                    matTooltipPosition="above"
-                    (click)="navigateBackToTheatresPage()">
-              <mat-icon>
-                {{'chevron_left'}}
-              </mat-icon>
-            </button>
-            <label class="title-style">
-              {{theatre?.name}}
-            </label>
-            <mat-icon mat-list-icon class="filter-list">
-              filter_list
-              <div class="notification-bubble" [ngClass]="{notification: filterActive()}">
-              </div>
-            </mat-icon>
-          </div>
-          <div>
-            <label class="theatre-details">
-              Theatre details here
-            </label>
-          </div>
-          <div class="address">
-            <label class="address-value">
-              {{theatre?.address}}
-            </label>
-            <label class="address-label">
-              Address
-            </label>
-          </div>
-          <div class="email">
-            <label class="email-value">
-              {{theatre?.email}}
-            </label>
-            <label class="email-label">
-              Email
-            </label>
-          </div>
+  <mat-card class="filter-card">
+    <div class="line-style">
+      <div class="header-style">
+        <div class="title-and-filter-icon">
+          <label class="title-style">
+            Movies
+          </label>
+
+          <mat-icon mat-list-icon class="filter-list">
+            filter_list
+            <div class="notification-bubble" [ngClass]="{notification: filterActive()}">
+            </div>
+          </mat-icon>
         </div>
 
-        <div class="poster-div">
-          <img *ngIf="theatre?.poster"
-               [src]="getImageUrl(theatre?.poster)"
-               class="theatre-poster"
-               alt="Poster"/>
-        </div>
+        <mat-form-field appearance="outline" class="filter-state-form location">
+          <mat-select
+            [placeholder]="'Select location'"
+            (selectionChange)="getAllTheatresByEvent($event)"
+            class="form-input"
+          >
+            <mat-option *ngFor="let location of locations" [value]="location">
+              {{ location }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-        <div class="right-header-content">
-          <div class="search-box">
-            <span class="fa fa-search"><mat-icon>search</mat-icon></span>
-            <input (keyup)="onButtonClick(index)"
-                   [(ngModel)]="searchString"
-                   matInput
-                   placeholder="Search...">
-            <span *ngIf="searchString" class="fa fa-search-close" (click)="searchString = '';onButtonClick(index)"><mat-icon>close</mat-icon></span>
-          </div>
-          <div class="location">
-            <div class="location-align">
-              <label class="location-icon">
-                <mat-icon> location_on</mat-icon>
-              </label>
-              <label class="location-value">
-                {{theatre?.location}}
-              </label>
-            </div>
-            <label class="location-label">
-              Location
-            </label>
-          </div>
-          <div class="phone">
-            <div class="phone-align">
-              <label class="phone-icon">
-                <mat-icon> phone</mat-icon>
-              </label>
-              <label class="phone-value">
-                {{theatre?.phone}}
-              </label>
-            </div>
-            <label class="phone-label">
-              Phone
-            </label>
-          </div>
+        <mat-form-field appearance="outline" class="filter-state-form theatre">
+          <mat-select
+            [placeholder]="'Select theatre'"
+            (selectionChange)="getAllMoviesByEvent($event)"
+            class="form-input"
+          >
+            <mat-option *ngFor="let theatre of theatres" [value]="theatre">
+              {{ theatre.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <button mat-button *ngIf="this.selectedTheatre"
+                [matTooltip]="'View theatre details'"
+                matTooltipPosition="after"
+                (click)="openTheatreDetailsDialog()"
+                class="info-button">
+          <mat-icon class="info-icon">info</mat-icon>
+        </button>
+
+        <div class="search-box">
+          <span class="fa fa-search"><mat-icon>search</mat-icon></span>
+          <input (keyup)="onButtonClick(index)"
+                 [(ngModel)]="searchString"
+                 matInput
+                 placeholder="Search...">
+          <span *ngIf="searchString" class="fa fa-search-close" (click)="searchString = '';onButtonClick(index)"><mat-icon>close</mat-icon></span>
         </div>
+      </div>
     </div>
 
     <div class="filters-row">
@@ -131,11 +99,41 @@
           </div>
 
           <div>
+            <div class="input-label">Duration</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <mat-select
+                [(ngModel)]="filters.duration"
+                (selectionChange)="onButtonClick(index)"
+                class="form-input"
+              >
+                <mat-option *ngFor="let durationInterval of durationIntervals" [value]="durationInterval">
+                  {{ durationInterval }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="input-label">Actors</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <input matInput [(ngModel)]="filters.actors" [ngModelOptions]="{updateOn:'change'}"
+                     (ngModelChange)="onButtonClick(index)" class="form-input">
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="input-label">Director</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <input matInput [(ngModel)]="filters.director" [ngModelOptions]="{updateOn:'change'}"
+                     (ngModelChange)="onButtonClick(index)" class="form-input">
+            </mat-form-field>
+          </div>
+
+          <div>
             <div class="input-label">Synopsis</div>
             <mat-form-field appearance="outline" class="filter-form">
               <input matInput [(ngModel)]="filters.synopsis" [ngModelOptions]="{updateOn:'change'}"
-                     (ngModelChange)="onButtonClick(index)"
-                     class="form-input">
+                     (ngModelChange)="onButtonClick(index)" class="form-input">
             </mat-form-field>
           </div>
         </div>
@@ -170,7 +168,6 @@
         </button>
       </div>
     </div>
-
   </mat-card>
 
   <div *ngFor="let movieTime of movieTimes">
@@ -184,7 +181,7 @@
                  alt="Poster"/>
           </div>
           <div class="main-details">
-            <div class="movie-name">
+            <div class="movie-name" (click)="clickOnMovieRow(movieTime.movie.id)">
               {{movieTime.movie.name}}
             </div>
             <div class="movie-age">
@@ -194,9 +191,12 @@
               {{movieTime.movie.genre}}
             </div>
             <div *ngFor="let time of movieTime.times" class="times-display">
-              <label class="time-style">
+              <button mat-raised-button
+                      [matTooltip]="'Buy tickets'"
+                      matTooltipPosition="above"
+                      class="time-style" >
                 {{time}}
-              </label>
+              </button>
             </div>
             <div class="movie-note">
               Note {{getNumber(movieTime.movie.note)}}

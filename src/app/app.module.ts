@@ -60,6 +60,10 @@ import { OrdersComponent } from './main-app/homepage-client/orders/orders.compon
 import { ReviewsComponent } from './main-app/homepage-client/reviews/reviews.component';
 import { MovieDetails1Component } from './main-app/homepage-client/homepage/movie-details1/movie-details1.component';
 import { MovieDetails2Component } from './main-app/homepage-client/program/movie-details2/movie-details2.component';
+import { TheatreDetails1Component } from './main-app/homepage-client/program/theatre-details1/theatre-details1.component';
+import { VenuesComponent } from './main-app/homepage-admin/venues/venues.component';
+import { AddVenueComponent } from './main-app/homepage-admin/venues/add-venue/add-venue.component';
+import { DeleteVenueComponent } from './main-app/homepage-admin/venues/delete-venue/delete-venue.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +98,12 @@ import { MovieDetails2Component } from './main-app/homepage-client/program/movie
     OrdersComponent,
     ReviewsComponent,
     MovieDetails1Component,
-    MovieDetails2Component
+    MovieDetails2Component,
+    TheatreDetailsComponent,
+    TheatreDetails1Component,
+    VenuesComponent,
+    AddVenueComponent,
+    DeleteVenueComponent
   ],
     imports: [
         BrowserModule,

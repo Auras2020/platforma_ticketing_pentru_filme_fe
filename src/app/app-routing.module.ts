@@ -22,6 +22,7 @@ import {OrdersComponent} from "./main-app/homepage-client/orders/orders.componen
 import {ReviewsComponent} from "./main-app/homepage-client/reviews/reviews.component";
 import {MovieDetails1Component} from "./main-app/homepage-client/homepage/movie-details1/movie-details1.component";
 import {MovieDetails2Component} from "./main-app/homepage-client/program/movie-details2/movie-details2.component";
+import {VenuesComponent} from "./main-app/homepage-admin/venues/venues.component";
 
 const routes: Routes = [
   {path: 'login', component: MainAppComponent},
@@ -36,6 +37,7 @@ const routes: Routes = [
     children: [
       {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard, AdminGuard]},
       {path: 'users', component: UserComponent, canActivate: [AuthGuard, AdminGuard]},
+      {path: 'venues', component: VenuesComponent, canActivate: [AuthGuard, AdminGuard]},
       {path: 'theatres', component: TheatresComponent, canActivate: [AuthGuard, AdminGuard]},
       {path: 'theatres/:id', component: TheatreDetailsComponent, canActivate: [AuthGuard, AdminGuard]},
       {path: 'movies', component: MoviesComponent, canActivate: [AuthGuard, AdminGuard]},

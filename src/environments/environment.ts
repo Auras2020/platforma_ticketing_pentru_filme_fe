@@ -29,7 +29,10 @@ export const environment = {
     currentRunning: "movies/current-running",
     soonRunning: "movies/soon-running",
     theatreLocations: "theatres/locations",
-    theatresFilterd: "theatres/filtered/"
+    theatresFilterd: "theatres/filtered/",
+    venues: "venues/",
+    venuesPage:"venues/page",
+    venuesPageFilter:"venues/page/filter"
   }
 };
 

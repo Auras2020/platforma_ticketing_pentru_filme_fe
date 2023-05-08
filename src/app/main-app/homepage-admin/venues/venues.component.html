@@ -1,0 +1,177 @@
+<div class="page-content">
+  <mat-card class="filter-card">
+    <div class="line-style">
+      <div class="header-style">
+        <div class="title-and-filter-icon">
+          <label class="title-style">
+            Venues
+          </label>
+
+          <mat-icon mat-list-icon class="filter-list">
+            filter_list
+            <div class="notification-bubble" [ngClass]="{notification: filterActive()}">
+            </div>
+          </mat-icon>
+        </div>
+
+        <div class="search-box">
+          <span class="fa fa-search"><mat-icon>search</mat-icon></span>
+          <input (keyup)="getAllVenues()"
+                 [(ngModel)]="searchString"
+                 matInput
+                 placeholder="Search...">
+          <span *ngIf="searchString" class="fa fa-search-close" (click)="searchString = '';getAllVenues()"><mat-icon>close</mat-icon></span>
+          <button mat-raised-button class="add-theatre-button" (click)="openAddVenueDialog($event)">Add venue</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="filters-row">
+      <div class="filters" fxFlex="80">
+        <div class="forms-display">
+          <div>
+            <div class="input-label">Location</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <input matInput [(ngModel)]="filters.location" [ngModelOptions]="{updateOn:'change'}"
+                     (ngModelChange)="getAllVenues()" class="form-input">
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="input-label">Theatre name</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <input matInput [(ngModel)]="filters.theatreName" [ngModelOptions]="{updateOn:'change'}"
+                     (ngModelChange)="getAllVenues()" class="form-input">
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="input-label">Movie name</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <input matInput [(ngModel)]="filters.movieName" [ngModelOptions]="{updateOn:'change'}"
+                     (ngModelChange)="getAllVenues()" class="form-input">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div>
+          <div class="input-label">Day</div>
+          <mat-form-field appearance="outline" class="filter-form">
+            <input matInput [(ngModel)]="filters.day" [ngModelOptions]="{updateOn:'change'}"
+                   (ngModelChange)="getAllVenues()" [matDatepicker]="daypicker"/>
+            <mat-datepicker-toggle matSuffix [for]="daypicker"></mat-datepicker-toggle>
+            <mat-datepicker #daypicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="empty-div"></div>
+
+      <div class="reset-div">
+        <button mat-button class="reset-button" (click)="resetFilters()">Reset filters</button>
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card class="table-card">
+    <div class="container" >
+
+      <mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef class="action-header"><span></span></th>
+          <td mat-cell *matCellDef="let row" class="edit-column">
+            <button mat-icon-button
+                    [matTooltip]="'Edit venue'"
+                    aria-label="Edit"
+                    matTooltipPosition="before"
+                    (click)="openEditVenueDialog($event, row)">
+              <mat-icon class="edit-button">
+                edit
+              </mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="venueNumber">
+          <th mat-header-cell *matHeaderCellDef class="data-header"><span>Venue number</span></th>
+          <td mat-cell *matCellDef="let row" class="name-column"
+          ><span class="ellipsis">{{ row.venueNumber }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="location">
+          <th mat-header-cell *matHeaderCellDef class="data-header"><span>Location</span></th>
+          <td mat-cell *matCellDef="let row" class="name-column"
+          ><span class="ellipsis">{{ row.location }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="theatre">
+          <th mat-header-cell *matHeaderCellDef class="data-header"><span>Theatre</span></th>
+          <td mat-cell *matCellDef="let row" class="name-column"
+          ><span class="ellipsis">{{ row.theatre.name }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="movie">
+          <th mat-header-cell *matHeaderCellDef class="data-header"><span>Movie</span></th>
+          <td mat-cell *matCellDef="let row" class="name-column"
+          ><span class="ellipsis">{{ row.movie.name }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="day">
+          <th mat-header-cell *matHeaderCellDef class="data-header"><span>Day</span></th>
+          <td mat-cell *matCellDef="let row" class="name-column">
+            <b><label>{{row.day | date:'dd'}} </label></b>
+            <label class="day-2">{{row.day | date:'LLL' | lowercase}} </label>
+            <b><label>{{row.day | date:'yyyy'}}</label></b>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="time">
+          <th mat-header-cell *matHeaderCellDef class="data-header"><span>Time</span></th>
+          <td mat-cell *matCellDef="let row" class="name-column"
+          ><span class="ellipsis">{{ row.time }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef class="action-header"></th>
+          <td mat-cell
+              (click)="$event.stopPropagation()"
+              *matCellDef="let row"
+              class="delete-column"
+          >
+            <button
+              (click)="openDeleteVenueDialog(row)"
+              mat-icon-button
+              [matTooltip]="'Delete venue'"
+              aria-label="Delete"
+              matTooltipPosition="before"
+            >
+              <mat-icon
+              >delete
+              </mat-icon
+              >
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header"></tr>
+        <tr mat-row
+            *matRowDef="let odd = odd; columns: displayedColumns"
+            [ngClass]="{ 'gray-row': odd }"
+            class="row"
+        ></tr>
+      </mat-table>
+      <mat-paginator [pageSizeOptions]="pageSizeOptions"
+                     [pageSize]="pageSize"
+                     (page)="pageChanged($event)"
+                     showFirstLastButtons>
+      </mat-paginator>
+    </div>
+
+  </mat-card>
+
+</div>

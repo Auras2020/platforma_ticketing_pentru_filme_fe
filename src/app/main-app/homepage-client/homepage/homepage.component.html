@@ -1,0 +1,163 @@
+<div class="page-content">
+  <mat-card class="filter-card">
+    <div class="line-style">
+      <div class="header-style">
+        <div class="title-and-filter-icon">
+          <label class="title-style">
+            Movies
+          </label>
+
+          <mat-icon mat-list-icon class="filter-list">
+            filter_list
+            <div class="notification-bubble" [ngClass]="{notification: filterActive()}">
+            </div>
+          </mat-icon>
+        </div>
+
+        <mat-form-field appearance="outline" class="filter-state-form state">
+          <mat-select
+            [placeholder]="'Playing now or soon..'"
+            (selectionChange)="getAllMoviesByEvent($event)"
+            class="form-input"
+          >
+            <mat-option *ngFor="let state of states" [value]="state">
+              {{ state }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="search-box">
+          <span class="fa fa-search"><mat-icon>search</mat-icon></span>
+          <input (keyup)="getAllMovies()"
+                 [(ngModel)]="searchString"
+                 matInput
+                 placeholder="Search...">
+          <span *ngIf="searchString" class="fa fa-search-close" (click)="searchString = '';getAllMovies()"><mat-icon>close</mat-icon></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="filters-row">
+      <div class="filters" fxFlex="80">
+        <div class="forms-display">
+          <div>
+            <div class="input-label">Name</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <input matInput [(ngModel)]="filters.name" [ngModelOptions]="{updateOn:'change'}"
+                     (ngModelChange)="getAllMovies()" class="form-input">
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="input-label">Category</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <mat-select
+                [(ngModel)]="filters.recommendedAge"
+                (selectionChange)="getAllMovies()"
+                class="form-input"
+              >
+                <mat-option *ngFor="let ageRestrict of ageRestricts" [value]="ageRestrict">
+                  {{ ageRestrict }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="input-label">Genre</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <mat-select
+                [(ngModel)]="filters.genre"
+                (selectionChange)="getAllMovies()"
+                class="form-input"
+              >
+                <mat-option *ngFor="let genre of genres" [value]="genre">
+                  {{ genre }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="input-label">Duration</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <mat-select
+                [(ngModel)]="filters.duration"
+                (selectionChange)="getAllMovies()"
+                class="form-input"
+              >
+                <mat-option *ngFor="let durationInterval of durationIntervals" [value]="durationInterval">
+                  {{ durationInterval }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="input-label">Actors</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <input matInput [(ngModel)]="filters.actors" [ngModelOptions]="{updateOn:'change'}"
+                     (ngModelChange)="getAllMovies()" class="form-input">
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="input-label">Director</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <input matInput [(ngModel)]="filters.director" [ngModelOptions]="{updateOn:'change'}"
+                     (ngModelChange)="getAllMovies()" class="form-input">
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="input-label">Synopsis</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <input matInput [(ngModel)]="filters.synopsis" [ngModelOptions]="{updateOn:'change'}"
+                     (ngModelChange)="getAllMovies()" class="form-input">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="empty-div"></div>
+
+      <div class="reset-div">
+        <button mat-button class="reset-button" (click)="resetFilters()">Reset filters</button>
+      </div>
+    </div>
+  </mat-card>
+
+  <div class="movies-display">
+    <div *ngFor="let movie of movies">
+      <mat-card class="movie-card">
+        <div class="movie-content">
+          <div class="movie-details">
+            <div>
+              <img *ngIf="movie.poster"
+                   [src]="getImageUrl(movie.poster)"
+                   class="movie-poster"
+                   alt="Poster"/>
+            </div>
+            <div class="main-details">
+              <div class="movie-name" (click)="clickOnMovieRow(movie.id)">
+                {{movie.name}}
+              </div>
+              <div class="movie-age">
+                {{movie.recommendedAge}}, {{formatDuration(movie.duration)}}
+              </div>
+              <div class="movie-genre">
+                {{movie.genre}}
+              </div>
+              <div class="movie-note">
+                Note {{getNumber(movie.note)}}
+              </div>
+              <div class="movie-rating">
+                Rating {{getNumber(movie.rating)}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

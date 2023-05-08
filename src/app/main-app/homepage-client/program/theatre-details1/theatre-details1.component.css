@@ -1,0 +1,112 @@
+.dialog-content{
+  padding: 24px;
+}
+
+.dialog-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  color: #00133F;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.delete-item-dialog-title{
+  border-bottom: 2px solid #839DC3;
+  font-size: 24px;
+  margin-bottom: 16px;
+  padding-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.close-button{
+  align-items: flex-end;
+}
+
+.empty-div{
+  align-self: flex-start;
+}
+
+.dialog-close-button{
+  height: 30px;
+  width: 30px;
+}
+
+.close-icon{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.form-content{
+  padding-bottom: 20px;
+  border-bottom: 2px solid #FDD5BD;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.theatre-poster{
+  height: 240px;
+  width: 480px;
+}
+
+.left-details{
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+}
+
+.right-details{
+  align-self: flex-end;
+}
+
+.details{
+  display: flex;
+  justify-content: space-between;
+}
+
+.address, .email{
+  padding-top: 15px;
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+}
+
+.location, .phone{
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-top: 15px;
+}
+
+.address-value, .email-value{
+  color: #213555;
+  font-weight: bold;
+  font-size: 18px;
+  padding-bottom: 5px;
+}
+
+.location-value, .phone-value{
+  color: #213555;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.address-label, .location-label, .email-label, .phone-label{
+  color: #9DA9AE;
+  font-size: 16px;
+}
+
+.location-icon, .phone-icon{
+  color: #213555;
+  margin-right: 7px;
+}
+
+.location-align, .phone-align{
+  display: inline-flex;
+}

@@ -1,0 +1,209 @@
+<div [formGroup]="form" class="dialog-content">
+  <div class="delete-item-dialog-title">
+    <div class="dialog-title">
+      {{title}}
+    </div>
+    <div class="empty-div"></div>
+    <div class="close-button">
+      <button mat-icon-button mat-dialog-close class="dialog-close-button">
+        <mat-icon class="close-icon">close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div>
+    <div class="form-padding form-content">
+      <div fxLayout="row wrap" fxLayout.xs="column">
+        <div class="form-row form-margin" fxFlex>
+          <div class="name-label-padding">
+            <label class="name-label" [ngClass]="{'asterisk': theatreControl.hasError('required')}">Theatre</label>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" class="mat-form">
+              <mat-select formControlName="theatre" [compareWith]="compareTheatreOptions">
+                <mat-option *ngFor="let theatre of theatres" [value]="theatre">{{
+                  theatre.name
+                  }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div
+              *ngIf="theatreControl.touched && theatreControl.hasError('required')" class="error">
+              Theatre is required!
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row" fxFlex>
+          <div class="name-label-padding">
+            <label class="name-label" [ngClass]="{'asterisk': movieControl.hasError('required')}">Movie</label>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" class="mat-form">
+              <mat-select formControlName="movie" [compareWith]="compareMovieOptions">
+                <mat-option *ngFor="let movie of movies" [value]="movie">{{
+                  movie.name
+                  }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div
+              *ngIf="movieControl.touched && movieControl.hasError('required')" class="error">
+              Movie is required!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div fxLayout="row wrap" fxLayout.xs="column">
+        <div class="form-row form-margin" fxFlex>
+          <div class="name-label-padding">
+            <label class="name-label" [ngClass]="{'asterisk': startDateControl.hasError('required')}">Start date</label>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" class="mat-form start-date-padding">
+              <input matInput [matDatepickerFilter]="startDateFilter" [matDatepicker]="startdatepicker" formControlName="startDate"/>
+              <mat-datepicker-toggle matSuffix [for]="startdatepicker"></mat-datepicker-toggle>
+              <mat-datepicker #startdatepicker></mat-datepicker>
+            </mat-form-field>
+            <div
+              *ngIf="startDateControl.touched && startDateControl.hasError('required')" class="error">
+              Start date is required!
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row form-margin" fxFlex>
+          <div class="name-label-padding">
+            <label class="name-label" [ngClass]="{'asterisk': endDateControl.hasError('required')}">End date</label>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" class="mat-form">
+              <input matInput formControlName="endDate" [matDatepickerFilter]="myFilter" [matDatepicker]="enddatepicker"/>
+              <mat-datepicker-toggle matSuffix [for]="enddatepicker"></mat-datepicker-toggle>
+              <mat-datepicker #enddatepicker></mat-datepicker>
+            </mat-form-field>
+            <div
+              *ngIf="endDateControl.touched && endDateControl.hasError('required')" class="error">
+              End date is required!
+            </div>
+            <div
+              *ngIf="!startDateControl.valid &&
+              endDateControl.touched && !endDateControl.hasError('required')" class="error error-width">
+              Please select start date first!
+            </div>
+            <div
+              *ngIf="form.errors?.['startEndDate'] && startDateControl.valid &&
+              endDateControl.touched && !endDateControl.hasError('required')" class="error error-width">
+              End date must be later than start date!
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-padding form-content">
+      <div fxLayout="row wrap" fxLayout.xs="column">
+        <div class="form-row form-margin" fxFlex>
+          <div class="name-label-padding">
+            <label class="name-label" [ngClass]="{'asterisk': hourControl.hasError('required')}">Hour</label>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" class="mat-form">
+              <input matInput type="number" formControlName="hour">
+            </mat-form-field>
+            <div
+              *ngIf="hourControl.touched && hourControl.hasError('required')" class="error">
+              Hour is required!
+            </div>
+            <div
+              *ngIf="hourControl.touched && !hourControl.hasError('required') && (hourValue() < 10 || hourValue() > 23)" class="error error-width">
+              Hour must be a positive number between 10 and 23!
+            </div>
+            <div
+              *ngIf="hourControl.touched && !hourControl.hasError('required') && (hourValue() >= 10 && hourValue() <= 23) && !checkIfHourInteger()" class="error">
+              Hour must be an integer number!
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row" fxFlex>
+          <div class="name-label-padding">
+            <label class="name-label" [ngClass]="{'asterisk': minuteControl.hasError('required')}">Minute</label>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" class="mat-form">
+              <input matInput type="number" formControlName="minute">
+            </mat-form-field>
+            <div
+              *ngIf="minuteControl.touched && minuteControl.hasError('required')" class="error">
+              Minute is required!
+            </div>
+            <div
+              *ngIf="minuteControl.touched && !minuteControl.hasError('required') && (minuteValue() < 0 || minuteValue() > 59)" class="error error-width">
+              Minute must be a positive number between 0 and 59!
+            </div>
+            <div
+              *ngIf="minuteControl.touched && !minuteControl.hasError('required') && (minuteValue() >= 0 && minuteValue() <= 59) && !checkIfMinuteInteger()" class="error">
+              Minute must be an integer number!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div fxLayout="row wrap" fxLayout.xs="column">
+        <div class="form-row form-margin" fxFlex>
+          <div class="name-label-padding">
+            <label class="name-label" [ngClass]="{'asterisk': dayControl.hasError('required')}">Day</label>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" class="mat-form">
+              <input matInput formControlName="day" [matDatepickerFilter]="myFilter" [matDatepicker]="daypicker"/>
+              <mat-datepicker-toggle matSuffix [for]="daypicker"></mat-datepicker-toggle>
+              <mat-datepicker #daypicker></mat-datepicker>
+            </mat-form-field>
+            <div *ngIf="(!startDateControl.value || !endDateControl.value) &&
+            dayControl.touched && !dayControl.hasError('required')" class="error error-width">
+              Please select start date and end date first!
+            </div>
+            <div
+              *ngIf="dayControl.touched && dayControl.hasError('required')" class="error">
+              Day is required!
+            </div>
+            <div
+              *ngIf="dayControl.touched && !dayControl.hasError('required') &&
+               form.errors?.['invalidRange'] && startDateControl.valid && endDateControl.valid" class="error error-width">
+              Day must be between start date and end date!
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row" fxFlex>
+          <div class="name-label-padding">
+            <label class="name-label" [ngClass]="{'asterisk': priceControl.hasError('required')}">Price</label>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" class="mat-form">
+              <input matInput type="number" formControlName="price">
+            </mat-form-field>
+            <div
+              *ngIf="priceControl.touched && priceControl.hasError('required')" class="error">
+              Price is required!
+            </div>
+            <div
+              *ngIf="priceControl.touched && !priceControl.hasError('required') && priceValue() <= 0" class="error">
+              Price must be a positive number!
+            </div>
+            <div
+              *ngIf="priceControl.touched && !priceControl.hasError('required') && priceValue() > 0 && !checkIfPriceInteger()" class="error">
+              Price must be an integer number!
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div mat-dialog-actions align="end" class="close-actions">
+      <button mat-button mat-dialog-close class="cancel-button">Cancel</button>
+      <button mat-raised-button type="submit" [disabled]="!form.valid || checkIfSameData()" (click)="saveShowTiming()" class="save-user-button">Save</button>
+    </div>
+  </div>
+</div>

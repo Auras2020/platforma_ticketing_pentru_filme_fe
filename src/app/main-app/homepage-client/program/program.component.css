@@ -2,118 +2,26 @@
   margin-bottom: 100px;
 }
 
-.calendar-card {
-  margin: 24px 24px 24px 24px;
-  padding-bottom: 24px;
-  min-height: 300px;
-}
-
-.header-section{
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 15px;
-  border-bottom: 2px solid #AABFDF;
-}
-
-.filter-list{
-  color: #DC4E2A;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 10px;
-}
-
-.notification-bubble.notification {
-  background: #E72A2A;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  font-size: 8px;
-  position: absolute;
-  top: 10px;
-  right: 0;
-}
-
-.title{
-  display: inline-flex;
-}
-
-.arrow-color{
-  color: #DC4E2A;
+.filter-card{
+  min-height: 430px;
+  margin: 24px;
 }
 
 .title-style{
+  font-size: 21px;
   color: #213555;
   font-weight: bold;
-  font-size: 25px;
-  align-self: center;
   margin-right: 12px;
-}
-
-.theatre-details{
-  padding-left: 48px;
-  color: #9DA9AE;
-  font-size: 18px;
-}
-
-.place-details, .contact-details{
-  padding-top: 15px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.address, .email{
-  padding-top: 15px;
-  align-self: flex-start;
-  display: flex;
-  flex-direction: column;
-  padding-left: 20px;
-}
-
-.poster-div{
-  align-self: flex-start;
-  padding-top: 20px;
-  padding-right: 140px;
-}
-
-.location, .phone, .actors, .director{
-  align-self: flex-end;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  padding-top: 15px;
-  padding-right: 20px;
-}
-
-.address-value, .email-value{
-  color: #213555;
-  font-weight: bold;
-  font-size: 18px;
-  padding-bottom: 5px;
-}
-
-.location-value, .phone-value, .director-value, .actors-value{
-  color: #213555;
-  font-weight: bold;
-  font-size: 18px;
-}
-
-.address-label, .location-label, .email-label, .phone-label, .director-label, .actors-label{
-  color: #9DA9AE;
-  font-size: 16px;
-}
-
-.actors-div, .director-div{
-  text-align: right;
+  float: left;
+  padding-left: 24px;
 }
 
 .search-box {
   color: #213555;
   font-size: 16px;
   position: absolute;
-  right: -6px;
-  margin-top: -50px;
+  right: 0;
+  margin-top: 10px;
 }
 
 .search-box input {
@@ -145,40 +53,124 @@
   color: #213555;
 }
 
-.left-header-content{
-  align-self: flex-start;
-  display: flex;
-  flex-direction: column;
-}
-
-.right-header-content{
-  align-self: flex-end;
-  display: flex;
-  flex-direction: column;
-}
-
-.actors-and-director{
-  align-self: center;
-  display: flex;
-  flex-direction: column;
-}
-
-.theatre-poster{
-  height: 160px;
-  width: 480px;
-}
-
-.location-icon, .phone-icon{
-  color: #213555;
-  margin-right: 7px;
-}
-
-.location-align, .phone-align{
+.header-style{
   display: inline-flex;
+}
+
+.title-and-filter-icon{
+  padding-top: 15px;
+}
+
+.filter-list{
+  color: #DC4E2A;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notification-bubble.notification {
+  background: #E72A2A;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  font-size: 8px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.line-style{
+  padding-bottom: 25px;
+  border-bottom: 2px solid #CBDAF0;
+}
+
+.input-label {
+  margin: 10px 0 0 20px;
+  color: #3E5F8D;
+  font-size: 18px;
+}
+
+.filter-form {
+  font-size: 14px;
+  margin-left: 20px;
+  padding: 0;
+}
+
+.form-input{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.reset-button {
+  color: #DC4E2A;
+  border: solid #DC4E2A;
+  height: 32px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin: 30px 0 30px 0;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reset-div{
+  align-items: flex-end;
+  align-content: center;
+  text-align: center;
+  margin-right: 24px;
+  position: absolute;
+  right: 0;
+}
+
+.forms-display{
+  display: inline-flex;
+  flex-wrap: wrap;
+}
+
+.mat-form-field {
+  flex: 1 1 calc(20% - 40px);
+  margin-right: 20px;
+}
+
+::ng-deep .mat-mdc-select-value{
+  color: #213555;
+}
+
+::ng-deep .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input {
+  color: #213555;
+}
+
+::ng-deep .mat-mdc-form-field-infix {
+  min-height: 32px;
+}
+
+.filters-row{
+  display: flex;
+  justify-content: space-between;
+}
+
+.empty-div, .filters{
+  align-items: flex-start;
+}
+
+.location{
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.theatre{
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-right: 10px;
 }
 
 .calendar-container {
   margin-top: 20px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -293,6 +285,12 @@ button:disabled {
   font-weight: bold;
   font-size: 20px;
   padding-bottom: 40px;
+  text-decoration: none;
+}
+
+.movie-name:hover{
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .movie-age, .movie-genre{
@@ -320,75 +318,34 @@ button:disabled {
   justify-content: space-between;
 }
 
-.empty-div{
-  align-self: flex-start;
-}
-
-::ng-deep .mat-mdc-select-value{
-  color: #213555;
-}
-
-::ng-deep .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input {
-  color: #213555;
-}
-
-::ng-deep .mat-mdc-form-field-infix {
-  min-height: 32px;
-}
-
-.filters-row{
+.actors-and-director{
+  align-self: center;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
 }
 
-.empty-div, .filters{
-  align-items: flex-start;
+.actors-div, .director-div{
+  text-align: right;
 }
 
-.forms-display{
-  align-self: flex-start;
-  display: inline-flex;
-  flex-wrap: wrap;
-}
-
-.filter-form {
-  font-size: 14px;
-  margin-left: 20px;
-  padding: 0;
-}
-
-.form-input{
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.reset-button {
-  color: #DC4E2A;
-  border: solid #DC4E2A;
-  height: 32px;
-  padding-left: 16px;
-  padding-right: 16px;
-  margin: 30px 0 30px 0;
-  font-weight: bold;
+.actors, .director{
+  align-self: flex-end;
   display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.reset-div{
+  flex-direction: column;
   align-items: flex-end;
-  align-content: center;
-  text-align: center;
-  margin-right: 24px;
-  position: absolute;
-  right: 0;
+  padding-top: 15px;
+  padding-right: 20px;
 }
 
-.input-label {
-  margin: 10px 0 0 20px;
-  color: #3E5F8D;
+.director-value, .actors-value{
+  color: #213555;
+  font-weight: bold;
   font-size: 18px;
+}
+
+.director-label, .actors-label{
+  color: #9DA9AE;
+  font-size: 16px;
 }
 
 .movie-note{
@@ -402,4 +359,18 @@ button:disabled {
   color: #213555;
   font-size: 16px;
   font-weight: 600;
+}
+
+.info-icon{
+  color: #213555;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+}
+
+.info-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 7px;
 }

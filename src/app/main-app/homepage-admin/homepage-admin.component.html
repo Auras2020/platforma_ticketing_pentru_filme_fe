@@ -47,6 +47,15 @@
       <button
         mat-raised-button
         class="menu-button"
+        routerLink="venues"
+        routerLinkActive="is-active"
+      >
+        <mat-icon class="material-icons-outlined">event_seat</mat-icon>
+        <mat-label class="menu-page">{{ "Venues" }}</mat-label>
+      </button>
+      <button
+        mat-raised-button
+        class="menu-button"
         routerLink="show-timings"
         routerLinkActive="is-active"
       >
