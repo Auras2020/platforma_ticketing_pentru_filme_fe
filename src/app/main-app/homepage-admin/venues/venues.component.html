@@ -45,16 +45,16 @@
             </mat-form-field>
           </div>
 
-          <div>
+          <!--<div>
             <div class="input-label">Movie name</div>
             <mat-form-field appearance="outline" class="filter-form">
               <input matInput [(ngModel)]="filters.movieName" [ngModelOptions]="{updateOn:'change'}"
                      (ngModelChange)="getAllVenues()" class="form-input">
             </mat-form-field>
-          </div>
+          </div>-->
         </div>
 
-        <div>
+        <!--<div>
           <div class="input-label">Day</div>
           <mat-form-field appearance="outline" class="filter-form">
             <input matInput [(ngModel)]="filters.day" [ngModelOptions]="{updateOn:'change'}"
@@ -62,7 +62,7 @@
             <mat-datepicker-toggle matSuffix [for]="daypicker"></mat-datepicker-toggle>
             <mat-datepicker #daypicker></mat-datepicker>
           </mat-form-field>
-        </div>
+        </div>-->
       </div>
 
       <div class="empty-div"></div>
@@ -83,7 +83,7 @@
             <button mat-icon-button
                     [matTooltip]="'Edit venue'"
                     aria-label="Edit"
-                    matTooltipPosition="before"
+                    matTooltipPosition="above"
                     (click)="openEditVenueDialog($event, row)">
               <mat-icon class="edit-button">
                 edit
@@ -102,7 +102,7 @@
         <ng-container matColumnDef="location">
           <th mat-header-cell *matHeaderCellDef class="data-header"><span>Location</span></th>
           <td mat-cell *matCellDef="let row" class="name-column"
-          ><span class="ellipsis">{{ row.location }}</span>
+          ><span class="ellipsis">{{ row.theatre.location }}</span>
           </td>
         </ng-container>
 
@@ -113,7 +113,7 @@
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="movie">
+        <!--<ng-container matColumnDef="movie">
           <th mat-header-cell *matHeaderCellDef class="data-header"><span>Movie</span></th>
           <td mat-cell *matCellDef="let row" class="name-column"
           ><span class="ellipsis">{{ row.movie.name }}</span>
@@ -134,7 +134,7 @@
           <td mat-cell *matCellDef="let row" class="name-column"
           ><span class="ellipsis">{{ row.time }}</span>
           </td>
-        </ng-container>
+        </ng-container>-->
 
         <ng-container matColumnDef="delete">
           <th mat-header-cell *matHeaderCellDef class="action-header"></th>
@@ -148,7 +148,7 @@
               mat-icon-button
               [matTooltip]="'Delete venue'"
               aria-label="Delete"
-              matTooltipPosition="before"
+              matTooltipPosition="above"
             >
               <mat-icon
               >delete

@@ -20,10 +20,10 @@
           </div>
           <div>
             <mat-form-field appearance="outline" class="mat-form">
-              <mat-select formControlName="theatre" [compareWith]="compareTheatreOptions">
-                <mat-option *ngFor="let theatre of theatres" [value]="theatre">{{
-                  theatre.name
-                  }}</mat-option>
+              <mat-select formControlName="theatre" (selectionChange)="getVenuesByTheatreId()" [compareWith]="compareTheatreOptions">
+                <mat-option *ngFor="let theatre of theatres" [value]="theatre">
+                  {{theatre.name}}, {{theatre.location}}
+                </mat-option>
               </mat-select>
             </mat-form-field>
             <div
@@ -195,6 +195,35 @@
             <div
               *ngIf="priceControl.touched && !priceControl.hasError('required') && priceValue() > 0 && !checkIfPriceInteger()" class="error">
               Price must be an integer number!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div fxLayout="row wrap" fxLayout.xs="column">
+        <div class="form-row-venue" fxFlex>
+          <div class="name-label-padding venue-label">
+            <label class="name-label" [ngClass]="{'asterisk': venueControl.hasError('required')}">Venue number</label>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" class="mat-form">
+              <mat-select formControlName="venue" [compareWith]="compareVenueOptions">
+                <mat-option *ngFor="let venue of venues" [value]="venue">
+                  {{venue.venueNumber}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div
+              *ngIf="venueControl.touched && venueControl.hasError('required')" class="error">
+              Venue number is required!
+            </div>
+            <div
+              *ngIf="venueControl.touched && !venueControl.hasError('required') && venueValue() <= 0" class="error">
+              Venue number must be a positive number!
+            </div>
+            <div
+              *ngIf="venueControl.touched && !venueControl.hasError('required') && venueValue() > 0 && !checkIfVenueNumberInteger()" class="error">
+              Venue number must be an integer number!
             </div>
           </div>
         </div>

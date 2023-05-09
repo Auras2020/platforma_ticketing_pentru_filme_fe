@@ -28,6 +28,10 @@ export const environment = {
     theatresFilterd: "theatres/filtered/",
     venues: "venues/",
     venuesPage:"venues/page",
-    venuesPageFilter:"venues/page/filter"
+    venuesPageFilter:"venues/page/filter",
+    moviesTheatre: "movies/theatre/",
+    movieShowTimings: "movies/show-timings",
+    theatreDay: "movies/theatre-and-day",
+    venuesTheatre: "venues/theatre/"
   }
 };

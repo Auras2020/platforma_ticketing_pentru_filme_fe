@@ -30,6 +30,14 @@
       <div class="filters" fxFlex="80">
         <div class="forms-display">
           <div>
+            <div class="input-label">Theatre location</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <input matInput [(ngModel)]="filters.theatreLocation" [ngModelOptions]="{updateOn:'change'}"
+                     (ngModelChange)="getAllShowTimings()" class="form-input">
+            </mat-form-field>
+          </div>
+
+          <div>
             <div class="input-label">Theatre name</div>
             <mat-form-field appearance="outline" class="filter-form">
               <input matInput [(ngModel)]="filters.theatreName" [ngModelOptions]="{updateOn:'change'}"
@@ -158,6 +166,13 @@
           <th mat-header-cell *matHeaderCellDef class="data-header"><span>Price</span></th>
           <td mat-cell *matCellDef="let row" class="name-column"
           ><span class="ellipsis">{{ row.price }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="venue">
+          <th mat-header-cell *matHeaderCellDef class="data-header"><span>Venue number</span></th>
+          <td mat-cell *matCellDef="let row" class="name-column"
+          ><span class="ellipsis">{{ row.venue?.venueNumber }}</span>
           </td>
         </ng-container>
 

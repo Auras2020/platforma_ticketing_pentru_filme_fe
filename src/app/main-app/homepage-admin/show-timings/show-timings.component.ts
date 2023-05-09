@@ -11,6 +11,7 @@ import {
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {DeleteShowTimingComponent} from "./delete-show-timing/delete-show-timing.component";
 import {AddShowTimingComponent} from "./add-show-timing/add-show-timing.component";
+import {VenuesService} from "../venues/venues.service";
 
 @Component({
   selector: 'app-show-timings',
@@ -23,6 +24,7 @@ export class ShowTimingsComponent implements OnInit{
 
   filters: ShowTimingsFilter = {
     movieName:'',
+    theatreLocation:'',
     theatreName:'',
     startDate: null,
     endDate: null,
@@ -45,6 +47,7 @@ export class ShowTimingsComponent implements OnInit{
     'time',
     'day',
     'price',
+    'venue',
     'delete'
   ];
 
@@ -100,6 +103,7 @@ export class ShowTimingsComponent implements OnInit{
   getAllByFilters(): void {
     this.filteredData = {
       movieName: this.filters.movieName,
+      theatreLocation: this.filters.theatreLocation,
       theatreName: this.filters.theatreName,
       startDate: this.filters.startDate,
       endDate: this.filters.endDate,
@@ -111,6 +115,7 @@ export class ShowTimingsComponent implements OnInit{
   filterActive(): boolean {
     let isActive: boolean;
     isActive = !((this.filters.movieName === '') &&
+      (this.filters.theatreLocation === '') &&
       (this.filters.theatreName === '') &&
       (this.filters.startDate === null) &&
       (this.filters.endDate === null) &&
@@ -120,6 +125,7 @@ export class ShowTimingsComponent implements OnInit{
 
   resetFilters(): void {
     this.filters.movieName = '';
+    this.filters.theatreLocation = '';
     this.filters.theatreName = '';
     this.filters.startDate = null;
     this.filters.endDate = null;
@@ -154,7 +160,7 @@ export class ShowTimingsComponent implements OnInit{
   openAddShowTimingDialog(event: MouseEvent) {
     event.stopPropagation();
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.height = "80%";
+    dialogConfig.height = "94%";
     dialogConfig.autoFocus = false
     dialogConfig.disableClose = true
 
@@ -164,7 +170,7 @@ export class ShowTimingsComponent implements OnInit{
   openEditShowTimingDialog(event: MouseEvent, showTiming: ShowTimings) {
     event.stopPropagation();
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.height = "80%";
+    dialogConfig.height = "94%";
     dialogConfig.autoFocus = false
     dialogConfig.disableClose = true
     dialogConfig.data = {

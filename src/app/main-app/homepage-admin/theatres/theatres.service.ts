@@ -34,6 +34,11 @@ export class TheatreFilteredPage{
   size?: number;
 }
 
+export interface TheatreIdDay {
+  theatreId: number;
+  day: Date;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -91,7 +96,7 @@ export class TheatresService {
     return this.http.get<string[]>(this.url + this.theatreLocations);
   }
 
-  getTheatresByLocation(location: string): Observable<Theatre[]>{
+  getTheatresByLocation(location?: string): Observable<Theatre[]>{
     return this.http.get<Theatre[]>(this.url + this.theatresFilterd + location)
   }
 }

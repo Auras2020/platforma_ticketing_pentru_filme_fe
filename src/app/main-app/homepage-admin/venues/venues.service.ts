@@ -1,23 +1,17 @@
 import { Injectable } from '@angular/core';
 import {Theatre} from "../theatres/theatres.service";
 import {Movie} from "../movies/movies.service";
-import {
-  ShowTimings,
-  ShowTimingsFilter,
-  ShowTimingsFilteredPage,
-  ShowTimingsPage
-} from "../show-timings/show-timings.service";
 import {environment} from "../../../../environments/environment";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 
 export interface Venue {
   id: number;
-  location: string;
+  //location: string;
   theatre: Theatre;
-  movie: Movie;
+  /*movie: Movie;
   day: Date;
-  time: string;
+  time: string;*/
   venueNumber: number;
   rowsNumber: number;
   columnsNumber: number;
@@ -26,8 +20,8 @@ export interface Venue {
 export interface VenuesFilter {
   location: string;
   theatreName: string;
-  movieName: string;
-  day: Date | null;
+  /*movieName: string;
+  day: Date | null;*/
   searchString: string;
 }
 
@@ -39,7 +33,7 @@ export interface VenuesPage {
 }
 
 export class VenuesFilteredPage{
-  dto: VenuesFilter = {location: '',  theatreName:'', movieName:'', day: null, searchString:''};
+  dto: VenuesFilter = {location: '',  theatreName:'', /*movieName:'', day: null,*/ searchString:''};
   page?: number;
   size?: number;
 }
@@ -52,6 +46,7 @@ export class VenuesService {
   venues =  environment.apiEndpoints.venues
   venuesPage = environment.apiEndpoints.venuesPage
   venuesPageFilter = environment.apiEndpoints.venuesPageFilter
+  venuesTheatre = environment.apiEndpoints.venuesTheatre
 
   constructor(private http: HttpClient) { }
 
@@ -72,5 +67,9 @@ export class VenuesService {
 
   getVenuesByFiltersPage(venuesFilteredPage: VenuesFilteredPage): Observable<VenuesPage>{
     return this.http.post<VenuesPage>(this.url + this.venuesPageFilter, venuesFilteredPage);
+  }
+
+  getAllVenueNumbersOfGivenTheatre(id: number | undefined): Observable<Venue[]> {
+    return this.http.get<Venue[]>(this.url + this.venuesTheatre + id)
   }
 }

@@ -192,6 +192,7 @@ mat-table {
 }
 
 .row{
+  cursor: pointer;
   border: 2px solid #213555;
 }
 

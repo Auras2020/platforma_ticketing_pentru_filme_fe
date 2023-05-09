@@ -48,6 +48,12 @@ export class MovieTimes{
   times?: string[];
 }
 
+export interface TheatreMovieDay {
+  theatreId: number;
+  movieId: number;
+  day: Date;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -60,6 +66,9 @@ export class MoviesService {
   movieTheatreDay = environment.apiEndpoints.movieTheatreDay
   currentRunning = environment.apiEndpoints.currentRunning
   soonRunning = environment.apiEndpoints.soonRunning
+  moviesTheatre = environment.apiEndpoints.moviesTheatre
+  movieShowTimings = environment.apiEndpoints.movieShowTimings
+  theatreDay = environment.apiEndpoints.theatreDay
 
   constructor(private http: HttpClient) { }
 
@@ -107,11 +116,23 @@ export class MoviesService {
     return this.http.post<MovieTimes[]>(this.url + this.movieTheatreDay, theatreDay);
   }
 
+  getAllMoviesByTheatreAndGivenDay(theatreDay: any): Observable<Movie[]>{
+    return this.http.post<Movie[]>(this.url + this.theatreDay, theatreDay);
+  }
+
   getAllMoviesCurrentlyRunning(movieFilters: any): Observable<Movie[]>{
     return this.http.post<Movie[]>(this.url + this.currentRunning, movieFilters);
   }
 
   getAllMoviesRunningSoon(movieFilters: any): Observable<Movie[]>{
     return this.http.post<Movie[]>(this.url + this.soonRunning, movieFilters);
+  }
+
+  getAllMoviesFromATheatre(id?: number): Observable<Movie[]>{
+    return this.http.get<Movie[]>(this.url + this.moviesTheatre + id);
+  }
+
+  getAllTimesByShowTiming(theatreMovieDate: any): Observable<string[]>{
+    return this.http.post<string[]>(this.url + this.movieShowTimings, theatreMovieDate);
   }
 }

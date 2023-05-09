@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Movie, MoviesService} from "../../movies/movies.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
@@ -6,6 +6,7 @@ import {ShowTimingsService} from "../show-timings.service";
 import {Theatre, TheatresService} from "../../theatres/theatres.service";
 import {rangeValidator, startDateValidator} from "./date-validator";
 import {FeedbackToolbarService} from "../../../../feedback-toolbar/feedback-toolbar.service";
+import {Venue, VenuesService} from "../../venues/venues.service";
 
 @Component({
   selector: 'app-add-show-timing',
@@ -16,6 +17,7 @@ export class AddShowTimingComponent implements OnInit{
 
   theatres?: Theatre[];
   movies?: Movie[];
+  venues?: Venue[];
 
   form = new FormGroup({
       id: new FormControl(''),
@@ -31,6 +33,9 @@ export class AddShowTimingComponent implements OnInit{
       }),
       day: new FormControl(null, Validators.required),
       price: new FormControl(null, {
+        validators: [Validators.required, Validators.min(0)]
+      }),
+      venue: new FormControl(null, {
         validators: [Validators.required, Validators.min(0)]
       })
     }, {
@@ -48,7 +53,8 @@ export class AddShowTimingComponent implements OnInit{
               @Inject(MAT_DIALOG_DATA) data: any,
               private theatresService: TheatresService,
               private moviesService: MoviesService,
-              private feedbackToolbarService: FeedbackToolbarService) {
+              private feedbackToolbarService: FeedbackToolbarService,
+              private venuesService: VenuesService) {
     this.edit = false
     if(data){
       this.edit = true;
@@ -66,6 +72,10 @@ export class AddShowTimingComponent implements OnInit{
 
   public compareTheatreOptions(t1: Theatre, t2: Theatre): boolean {
     return t1?.id === t2?.id;
+  }
+
+  public compareVenueOptions(v1: Venue, v2: Venue): boolean {
+    return v1?.id === v2?.id;
   }
 
   checkIfSameData(): boolean{
@@ -87,6 +97,12 @@ export class AddShowTimingComponent implements OnInit{
     })
   }
 
+  public getVenuesByTheatreId() {
+    this.venuesService.getAllVenueNumbersOfGivenTheatre(this.theatreControl.value.id).subscribe((venues) => {
+      this.venues = venues;
+    })
+  }
+
   private getHour(): any{
     return this.form.controls['hour'].value !== null && this.form.controls['hour'].value < 10 ? "0" + this.form.controls['hour'].value : this.form.controls['hour'].value;
   }
@@ -100,6 +116,7 @@ export class AddShowTimingComponent implements OnInit{
       ...this.form.value,
       time: this.getHour() +  ":" + this.getMinute()
     }
+    console.log(this.form.value);
     this.prevParsedValue = this.form.value;
     this.showTimingsService.createShowTiming(parsedValue).subscribe(() => {
       if(this.edit){
@@ -137,6 +154,10 @@ export class AddShowTimingComponent implements OnInit{
 
   checkIfPriceInteger(): any{
     return Number.isInteger(this.form.controls['price'].value)
+  }
+
+  checkIfVenueNumberInteger(): any{
+    return Number.isInteger(this.form.controls['venue'].value)
   }
 
   get movieControl(){
@@ -181,6 +202,14 @@ export class AddShowTimingComponent implements OnInit{
 
   get priceControl(): any{
     return this.form.controls['price']
+  }
+
+  get venueControl(): any{
+    return this.form.controls['venue']
+  }
+
+  venueValue(): any{
+    return this.form.controls['venue'].value
   }
 
 }

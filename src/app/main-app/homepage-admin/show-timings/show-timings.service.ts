@@ -4,6 +4,7 @@ import {Theatre} from "../theatres/theatres.service";
 import {environment} from "../../../../environments/environment";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {Venue} from "../venues/venues.service";
 
 export interface ShowTimings{
   id: number;
@@ -14,10 +15,12 @@ export interface ShowTimings{
   time: string;
   day: Date;
   price: number;
+  venue: Venue;
 }
 
 export interface ShowTimingsFilter{
   movieName: string;
+  theatreLocation: string;
   theatreName: string;
   startDate: Date | null;
   endDate: Date | null;
@@ -33,7 +36,7 @@ export interface ShowTimingsPage{
 }
 
 export class ShowTimingsFilteredPage{
-  dto: ShowTimingsFilter = {movieName:'',  theatreName:'', startDate: null, endDate: null, day: null, searchString:''};
+  dto: ShowTimingsFilter = {movieName:'', theatreLocation:'',  theatreName:'', startDate: null, endDate: null, day: null, searchString:''};
   page?: number;
   size?: number;
 }

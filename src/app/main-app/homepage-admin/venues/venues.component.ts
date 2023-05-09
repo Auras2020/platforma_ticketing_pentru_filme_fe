@@ -26,8 +26,8 @@ export class VenuesComponent implements OnInit{
   filters: VenuesFilter = {
     location: '',
     theatreName:'',
-    movieName:'',
-    day: null,
+    /*movieName:'',
+    day: null,*/
     searchString:''
   }
   searchString: string = '';
@@ -42,9 +42,9 @@ export class VenuesComponent implements OnInit{
     'venueNumber',
     'location',
     'theatre',
-    'movie',
+    /*'movie',
     'day',
-    'time',
+    'time',*/
     'delete'
   ];
 
@@ -101,8 +101,8 @@ export class VenuesComponent implements OnInit{
     this.filteredData = {
       location: this.filters.location,
       theatreName: this.filters.theatreName,
-      movieName: this.filters.movieName,
-      day: this.filters.day,
+      /*movieName: this.filters.movieName,
+      day: this.filters.day,*/
       searchString: this.searchString
     };
   }
@@ -110,17 +110,17 @@ export class VenuesComponent implements OnInit{
   filterActive(): boolean {
     let isActive: boolean;
     isActive = !((this.filters.location === '') &&
-      (this.filters.theatreName === '') &&
+      (this.filters.theatreName === '') /*&&
       (this.filters.movieName === '') &&
-      (this.filters.day === null));
+      (this.filters.day === null)*/);
     return isActive;
   }
 
   resetFilters(): void {
     this.filters.location = '';
     this.filters.theatreName = '';
-    this.filters.movieName = '';
-    this.filters.day = null;
+    /*this.filters.movieName = '';
+    this.filters.day = null;*/
     this.getAllVenues();
   }
 
@@ -151,7 +151,7 @@ export class VenuesComponent implements OnInit{
   openAddVenueDialog(event: MouseEvent) {
     event.stopPropagation();
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.height = "80%";
+    dialogConfig.height = "52%";
     dialogConfig.autoFocus = false
     dialogConfig.disableClose = true
 
@@ -161,7 +161,7 @@ export class VenuesComponent implements OnInit{
   openEditVenueDialog(event: MouseEvent, venue: Venue) {
     event.stopPropagation();
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.height = "80%";
+    dialogConfig.height = "52%";
     dialogConfig.autoFocus = false
     dialogConfig.disableClose = true
     dialogConfig.data = {
