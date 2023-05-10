@@ -61,6 +61,7 @@ export class AddShowTimingComponent implements OnInit{
       this.form.controls['hour'].setValue(data.showTiming.time.substring(0, 2));
       this.form.controls['minute'].setValue(data.showTiming.time.substring(3, 5));
       this.form.patchValue(data.showTiming);
+      this.getVenuesByTheatreId();
     } else {
       this.edit = false;
     }

@@ -38,6 +38,13 @@ export class VenuesFilteredPage{
   size?: number;
 }
 
+export interface ShowTimingVenue {
+  theatreId: number;
+  movieId: number;
+  day: Date;
+  time: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -47,6 +54,7 @@ export class VenuesService {
   venuesPage = environment.apiEndpoints.venuesPage
   venuesPageFilter = environment.apiEndpoints.venuesPageFilter
   venuesTheatre = environment.apiEndpoints.venuesTheatre
+  showTimingVenue = environment.apiEndpoints.showTimingVenue
 
   constructor(private http: HttpClient) { }
 
@@ -69,7 +77,15 @@ export class VenuesService {
     return this.http.post<VenuesPage>(this.url + this.venuesPageFilter, venuesFilteredPage);
   }
 
+  findVenueByShowTimingDetails(showTimingVenue: ShowTimingVenue): Observable<Venue>{
+    return this.http.post<Venue>(this.url + this.showTimingVenue, showTimingVenue);
+  }
+
   getAllVenueNumbersOfGivenTheatre(id: number | undefined): Observable<Venue[]> {
     return this.http.get<Venue[]>(this.url + this.venuesTheatre + id)
+  }
+
+  getVenue(id: string): Observable<Venue>{
+    return this.http.get<Venue>(this.url + this.venues + id);
   }
 }

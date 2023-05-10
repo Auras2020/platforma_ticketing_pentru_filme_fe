@@ -23,6 +23,8 @@ import {ReviewsComponent} from "./main-app/homepage-client/reviews/reviews.compo
 import {MovieDetails1Component} from "./main-app/homepage-client/homepage/movie-details1/movie-details1.component";
 import {MovieDetails2Component} from "./main-app/homepage-client/program/movie-details2/movie-details2.component";
 import {VenuesComponent} from "./main-app/homepage-admin/venues/venues.component";
+import {VenueSeatsComponent} from "./main-app/homepage-admin/venues/venue-seats/venue-seats.component";
+import {VenueSeats1Component} from "./main-app/homepage-client/program/venue-seats1/venue-seats1.component";
 
 const routes: Routes = [
   {path: 'login', component: MainAppComponent},
@@ -38,6 +40,7 @@ const routes: Routes = [
       {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard, AdminGuard]},
       {path: 'users', component: UserComponent, canActivate: [AuthGuard, AdminGuard]},
       {path: 'venues', component: VenuesComponent, canActivate: [AuthGuard, AdminGuard]},
+      {path: 'venues/:id', component: VenueSeatsComponent, canActivate: [AuthGuard, AdminGuard]},
       {path: 'theatres', component: TheatresComponent, canActivate: [AuthGuard, AdminGuard]},
       {path: 'theatres/:id', component: TheatreDetailsComponent, canActivate: [AuthGuard, AdminGuard]},
       {path: 'movies', component: MoviesComponent, canActivate: [AuthGuard, AdminGuard]},
@@ -54,6 +57,7 @@ const routes: Routes = [
       {path: 'home/movies/:id', component: MovieDetails1Component, canActivate: [AuthGuard, ClientGuard]},
       {path: 'program', component: ProgramComponent, canActivate: [AuthGuard, ClientGuard]},
       {path: 'program/movies/:id', component: MovieDetails2Component, canActivate: [AuthGuard, ClientGuard]},
+      {path: 'program/venue/:id', component: VenueSeats1Component, canActivate: [AuthGuard, ClientGuard]},
       {path: 'orders', component: OrdersComponent, canActivate: [AuthGuard, ClientGuard]},
       {path: 'reviews', component: ReviewsComponent, canActivate: [AuthGuard, ClientGuard]}
     ]},

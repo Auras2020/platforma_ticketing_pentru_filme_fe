@@ -64,6 +64,8 @@ import { TheatreDetails1Component } from './main-app/homepage-client/program/the
 import { VenuesComponent } from './main-app/homepage-admin/venues/venues.component';
 import { AddVenueComponent } from './main-app/homepage-admin/venues/add-venue/add-venue.component';
 import { DeleteVenueComponent } from './main-app/homepage-admin/venues/delete-venue/delete-venue.component';
+import { VenueSeatsComponent } from './main-app/homepage-admin/venues/venue-seats/venue-seats.component';
+import { VenueSeats1Component } from './main-app/homepage-client/program/venue-seats1/venue-seats1.component';
 
 @NgModule({
   declarations: [
@@ -103,7 +105,9 @@ import { DeleteVenueComponent } from './main-app/homepage-admin/venues/delete-ve
     TheatreDetails1Component,
     VenuesComponent,
     AddVenueComponent,
-    DeleteVenueComponent
+    DeleteVenueComponent,
+    VenueSeatsComponent,
+    VenueSeats1Component
   ],
     imports: [
         BrowserModule,

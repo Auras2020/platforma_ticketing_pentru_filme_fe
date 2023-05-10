@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {Theatre, TheatresService} from "../../homepage-admin/theatres/theatres.service";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {TheatreDetails1Component} from "./theatre-details1/theatre-details1.component";
+import {Venue, VenuesService} from "../../homepage-admin/venues/venues.service";
 
 @Component({
   selector: 'app-program',
@@ -41,6 +42,8 @@ export class ProgramComponent implements OnInit{
 
   theatres?: Theatre[];
   locations?: string[];
+  //venue?: Venue;
+  curDate?: Date;
 
   ngOnInit(): void {
     this.theatresService.getAllTheatresLocations().subscribe((locations) => {
@@ -52,7 +55,8 @@ export class ProgramComponent implements OnInit{
   constructor(private theatresService: TheatresService,
               private moviesService: MoviesService,
               private router: Router,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private venuesService: VenuesService) {
   }
 
   getAllByFilters(): void {
@@ -145,6 +149,7 @@ export class ProgramComponent implements OnInit{
 
   onButtonClick(index: number) {
     this.getAllByFilters();
+    this.curDate = this.datesOfWeek[index];
     let theatreDay = {
       theatreId: this.selectedTheatre?.id,
       day: this.datesOfWeek[index],
@@ -183,6 +188,25 @@ export class ProgramComponent implements OnInit{
     dialogConfig.width = '700px'
 
     this.dialog.open(TheatreDetails1Component, dialogConfig)
+  }
+
+  findVenueByShowTimingDetails(movie: any, time: any): void{
+    const shVenue = {
+      theatreId: this.selectedTheatre?.id!,
+      movieId: movie?.id,
+      day: this.curDate!,
+      time: time
+    }
+    console.log(shVenue);
+    this.venuesService.findVenueByShowTimingDetails(shVenue).subscribe((venue) => {
+      //this.venue = venue;
+      console.log(venue);
+      this.navigateToVenueSeatsPage(venue?.id);
+    })
+  }
+
+  navigateToVenueSeatsPage(id: any): any{
+    this.router.navigate(['client', 'program', 'venue', id]);
   }
 
 }

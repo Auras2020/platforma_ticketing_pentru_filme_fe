@@ -11,7 +11,6 @@ import {
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {DeleteShowTimingComponent} from "./delete-show-timing/delete-show-timing.component";
 import {AddShowTimingComponent} from "./add-show-timing/add-show-timing.component";
-import {VenuesService} from "../venues/venues.service";
 
 @Component({
   selector: 'app-show-timings',

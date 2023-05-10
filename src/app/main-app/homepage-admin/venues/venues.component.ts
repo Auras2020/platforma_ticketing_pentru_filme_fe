@@ -1,18 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
-import {
-  ShowTimings,
-  ShowTimingsFilter, ShowTimingsFilteredPage,
-  ShowTimingsPage,
-  ShowTimingsService
-} from "../show-timings/show-timings.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {Venue, VenuesFilter, VenuesFilteredPage, VenuesPage, VenuesService} from "./venues.service";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
-import {DeleteShowTimingComponent} from "../show-timings/delete-show-timing/delete-show-timing.component";
-import {AddShowTimingComponent} from "../show-timings/add-show-timing/add-show-timing.component";
 import {AddVenueComponent} from "./add-venue/add-venue.component";
 import {DeleteVenueComponent} from "./delete-venue/delete-venue.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-venues',
@@ -26,8 +19,6 @@ export class VenuesComponent implements OnInit{
   filters: VenuesFilter = {
     location: '',
     theatreName:'',
-    /*movieName:'',
-    day: null,*/
     searchString:''
   }
   searchString: string = '';
@@ -42,9 +33,6 @@ export class VenuesComponent implements OnInit{
     'venueNumber',
     'location',
     'theatre',
-    /*'movie',
-    'day',
-    'time',*/
     'delete'
   ];
 
@@ -53,7 +41,8 @@ export class VenuesComponent implements OnInit{
   }
 
   constructor(private venuesService: VenuesService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private router: Router) {
   }
 
   handleSuccess(venuesPage: VenuesPage){
@@ -101,8 +90,6 @@ export class VenuesComponent implements OnInit{
     this.filteredData = {
       location: this.filters.location,
       theatreName: this.filters.theatreName,
-      /*movieName: this.filters.movieName,
-      day: this.filters.day,*/
       searchString: this.searchString
     };
   }
@@ -110,17 +97,13 @@ export class VenuesComponent implements OnInit{
   filterActive(): boolean {
     let isActive: boolean;
     isActive = !((this.filters.location === '') &&
-      (this.filters.theatreName === '') /*&&
-      (this.filters.movieName === '') &&
-      (this.filters.day === null)*/);
+      (this.filters.theatreName === ''));
     return isActive;
   }
 
   resetFilters(): void {
     this.filters.location = '';
     this.filters.theatreName = '';
-    /*this.filters.movieName = '';
-    this.filters.day = null;*/
     this.getAllVenues();
   }
 
@@ -181,6 +164,10 @@ export class VenuesComponent implements OnInit{
         this.getAllVenues();
       }
     );
+  }
+
+  public clickOnVenueRow(id: string) {
+    this.router.navigate(['admin', 'venues', id]);
   }
 
 }

@@ -194,6 +194,7 @@
               <button mat-raised-button
                       [matTooltip]="'Buy tickets'"
                       matTooltipPosition="above"
+                      (click)="findVenueByShowTimingDetails(movieTime?.movie, time)"
                       class="time-style" >
                 {{time}}
               </button>
