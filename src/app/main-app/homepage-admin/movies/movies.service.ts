@@ -54,6 +54,11 @@ export interface TheatreMovieDay {
   day: Date;
 }
 
+export interface MovieFilterAge {
+  movieFilter: MovieFilters;
+  age: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -69,6 +74,7 @@ export class MoviesService {
   moviesTheatre = environment.apiEndpoints.moviesTheatre
   movieShowTimings = environment.apiEndpoints.movieShowTimings
   theatreDay = environment.apiEndpoints.theatreDay
+  movieAge = environment.apiEndpoints.movieAge
 
   constructor(private http: HttpClient) { }
 
@@ -126,6 +132,10 @@ export class MoviesService {
 
   getAllMoviesRunningSoon(movieFilters: any): Observable<Movie[]>{
     return this.http.post<Movie[]>(this.url + this.soonRunning, movieFilters);
+  }
+
+  getRecomendedMovies(movieFilterAge: any): Observable<Movie[]>{
+    return this.http.post<Movie[]>(this.url + this.movieAge, movieFilterAge);
   }
 
   getAllMoviesFromATheatre(id?: number): Observable<Movie[]>{

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Movie, MovieFilters, MoviesService} from "../../homepage-admin/movies/movies.service";
 import {Router} from "@angular/router";
+import {UserService} from "../../homepage-admin/user/user.service";
 
 @Component({
   selector: 'app-homepage',
@@ -22,19 +23,25 @@ export class HomepageComponent implements OnInit{
   searchString: string = '';
   filteredData?: MovieFilters | null
 
-  states = ['currently playing', 'playing soon']
+  states = ['currently playing', 'playing soon', 'recommended movies']
   ageRestricts = ['AG', 'AP12', 'N15', 'IM18']
   durationIntervals = ['<1h30m', '1h30m-2h0m', '2h0m-2h30m', '>2h30m'];
   genres = ['Action', 'Adventure', 'Comedy', 'Drama', 'Horror', 'Romance', 'SF', 'Thriller', 'Western'];
   movies?: Movie[];
   selectedValue?: any;
+  age?: number;
 
   ngOnInit(): void {
     this.getAllMovies();
+    const currentUser = JSON.parse(localStorage.getItem("user") + '');
+    this.userService.getUserByEmail(currentUser.username).subscribe((user) => {
+      this.age = user?.age;
+    })
   }
 
   constructor(private moviesService: MoviesService,
-              private router: Router) {
+              private router: Router,
+              private userService: UserService) {
   }
 
   getAllByFilters(): void {
@@ -79,6 +86,8 @@ export class HomepageComponent implements OnInit{
       this.getAllMoviesCurrentlyRunning();
     } else if(event.value === this.states[1]){
       this.getAllMoviesRunningSoon();
+    } else if(event.value === this.states[2]){
+      this.getRecomendedMovies();
     } else {
       this.movies = [];
     }
@@ -104,6 +113,17 @@ export class HomepageComponent implements OnInit{
   getAllMoviesRunningSoon(): void{
     this.getAllByFilters();
     this.moviesService.getAllMoviesRunningSoon(this.filteredData).subscribe((movies) => {
+      this.movies = movies;
+    })
+  }
+
+  getRecomendedMovies(): void{
+    this.getAllByFilters();
+    const movieFiltersAge = {
+      movieFilter: this.filteredData,
+      age: this.age
+    }
+    this.moviesService.getRecomendedMovies(movieFiltersAge).subscribe((movies) => {
       this.movies = movies;
     })
   }

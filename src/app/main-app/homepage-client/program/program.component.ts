@@ -5,6 +5,7 @@ import {Theatre, TheatresService} from "../../homepage-admin/theatres/theatres.s
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {TheatreDetails1Component} from "./theatre-details1/theatre-details1.component";
 import {Venue, VenuesService} from "../../homepage-admin/venues/venues.service";
+import {ShowTimingsService} from "../../homepage-admin/show-timings/show-timings.service";
 
 @Component({
   selector: 'app-program',
@@ -56,7 +57,7 @@ export class ProgramComponent implements OnInit{
               private moviesService: MoviesService,
               private router: Router,
               private dialog: MatDialog,
-              private venuesService: VenuesService) {
+              private showTimingsService: ShowTimingsService) {
   }
 
   getAllByFilters(): void {
@@ -198,10 +199,9 @@ export class ProgramComponent implements OnInit{
       time: time
     }
     console.log(shVenue);
-    this.venuesService.findVenueByShowTimingDetails(shVenue).subscribe((venue) => {
-      //this.venue = venue;
-      console.log(venue);
-      this.navigateToVenueSeatsPage(venue?.id);
+    this.showTimingsService.findShowTimingByShowTimingDetails(shVenue).subscribe((showTiming) => {
+      console.log(showTiming);
+      this.navigateToVenueSeatsPage(showTiming?.id);
     })
   }
 

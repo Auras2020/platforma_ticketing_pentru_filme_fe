@@ -4,7 +4,7 @@ import {Theatre} from "../theatres/theatres.service";
 import {environment} from "../../../../environments/environment";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Venue} from "../venues/venues.service";
+import {ShowTimingVenue, Venue} from "../venues/venues.service";
 
 export interface ShowTimings{
   id: number;
@@ -50,6 +50,7 @@ export class ShowTimingsService {
   showTimings =  environment.apiEndpoints.showTimings
   showTimingsPage = environment.apiEndpoints.showTimingsPage
   showTimingsPageFilter = environment.apiEndpoints.showTimingsPageFilter
+  showTimingVenue = environment.apiEndpoints.showTimingVenue
 
   constructor(private http: HttpClient) { }
 
@@ -70,5 +71,13 @@ export class ShowTimingsService {
 
   getShowTimingsByFiltersPage(showTimingsFilteredPage: ShowTimingsFilteredPage): Observable<ShowTimingsPage>{
     return this.http.post<ShowTimingsPage>(this.url + this.showTimingsPageFilter, showTimingsFilteredPage);
+  }
+
+  findShowTimingByShowTimingDetails(showTimingVenue: ShowTimingVenue): Observable<ShowTimings>{
+    return this.http.post<ShowTimings>(this.url + this.showTimingVenue, showTimingVenue);
+  }
+
+  getShowTiming(id: string): Observable<ShowTimings>{
+    return this.http.get<ShowTimings>(this.url + this.showTimings + id);
   }
 }
