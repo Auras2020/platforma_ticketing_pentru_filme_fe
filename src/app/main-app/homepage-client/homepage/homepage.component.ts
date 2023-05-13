@@ -98,6 +98,8 @@ export class HomepageComponent implements OnInit{
       this.getAllMoviesCurrentlyRunning();
     } else if(this.selectedValue === this.states[1]){
       this.getAllMoviesRunningSoon();
+    } else if(this.selectedValue === this.states[2]){
+      this.getRecomendedMovies();
     } else {
       this.movies = [];
     }

@@ -1,92 +1,91 @@
 <div class="page-content">
   <mat-card class="calendar-card">
     <div class="header-section">
-      <!--<div class="first-line">-->
-        <div class="left-header-content">
-          <div class="title">
-            <button mat-icon-button class="arrow-color"
-                    [matTooltip]="'Back to theatres page'"
-                    matTooltipPosition="above"
-                    (click)="navigateBackToTheatresPage()">
-              <mat-icon>
-                {{'chevron_left'}}
-              </mat-icon>
-            </button>
-            <label class="title-style">
-              {{theatre?.name}}
-            </label>
-            <mat-icon mat-list-icon class="filter-list">
-              filter_list
-              <div class="notification-bubble" [ngClass]="{notification: filterActive()}">
-              </div>
+      <div class="left-header-content">
+        <div class="title">
+          <button mat-icon-button class="arrow-color"
+                  [matTooltip]="'Back to theatres page'"
+                  matTooltipPosition="above"
+                  (click)="navigateBackToTheatresPage()">
+            <mat-icon>
+              {{'chevron_left'}}
             </mat-icon>
-          </div>
-          <div>
-            <label class="theatre-details">
-              Theatre details here
-            </label>
-          </div>
-          <div class="address">
-            <label class="address-value">
-              {{theatre?.address}}
-            </label>
-            <label class="address-label">
-              Address
-            </label>
-          </div>
-          <div class="email">
-            <label class="email-value">
-              {{theatre?.email}}
-            </label>
-            <label class="email-label">
-              Email
-            </label>
-          </div>
-        </div>
-
-        <div class="poster-div">
-          <img *ngIf="theatre?.poster"
-               [src]="getImageUrl(theatre?.poster)"
-               class="theatre-poster"
-               alt="Poster"/>
-        </div>
-
-        <div class="right-header-content">
-          <div class="search-box">
-            <span class="fa fa-search"><mat-icon>search</mat-icon></span>
-            <input (keyup)="onButtonClick(index)"
-                   [(ngModel)]="searchString"
-                   matInput
-                   placeholder="Search...">
-            <span *ngIf="searchString" class="fa fa-search-close" (click)="searchString = '';onButtonClick(index)"><mat-icon>close</mat-icon></span>
-          </div>
-          <div class="location">
-            <div class="location-align">
-              <label class="location-icon">
-                <mat-icon> location_on</mat-icon>
-              </label>
-              <label class="location-value">
-                {{theatre?.location}}
-              </label>
+          </button>
+          <label class="title-style">
+            {{theatre?.name}}
+          </label>
+          <mat-icon mat-list-icon class="filter-list">
+            filter_list
+            <div class="notification-bubble" [ngClass]="{notification: filterActive()}">
             </div>
-            <label class="location-label">
-              Location
-            </label>
-          </div>
-          <div class="phone">
-            <div class="phone-align">
-              <label class="phone-icon">
-                <mat-icon> phone</mat-icon>
-              </label>
-              <label class="phone-value">
-                {{theatre?.phone}}
-              </label>
-            </div>
-            <label class="phone-label">
-              Phone
-            </label>
-          </div>
+          </mat-icon>
         </div>
+        <div>
+          <label class="theatre-details">
+            Theatre details here
+          </label>
+        </div>
+        <div class="address">
+          <label class="address-value">
+            {{theatre?.address}}
+          </label>
+          <label class="address-label">
+            Address
+          </label>
+        </div>
+        <div class="email">
+          <label class="email-value">
+            {{theatre?.email}}
+          </label>
+          <label class="email-label">
+            Email
+          </label>
+        </div>
+      </div>
+
+      <div class="poster-div">
+        <img *ngIf="theatre?.poster"
+             [src]="getImageUrl(theatre?.poster)"
+             class="theatre-poster"
+             alt="Poster"/>
+      </div>
+
+      <div class="right-header-content">
+        <div class="search-box">
+          <span class="fa fa-search"><mat-icon>search</mat-icon></span>
+          <input (keyup)="onButtonClick(index)"
+                 [(ngModel)]="searchString"
+                 matInput
+                 placeholder="Search...">
+          <span *ngIf="searchString" class="fa fa-search-close" (click)="searchString = '';onButtonClick(index)"><mat-icon>close</mat-icon></span>
+        </div>
+        <div class="location">
+          <div class="location-align">
+            <label class="location-icon">
+              <mat-icon> location_on</mat-icon>
+            </label>
+            <label class="location-value">
+              {{theatre?.location}}
+            </label>
+          </div>
+          <label class="location-label">
+            Location
+          </label>
+        </div>
+        <div class="phone">
+          <div class="phone-align">
+            <label class="phone-icon">
+              <mat-icon> phone</mat-icon>
+            </label>
+            <label class="phone-value">
+              {{theatre?.phone}}
+            </label>
+          </div>
+          <label class="phone-label">
+            Phone
+          </label>
+        </div>
+      </div>
     </div>
 
     <div class="filters-row">

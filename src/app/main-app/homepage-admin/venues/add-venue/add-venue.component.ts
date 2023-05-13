@@ -81,9 +81,6 @@ export class AddVenueComponent implements OnInit{
   saveVenue() {
     this.prevParsedValue = this.form.value;
     this.venuesService.createVenue(this.form.value).subscribe(() => {
-      if(this.edit){
-        this.dialogRef.close(true);
-      }
       this.feedbackToolbarService.openSnackBarWithSuccessMessage(this.msg);
     });
   }

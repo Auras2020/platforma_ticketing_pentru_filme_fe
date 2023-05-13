@@ -1,0 +1,370 @@
+.page-content{
+  margin-bottom: 100px;
+}
+
+.movie-details-card{
+  margin: 24px;
+}
+
+.seats-card{
+  margin: 24px;
+}
+
+.title{
+  display: inline-flex;
+  border-bottom: 2px solid #AABFDF;
+}
+
+.seats-title{
+  border-bottom: 2px solid #AABFDF;
+  padding: 10px 0 10px 50px;
+}
+
+.arrow-color{
+  color: #DC4E2A;
+}
+
+.title-style, .seats-title-style{
+  color: #213555;
+  font-weight: bold;
+  font-size: 25px;
+  align-self: center;
+}
+
+.seat-style{
+  background-color: green;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.row-display{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.venue-display{
+  align-self: flex-start;
+  flex-direction: column;
+}
+
+.index-style{
+  color: black;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.index-margin{
+  margin-bottom: 35px;
+}
+
+.index-style-left, .index-style-right{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.row-seats{
+  display: inline-flex;
+  align-self: flex-start;
+}
+
+.seats-align{
+  display: flex;
+  justify-content: space-between;
+}
+
+.empty-div{
+  align-self: flex-start;
+}
+
+.seat-display{
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.border-style{
+  padding-bottom: 20px;
+  padding-top: 10px;
+  border-bottom: 2px solid #FDD5BD;
+}
+
+.seats-width{
+  width: 85%;
+}
+
+.screen-style{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: gray;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  letter-spacing: 5px;
+}
+
+.info-display{
+  margin-top: 20px;
+  display: inline-flex;
+  justify-content: center;
+}
+
+.green-seat-style{
+  height: 20px;
+  width: 20px;
+  background-color: green;
+  margin-right: 10px;
+}
+
+.green-seat-label{
+  font-size: 20px;
+  font-weight: bold;
+  color: #213555;
+  margin-right: 30px;
+}
+
+.red-seat-style{
+  height: 20px;
+  width: 20px;
+  background-color: red;
+  margin-right: 10px;
+}
+
+.red-seat-label{
+  font-size: 20px;
+  font-weight: bold;
+  color: #213555;
+  margin-right: 30px;
+}
+
+.yellow-seat-style{
+  height: 20px;
+  width: 20px;
+  background-color: yellow;
+  margin-right: 10px;
+}
+
+.yellow-seat-label{
+  font-size: 20px;
+  font-weight: bold;
+  color: #213555;
+}
+
+.seat-style:hover{
+  background-color: yellow;
+  color: #213555;
+}
+
+.bg-color{
+  background-color: yellow;
+  color: #213555;
+}
+
+/*.actions-section{
+  padding-top: 10px;
+  margin-right: 110px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}*/
+
+.reserve-ticket{
+  color: #DC4E2A;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+.buy-ticket {
+  background-color: #DC4E2A;
+  color: white;
+  font-weight: bold;
+  width: 125px;
+}
+
+.bottom-section{
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.bottom-section-content{
+  width: 85%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.selected-seats{
+  align-self: flex-start;
+  display: inline-flex;
+}
+
+.actions-section{
+  align-self: flex-start;
+}
+
+.seats-selected-style{
+  font-weight: bold;
+  font-size: 18px;
+  color: #213555;
+  padding-right: 10px;
+}
+
+.nr-selected-style{
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.green-number{
+  color: green;
+}
+
+.red-number{
+  color: red;
+}
+
+.left-header-content, .right-header-content{
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+}
+
+.poster-div{
+  align-self: flex-start;
+  padding-top: 20px;
+  padding-right: 80px;
+}
+
+.header-section{
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 15px;
+}
+
+.movie-poster{
+  height: 280px;
+  width: 210px;
+}
+
+.movie-details{
+  padding-top: 15px;
+  display: inline-flex;
+}
+
+.movie-name{
+  font-size: 21px;
+  font-weight: bold;
+  color: #213555;
+  align-self: center;
+  padding-left: 24px;
+  padding-right: 25px;
+}
+
+.movie-age{
+  align-self: center;
+  border-radius: 50%;
+  font-size: 16px;
+  font-weight: bold;
+  height: 20px;
+  width: 50px;
+  border: 2px solid #DC4E2A;
+  color: #213555;
+  background-color: #FFF3E0;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  display: flex;
+}
+
+.day-style{
+  padding: 6px 10px 6px 10px;
+  margin-top: 44px;
+  margin-left: 24px;
+  font-weight: 600;
+  font-size: 14px;
+  background-color: #213555;
+  text-align: center;
+  width: 100px;
+  display: block;
+}
+
+.day-1{
+  padding-right: 5px;
+  font-weight: 600;
+  color: white;
+}
+
+.day-2{
+  font-weight: 400;
+  padding-right: 5px;
+  color: #BDC7CC;
+}
+
+.day-3{
+  color: white;
+}
+
+.day-of-week{
+  margin-left: 24px;
+  margin-top: 5px;
+}
+
+.day-of-week-style{
+  font-weight: 600;
+  color: #213555;
+}
+
+.theatre-and-venue{
+  margin-left: 24px;
+  margin-top: 44px;
+}
+
+.theatre-style, .venue-style{
+  color: #213555;
+  font-weight: bold;
+}
+
+.name-label-padding{
+  padding-bottom: 5px;
+}
+
+.form-margins{
+  margin-top: 15px;
+  margin-right: 24px;
+}
+
+.name-label {
+  color: #3E5F8D;
+  font-weight: 500;
+}
+
+.mat-form {
+  width: 270px;
+}
+
+.error{
+  margin-top: -20px;
+  margin-bottom: 10px;
+  color: red
+}
+
+.form-input{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.nr-total{
+  margin-left: 24px;
+  margin-top: 44px;
+}
+
+.nr-tickets{
+  color: #213555;
+  font-weight: bold;
+}

@@ -1,0 +1,195 @@
+<div [formGroup]="form" class="page-content">
+  <mat-card class="movie-details-card">
+    <div class="title">
+      <button mat-icon-button class="arrow-color"
+              [matTooltip]="'Back to program page'"
+              matTooltipPosition="above"
+              (click)="navigateBackToProgramPage()">
+        <mat-icon>
+          {{'chevron_left'}}
+        </mat-icon>
+      </button>
+      <label class="title-style">
+        Tickets
+      </label>
+    </div>
+
+    <div class="header-section">
+      <div class="left-header-content">
+        <div class="movie-details">
+          <label class="movie-name">
+            {{showTiming?.movie?.name}}
+          </label>
+          <label class="movie-age">
+            {{showTiming?.movie?.recommendedAge}}
+          </label>
+        </div>
+
+        <div class="day-style">
+          <b><label class="day-1">{{showTiming?.day | date:'dd'}} </label></b>
+          <label class="day-2">{{showTiming?.day | date:'LLL' | uppercase}} </label>
+          <b><label class="day-3">{{showTiming?.day| date:'yyyy'}}</label></b>
+        </div>
+
+        <div class="day-of-week">
+          <label class="day-of-week-style">
+            {{dayOfWeek}} {{showTiming?.time}}
+          </label>
+        </div>
+
+        <div class="theatre-and-venue">
+          <div>
+            <label class="theatre-style">
+              {{showTiming?.theatre?.name}}
+            </label>
+          </div>
+          <div>
+            <label class="venue-style">
+              Venue {{showTiming?.venue?.venueNumber}}
+            </label>
+          </div>
+        </div>
+
+        <div class="nr-total">
+          <label class="nr-tickets">
+            Total number of selected tickets: {{nrTotal}}
+          </label>
+        </div>
+      </div>
+
+      <div class="poster-div">
+        <img *ngIf="showTiming?.movie?.poster"
+             [src]="getImageUrl(showTiming?.movie?.poster)"
+             class="movie-poster"
+             alt="Poster"/>
+      </div>
+
+      <div class="right-header-content">
+        <div class="form-margins">
+          <div class="name-label-padding">
+            <label class="name-label">Adult tickets({{showTiming?.price}} RON)</label>
+          </div>
+          <mat-form-field appearance="outline" class="mat-form">
+            <mat-select
+              [placeholder]="'Select number of adult tickets'"
+              (selectionChange)="getNumberOfAdultTicketsByEvent($event)"
+              class="form-input"
+            >
+              <mat-option *ngFor="let number of numbers" [value]="number">
+                {{ number }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-margins-1">
+          <div class="name-label-padding">
+            <label class="name-label">Student tickets({{showTiming?.price! - 5}} RON)</label>
+          </div>
+          <mat-form-field appearance="outline" class="mat-form">
+            <mat-select
+              [placeholder]="'Select number of student tickets'"
+              (selectionChange)="getNumberOfStudentTicketsByEvent($event)"
+              class="form-input"
+            >
+              <mat-option *ngFor="let number of numbers" [value]="number">
+                {{ number }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-margins-1">
+          <div class="name-label-padding">
+            <label class="name-label">Child tickets({{showTiming?.price! - 7}} RON)</label>
+          </div>
+          <mat-form-field appearance="outline" class="mat-form">
+            <mat-select
+              [placeholder]="'Select number of child tickets'"
+              (selectionChange)="getNumberOfChildTicketsByEvent($event)"
+              class="form-input"
+            >
+              <mat-option *ngFor="let number of numbers" [value]="number">
+                {{ number }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card class="seats-card">
+    <div class="seats-title">
+      <label class="seats-title-style">
+        Seats
+      </label>
+    </div>
+    <div class="info-display">
+      <label class="green-seat-style"></label>
+      <label class="green-seat-label">
+        Seat available
+      </label>
+      <label class="red-seat-style"></label>
+      <label class="red-seat-label">
+        Already booked
+      </label>
+      <label class="yellow-seat-style"></label>
+      <label class="yellow-seat-label">
+        Seat selected
+      </label>
+    </div>
+    <div class="seat-display">
+      <div class="seats-width">
+        <label class="screen-style">
+          Screen
+        </label>
+      </div>
+    </div>
+    <div class="seat-display border-style">
+      <div class="seats-width">
+        <div *ngFor="let row of this.array1; let i = index">
+          <div class="row-display">
+            <div class="index-style-left">
+              <label class="index-style">
+                {{row}}
+              </label>
+            </div>
+            <div class="row-seats">
+              <div *ngFor="let column of this.array2; let j = index">
+                <button mat-raised-button
+                        [disabled]="isSeatBooked(i, j)"
+                        [style.color]="!isSeatBooked(i, j) ? originalColor[i * this.showTiming?.venue?.columnsNumber! + j] : 'white'"
+                        [style.background-color]="!isSeatBooked(i, j) ? originalBackgroundColor[i * this.showTiming?.venue?.columnsNumber! + j] : 'red'"
+                        (click)="toggleBackgroundColor(i, j)"
+                        class="seat-style" >
+                  {{column}}
+                </button>
+              </div>
+            </div>
+            <div class="index-style-right">
+              <label class="index-style">
+                {{row}}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-section">
+      <div class="bottom-section-content">
+        <div class="selected-seats">
+          <label class="seats-selected-style">
+            Selected seats:
+          </label>
+          <label class="nr-selected-style"  [ngClass]="{'green-number': !buttonDisabled(), 'red-number': buttonDisabled()}">
+            {{this.selectedSeats.length}}
+          </label>
+        </div>
+        <div class="empty-div"></div>
+        <div class="actions-section">
+          <button mat-button class="reserve-ticket" [disabled]="buttonDisabled()" (click)="openReservationDialog()">Reservation</button>
+          <button mat-raised-button class="buy-ticket" [disabled]="buttonDisabled()" (click)="openBuyTicketsDialog()">Buy tickets</button>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>

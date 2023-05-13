@@ -120,9 +120,6 @@ export class AddShowTimingComponent implements OnInit{
     console.log(this.form.value);
     this.prevParsedValue = this.form.value;
     this.showTimingsService.createShowTiming(parsedValue).subscribe(() => {
-      if(this.edit){
-        this.dialogRef.close(true);
-      }
       this.feedbackToolbarService.openSnackBarWithSuccessMessage(this.msg);
     });
   }
