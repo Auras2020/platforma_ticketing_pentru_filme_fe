@@ -6,6 +6,8 @@ import {BuyTicketsComponent} from "./buy-tickets/buy-tickets.component";
 import {ShowTimings, ShowTimingsService} from "../../../homepage-admin/show-timings/show-timings.service";
 import {VenueSeats1Service} from "./venue-seats1.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FeedbackToolbarService} from "../../../../feedback-toolbar/feedback-toolbar.service";
+import {User, UserService} from "../../../homepage-admin/user/user.service";
 
 @Component({
   selector: 'app-venue-seats1',
@@ -31,6 +33,7 @@ export class VenueSeats1Component implements OnInit{
   nrChilds: number = 0;
   nrTotal: number = 0;
   k = this.nrTotal;
+  user?: User;
 
   form = new FormGroup({
     adult: new FormControl('', [Validators.min(0), Validators.max(10)]),
@@ -43,7 +46,9 @@ export class VenueSeats1Component implements OnInit{
               private route: ActivatedRoute,
               private showTimingsService: ShowTimingsService,
               private dialog: MatDialog,
-              private venueSeats1Service: VenueSeats1Service) {
+              private venueSeats1Service: VenueSeats1Service,
+              private feedbackToolbarService: FeedbackToolbarService,
+              private userService: UserService) {
   }
 
   ngOnInit(): void {
@@ -57,6 +62,14 @@ export class VenueSeats1Component implements OnInit{
       this.array1 = Array.from({ length: this.showTiming?.venue?.rowsNumber! }, (_, i) => i + 1);
       this.array2 = Array.from({ length: this.showTiming?.venue?.columnsNumber! }, (_, i) => i + 1);
     })
+    this.userService.getUserByEmail(this.currentUserEmail()).subscribe((user) => {
+      this.user = user;
+    })
+  }
+
+  public currentUserEmail(): string{
+    const currentUser = JSON.parse(localStorage.getItem("user") + '')
+    return currentUser?.username;
   }
 
   navigateBackToProgramPage(): void{
@@ -83,23 +96,78 @@ export class VenueSeats1Component implements OnInit{
   toggleBackgroundColor(i: number, j: number): void {
     let i1 = i + 1;
     let j1 = j + 1;
-    if(!this.k && !this.selectedSeats.includes(JSON.stringify({i1, j1}))){
+
+    if(this.nrTotal === 1 && this.selectedSeats.length === 1) {
       this.initializeColors();
       this.selectedSeats = [];
       this.k = this.nrTotal;
+    } else {
+      if(!this.nrTotal){
+        this.feedbackToolbarService.openSnackBarWithErrorMessage("First select number of seats!");
+      } else if(this.selectedSeats.length === this.nrTotal && !this.selectedSeats.includes(JSON.stringify({i1, j1}))){
+        if(this.nrTotal === 1) {
+          this.feedbackToolbarService.openSnackBarWithErrorMessage("You have already selected " + this.nrTotal + " seat! " +
+            "Deselect some seats if you want to choose others");
+        } else {
+          this.feedbackToolbarService.openSnackBarWithErrorMessage("You have already selected " + this.nrTotal + " seats! " +
+            "Deselect some seats if you want to choose others");
+        }
+      } else if(this.selectedSeats.length > this.nrTotal){
+        if(this.selectedSeats.includes(JSON.stringify({i1, j1}))){
+          if(this.selectedSeats.length - this.nrTotal - 1){
+            if(this.selectedSeats.length - this.nrTotal - 1 === 1){
+              if(this.nrTotal === 1){
+                this.feedbackToolbarService.openSnackBarWithErrorMessage("You have selected only " + this.nrTotal + " seat! " +
+                  "Deselect " + (this.selectedSeats.length - this.nrTotal - 1) + " seat to book tickets");
+              } else {
+                this.feedbackToolbarService.openSnackBarWithErrorMessage("You have selected only " + this.nrTotal + " seats! " +
+                  "Deselect " + (this.selectedSeats.length - this.nrTotal - 1) + " seat to book tickets");
+              }
+            } else {
+              if(this.nrTotal === 1){
+                this.feedbackToolbarService.openSnackBarWithErrorMessage("You have selected only " + this.nrTotal + " seat! " +
+                  "Deselect " + (this.selectedSeats.length - this.nrTotal - 1) + " seats to book tickets");
+              } else {
+                this.feedbackToolbarService.openSnackBarWithErrorMessage("You have selected only " + this.nrTotal + " seats! " +
+                  "Deselect " + (this.selectedSeats.length - this.nrTotal - 1) + " seats to book tickets");
+              }
+            }
+          }
+        } else {
+          if(this.selectedSeats.length - this.nrTotal === 1){
+            if(this.nrTotal === 1) {
+              this.feedbackToolbarService.openSnackBarWithErrorMessage("You have selected only " + this.nrTotal + " seat! " +
+                "Deselect " + (this.selectedSeats.length - this.nrTotal) + " seat to book tickets");
+            } else {
+              this.feedbackToolbarService.openSnackBarWithErrorMessage("You have selected only " + this.nrTotal + " seats! " +
+                "Deselect " + (this.selectedSeats.length - this.nrTotal) + " seat to book tickets");
+            }
+          } else {
+            if(this.nrTotal === 1) {
+              this.feedbackToolbarService.openSnackBarWithErrorMessage("You have selected only " + this.nrTotal + " seat! " +
+                "Deselect " + (this.selectedSeats.length - this.nrTotal) + " seats to book tickets");
+            } else {
+              this.feedbackToolbarService.openSnackBarWithErrorMessage("You have selected only " + this.nrTotal + " seats! " +
+                "Deselect " + (this.selectedSeats.length - this.nrTotal) + " seats to book tickets");
+            }
+          }
+        }
+      }
     }
+
     if(this.selectedSeats.includes(JSON.stringify({i1, j1}))){
       let index1 = this.selectedSeats.indexOf(JSON.stringify({i1, j1}));
       this.selectedSeats.splice(index1, 1);
       this.k++;
       this.originalColor[i * this.showTiming?.venue?.columnsNumber! + j] =  'white';
       this.originalBackgroundColor[i * this.showTiming?.venue?.columnsNumber! + j] = 'green';
-    } else {
+    } else if(this.nrTotal && this.selectedSeats.length < this.nrTotal){
       this.selectedSeats.push(JSON.stringify({i1, j1}));
       this.k--;
       this.originalColor[i * this.showTiming?.venue?.columnsNumber! + j] = this.originalColor[i * this.showTiming?.venue?.columnsNumber! + j] === '#213555' ? 'white' : '#213555';
       this.originalBackgroundColor[i * this.showTiming?.venue?.columnsNumber! + j] = this.originalBackgroundColor[i * this.showTiming?.venue?.columnsNumber! + j] === 'yellow' ? 'green' : 'yellow';
     }
+
   }
 
   buttonDisabled(): boolean{
@@ -112,7 +180,8 @@ export class VenueSeats1Component implements OnInit{
     dialogConfig.disableClose = true
     dialogConfig.data = {
       showTiming: this.showTiming,
-      seats: this.selectedSeats
+      seats: this.selectedSeats,
+      user: this.user
     };
     const dialogRef = this.dialog.open(ReservationComponent, dialogConfig)
     dialogRef.afterClosed().subscribe((result) => {
@@ -130,7 +199,8 @@ export class VenueSeats1Component implements OnInit{
     dialogConfig.disableClose = true
     dialogConfig.data = {
       showTiming: this.showTiming,
-      seats: this.selectedSeats
+      seats: this.selectedSeats,
+      user: this.user
     };
     const dialogRef = this.dialog.open(BuyTicketsComponent, dialogConfig)
     dialogRef.afterClosed().subscribe((result) => {

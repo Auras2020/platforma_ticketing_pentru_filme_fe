@@ -3,10 +3,12 @@ import {environment} from "../../../../../environments/environment";
 import {ShowTimings} from "../../../homepage-admin/show-timings/show-timings.service";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {User} from "../../../homepage-admin/user/user.service";
 
 export interface Seat {
   showTiming: ShowTimings;
   seats: string[];
+  user: User
 }
 
 @Injectable({

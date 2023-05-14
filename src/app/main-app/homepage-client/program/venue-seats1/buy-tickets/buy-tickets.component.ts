@@ -1,9 +1,9 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {FeedbackToolbarComponent} from "../../../../../feedback-toolbar/feedback-toolbar.component";
 import {FeedbackToolbarService} from "../../../../../feedback-toolbar/feedback-toolbar.service";
 import {ShowTimings} from "../../../../homepage-admin/show-timings/show-timings.service";
 import {VenueSeats1Service} from "../venue-seats1.service";
+import {User} from "../../../../homepage-admin/user/user.service";
 
 @Component({
   selector: 'app-buy-tickets',
@@ -14,6 +14,7 @@ export class BuyTicketsComponent {
 
   showTiming?: ShowTimings;
   seats?: string[];
+  user?: User;
 
   constructor(private dialogRef: MatDialogRef<BuyTicketsComponent>,
               @Inject(MAT_DIALOG_DATA) data: any,
@@ -21,18 +22,19 @@ export class BuyTicketsComponent {
               private venueSeats1Service: VenueSeats1Service){
     if(data) {
       this.showTiming = data.showTiming;
-      this.seats = data.seats
+      this.seats = data.seats;
+      this.user = data.user;
     }
   }
 
   buyTicketsConfirmation(): void{
-    //for(let seat of this.seats!) {
-      const s = {
-        showTiming: this.showTiming,
-        seats: this.seats!
-      }
-      this.venueSeats1Service.createSeat(s).subscribe();
-    //}
+    const s = {
+      showTiming: this.showTiming,
+      seats: this.seats!,
+      user: this.user
+    }
+    console.log(this.user);
+    this.venueSeats1Service.createSeat(s).subscribe();
     this.dialogRef.close(true);
     this.feedbackToolbarService.openSnackBarWithSuccessMessage("Tickets booked successfully! You will receive an email with tickets");
   }
