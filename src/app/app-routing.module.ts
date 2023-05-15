@@ -25,6 +25,7 @@ import {MovieDetails2Component} from "./main-app/homepage-client/program/movie-d
 import {VenuesComponent} from "./main-app/homepage-admin/venues/venues.component";
 import {VenueSeatsComponent} from "./main-app/homepage-admin/venues/venue-seats/venue-seats.component";
 import {VenueSeats1Component} from "./main-app/homepage-client/program/venue-seats1/venue-seats1.component";
+import {ProductsComponent} from "./main-app/homepage-admin/products/products.component";
 
 const routes: Routes = [
   {path: 'login', component: MainAppComponent},
@@ -45,7 +46,8 @@ const routes: Routes = [
       {path: 'theatres/:id', component: TheatreDetailsComponent, canActivate: [AuthGuard, AdminGuard]},
       {path: 'movies', component: MoviesComponent, canActivate: [AuthGuard, AdminGuard]},
       {path: 'movies/:id', component: MovieDetailsComponent, canActivate: [AuthGuard, AdminGuard]},
-      {path: 'show-timings', component: ShowTimingsComponent, canActivate: [AuthGuard, AdminGuard]}
+      {path: 'show-timings', component: ShowTimingsComponent, canActivate: [AuthGuard, AdminGuard]},
+      {path: 'products', component: ProductsComponent, canActivate: [AuthGuard, AdminGuard]}
   ]},
   {path: 'distribuitor', component: HomepageDistribuitorComponent, canActivate: [AuthGuard, DistribuitorGuard]},
   {

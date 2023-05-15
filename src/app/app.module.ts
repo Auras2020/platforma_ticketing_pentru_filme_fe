@@ -68,6 +68,9 @@ import { VenueSeatsComponent } from './main-app/homepage-admin/venues/venue-seat
 import { VenueSeats1Component } from './main-app/homepage-client/program/venue-seats1/venue-seats1.component';
 import { ReservationComponent } from './main-app/homepage-client/program/venue-seats1/reservation/reservation.component';
 import { BuyTicketsComponent } from './main-app/homepage-client/program/venue-seats1/buy-tickets/buy-tickets.component';
+import { ProductsComponent } from './main-app/homepage-admin/products/products.component';
+import { AddProductComponent } from './main-app/homepage-admin/products/add-product/add-product.component';
+import { DeleteProductComponent } from './main-app/homepage-admin/products/delete-product/delete-product.component';
 
 @NgModule({
   declarations: [
@@ -111,7 +114,10 @@ import { BuyTicketsComponent } from './main-app/homepage-client/program/venue-se
     VenueSeatsComponent,
     VenueSeats1Component,
     ReservationComponent,
-    BuyTicketsComponent
+    BuyTicketsComponent,
+    ProductsComponent,
+    AddProductComponent,
+    DeleteProductComponent
   ],
     imports: [
         BrowserModule,

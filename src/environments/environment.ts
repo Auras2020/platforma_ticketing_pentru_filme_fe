@@ -39,7 +39,9 @@ export const environment = {
     venuesTheatre: "venues/theatre/",
     showTimingVenue: "show-timings/show-timing-details",
     seats: "seats/",
-    movieAge: "movies/age"
+    movieAge: "movies/age",
+    products: "products/",
+    productsCategory: "products/category"
   }
 };
 
