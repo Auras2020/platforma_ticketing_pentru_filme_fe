@@ -1,0 +1,189 @@
+.page-content{
+  margin-bottom: 100px;
+}
+
+.filter-card{
+  margin: 24px;
+}
+
+.title-style{
+  font-size: 21px;
+  color: #213555;
+  font-weight: bold;
+  margin-right: 12px;
+  float: left;
+  padding-left: 24px;
+}
+
+.title{
+  padding-top: 15px;
+}
+
+/*.line-style{
+  padding-bottom: 25px;
+  border-bottom: 2px solid #CBDAF0;
+}*/
+
+.search-box {
+  color: #213555;
+  font-size: 16px;
+  position: absolute;
+  right: 0;
+  margin-top: 10px;
+}
+
+.search-box input {
+  padding-left: 15px;
+  margin-right: 24px;
+  border-radius: 20px;
+  border: 2px solid #CBDAF0;
+  background-color: #f8f9ff;
+  width: 250px;
+  height: 30px;
+  color: #213555;
+}
+.search-box input:focus{
+  outline: none !important;
+  border:2px solid #CBDAF0;
+  opacity: 0.5;
+}
+
+.search-box input { text-indent: 25px;}
+.search-box .fa-search {
+  position: absolute;
+  top: 7px;
+  left: 10px;
+}
+.search-box .fa-search-close {
+  position: absolute;
+  top: 7px;
+  left: 235px;
+  color: #213555;
+}
+
+.add-product-button{
+  background-color: #DC4E2A;
+  color: #FFFFFF;
+  margin-right: 24px;
+  font-weight: bold;
+}
+
+.header-style{
+  display: inline-flex;
+}
+
+.filter-product-form {
+  font-size: 18px;
+  margin-left: 20px;
+  padding: 0;
+}
+
+.product{
+  margin-top: 10px;
+}
+
+.form-input{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.mat-form-field {
+  flex: 1 1 calc(20% - 40px);
+  margin-right: 20px;
+}
+
+::ng-deep .mat-mdc-select-value{
+  color: #213555;
+}
+
+::ng-deep .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input {
+  color: #213555;
+}
+
+::ng-deep .mat-mdc-form-field-infix {
+  min-height: 32px;
+}
+
+.products-display{
+  display: inline-flex;
+  flex-wrap: wrap;
+}
+
+.product-card {
+  margin: 24px;
+  padding-bottom: 24px;
+  min-height: 250px;
+  min-width: 430px;
+}
+
+.product-poster{
+  padding-left: 20px;
+  padding-top: 30px;
+  height: 230px;
+  width: 200px;
+}
+
+.product-details{
+  align-self: flex-start;
+  display: inline-flex;
+}
+
+.main-details{
+  padding-top: 30px;
+  padding-left: 20px;
+}
+
+.product-name{
+  padding-bottom: 40px;
+  display: inline-flex;
+  /*display: flex;
+  justify-content: space-between;*/
+}
+
+.product-name-label{
+  color: #213555;
+  font-weight: bold;
+  font-size: 20px;
+  padding-right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.name-div, .empty-div{
+  align-self: flex-start;
+}
+
+.align-buttons{
+  display: inline-flex;
+  align-self: flex-end;
+}
+
+.movie-age, .movie-genre{
+  color: #213555;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.movie-note{
+  padding-top: 30px;
+  color: #213555;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.movie-rating{
+  color: #213555;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.poster-content{
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit-button, .delete-button {
+  color: #DC4E2A;
+}
