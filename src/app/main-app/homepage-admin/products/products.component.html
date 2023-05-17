@@ -1,6 +1,15 @@
 <div class="page-content">
   <mat-card class="filter-card">
     <div class="header-style">
+      <button mat-icon-button class="arrow-color"
+              [matTooltip]="'Back to theatres page'"
+              matTooltipPosition="above"
+              (click)="navigateBackToTheatresPage()">
+        <mat-icon>
+          {{'chevron_left'}}
+        </mat-icon>
+      </button>
+
       <div class="title">
         <label class="title-style">
           Products
@@ -24,6 +33,7 @@
         <input (keyup)="getAllProducts()"
                [(ngModel)]="searchString"
                matInput
+               [ngModelOptions]="{standalone: true}"
                placeholder="Search...">
         <span *ngIf="searchString" class="fa fa-search-close" (click)="searchString = '';getAllProducts()"><mat-icon>close</mat-icon></span>
         <button mat-raised-button class="add-product-button" (click)="openAddProductDialog($event)">Add product</button>

@@ -169,8 +169,15 @@ mat-table {
   vertical-align: middle;
 }
 
+.products-column{
+  font-weight: 600;
+  width: 10%;
+  color: #DC4E2A;
+  font-size: 14px;
+}
+
 .delete-column, .edit-column{
-  text-align: left;
+  text-align: right;
   font-weight: 600;
   width: 1%;
   color: #DC4E2A;

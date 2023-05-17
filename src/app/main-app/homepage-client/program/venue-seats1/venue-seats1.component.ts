@@ -8,6 +8,12 @@ import {VenueSeats1Service} from "./venue-seats1.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {FeedbackToolbarService} from "../../../../feedback-toolbar/feedback-toolbar.service";
 import {User, UserService} from "../../../homepage-admin/user/user.service";
+import {
+  Product, ProductDetails,
+  ProductFilter, ProductsService,
+  SearchedTheatre,
+  SearchedTheatreProduct
+} from "../../../homepage-admin/products/products.service";
 
 @Component({
   selector: 'app-venue-seats1',
@@ -35,6 +41,17 @@ export class VenueSeats1Component implements OnInit{
   k = this.nrTotal;
   user?: User;
 
+  filters: ProductFilter = {
+    searchString: ''
+  }
+  searchString: string = '';
+  filteredData?: ProductFilter | null
+  types = ['all', 'food', 'drink', 'menu'];
+  products: Product[] = [];
+  productsList: number[] = [];
+  productsPrices: number[] = [];
+  selectedValue?: any;
+
   form = new FormGroup({
     adult: new FormControl('', [Validators.min(0), Validators.max(10)]),
     student: new FormControl('', [Validators.min(0), Validators.max(10)]),
@@ -42,13 +59,21 @@ export class VenueSeats1Component implements OnInit{
     }
   )
 
+  form1 = new FormGroup({
+      types: new FormControl('')
+    }
+  )
+
+  selectedProducts: number[] = [];
+
   constructor(private router: Router,
               private route: ActivatedRoute,
               private showTimingsService: ShowTimingsService,
               private dialog: MatDialog,
               private venueSeats1Service: VenueSeats1Service,
               private feedbackToolbarService: FeedbackToolbarService,
-              private userService: UserService) {
+              private userService: UserService,
+              private productsService: ProductsService) {
   }
 
   ngOnInit(): void {
@@ -57,6 +82,7 @@ export class VenueSeats1Component implements OnInit{
     this.initializeSeats(id);
     this.showTimingsService.getShowTiming(id).subscribe((showTiming) => {
       this.showTiming = showTiming;
+      this.getAllProductsFromTheatre();
       this.dayOfWeek = this.daysOfWeek[new Date(showTiming?.day).getDay()!];
       this.initializeColors();
       this.array1 = Array.from({ length: this.showTiming?.venue?.rowsNumber! }, (_, i) => i + 1);
@@ -67,6 +93,23 @@ export class VenueSeats1Component implements OnInit{
     })
   }
 
+  getAllProductsFromTheatre() : void{
+    this.filteredData = {
+      searchString: ''
+    };
+    let searchedTheatre: SearchedTheatre={
+      theatreId: this.showTiming?.theatre?.id!,
+      productFilter: this.filteredData!
+    }
+
+    this.productsService.getAllProductsByTheatreId(searchedTheatre).subscribe((products) => {
+        this.products = products;
+        this.productsList = products.map(p => p.id);
+        this.productsPrices = Array.from({ length: products?.length }, (_) => 0);
+        this.selectedProducts = Array.from({ length: products?.length }, (_) => 0);
+      }
+    )
+  }
   public currentUserEmail(): string{
     const currentUser = JSON.parse(localStorage.getItem("user") + '')
     return currentUser?.username;
@@ -181,6 +224,7 @@ export class VenueSeats1Component implements OnInit{
     dialogConfig.data = {
       showTiming: this.showTiming,
       seats: this.selectedSeats,
+      productDetails: this.getProductDetails(),
       user: this.user
     };
     const dialogRef = this.dialog.open(ReservationComponent, dialogConfig)
@@ -200,6 +244,7 @@ export class VenueSeats1Component implements OnInit{
     dialogConfig.data = {
       showTiming: this.showTiming,
       seats: this.selectedSeats,
+      productDetails: this.getProductDetails(),
       user: this.user
     };
     const dialogRef = this.dialog.open(BuyTicketsComponent, dialogConfig)
@@ -229,6 +274,116 @@ export class VenueSeats1Component implements OnInit{
   getNumberOfChildTicketsByEvent(event: any): void{
     this.nrChilds = event.value;
     this.nrTotal = this.nrAdults + this.nrStudents + this.nrChilds;
+  }
+
+  getCategoryByEvent(event: any): void{
+    this.selectedValue = event.value;
+    if(this.selectedValue === 'all') {
+      this.selectedValue = null;
+      this.getAllProducts();
+    } else {
+      this.getAllProductsByCategory();
+    }
+  }
+
+  getAllByFilters(): void {
+    this.filteredData = {
+      searchString: this.searchString
+    };
+  }
+
+  getAllProducts() {
+    this.getAllByFilters();
+
+    if(this.selectedValue){
+      this.getAllProductsByCategory();
+    } else {
+      this.filteredData = {
+        searchString: this.searchString
+      };
+      let searchedTheatre: SearchedTheatre={
+        theatreId: this.showTiming?.theatre?.id!,
+        productFilter: this.filteredData!
+      }
+
+      this.productsService.getAllProductsByTheatreId(searchedTheatre).subscribe((products) => {
+          this.products = products;
+        }
+      )
+    }
+
+  }
+
+  getAllProductsByCategory() {
+    this.getAllByFilters();
+
+    let searchedTheatreProduct: SearchedTheatreProduct={
+      category: this.selectedValue,
+      theatreId: this.showTiming?.theatre?.id!,
+      productFilter: this.filteredData!
+    }
+
+    this.productsService.getAllProductsByCategoryAndTheatreId(searchedTheatreProduct).subscribe((products) => {
+        this.products = products;
+      }
+    )
+
+  }
+
+  getCounts(product: any): any{
+    return this.selectedProducts[this.productsList?.indexOf(product?.id)!];
+  }
+
+  incrementCountOfProduct(product: any): void{
+    this.selectedProducts[this.productsList?.indexOf(product?.id)!] += 1;
+    this.productsPrices[this.productsList?.indexOf(product?.id)!] += product?.price;
+  }
+
+  decrementPriceOfProduct(product: any): void{
+    this.selectedProducts[this.productsList?.indexOf(product?.id)!] -= 1
+    this.productsPrices[this.productsList?.indexOf(product?.id)!] -= product?.price;
+  }
+
+  decrementCountOfProduct(product: any): void{
+    this.selectedProducts[this.productsList?.indexOf(product?.id)!] > 0
+      ? this.decrementPriceOfProduct(product)
+      : 0;
+  }
+
+  calculateSumOfProducts(): any {
+    let s = 0;
+    for(let p of this.selectedProducts) {
+      s += p;
+    }
+    return s;
+  }
+
+  calculatePriceOfProducts(): any {
+    let s = 0;
+    for(let p of this.productsPrices) {
+      s += p;
+    }
+    return s;
+  }
+
+  getProductDetails(): any {
+    let prodDetails: ProductDetails[] = [];
+    let j = 0;
+    for(let p of this.selectedProducts) {
+      if(p > 0) {
+        let prod = this.products[j];
+        let details = {
+          id: prod?.id,
+          name: prod?.name,
+          price: prod?.price,
+          quantity: prod?.quantity,
+          number: p
+        }
+        prodDetails.push(details);
+      }
+      j++;
+    }
+    return prodDetails;
   }
 
 }

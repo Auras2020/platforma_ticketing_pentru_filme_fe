@@ -122,10 +122,6 @@ export class MoviesService {
     return this.http.post<MovieTimes[]>(this.url + this.movieTheatreDay, theatreDay);
   }
 
-  getAllMoviesByTheatreAndGivenDay(theatreDay: any): Observable<Movie[]>{
-    return this.http.post<Movie[]>(this.url + this.theatreDay, theatreDay);
-  }
-
   getAllMoviesCurrentlyRunning(movieFilters: any): Observable<Movie[]>{
     return this.http.post<Movie[]>(this.url + this.currentRunning, movieFilters);
   }

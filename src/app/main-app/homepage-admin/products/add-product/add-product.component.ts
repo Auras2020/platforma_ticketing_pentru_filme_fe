@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {TheatresService} from "../../theatres/theatres.service";
+import {Theatre, TheatresService} from "../../theatres/theatres.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FeedbackToolbarService} from "../../../../feedback-toolbar/feedback-toolbar.service";
 import {ProductsService} from "../products.service";
@@ -30,19 +30,22 @@ export class AddProductComponent implements OnInit{
   isImageType?: boolean;
   imageSelected: boolean = false;
   types = ['food', 'drink', 'menu'];
+  theatre?: Theatre;
 
   constructor(private productsService: ProductsService,
               private dialogRef: MatDialogRef<AddProductComponent>,
               @Inject(MAT_DIALOG_DATA) data: any,
               private feedbackToolbarService: FeedbackToolbarService) {
     this.edit = false
-    if(data){
+    if(data.product){
       this.edit = true
       this.form.patchValue(data.product);
       this.fileName = data.product.imageName;
+      this.theatre = data.theatre;
     } else {
       this.edit = false;
       this.fileName = null;
+      this.theatre = data.theatre;
     }
   }
 
@@ -60,17 +63,21 @@ export class AddProductComponent implements OnInit{
   }
 
   saveProduct() {
+    const product = {
+      ...this.form.value,
+      theatre: this.theatre
+    }
+
     if(this.isImageType === false){
       this.feedbackToolbarService.openSnackBarWithErrorMessage("Photo must be of image type");
     } else {
       if(this.filePath){
-        console.log(this.form.value);
-        this.productsService.createProduct(this.filePath, this.form.value).subscribe(() => {
+        this.productsService.createProduct(this.filePath, product).subscribe(() => {
           this.dialogRef.close(true);
           this.feedbackToolbarService.openSnackBarWithSuccessMessage(this.msg);
         })
       } else {
-        this.productsService.createProduct(null, this.form.value).subscribe(() => {
+        this.productsService.createProduct(null, product).subscribe(() => {
           this.dialogRef.close(true);
           this.feedbackToolbarService.openSnackBarWithSuccessMessage(this.msg);
         })

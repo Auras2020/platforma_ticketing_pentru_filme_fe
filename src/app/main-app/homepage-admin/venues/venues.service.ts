@@ -1,17 +1,12 @@
 import { Injectable } from '@angular/core';
 import {Theatre} from "../theatres/theatres.service";
-import {Movie} from "../movies/movies.service";
 import {environment} from "../../../../environments/environment";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 
 export interface Venue {
   id: number;
-  //location: string;
   theatre: Theatre;
-  /*movie: Movie;
-  day: Date;
-  time: string;*/
   venueNumber: number;
   rowsNumber: number;
   columnsNumber: number;
@@ -20,8 +15,6 @@ export interface Venue {
 export interface VenuesFilter {
   location: string;
   theatreName: string;
-  /*movieName: string;
-  day: Date | null;*/
   searchString: string;
 }
 

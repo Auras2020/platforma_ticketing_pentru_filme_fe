@@ -1,4 +1,4 @@
-<div [formGroup]="form" class="page-content">
+<div class="page-content">
   <mat-card class="movie-details-card">
     <div class="title">
       <button mat-icon-button class="arrow-color"
@@ -64,7 +64,7 @@
              alt="Poster"/>
       </div>
 
-      <div class="right-header-content">
+      <div [formGroup]="form" class="right-header-content">
         <div class="form-margins">
           <div class="name-label-padding">
             <label class="name-label">Adult tickets({{showTiming?.price}} RON)</label>
@@ -73,6 +73,7 @@
             <mat-select
               [placeholder]="'Select number of adult tickets'"
               (selectionChange)="getNumberOfAdultTicketsByEvent($event)"
+              formControlName="adult"
               class="form-input"
             >
               <mat-option *ngFor="let number of numbers" [value]="number">
@@ -89,6 +90,7 @@
             <mat-select
               [placeholder]="'Select number of student tickets'"
               (selectionChange)="getNumberOfStudentTicketsByEvent($event)"
+              formControlName="student"
               class="form-input"
             >
               <mat-option *ngFor="let number of numbers" [value]="number">
@@ -105,6 +107,7 @@
             <mat-select
               [placeholder]="'Select number of child tickets'"
               (selectionChange)="getNumberOfChildTicketsByEvent($event)"
+              formControlName="child"
               class="form-input"
             >
               <mat-option *ngFor="let number of numbers" [value]="number">
@@ -114,6 +117,108 @@
           </mat-form-field>
         </div>
       </div>
+    </div>
+  </mat-card>
+
+  <mat-card class="filter-card">
+    <div [formGroup]="form1" class="header-style">
+      <div class="products-title">
+        <label class="products-title-style">
+          Products
+        </label>
+      </div>
+
+      <mat-form-field appearance="outline" class="filter-product-form product">
+        <mat-select
+          [placeholder]="'Select type of product..'"
+          (selectionChange)="getCategoryByEvent($event)"
+          formControlName="types"
+          class="form-input"
+        >
+          <mat-option *ngFor="let type of types" [value]="type">
+            {{ type }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="search-box">
+        <span class="fa fa-search"><mat-icon>search</mat-icon></span>
+        <input (keyup)="getAllProducts()"
+               [(ngModel)]="searchString"
+               matInput
+               [ngModelOptions]="{standalone: true}"
+               placeholder="Search...">
+        <span  class="fa fa-search-close" (click)="searchString = '';getAllProducts()"><mat-icon>close</mat-icon></span>
+      </div>
+    </div>
+
+    <div>
+      <div class="products-display">
+        <div *ngFor="let product of products">
+          <mat-card class="product-card">
+            <div class="product-details">
+              <div>
+                <img *ngIf="product.image"
+                     [src]="getImageUrl(product.image)"
+                     class="product-poster"
+                     alt="Poster"/>
+              </div>
+              <div class="main-details">
+                <div class="product-name">
+                  <label class="product-name-label">
+                    {{product.name}}
+                  </label>
+                  <button
+                    mat-icon-button
+                    [matTooltip]="'Remove product'"
+                    aria-label="Choose"
+                    matTooltipPosition="above"
+                    (click)="decrementCountOfProduct(product)"
+                  >
+                    <mat-icon class="product-button">
+                      remove
+                    </mat-icon>
+                  </button>
+                  <label class="count-style">
+                    {{getCounts(product)}}
+                  </label>
+                  <button
+                    mat-icon-button
+                    [matTooltip]="'Add product'"
+                    aria-label="Choose"
+                    matTooltipPosition="above"
+                    (click)="incrementCountOfProduct(product)"
+                  >
+                    <mat-icon class="product-button">
+                      add
+                    </mat-icon>
+                  </button>
+                </div>
+                <div class="product-price">
+                  Price: {{product.price}} RON
+                </div>
+                <div class="product-quantity">
+                  Quantity: {{product.quantity}}g
+                </div>
+                <div class="product-number">
+                  Number: {{product.number}}
+                </div>
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+      <div class="empty-space"></div>
+    </div>
+    <div class="total-count">
+      <label class="total-count-style">
+        Total number of selected products is: {{calculateSumOfProducts()}}
+      </label>
+    </div>
+    <div class="total-price">
+      <label class="total-price-style">
+        Price of all selected products is: {{calculatePriceOfProducts()}} RON
+      </label>
     </div>
   </mat-card>
 

@@ -2,6 +2,11 @@
   margin-bottom: 100px;
 }
 
+.arrow-color{
+  margin-top: 2px;
+  color: #DC4E2A;
+}
+
 .filter-card{
   margin: 24px;
 }
@@ -12,7 +17,6 @@
   font-weight: bold;
   margin-right: 12px;
   float: left;
-  padding-left: 24px;
 }
 
 .title{
@@ -137,8 +141,6 @@
 .product-name{
   padding-bottom: 40px;
   display: inline-flex;
-  /*display: flex;
-  justify-content: space-between;*/
 }
 
 .product-name-label{
@@ -168,12 +170,6 @@
 
 .movie-note{
   padding-top: 30px;
-  color: #213555;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.movie-rating{
   color: #213555;
   font-size: 16px;
   font-weight: 600;

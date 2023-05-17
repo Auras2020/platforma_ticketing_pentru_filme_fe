@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
-import {Product, ProductFilter, ProductsService, SearchedProduct} from "./products.service";
+import {Product, ProductFilter, ProductsService, SearchedTheatre, SearchedTheatreProduct} from "./products.service";
 import {AddProductComponent} from "./add-product/add-product.component";
-import {Movie} from "../movies/movies.service";
-import {DeleteMovieComponent} from "../movies/delete-movie/delete-movie.component";
 import {DeleteProductComponent} from "./delete-product/delete-product.component";
+import {ActivatedRoute, Router} from "@angular/router";
+import {Theatre, TheatresService} from "../theatres/theatres.service";
 
 @Component({
   selector: 'app-products',
@@ -21,12 +21,21 @@ export class ProductsComponent implements OnInit{
   types = ['all', 'food', 'drink', 'menu'];
   products?: Product[];
   selectedValue?: any;
+  id: number = -1;
+  theatre?: Theatre;
 
   constructor(private productsService: ProductsService,
-              private dialog: MatDialog) {
+              private theatresService: TheatresService,
+              private dialog: MatDialog,
+              private router: Router,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    this.id = this.route.snapshot.params['id'];
+    this.theatresService.getTheatre(this.id).subscribe((theatre) => {
+      this.theatre = theatre;
+    })
     this.getAllProducts();
   }
 
@@ -55,7 +64,11 @@ export class ProductsComponent implements OnInit{
       this.filteredData = {
         searchString: this.searchString
       };
-      this.productsService.getAllProducts(this.filteredData!).subscribe((products) => {
+      let searchedTheatre: SearchedTheatre={
+        theatreId: this.id,
+        productFilter: this.filteredData!
+      }
+      this.productsService.getAllProductsByTheatreId(searchedTheatre).subscribe((products) => {
           this.products = products;
         }
       )
@@ -66,12 +79,13 @@ export class ProductsComponent implements OnInit{
   getAllProductsByCategory() {
     this.getAllByFilters();
 
-    let searchedProduct: SearchedProduct={
+    let searchedTheatreProduct: SearchedTheatreProduct={
       category: this.selectedValue,
+      theatreId: this.id,
       productFilter: this.filteredData!
     }
 
-    this.productsService.getAllProductsByCategory(searchedProduct).subscribe((products) => {
+    this.productsService.getAllProductsByCategoryAndTheatreId(searchedTheatreProduct).subscribe((products) => {
         this.products = products;
       }
     )
@@ -99,6 +113,9 @@ export class ProductsComponent implements OnInit{
     event.stopPropagation();
     const dialogConfig = new MatDialogConfig();
     dialogConfig.height = "100%";
+    dialogConfig.data = {
+      theatre: this.theatre
+    };
     this.openProductDialog(dialogConfig);
   }
 
@@ -106,7 +123,8 @@ export class ProductsComponent implements OnInit{
     const dialogConfig = new MatDialogConfig();
     dialogConfig.height = "100%";
     dialogConfig.data = {
-      product
+      product: product,
+      theatre: this.theatre
     };
     this.openProductDialog(dialogConfig);
   }
@@ -127,5 +145,9 @@ export class ProductsComponent implements OnInit{
         this.getAllProducts();
       }
     );
+  }
+
+  navigateBackToTheatresPage(): void{
+    this.router.navigate(['admin', 'theatres']);
   }
 }

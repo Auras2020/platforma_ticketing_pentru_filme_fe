@@ -30,11 +30,12 @@ export class TheatresComponent implements OnInit{
   dataSource = new MatTableDataSource<Theatre>([]);
 
   public displayedColumns = [
-    'edit',
+    'products',
     'name',
     'poster',
     'location',
     'address',
+    'edit',
     'delete'
   ];
 
@@ -170,6 +171,10 @@ export class TheatresComponent implements OnInit{
 
   public clickOnTheatreRow(id: string) {
     this.router.navigate(['admin', 'theatres', id]);
+  }
+
+  public clickOnProductsButtonRow(id: string) {
+    this.router.navigate(['admin', 'products', id]);
   }
 
 }

@@ -41,7 +41,8 @@ export const environment = {
     seats: "seats/",
     movieAge: "movies/age",
     products: "products/",
-    productsCategory: "products/category"
+    productsTheatre: "products/theatre",
+    productsCategoryTheatre: "products/category-and-theatre"
   }
 };
 

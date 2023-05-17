@@ -198,9 +198,7 @@ export class ProgramComponent implements OnInit{
       day: this.curDate!,
       time: time
     }
-    console.log(shVenue);
     this.showTimingsService.findShowTimingByShowTimingDetails(shVenue).subscribe((showTiming) => {
-      console.log(showTiming);
       this.navigateToVenueSeatsPage(showTiming?.id);
     })
   }

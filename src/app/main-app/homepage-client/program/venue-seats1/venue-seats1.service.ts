@@ -4,10 +4,12 @@ import {ShowTimings} from "../../../homepage-admin/show-timings/show-timings.ser
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {User} from "../../../homepage-admin/user/user.service";
+import {ProductDetails} from "../../../homepage-admin/products/products.service";
 
 export interface Seat {
   showTiming: ShowTimings;
   seats: string[];
+  productDetails: ProductDetails[];
   user: User
 }
 
