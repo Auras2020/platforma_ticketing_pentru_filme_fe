@@ -41,6 +41,7 @@ export class ReservationComponent {
 
     for(let p of this.productDetails!){
       this.productsService.getProduct(p?.id).subscribe((product) => {
+        product.number -= p?.number;
         this.productsService.createProduct(null, product).subscribe();
       })
     }

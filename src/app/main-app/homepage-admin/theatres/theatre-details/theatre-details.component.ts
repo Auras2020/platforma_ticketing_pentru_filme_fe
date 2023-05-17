@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Theatre, TheatresService} from "../theatres.service";
 import {MovieFilters, MoviesService} from "../../movies/movies.service";
+import {ShowTimings, ShowTimingsService} from "../../show-timings/show-timings.service";
 
 @Component({
   selector: 'app-theatre-details',
@@ -37,7 +38,8 @@ export class TheatreDetailsComponent implements OnInit{
   constructor(private theatresService: TheatresService,
               private router: Router,
               private route: ActivatedRoute,
-              private moviesService: MoviesService) {
+              private moviesService: MoviesService,
+              private showTimingsService: ShowTimingsService) {
   }
 
   ngOnInit(): void {
@@ -146,6 +148,22 @@ export class TheatreDetailsComponent implements OnInit{
 
   getNumber(num: any): any{
     return !num ? '-' : num;
+  }
+
+  findVenueByShowTimingDetails(movie: any, time: any): void{
+    const shVenue = {
+      theatreId: this.theatre?.id!,
+      movieId: movie?.id,
+      day: this.currentDate!,
+      time: time
+    }
+    this.showTimingsService.findShowTimingByShowTimingDetails(shVenue).subscribe((showTiming) => {
+      this.navigateToVenueSeatsPage(showTiming?.id);
+    })
+  }
+
+  navigateToVenueSeatsPage(id: any): any{
+    this.router.navigate(['admin', 'theatres', 'venue', id]);
   }
 
 }

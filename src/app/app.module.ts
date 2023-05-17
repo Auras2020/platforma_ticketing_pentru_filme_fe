@@ -71,6 +71,7 @@ import { BuyTicketsComponent } from './main-app/homepage-client/program/venue-se
 import { ProductsComponent } from './main-app/homepage-admin/products/products.component';
 import { AddProductComponent } from './main-app/homepage-admin/products/add-product/add-product.component';
 import { DeleteProductComponent } from './main-app/homepage-admin/products/delete-product/delete-product.component';
+import { VenueSeats2Component } from './main-app/homepage-admin/theatres/theatre-details/venue-seats2/venue-seats2.component';
 
 @NgModule({
   declarations: [
@@ -117,7 +118,8 @@ import { DeleteProductComponent } from './main-app/homepage-admin/products/delet
     BuyTicketsComponent,
     ProductsComponent,
     AddProductComponent,
-    DeleteProductComponent
+    DeleteProductComponent,
+    VenueSeats2Component
   ],
     imports: [
         BrowserModule,

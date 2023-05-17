@@ -121,6 +121,10 @@
   min-width: 430px;
 }
 
+.product-card:hover{
+  background-color: #FFF3E0;
+}
+
 .product-poster{
   padding-left: 20px;
   padding-top: 30px;

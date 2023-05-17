@@ -44,25 +44,7 @@
                      (ngModelChange)="getAllVenues()" class="form-input">
             </mat-form-field>
           </div>
-
-          <!--<div>
-            <div class="input-label">Movie name</div>
-            <mat-form-field appearance="outline" class="filter-form">
-              <input matInput [(ngModel)]="filters.movieName" [ngModelOptions]="{updateOn:'change'}"
-                     (ngModelChange)="getAllVenues()" class="form-input">
-            </mat-form-field>
-          </div>-->
         </div>
-
-        <!--<div>
-          <div class="input-label">Day</div>
-          <mat-form-field appearance="outline" class="filter-form">
-            <input matInput [(ngModel)]="filters.day" [ngModelOptions]="{updateOn:'change'}"
-                   (ngModelChange)="getAllVenues()" [matDatepicker]="daypicker"/>
-            <mat-datepicker-toggle matSuffix [for]="daypicker"></mat-datepicker-toggle>
-            <mat-datepicker #daypicker></mat-datepicker>
-          </mat-form-field>
-        </div>-->
       </div>
 
       <div class="empty-div"></div>
@@ -112,29 +94,6 @@
           ><span class="ellipsis">{{ row.theatre.name }}</span>
           </td>
         </ng-container>
-
-        <!--<ng-container matColumnDef="movie">
-          <th mat-header-cell *matHeaderCellDef class="data-header"><span>Movie</span></th>
-          <td mat-cell *matCellDef="let row" class="name-column"
-          ><span class="ellipsis">{{ row.movie.name }}</span>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="day">
-          <th mat-header-cell *matHeaderCellDef class="data-header"><span>Day</span></th>
-          <td mat-cell *matCellDef="let row" class="name-column">
-            <b><label>{{row.day | date:'dd'}} </label></b>
-            <label class="day-2">{{row.day | date:'LLL' | lowercase}} </label>
-            <b><label>{{row.day | date:'yyyy'}}</label></b>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="time">
-          <th mat-header-cell *matHeaderCellDef class="data-header"><span>Time</span></th>
-          <td mat-cell *matCellDef="let row" class="name-column"
-          ><span class="ellipsis">{{ row.time }}</span>
-          </td>
-        </ng-container>-->
 
         <ng-container matColumnDef="delete">
           <th mat-header-cell *matHeaderCellDef class="action-header"></th>

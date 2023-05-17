@@ -193,9 +193,13 @@
               {{movieTime.movie.genre}}
             </div>
             <div *ngFor="let time of movieTime.times" class="times-display">
-              <label class="time-style">
+              <button mat-raised-button
+                      [matTooltip]="'View venue seats'"
+                      matTooltipPosition="above"
+                      (click)="findVenueByShowTimingDetails(movieTime?.movie, time)"
+                      class="time-style" >
                 {{time}}
-              </label>
+              </button>
             </div>
             <div class="movie-note">
               Note {{getNumber(movieTime.movie.note)}}

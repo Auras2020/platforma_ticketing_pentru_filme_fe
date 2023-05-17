@@ -48,6 +48,8 @@ export class ProductsService {
   products =  environment.apiEndpoints.products
   productsTheatre = environment.apiEndpoints.productsTheatre
   productsCategoryAndTheatre = environment.apiEndpoints.productsCategoryTheatre
+  productsTheatreAvailable = environment.apiEndpoints.productsTheatreAvailable
+  productsCategoryAndTheatreAvailable = environment.apiEndpoints.productsCategoryTheatreAvailable
 
   constructor(private http: HttpClient) { }
 
@@ -65,6 +67,14 @@ export class ProductsService {
 
   getAllProductsByCategoryAndTheatreId(searchedTheatreProduct: SearchedTheatreProduct): Observable<Product[]>{
     return this.http.post<Product[]>(this.url + this.productsCategoryAndTheatre, searchedTheatreProduct);
+  }
+
+  getAllProductsAvailableByTheatreId(searchedTheatre: SearchedTheatre): Observable<Product[]>{
+    return this.http.post<Product[]>(this.url + this.productsTheatreAvailable, searchedTheatre);
+  }
+
+  getAllProductsAvailableByCategoryAndTheatreId(searchedTheatreProduct: SearchedTheatreProduct): Observable<Product[]>{
+    return this.http.post<Product[]>(this.url + this.productsCategoryAndTheatreAvailable, searchedTheatreProduct);
   }
 
   createProduct(image: any, product: any): Observable<Product> {

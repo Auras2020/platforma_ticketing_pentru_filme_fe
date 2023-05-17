@@ -43,7 +43,6 @@ export class ProgramComponent implements OnInit{
 
   theatres?: Theatre[];
   locations?: string[];
-  //venue?: Venue;
   curDate?: Date;
 
   ngOnInit(): void {

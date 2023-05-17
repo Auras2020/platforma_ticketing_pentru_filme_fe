@@ -2,15 +2,25 @@
   <mat-card class="filter-card">
     <div class="title">
       <button mat-icon-button class="arrow-color"
-              [matTooltip]="'Back to venues page'"
+              [matTooltip]="'Back to theatres details page'"
               matTooltipPosition="above"
-              (click)="navigateBackToVenuesPage()">
+              (click)="navigateBackToTheatreDetailsPage()">
         <mat-icon>
           {{'chevron_left'}}
         </mat-icon>
       </button>
       <label class="title-style">
         Venue seats
+      </label>
+    </div>
+    <div class="info-display">
+      <label class="green-seat-style"></label>
+      <label class="green-seat-label">
+        Seat available
+      </label>
+      <label class="red-seat-style"></label>
+      <label class="red-seat-label">
+        Already booked
       </label>
     </div>
     <div class="seat-display">
@@ -25,13 +35,17 @@
         <div *ngFor="let row of this.array1; let i = index">
           <div class="row-display">
             <div class="index-style-left">
-              <label class="index-style">
+              <label
+                class="index-style">
                 {{row}}
               </label>
             </div>
             <div class="row-seats">
               <div *ngFor="let column of this.array2; let j = index">
-                <div class="seat-style" >
+                <div
+                  [style.color]="!isSeatBooked(i, j) ? originalColor[i * this.showTiming?.venue?.columnsNumber! + j] : 'white'"
+                  [style.background-color]="!isSeatBooked(i, j) ? originalBackgroundColor[i * this.showTiming?.venue?.columnsNumber! + j] : 'red'"
+                  class="seat-style" >
                   {{column}}
                 </div>
               </div>

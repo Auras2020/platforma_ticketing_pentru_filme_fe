@@ -102,7 +102,7 @@ export class VenueSeats1Component implements OnInit{
       productFilter: this.filteredData!
     }
 
-    this.productsService.getAllProductsByTheatreId(searchedTheatre).subscribe((products) => {
+    this.productsService.getAllProductsAvailableByTheatreId(searchedTheatre).subscribe((products) => {
         this.products = products;
         this.productsList = products.map(p => p.id);
         this.productsPrices = Array.from({ length: products?.length }, (_) => 0);
@@ -306,7 +306,7 @@ export class VenueSeats1Component implements OnInit{
         productFilter: this.filteredData!
       }
 
-      this.productsService.getAllProductsByTheatreId(searchedTheatre).subscribe((products) => {
+      this.productsService.getAllProductsAvailableByTheatreId(searchedTheatre).subscribe((products) => {
           this.products = products;
         }
       )
@@ -323,7 +323,7 @@ export class VenueSeats1Component implements OnInit{
       productFilter: this.filteredData!
     }
 
-    this.productsService.getAllProductsByCategoryAndTheatreId(searchedTheatreProduct).subscribe((products) => {
+    this.productsService.getAllProductsAvailableByCategoryAndTheatreId(searchedTheatreProduct).subscribe((products) => {
         this.products = products;
       }
     )
@@ -335,6 +335,10 @@ export class VenueSeats1Component implements OnInit{
   }
 
   incrementCountOfProduct(product: any): void{
+    if(this.selectedProducts[this.productsList?.indexOf(product?.id)!] >= product?.number){
+      this.feedbackToolbarService.openSnackBarWithErrorMessage("There are not enough " + product?.name + " left!");
+      return;
+    }
     this.selectedProducts[this.productsList?.indexOf(product?.id)!] += 1;
     this.productsPrices[this.productsList?.indexOf(product?.id)!] += product?.price;
   }

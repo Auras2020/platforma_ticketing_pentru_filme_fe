@@ -38,6 +38,8 @@ export const environment = {
     movieAge: "movies/age",
     products: "products/",
     productsTheatre: "products/theatre",
-    productsCategoryTheatre: "products/category-and-theatre"
+    productsCategoryTheatre: "products/category-and-theatre",
+    productsTheatreAvailable: "products/theatre/available",
+    productsCategoryTheatreAvailable: "products/category-and-theatre/available"
   }
 };

@@ -192,7 +192,7 @@
             </div>
             <div *ngFor="let time of movieTime.times" class="times-display">
               <button mat-raised-button
-                      [matTooltip]="'Buy tickets'"
+                      [matTooltip]="'Book tickets'"
                       matTooltipPosition="above"
                       (click)="findVenueByShowTimingDetails(movieTime?.movie, time)"
                       class="time-style" >
