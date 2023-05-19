@@ -29,6 +29,7 @@ import {ProductsComponent} from "./main-app/homepage-admin/products/products.com
 import {
   VenueSeats2Component
 } from "./main-app/homepage-admin/theatres/theatre-details/venue-seats2/venue-seats2.component";
+import {BookedProductsComponent} from "./main-app/homepage-client/orders/booked-products/booked-products.component";
 
 const routes: Routes = [
   {path: 'login', component: MainAppComponent},
@@ -64,7 +65,7 @@ const routes: Routes = [
       {path: 'program', component: ProgramComponent, canActivate: [AuthGuard, ClientGuard]},
       {path: 'program/movies/:id', component: MovieDetails2Component, canActivate: [AuthGuard, ClientGuard]},
       {path: 'program/venue/:id', component: VenueSeats1Component, canActivate: [AuthGuard, ClientGuard]},
-      {path: 'orders', component: OrdersComponent, canActivate: [AuthGuard, ClientGuard]},
+      {path: 'orders', component: BookedProductsComponent, canActivate: [AuthGuard, ClientGuard]},
       {path: 'reviews', component: ReviewsComponent, canActivate: [AuthGuard, ClientGuard]}
     ]},
   {path: '**', pathMatch: 'full', component: PageNotFoundComponent}

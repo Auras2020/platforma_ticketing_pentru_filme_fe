@@ -10,7 +10,8 @@ export interface Seat {
   showTiming: ShowTimings;
   seats: string[];
   productDetails: ProductDetails[];
-  user: User
+  user: User;
+  status: string;
 }
 
 @Injectable({

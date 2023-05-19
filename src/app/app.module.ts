@@ -72,6 +72,8 @@ import { ProductsComponent } from './main-app/homepage-admin/products/products.c
 import { AddProductComponent } from './main-app/homepage-admin/products/add-product/add-product.component';
 import { DeleteProductComponent } from './main-app/homepage-admin/products/delete-product/delete-product.component';
 import { VenueSeats2Component } from './main-app/homepage-admin/theatres/theatre-details/venue-seats2/venue-seats2.component';
+import { BookedProductsComponent } from './main-app/homepage-client/orders/booked-products/booked-products.component';
+import { BookedTicketsComponent } from './main-app/homepage-client/orders/booked-tickets/booked-tickets.component';
 
 @NgModule({
   declarations: [
@@ -119,7 +121,9 @@ import { VenueSeats2Component } from './main-app/homepage-admin/theatres/theatre
     ProductsComponent,
     AddProductComponent,
     DeleteProductComponent,
-    VenueSeats2Component
+    VenueSeats2Component,
+    BookedProductsComponent,
+    BookedTicketsComponent
   ],
     imports: [
         BrowserModule,

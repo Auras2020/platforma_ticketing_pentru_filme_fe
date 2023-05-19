@@ -69,15 +69,16 @@ export class MoviesComponent implements OnInit{
 
   getAllMovies() {
     this.getAllByFilters();
-    if (this.filteredData) {
+    if (this.filterActive()) {
       let movieFilteredPage: MovieFilteredPage={
-        dto: this.filteredData,
+        dto: this.filteredData!,
         size: this.pageSize,
         page: this.currentPage
       }
 
       this.moviesService.getMoviesByFiltersPage(movieFilteredPage).subscribe(
         moviePage => {
+          console.log(moviePage);
           this.handleSuccess(moviePage)
         },
         () => {

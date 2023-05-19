@@ -36,7 +36,8 @@ export class ReservationComponent {
       showTiming: this.showTiming,
       seats: this.seats!,
       productDetails: this.productDetails!,
-      user: this.user
+      user: this.user,
+      status: 'reserved'
     }
 
     for(let p of this.productDetails!){

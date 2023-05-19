@@ -40,6 +40,9 @@ export const environment = {
     productsTheatre: "products/theatre",
     productsCategoryTheatre: "products/category-and-theatre",
     productsTheatreAvailable: "products/theatre/available",
-    productsCategoryTheatreAvailable: "products/category-and-theatre/available"
+    productsCategoryTheatreAvailable: "products/category-and-theatre/available",
+    bookedProducts: "booked-products/",
+    bookedProductsPage: "booked-products/page",
+    bookedProductsPageFilter: "booked-products/page/filter"
   }
 };
