@@ -43,6 +43,7 @@ export const environment = {
     productsCategoryTheatreAvailable: "products/category-and-theatre/available",
     bookedProducts: "booked-products/",
     bookedProductsPage: "booked-products/page",
-    bookedProductsPageFilter: "booked-products/page/filter"
+    bookedProductsPageFilter: "booked-products/page/filter",
+    bookedProductsStatus: "booked-products/status"
   }
 };

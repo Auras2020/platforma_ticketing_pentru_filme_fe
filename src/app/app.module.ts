@@ -74,6 +74,8 @@ import { DeleteProductComponent } from './main-app/homepage-admin/products/delet
 import { VenueSeats2Component } from './main-app/homepage-admin/theatres/theatre-details/venue-seats2/venue-seats2.component';
 import { BookedProductsComponent } from './main-app/homepage-client/orders/booked-products/booked-products.component';
 import { BookedTicketsComponent } from './main-app/homepage-client/orders/booked-tickets/booked-tickets.component';
+import { BookedProductsStatusComponent } from './main-app/homepage-client/orders/booked-products/booked-products-status/booked-products-status.component';
+import { BookedTicketsStatusComponent } from './main-app/homepage-client/orders/booked-tickets/booked-tickets-status/booked-tickets-status.component';
 
 @NgModule({
   declarations: [
@@ -123,7 +125,9 @@ import { BookedTicketsComponent } from './main-app/homepage-client/orders/booked
     DeleteProductComponent,
     VenueSeats2Component,
     BookedProductsComponent,
-    BookedTicketsComponent
+    BookedTicketsComponent,
+    BookedProductsStatusComponent,
+    BookedTicketsStatusComponent
   ],
     imports: [
         BrowserModule,
