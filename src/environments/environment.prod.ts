@@ -34,16 +34,16 @@ export const environment = {
     theatreDay: "movies/theatre-and-day",
     venuesTheatre: "venues/theatre/",
     showTimingVenue: "show-timings/show-timing-details",
-    seats: "seats/",
     movieAge: "movies/age",
     products: "products/",
     productsTheatre: "products/theatre",
     productsCategoryTheatre: "products/category-and-theatre",
     productsTheatreAvailable: "products/theatre/available",
     productsCategoryTheatreAvailable: "products/category-and-theatre/available",
-    bookedProducts: "booked-products/",
-    bookedProductsPage: "booked-products/page",
-    bookedProductsPageFilter: "booked-products/page/filter",
-    bookedProductsStatus: "booked-products/status"
+    orders: "orders/",
+    ordersPage: "orders/page",
+    ordersPageFilter: "orders/page/filter",
+    ordersStatus: "orders/status",
+    ordersDetails: "orders/details"
   }
 };

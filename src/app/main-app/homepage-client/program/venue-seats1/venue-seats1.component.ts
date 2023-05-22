@@ -51,6 +51,7 @@ export class VenueSeats1Component implements OnInit{
   productsList: number[] = [];
   productsPrices: number[] = [];
   selectedValue?: any;
+  allProducts: Product[] = [];
 
   form = new FormGroup({
     adult: new FormControl('', [Validators.min(0), Validators.max(10)]),
@@ -103,6 +104,7 @@ export class VenueSeats1Component implements OnInit{
     }
 
     this.productsService.getAllProductsAvailableByTheatreId(searchedTheatre).subscribe((products) => {
+        this.allProducts = products;
         this.products = products;
         this.productsList = products.map(p => p.id);
         this.productsPrices = Array.from({ length: products?.length }, (_) => 0);
@@ -375,7 +377,7 @@ export class VenueSeats1Component implements OnInit{
     let j = 0;
     for(let p of this.selectedProducts) {
       if(p > 0) {
-        let prod = this.products[j];
+        let prod = this.allProducts[j];
         let details = {
           id: prod?.id,
           name: prod?.name,

@@ -1,0 +1,51 @@
+<div class="dialog-content">
+  <div class="delete-item-dialog-title">
+    <div class="dialog-title">
+      Booked products details
+    </div>
+    <div class="empty-div"></div>
+    <div class="close-button">
+      <button mat-icon-button mat-dialog-close class="dialog-close-button">
+        <mat-icon class="close-icon">close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div>
+    <div *ngFor="let prod of products">
+      <div class="product-border">
+        <div>
+          <label class="detail-style">
+            Name: {{prod.name}}
+          </label>
+        </div>
+        <div>
+          <label class="detail-style">
+            Price: {{prod.price}}
+          </label>
+        </div>
+        <div>
+          <label class="detail-style">
+            Quantity: {{prod.quantity}}
+          </label>
+        </div>
+        <div>
+          <label class="detail-style">
+            Number: {{prod.number}}
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="number-padding">
+    <label class="detail-style">
+      Total number of products: {{getTotalNumber()}}
+    </label>
+  </div>
+  <div>
+    <label class="detail-style">
+      Total price of products: {{getTotalPrice()}}
+    </label>
+  </div>
+</div>

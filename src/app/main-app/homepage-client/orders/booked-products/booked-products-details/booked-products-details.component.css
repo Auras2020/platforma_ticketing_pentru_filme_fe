@@ -1,0 +1,56 @@
+.dialog-content{
+  padding: 24px;
+}
+
+.dialog-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  color: #00133F;
+}
+
+.delete-item-dialog-title{
+  border-bottom: 2px solid #839DC3;
+  font-size: 24px;
+  margin-bottom: 16px;
+  padding-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.close-button{
+  align-items: flex-end;
+}
+
+.empty-div{
+  align-self: flex-start;
+}
+
+.dialog-close-button{
+  height: 30px;
+  width: 30px;
+}
+
+.close-icon{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.product-border{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #FDD5BD;
+}
+
+.detail-style{
+  color: #213555;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.number-padding{
+  padding-top: 10px;
+}

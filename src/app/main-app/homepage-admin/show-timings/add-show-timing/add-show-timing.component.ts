@@ -117,7 +117,6 @@ export class AddShowTimingComponent implements OnInit{
       ...this.form.value,
       time: this.getHour() +  ":" + this.getMinute()
     }
-    console.log(this.form.value);
     this.prevParsedValue = this.form.value;
     this.showTimingsService.createShowTiming(parsedValue).subscribe(() => {
       this.feedbackToolbarService.openSnackBarWithSuccessMessage(this.msg);

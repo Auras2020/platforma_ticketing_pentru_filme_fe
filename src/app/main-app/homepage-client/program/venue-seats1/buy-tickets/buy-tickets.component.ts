@@ -37,7 +37,8 @@ export class BuyTicketsComponent {
       seats: this.seats!,
       productDetails: this.productDetails!,
       user: this.user,
-      status: 'bought'
+      ticketStatus: 'bought',
+      productStatus: 'bought'
     }
 
     for(let p of this.productDetails!){

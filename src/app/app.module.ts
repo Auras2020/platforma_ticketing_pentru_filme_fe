@@ -76,6 +76,8 @@ import { BookedProductsComponent } from './main-app/homepage-client/orders/booke
 import { BookedTicketsComponent } from './main-app/homepage-client/orders/booked-tickets/booked-tickets.component';
 import { BookedProductsStatusComponent } from './main-app/homepage-client/orders/booked-products/booked-products-status/booked-products-status.component';
 import { BookedTicketsStatusComponent } from './main-app/homepage-client/orders/booked-tickets/booked-tickets-status/booked-tickets-status.component';
+import {DatePipe} from "@angular/common";
+import { BookedProductsDetailsComponent } from './main-app/homepage-client/orders/booked-products/booked-products-details/booked-products-details.component';
 
 @NgModule({
   declarations: [
@@ -127,7 +129,8 @@ import { BookedTicketsStatusComponent } from './main-app/homepage-client/orders/
     BookedProductsComponent,
     BookedTicketsComponent,
     BookedProductsStatusComponent,
-    BookedTicketsStatusComponent
+    BookedTicketsStatusComponent,
+    BookedProductsDetailsComponent
   ],
     imports: [
         BrowserModule,
@@ -157,7 +160,7 @@ import { BookedTicketsStatusComponent } from './main-app/homepage-client/orders/
         MatSnackBarModule
     ],
   providers: [AuthGuard, AdminGuard, DistribuitorGuard, ClientGuard,
-    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 3000}}],
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 3000}}, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

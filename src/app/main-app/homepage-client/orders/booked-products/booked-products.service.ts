@@ -3,47 +3,48 @@ import {
   ShowTimings
 } from "../../../homepage-admin/show-timings/show-timings.service";
 import {User} from "../../../homepage-admin/user/user.service";
-import {ProductDetails} from "../../../homepage-admin/products/products.service";
 import {environment} from "../../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {ProductDetails} from "../../../homepage-admin/products/products.service";
 
-export interface BookedProduct{
+export interface Order{
   showTiming?: ShowTimings;
   user?: User;
-  //productDetails: ProductDetails[];
-  count?: number;
-  status?: string;
+  ticketsCount?: number;
+  ticketsStatus?: string;
+  productsCount?: number;
+  productsStatus?: string;
 }
 
-export interface BookedProductFilter {
+export interface OrderFilter {
   theatreLocation: string;
   theatreName: string;
   movieName: string;
   day: Date | null;
-  name: string;
-  status: string;
+  productName: string;
+  ticketStatus: string;
+  productStatus: string;
   searchString: string;
 }
 
-export class BookedProductFilteredPage {
+export class OrderFilteredPage {
   user?: User;
-  dto: BookedProductFilter | null = {theatreLocation:'', theatreName: '', movieName: '', day: null, name:'', status:'', searchString:''};
+  dto: OrderFilter | null = {theatreLocation:'', theatreName: '', movieName: '',
+    day: null, productName: '', ticketStatus: '', productStatus: '', searchString:''};
   page?: number;
   size?: number;
 }
 
-export class BookedProductP {
+export class OrderP {
   user?: User;
   page?: number;
   size?: number;
 }
 
-export interface BookedProductPage {
-  bookedProducts: BookedProduct[];
-  //currentPage: number;
+export interface OrderPage {
+  orders: Order[];
   totalItems: number;
-  //totalPages: number;
 }
 
 @Injectable({
@@ -52,21 +53,26 @@ export interface BookedProductPage {
 export class BookedProductsService {
 
   url = environment.apiUrl
-  bookedProductsPage = environment.apiEndpoints.bookedProductsPage
-  bookedProductsPageFilter = environment.apiEndpoints.bookedProductsPageFilter
-  bookedProductsStatus = environment.apiEndpoints.bookedProductsStatus
+  ordersPage = environment.apiEndpoints.ordersPage
+  ordersPageFilter = environment.apiEndpoints.ordersPageFilter
+  ordersStatus = environment.apiEndpoints.ordersStatus
+  ordersDetails =  environment.apiEndpoints.ordersDetails
 
   constructor(private http: HttpClient) { }
 
-  getBookedProductsByPage(bookedProductFilteredPage: BookedProductP): Observable<BookedProductPage>{
-    return this.http.post<BookedProductPage>(this.url + this.bookedProductsPage,bookedProductFilteredPage);
+  getBookedProductsByPage(orderFilteredPage: OrderP): Observable<OrderPage>{
+    return this.http.post<OrderPage>(this.url + this.ordersPage, orderFilteredPage);
   }
 
-  getBookedProductsByFiltersPage(bookedProductFilteredPage: BookedProductFilteredPage): Observable<BookedProductPage>{
-    return this.http.post<BookedProductPage>(this.url + this.bookedProductsPageFilter, bookedProductFilteredPage);
+  getBookedProductsByFiltersPage(orderFilteredPage: OrderFilteredPage): Observable<OrderPage>{
+    return this.http.post<OrderPage>(this.url + this.ordersPageFilter, orderFilteredPage);
   }
 
-  changeBookedProductsStatus(bookedProduct: BookedProduct): any{
-    return this.http.post(this.url + this.bookedProductsStatus, bookedProduct);
+  changeBookedProductsStatus(order: Order): any{
+    return this.http.post(this.url + this.ordersStatus, order);
+  }
+
+  getBookedProductsDetails(order: Order): Observable<ProductDetails[]>{
+    return this.http.post<ProductDetails[]>(this.url + this.ordersDetails, order);
   }
 }

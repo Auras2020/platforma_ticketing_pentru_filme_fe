@@ -2,16 +2,12 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {
-  BookedProduct,
-  BookedProductFilter,
-  BookedProductFilteredPage, BookedProductP,
-  BookedProductPage,
-  BookedProductsService
+  BookedProductsService, Order, OrderFilter, OrderFilteredPage, OrderP, OrderPage
 } from "./booked-products.service";
 import {User, UserService} from "../../../homepage-admin/user/user.service";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
-import {DeleteMovieComponent} from "../../../homepage-admin/movies/delete-movie/delete-movie.component";
 import {BookedProductsStatusComponent} from "./booked-products-status/booked-products-status.component";
+import {BookedProductsDetailsComponent} from "./booked-products-details/booked-products-details.component";
 
 @Component({
   selector: 'app-booked-products',
@@ -22,25 +18,28 @@ export class BookedProductsComponent implements OnInit{
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
 
-  filters: BookedProductFilter = {
+  filters: OrderFilter = {
     theatreLocation:'',
     theatreName: '',
     movieName: '',
     day: null,
-    name:'',
-    status:'',
+    productName: '',
+    ticketStatus: '',
+    productStatus: '',
     searchString:''
   }
   searchString: string = '';
-  filteredData?: BookedProductFilter | null
+  filteredData?: OrderFilter | null
   currentPage: number = 0
   pageSize:number = 10
-  pageSizeOptions:number[] = [1, 2, 5, 10, 15, 20]
-  dataSource = new MatTableDataSource<BookedProduct>([]);
+  pageSizeOptions:number[] = [5, 10, 15, 20]
+  dataSource = new MatTableDataSource<Order>([]);
 
   public displayedColumns = [
+    'bookedTickets',
     'bookedProducts',
-    'status',
+    'ticketsStatus',
+    'productsStatus',
     'theatre',
     'location',
     'movie',
@@ -68,9 +67,10 @@ export class BookedProductsComponent implements OnInit{
     return currentUser?.username;
   }
 
-  handleSuccess(bookedProductPage: BookedProductPage){
-    this.paginator!.length = bookedProductPage.totalItems
-    this.dataSource.data = bookedProductPage.bookedProducts
+  handleSuccess(orderPage: OrderPage){
+    this.paginator!.length = orderPage.totalItems
+    this.dataSource.data = orderPage.orders
+    console.log(orderPage.orders);
   }
 
   handleError(){
@@ -82,30 +82,30 @@ export class BookedProductsComponent implements OnInit{
   getAllBookedProducts() {
     this.getAllByFilters();
     if (this.filteredData) {
-      let bookedProductFilteredPage: BookedProductFilteredPage={
+      let orderFilteredPage: OrderFilteredPage={
         user: this.user,
         dto: this.filteredData,
         size: this.pageSize,
         page: this.currentPage
       }
 
-      this.bookedProductsService.getBookedProductsByFiltersPage(bookedProductFilteredPage).subscribe(
-        bookedProductsPage => {
-          this.handleSuccess(bookedProductsPage)
+      this.bookedProductsService.getBookedProductsByFiltersPage(orderFilteredPage).subscribe(
+        ordersPage => {
+          this.handleSuccess(ordersPage)
         },
         () => {
           this.handleError()
         }
       )
     } else {
-      let bookedProductFilteredPage: BookedProductP={
+      let ordersFilteredPage: OrderP={
         user: this.user,
         size: this.pageSize,
         page: this.currentPage
       }
-      this.bookedProductsService.getBookedProductsByPage(bookedProductFilteredPage).subscribe(
-        bookedProductsPage => {
-          this.handleSuccess(bookedProductsPage)
+      this.bookedProductsService.getBookedProductsByPage(ordersFilteredPage).subscribe(
+        ordersPage => {
+          this.handleSuccess(ordersPage)
         },
         () => {
           this.handleError()
@@ -120,8 +120,9 @@ export class BookedProductsComponent implements OnInit{
       theatreName: this.filters.theatreName,
       movieName: this.filters.movieName,
       day: this.filters.day,
-      name: this.filters.name,
-      status: this.filters.status,
+      productName: this.filters.productName,
+      ticketStatus: this.filters.ticketStatus,
+      productStatus: this.filters.productStatus,
       searchString: this.searchString
     };
   }
@@ -132,8 +133,9 @@ export class BookedProductsComponent implements OnInit{
       (this.filters.theatreName === '') &&
       (this.filters.movieName === '') &&
       (this.filters.day === null) &&
-      (this.filters.name === '') &&
-      (this.filters.status === ''));
+      (this.filters.productName === '') &&
+      (this.filters.ticketStatus === '') &&
+      (this.filters.productStatus === ''));
     return isActive;
   }
 
@@ -142,8 +144,9 @@ export class BookedProductsComponent implements OnInit{
     this.filters.theatreName = '';
     this.filters.movieName = '';
     this.filters.day = null;
-    this.filters.name = '';
-    this.filters.status = '';
+    this.filters.productName = '';
+    this.filters.ticketStatus = '';
+    this.filters.productStatus = '';
     this.getAllBookedProducts();
   }
 
@@ -151,6 +154,54 @@ export class BookedProductsComponent implements OnInit{
     this.pageSize = event.pageSize;
     this.currentPage = event.pageIndex;
     this.getAllBookedProducts();
+  }
+
+  private compareDays(date1: Date, date2: Date): boolean{
+    let day1 = date1.getDate();
+    let day2 = date2.getDate();
+    let month1 = date1.getMonth();
+    let month2 = date2.getMonth();
+    return month2 > month1 || (month2 === month1 && day2 > day1);
+  }
+
+  private checkIfSameDays(date1: Date, date2: Date): boolean{
+    let day1 = date1.getDate();
+    let day2 = date2.getDate();
+    let month1 = date1.getMonth();
+    let month2 = date2.getMonth();
+    return month2 === month1 && day2 === day1;
+  }
+
+  private compareHourAndMinute(time1: string, time2: string): boolean{
+    const [hour1, minute1] = time1.split(":");
+    const hourNumber1 = parseInt(hour1, 10);
+    const minuteNumber1 = parseInt(minute1, 10);
+
+    const [hour2, minute2] = time2.split(":");
+    const hourNumber2 = parseInt(hour2, 10);
+    const minuteNumber2 = parseInt(minute2, 10);
+
+    return hourNumber1 < hourNumber2 || (hourNumber1 === hourNumber2 && minuteNumber1 < minuteNumber2);
+  }
+
+  public compareWithCurrentDate(row: Order): boolean{
+    let time = new Date().getHours() + ":" + new Date().getMinutes();
+    return this.compareDays(new Date(row.showTiming?.day!), new Date()) ||
+      (this.checkIfSameDays(new Date(row.showTiming?.day!), new Date()) &&
+        this.compareHourAndMinute(row.showTiming?.time!, time));
+  }
+
+  public viewBookedProductsDetails(product: any): void{
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      product: product
+    };
+
+    dialogConfig.autoFocus = false
+    dialogConfig.disableClose = true
+    dialogConfig.height = '70%'
+    dialogConfig.width = '40%'
+    this.dialog.open(BookedProductsDetailsComponent, dialogConfig);
   }
 
   public editStatus(event: any, product: any): void{
@@ -166,15 +217,10 @@ export class BookedProductsComponent implements OnInit{
 
     const dialogRef = this.dialog.open(BookedProductsStatusComponent, dialogConfig)
 
-    dialogRef.afterClosed().subscribe(
-      () => {
+    dialogRef.afterClosed().subscribe(() => {
         this.getAllBookedProducts();
       }
     );
-  }
-
-  public getStatus(status: any): any{
-    return 0;
   }
 
   public getStatusColor(status: any): string

@@ -163,9 +163,33 @@ mat-table {
 .name-column {
   text-align: left;
   font-weight: 600;
-  color: #213555;
   font-size: 14px;
   vertical-align: middle;
+  width: 10%;
+}
+
+.nr-column{
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+  vertical-align: middle;
+  width: 5%;
+}
+
+.status-column{
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+  vertical-align: middle;
+  width: 15%;
+}
+
+.movie-column{
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+  vertical-align: middle;
+  width: 20%;
 }
 
 .align-status, .align-number{
@@ -178,8 +202,24 @@ mat-table {
 }
 
 .data-header{
+  width: 10%;
+}
+
+.nr-header{
+  width: 5%;
+}
+
+.status-header{
+  width: 15%;
+}
+
+.movie-header{
   width: 20%;
 }
+
+/*.option-width{
+  width: 150px;
+}*/
 
 .gray-row {
   background-color: #F6F8F8 !important;

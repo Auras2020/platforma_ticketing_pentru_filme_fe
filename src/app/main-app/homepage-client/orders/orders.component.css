@@ -1,0 +1,30 @@
+.top-buttons-default {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  font-size: large;
+  font-weight: bold;
+  color: rgb(130,142,147);
+  height: 100%;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  border-radius: 0;
+}
+
+.top-buttons-default:hover {
+  margin-bottom: -1px;
+  border-bottom: 3px solid rgb(221,77,37);
+}
+
+.top-buttons-selected {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  font-size: large;
+  font-weight: bold;
+  color: rgb(27,50,84);
+  height: 100%;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  border-radius: 0;
+  margin-bottom: -2px;
+  border-bottom: 4px solid rgb(221,77,37);
+}
