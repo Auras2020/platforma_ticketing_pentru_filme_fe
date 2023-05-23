@@ -13,6 +13,7 @@ export class TheatreDetailsComponent implements OnInit{
   theatre?: Theatre;
   daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   datesOfWeek: Date[] = [];
+  curDate?: Date;
   currentDate = new Date();
   auxDate = new Date();
   index = 0;
@@ -123,6 +124,7 @@ export class TheatreDetailsComponent implements OnInit{
 
   onButtonClick(index: number) {
     this.getAllByFilters();
+    this.curDate = this.datesOfWeek[index];
     let theatreDay = {
       theatreId: this.id,
       day: this.datesOfWeek[index],
@@ -154,7 +156,7 @@ export class TheatreDetailsComponent implements OnInit{
     const shVenue = {
       theatreId: this.theatre?.id!,
       movieId: movie?.id,
-      day: this.currentDate!,
+      day: this.curDate!,
       time: time
     }
     this.showTimingsService.findShowTimingByShowTimingDetails(shVenue).subscribe((showTiming) => {

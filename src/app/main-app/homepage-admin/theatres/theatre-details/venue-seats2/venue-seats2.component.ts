@@ -2,7 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Venue, VenuesService} from "../../../venues/venues.service";
 import {ShowTimings, ShowTimingsService} from "../../../show-timings/show-timings.service";
-import {VenueSeats1Service} from "../../../../homepage-client/program/venue-seats1/venue-seats1.service";
+import {
+  SeatTicketStatusDto,
+  VenueSeats1Service
+} from "../../../../homepage-client/program/venue-seats1/venue-seats1.service";
 
 @Component({
   selector: 'app-venue-seats2',
@@ -16,7 +19,7 @@ export class VenueSeats2Component implements OnInit{
   array1: number[] = [];
   array2: number[] = [];
   theatreId: number = -1;
-  bookedSeats: string[] = [];
+  bookedSeatsAndTicketsStatus?: SeatTicketStatusDto;
   originalColor: any[] = [];
   originalBackgroundColor: any[] = [];
 
@@ -46,8 +49,8 @@ export class VenueSeats2Component implements OnInit{
   }
 
   initializeSeats(id: any): void{
-    this.venueSeats1Service.findSeatsByShowTiming(id).subscribe((seats) => {
-      this.bookedSeats = seats;
+    this.venueSeats1Service.findSeatsAndTicketsStatusByShowTiming(id).subscribe((seats) => {
+      this.bookedSeatsAndTicketsStatus = seats;
     })
   }
 
@@ -56,9 +59,10 @@ export class VenueSeats2Component implements OnInit{
     this.originalBackgroundColor = ['green'];
   }
 
-  isSeatBooked(i: number, j: number): boolean{
+  isSeatBooked(i: number, j: number): boolean | undefined{
     let i1 = i + 1;
     let j1 = j + 1;
-    return this.bookedSeats.includes(JSON.stringify({i1, j1}));
+    return this.bookedSeatsAndTicketsStatus?.seats.includes(JSON.stringify({i1, j1}))
+      && !this.bookedSeatsAndTicketsStatus?.ticketsStatus.includes('cancelled');
   }
 }

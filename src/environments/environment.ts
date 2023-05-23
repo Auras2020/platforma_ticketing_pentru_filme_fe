@@ -48,7 +48,8 @@ export const environment = {
     ordersPage: "orders/page",
     ordersPageFilter: "orders/page/filter",
     ordersStatus: "orders/status",
-    ordersDetails: "orders/details"
+    ordersTicketsDetails: "orders/tickets-details",
+    ordersProductsDetails: "orders/products-details"
   }
 };
 

@@ -20,7 +20,7 @@
     Are you sure you want to change status of products from {{this.currentStatus}} to {{this.newStatus}}?
   </div>
   <div class="dialog-content" *ngIf="this.newStatus === 'cancelled'">
-    Are you sure you want to change status of products from {{this.currentStatus}} to {{this.newStatus}}? Once you cancel products you will not be able to undo this operation.
+    Are you sure you want to change status of products from {{this.currentStatus}} to {{this.newStatus}}? Once you cancel products you will not be able to change status of products.
   </div>
   <div mat-dialog-actions align="end">
     <button mat-button mat-dialog-close class="cancel-button">Cancel</button>

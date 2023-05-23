@@ -8,6 +8,8 @@ import {User, UserService} from "../../../homepage-admin/user/user.service";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {BookedProductsStatusComponent} from "./booked-products-status/booked-products-status.component";
 import {BookedProductsDetailsComponent} from "./booked-products-details/booked-products-details.component";
+import {TicketsStatusComponent} from "./tickets-status/tickets-status.component";
+import {TicketsDetailsComponent} from "./tickets-details/tickets-details.component";
 
 @Component({
   selector: 'app-booked-products',
@@ -70,7 +72,6 @@ export class BookedProductsComponent implements OnInit{
   handleSuccess(orderPage: OrderPage){
     this.paginator!.length = orderPage.totalItems
     this.dataSource.data = orderPage.orders
-    console.log(orderPage.orders);
   }
 
   handleError(){
@@ -191,10 +192,23 @@ export class BookedProductsComponent implements OnInit{
         this.compareHourAndMinute(row.showTiming?.time!, time));
   }
 
-  public viewBookedProductsDetails(product: any): void{
+  public viewTicketsDetails(order: any): void{
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
-      product: product
+      order: order
+    };
+
+    dialogConfig.autoFocus = false
+    dialogConfig.disableClose = true
+    dialogConfig.height = '70%'
+    dialogConfig.width = '40%'
+    this.dialog.open(TicketsDetailsComponent, dialogConfig);
+  }
+
+  public viewBookedProductsDetails(order: any): void{
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      order: order
     };
 
     dialogConfig.autoFocus = false
@@ -204,12 +218,31 @@ export class BookedProductsComponent implements OnInit{
     this.dialog.open(BookedProductsDetailsComponent, dialogConfig);
   }
 
-  public editStatus(event: any, product: any): void{
+  public editTicketsStatus(event: any, order: any): void{
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
-      currentStatus: product.status,
+      currentStatus: order.ticketsStatus,
       newStatus: event.value,
-      product: product
+      order: order
+    };
+
+    dialogConfig.autoFocus = false
+    dialogConfig.disableClose = true
+
+    const dialogRef = this.dialog.open(TicketsStatusComponent, dialogConfig)
+
+    dialogRef.afterClosed().subscribe(() => {
+        this.getAllBookedProducts();
+      }
+    );
+  }
+
+  public editProductsStatus(event: any, order: any): void{
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      currentStatus: order.productsStatus,
+      newStatus: event.value,
+      order: order
     };
 
     dialogConfig.autoFocus = false

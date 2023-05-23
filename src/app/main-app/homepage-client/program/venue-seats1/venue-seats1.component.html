@@ -210,15 +210,30 @@
       </div>
       <div class="empty-space"></div>
     </div>
-    <div class="total-count">
-      <label class="total-count-style">
-        Total number of selected products is: {{calculateSumOfProducts()}}
-      </label>
-    </div>
-    <div class="total-price">
-      <label class="total-price-style">
-        Price of all selected products is: {{calculatePriceOfProducts()}} RON
-      </label>
+    <div class="display-products-footer">
+      <div class="display-numbers">
+        <div class="total-count">
+          <label class="total-count-style">
+            Total number of selected products is: {{calculateSumOfProducts()}}
+          </label>
+        </div>
+        <div class="total-price">
+          <label class="total-price-style">
+            Price of all selected products is: {{calculatePriceOfProducts()}} RON
+          </label>
+        </div>
+      </div>
+      <div class="empty-div"></div>
+      <div class="products-buttons">
+        <div class="reserve-form">
+          <label class="product-button-style">Reserve</label>
+          <mat-checkbox [(ngModel)]="checkbox1Selected" (change)="checkboxChanged(1)"></mat-checkbox>
+        </div>
+        <div>
+          <label class="product-button-style">Buy</label>
+          <mat-checkbox [(ngModel)]="checkbox2Selected" (change)="checkboxChanged(2)"></mat-checkbox>
+        </div>
+      </div>
     </div>
   </mat-card>
 

@@ -564,3 +564,29 @@
   font-weight: bold;
   color: #213555;
 }
+
+.display-products-footer{
+  justify-content: space-between;
+  display: flex;
+}
+
+.display-numbers{
+  align-self: flex-start;
+  flex-direction: column;
+}
+
+.products-buttons{
+  align-self: flex-start;
+  display: inline-flex;
+  margin-right: 24px;
+}
+
+.product-button-style{
+  font-size: 16px;
+  font-weight: bold;
+  color: #213555;
+}
+
+.reserve-form{
+  margin-right: 10px;
+}

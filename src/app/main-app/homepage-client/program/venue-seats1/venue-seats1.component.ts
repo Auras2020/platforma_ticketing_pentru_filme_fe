@@ -4,7 +4,7 @@ import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {ReservationComponent} from "./reservation/reservation.component";
 import {BuyTicketsComponent} from "./buy-tickets/buy-tickets.component";
 import {ShowTimings, ShowTimingsService} from "../../../homepage-admin/show-timings/show-timings.service";
-import {VenueSeats1Service} from "./venue-seats1.service";
+import {SeatTicketStatusDto, VenueSeats1Service} from "./venue-seats1.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {FeedbackToolbarService} from "../../../../feedback-toolbar/feedback-toolbar.service";
 import {User, UserService} from "../../../homepage-admin/user/user.service";
@@ -27,7 +27,7 @@ export class VenueSeats1Component implements OnInit{
   array1: number[] = [];
   array2: number[] = [];
   selectedSeats: any[] = [];
-  bookedSeats: string[] = [];
+  bookedSeatsAndTicketsStatus?: SeatTicketStatusDto;
 
   originalColor: any[] = [];
   originalBackgroundColor: any[] = [];
@@ -40,6 +40,9 @@ export class VenueSeats1Component implements OnInit{
   nrTotal: number = 0;
   k = this.nrTotal;
   user?: User;
+
+  checkbox1Selected = false;
+  checkbox2Selected = true;
 
   filters: ProductFilter = {
     searchString: ''
@@ -127,15 +130,16 @@ export class VenueSeats1Component implements OnInit{
   }
 
   initializeSeats(id: any): void{
-    this.venueSeats1Service.findSeatsByShowTiming(id).subscribe((seats) => {
-      this.bookedSeats = seats;
+    this.venueSeats1Service.findSeatsAndTicketsStatusByShowTiming(id).subscribe((seats) => {
+      this.bookedSeatsAndTicketsStatus = seats;
     })
   }
 
-  isSeatBooked(i: number, j: number): boolean{
+  isSeatBooked(i: number, j: number): boolean | undefined{
     let i1 = i + 1;
     let j1 = j + 1;
-    return this.bookedSeats.includes(JSON.stringify({i1, j1}));
+    return this.bookedSeatsAndTicketsStatus?.seats.includes(JSON.stringify({i1, j1}))
+      && !this.bookedSeatsAndTicketsStatus?.ticketsStatus.includes('cancelled');
   }
 
   toggleBackgroundColor(i: number, j: number): void {
@@ -392,4 +396,18 @@ export class VenueSeats1Component implements OnInit{
     return prodDetails;
   }
 
+  checkboxChanged(checkboxNumber: number) {
+    console.log(checkboxNumber);
+    if (checkboxNumber === 1) {
+      this.checkbox1Selected = !this.checkbox1Selected;
+      //if(this.checkbox2Selected){
+        this.checkbox2Selected = false;
+      //}
+    } else if (checkboxNumber === 2) {
+      this.checkbox2Selected = !this.checkbox2Selected;
+      //if(this.checkbox1Selected){
+        this.checkbox1Selected = false;
+      //}
+    }
+  }
 }

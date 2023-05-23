@@ -47,6 +47,13 @@ export interface OrderPage {
   totalItems: number;
 }
 
+export interface TicketDetails {
+  id: number;
+  venueNumber: number;
+  price: number;
+  seat: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -56,7 +63,8 @@ export class BookedProductsService {
   ordersPage = environment.apiEndpoints.ordersPage
   ordersPageFilter = environment.apiEndpoints.ordersPageFilter
   ordersStatus = environment.apiEndpoints.ordersStatus
-  ordersDetails =  environment.apiEndpoints.ordersDetails
+  ordersTicketsDetails =  environment.apiEndpoints.ordersTicketsDetails
+  ordersProductsDetails =  environment.apiEndpoints.ordersProductsDetails
 
   constructor(private http: HttpClient) { }
 
@@ -68,11 +76,15 @@ export class BookedProductsService {
     return this.http.post<OrderPage>(this.url + this.ordersPageFilter, orderFilteredPage);
   }
 
-  changeBookedProductsStatus(order: Order): any{
+  changeOrderStatus(order: Order): any{
     return this.http.post(this.url + this.ordersStatus, order);
   }
 
+  getTicketsDetails(order: Order): Observable<TicketDetails[]>{
+    return this.http.post<TicketDetails[]>(this.url + this.ordersTicketsDetails, order);
+  }
+
   getBookedProductsDetails(order: Order): Observable<ProductDetails[]>{
-    return this.http.post<ProductDetails[]>(this.url + this.ordersDetails, order);
+    return this.http.post<ProductDetails[]>(this.url + this.ordersProductsDetails, order);
   }
 }

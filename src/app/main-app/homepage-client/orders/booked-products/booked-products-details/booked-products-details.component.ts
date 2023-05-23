@@ -10,19 +10,19 @@ import {ProductDetails} from "../../../../homepage-admin/products/products.servi
 })
 export class BookedProductsDetailsComponent implements OnInit{
 
-  product?: Order;
+  order?: Order;
   products: ProductDetails[] = [];
 
   constructor(private bookedProductsService: BookedProductsService,
               private dialogRef: MatDialogRef<BookedProductsDetailsComponent>,
               @Inject(MAT_DIALOG_DATA) data: any){
     if(data) {
-      this.product = data.product;
+      this.order = data.order;
     }
   }
 
   ngOnInit(): void {
-    this.bookedProductsService.getBookedProductsDetails(this.product!).subscribe((prods) => {
+    this.bookedProductsService.getBookedProductsDetails(this.order!).subscribe((prods) => {
       this.products = prods;
     })
   }

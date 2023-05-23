@@ -124,13 +124,13 @@
               <span class="nr-centered">{{ row.ticketsCount }}</span>
               <button
                 mat-icon-button
-                [matTooltip]="'View products'"
+                [matTooltip]="'View tickets'"
                 aria-label="Products"
                 matTooltipPosition="before"
-                (click)="viewBookedProductsDetails(row)"
+                (click)="viewTicketsDetails(row)"
               >
                 <mat-icon class="edit-button">
-                  fastfood
+                  theaters
                 </mat-icon>
               </button>
             </div>
@@ -163,7 +163,7 @@
           <td mat-cell *matCellDef="let row" class="status-column" [style.color] = "row.ticketsStatus === 'cancelled' || compareWithCurrentDate(row) ? 'gray' : '#213555'">
             <div class="align-status" *ngIf="row.ticketsStatus">
               <mat-icon class="material-icons-outlined" [ngStyle]="{'color': getStatusColor(row.ticketsStatus)}" >{{getStatusIcon()}}</mat-icon>
-              <mat-select [disabled] = "row.ticketsStatus === 'cancelled' || compareWithCurrentDate(row)" (selectionChange)="editStatus($event, row)" [ngModel]="row.ticketsStatus" [ngStyle]="{'width': '85%'}" class="status-align">
+              <mat-select [disabled] = "row.ticketsStatus === 'cancelled' || compareWithCurrentDate(row)" (selectionChange)="editTicketsStatus($event, row)" [ngModel]="row.ticketsStatus" [ngStyle]="{'width': '85%'}" class="status-align">
                 <mat-option *ngFor="let status of statuses" [value]="status" class="option-width">
                   {{status}}
                 </mat-option>
@@ -177,7 +177,7 @@
           <td mat-cell *matCellDef="let row" class="status-column" [style.color] = "row.ticketsStatus === 'cancelled' || compareWithCurrentDate(row) ? 'gray' : '#213555'">
             <div class="align-status" *ngIf="row.productsStatus">
               <mat-icon class="material-icons-outlined" [ngStyle]="{'color': getStatusColor(row.productsStatus)}" >{{getStatusIcon()}}</mat-icon>
-              <mat-select [disabled] = "row.productsStatus === 'cancelled' || compareWithCurrentDate(row)" (selectionChange)="editStatus($event, row)" [ngModel]="row.productsStatus" [ngStyle]="{'width': '85%'}" class="status-align">
+              <mat-select [disabled] = "row.productsStatus === 'cancelled' || compareWithCurrentDate(row)" (selectionChange)="editProductsStatus($event, row)" [ngModel]="row.productsStatus" [ngStyle]="{'width': '85%'}" class="status-align">
                 <mat-option *ngFor="let status of statuses" [value]="status">
                   {{status}}
                 </mat-option>

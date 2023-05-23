@@ -15,6 +15,11 @@ export interface TicketsProducts {
   productStatus: string;
 }
 
+export interface SeatTicketStatusDto {
+  seats: string[];
+  ticketsStatus: string[];
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -29,7 +34,7 @@ export class VenueSeats1Service {
     return this.http.put<any>(this.url + this.orders, ticketsProducts);
   }
 
-  findSeatsByShowTiming(id: string): Observable<string[]>{
-    return this.http.get<string[]>(this.url + this.orders + id);
+  findSeatsAndTicketsStatusByShowTiming(id: string): Observable<SeatTicketStatusDto>{
+    return this.http.get<SeatTicketStatusDto>(this.url + this.orders + id);
   }
 }

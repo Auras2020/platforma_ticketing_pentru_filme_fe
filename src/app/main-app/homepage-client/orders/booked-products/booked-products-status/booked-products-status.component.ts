@@ -11,7 +11,7 @@ export class BookedProductsStatusComponent {
 
   currentStatus?: string;
   newStatus?: string;
-  product?: Order;
+  order?: Order;
 
   constructor(private bookedProductsService: BookedProductsService,
               private dialogRef: MatDialogRef<BookedProductsStatusComponent>,
@@ -19,16 +19,16 @@ export class BookedProductsStatusComponent {
     if(data) {
       this.currentStatus = data.currentStatus;
       this.newStatus = data.newStatus;
-      this.product = data.product;
+      this.order = data.order;
     }
   }
 
   changeProductsStatus() {
-    let prod = {
-      ...this.product,
-      status: this.newStatus
+    let order = {
+      ...this.order,
+      productsStatus: this.newStatus
     }
-    this.bookedProductsService.changeBookedProductsStatus(prod).subscribe(() => {
+    this.bookedProductsService.changeOrderStatus(order).subscribe(() => {
       this.dialogRef.close(true);
     });
   }
