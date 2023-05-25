@@ -1,1 +1,242 @@
-<p>orders works!</p>
+<div class="page-content">
+  <mat-card class="filter-card">
+    <div class="line-style">
+      <div class="header-style">
+        <div class="title-and-filter-icon">
+          <label class="title-style">
+            Orders
+          </label>
+
+          <mat-icon mat-list-icon class="filter-list">
+            filter_list
+            <div class="notification-bubble" [ngClass]="{notification: filterActive()}">
+            </div>
+          </mat-icon>
+        </div>
+
+        <div class="search-box">
+          <span class="fa fa-search"><mat-icon>search</mat-icon></span>
+          <input (keyup)="getAllOrders()"
+                 [(ngModel)]="searchString"
+                 matInput
+                 placeholder="Search...">
+          <span *ngIf="searchString" class="fa fa-search-close" (click)="searchString = '';getAllOrders()"><mat-icon>close</mat-icon></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="filters-row">
+      <div class="filters" fxFlex="80">
+        <div class="forms-display">
+          <div>
+            <div class="input-label">Theatre location</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <input matInput [(ngModel)]="filters.theatreLocation" [ngModelOptions]="{updateOn:'change'}"
+                     (ngModelChange)="getAllOrders()" class="form-input">
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="input-label">Theatre name</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <input matInput [(ngModel)]="filters.theatreName" [ngModelOptions]="{updateOn:'change'}"
+                     (ngModelChange)="getAllOrders()" class="form-input">
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="input-label">Movie name</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <input matInput [(ngModel)]="filters.movieName" [ngModelOptions]="{updateOn:'change'}"
+                     (ngModelChange)="getAllOrders()" class="form-input">
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="input-label">Product name</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <input matInput [(ngModel)]="filters.productName" [ngModelOptions]="{updateOn:'change'}"
+                     (ngModelChange)="getAllOrders()" class="form-input">
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="input-label">Ticket status</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <mat-select
+                [(ngModel)]="filters.ticketStatus"
+                (selectionChange)="getAllOrders()"
+                class="form-input"
+              >
+                <mat-option *ngFor="let status of statuses" [value]="status">
+                  {{ status }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="input-label">Product status</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <mat-select
+                [(ngModel)]="filters.productStatus"
+                (selectionChange)="getAllOrders()"
+                class="form-input"
+              >
+                <mat-option *ngFor="let status of statuses" [value]="status">
+                  {{ status }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="forms-display">
+          <div>
+            <div class="input-label">Day</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <input matInput [(ngModel)]="filters.day" [ngModelOptions]="{updateOn:'change'}"
+                     (ngModelChange)="getAllOrders()" [matDatepicker]="daypicker"/>
+              <mat-datepicker-toggle matSuffix [for]="daypicker"></mat-datepicker-toggle>
+              <mat-datepicker #daypicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="empty-div"></div>
+
+      <div class="reset-div">
+        <button mat-button class="reset-button" (click)="resetFilters()">Reset filters</button>
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card class="table-card">
+    <div class="container" >
+
+      <mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="bookedTickets">
+          <th mat-header-cell *matHeaderCellDef class="nr-header"><span>Tickets</span></th>
+          <td mat-cell *matCellDef="let row" class="nr-column" [style.color] = "row.ticketsStatus === 'cancelled' || compareWithCurrentDate(row) ? 'gray' : '#213555'"
+          >
+            <div class="align-number">
+              <span class="nr-centered">{{ row.ticketsCount }}</span>
+              <button
+                mat-icon-button
+                [matTooltip]="'View tickets'"
+                aria-label="Products"
+                matTooltipPosition="before"
+                (click)="viewTicketsDetails(row)"
+              >
+                <mat-icon class="edit-button">
+                  theaters
+                </mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="bookedProducts">
+          <th mat-header-cell *matHeaderCellDef class="nr-header"><span>Products</span></th>
+          <td mat-cell *matCellDef="let row" class="nr-column" [style.color] = "row.ticketsStatus === 'cancelled' || compareWithCurrentDate(row) ? 'gray' : '#213555'"
+          >
+            <div class="align-number" *ngIf="row.productsCount">
+              <span class="nr-centered">{{ row.productsCount }}</span>
+              <button
+                mat-icon-button
+                [matTooltip]="'View products'"
+                aria-label="Products"
+                matTooltipPosition="before"
+                (click)="viewBookedProductsDetails(row)"
+              >
+                <mat-icon class="edit-button">
+                  fastfood
+                </mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="ticketsStatus">
+          <th mat-header-cell *matHeaderCellDef class="status-header"><span>Tickets status</span></th>
+          <td mat-cell *matCellDef="let row" class="status-column" [style.color] = "row.ticketsStatus === 'cancelled' || compareWithCurrentDate(row) ? 'gray' : '#213555'">
+            <div class="align-status" *ngIf="row.ticketsStatus">
+              <mat-icon class="material-icons-outlined" [ngStyle]="{'color': getStatusColor(row.ticketsStatus)}" >{{getStatusIcon()}}</mat-icon>
+              <mat-select [disabled] = "row.ticketsStatus === 'cancelled' || compareWithCurrentDate(row)" (selectionChange)="editTicketsStatus($event, row)" [ngModel]="row.ticketsStatus" [ngStyle]="{'width': '85%'}" class="status-align">
+                <mat-option *ngFor="let status of statuses" [value]="status" class="option-width">
+                  {{status}}
+                </mat-option>
+              </mat-select>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="productsStatus">
+          <th mat-header-cell *matHeaderCellDef class="status-header"><span>Products status</span></th>
+          <td mat-cell *matCellDef="let row" class="status-column" [style.color] = "compareWithCurrentDate(row) ? 'gray' : '#213555'">
+            <div class="align-status" *ngIf="row.productsStatus">
+              <mat-icon class="material-icons-outlined" [ngStyle]="{'color': getStatusColor(row.productsStatus)}" >{{getStatusIcon()}}</mat-icon>
+              <mat-select [disabled] = "row.productsStatus === 'cancelled' || compareWithCurrentDate(row)" (selectionChange)="editProductsStatus($event, row)" [ngModel]="row.productsStatus" [ngStyle]="{'width': '85%'}" class="status-align">
+                <mat-option *ngFor="let status of statuses" [value]="status">
+                  {{status}}
+                </mat-option>
+              </mat-select>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="theatre">
+          <th mat-header-cell *matHeaderCellDef class="data-header"><span>Theatre</span></th>
+          <td mat-cell *matCellDef="let row" class="name-column" [style.color] = "row.ticketsStatus === 'cancelled' || compareWithCurrentDate(row) ? 'gray' : '#213555'"
+          ><span class="ellipsis">{{ row.showTiming?.theatre?.name }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="location">
+          <th mat-header-cell *matHeaderCellDef class="data-header"><span>Location</span></th>
+          <td mat-cell *matCellDef="let row" class="name-column" [style.color] = "row.ticketsStatus === 'cancelled' || compareWithCurrentDate(row) ? 'gray' : '#213555'"
+          ><span class="ellipsis">{{ row.showTiming?.theatre?.location }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="movie">
+          <th mat-header-cell *matHeaderCellDef class="movie-header"><span>Movie</span></th>
+          <td mat-cell *matCellDef="let row" class="movie-column" [style.color] = "row.ticketsStatus === 'cancelled' || compareWithCurrentDate(row) ? 'gray' : '#213555'"
+          ><span class="ellipsis">{{ row.showTiming?.movie?.name }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="day">
+          <th mat-header-cell *matHeaderCellDef class="data-header"><span>Day</span></th>
+          <td mat-cell *matCellDef="let row" class="name-column" [style.color] = "row.ticketsStatus === 'cancelled' || compareWithCurrentDate(row) ? 'gray' : '#213555'">
+            <b><label>{{row.showTiming?.day | date:'dd'}} </label></b>
+            <label class="day-2">{{row.showTiming?.day | date:'LLL' | lowercase}} </label>
+            <b><label>{{row.showTiming?.day | date:'yyyy'}}</label></b>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="time">
+          <th mat-header-cell *matHeaderCellDef class="data-header"><span>Time</span></th>
+          <td mat-cell *matCellDef="let row" class="name-column" [style.color] = "row.ticketsStatus === 'cancelled' || compareWithCurrentDate(row) ? 'gray' : '#213555'"
+          ><span class="ellipsis">{{ row.showTiming?.time }}</span>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header"></tr>
+        <tr mat-row
+            *matRowDef="let odd = odd; columns: displayedColumns"
+            [ngClass]="{ 'gray-row': odd }"
+            class="row"
+        ></tr>
+      </mat-table>
+      <mat-paginator [pageSizeOptions]="pageSizeOptions"
+                     [pageSize]="pageSize"
+                     (page)="pageChanged($event)"
+                     showFirstLastButtons>
+      </mat-paginator>
+    </div>
+
+  </mat-card>
+
+</div>

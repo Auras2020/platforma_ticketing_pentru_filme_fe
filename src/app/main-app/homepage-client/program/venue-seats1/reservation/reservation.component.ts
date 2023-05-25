@@ -17,6 +17,7 @@ export class ReservationComponent {
   seats?: string[];
   productDetails?: ProductDetails[];
   user?: User;
+  productsStatus?: string;
 
   constructor(private dialogRef: MatDialogRef<ReservationComponent>,
               @Inject(MAT_DIALOG_DATA) data: any,
@@ -28,6 +29,7 @@ export class ReservationComponent {
       this.seats = data.seats;
       this.productDetails = data.productDetails;
       this.user = data.user;
+      this.productsStatus = data.productsStatus;
     }
   }
 
@@ -38,7 +40,7 @@ export class ReservationComponent {
       productDetails: this.productDetails!,
       user: this.user,
       ticketStatus: 'reserved',
-      productStatus: 'reserved'
+      productStatus: this.productsStatus
     }
 
     for(let p of this.productDetails!){

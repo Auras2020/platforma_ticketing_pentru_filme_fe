@@ -78,7 +78,6 @@ export class ProductsService {
   }
 
   createProduct(image: any, product: any): Observable<Product> {
-    console.log(product);
     const formData = new FormData();
     if (image === null) {
       formData.append('image', new Blob(), '');

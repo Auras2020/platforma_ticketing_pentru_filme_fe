@@ -14,6 +14,8 @@ import {
   SearchedTheatre,
   SearchedTheatreProduct
 } from "../../../homepage-admin/products/products.service";
+import {OrdersService} from "../../orders/orders.service";
+import * as moment from "moment/moment";
 
 @Component({
   selector: 'app-venue-seats1',
@@ -27,7 +29,7 @@ export class VenueSeats1Component implements OnInit{
   array1: number[] = [];
   array2: number[] = [];
   selectedSeats: any[] = [];
-  bookedSeatsAndTicketsStatus?: SeatTicketStatusDto;
+  bookedSeatsAndTicketsStatus?: SeatTicketStatusDto[];
 
   originalColor: any[] = [];
   originalBackgroundColor: any[] = [];
@@ -39,10 +41,11 @@ export class VenueSeats1Component implements OnInit{
   nrChilds: number = 0;
   nrTotal: number = 0;
   k = this.nrTotal;
-  user?: User;
+  user?: any;
 
   checkbox1Selected = false;
   checkbox2Selected = true;
+  checkBoxSelected = true;
 
   filters: ProductFilter = {
     searchString: ''
@@ -77,7 +80,8 @@ export class VenueSeats1Component implements OnInit{
               private venueSeats1Service: VenueSeats1Service,
               private feedbackToolbarService: FeedbackToolbarService,
               private userService: UserService,
-              private productsService: ProductsService) {
+              private productsService: ProductsService,
+              private ordersService: OrdersService) {
   }
 
   ngOnInit(): void {
@@ -138,8 +142,12 @@ export class VenueSeats1Component implements OnInit{
   isSeatBooked(i: number, j: number): boolean | undefined{
     let i1 = i + 1;
     let j1 = j + 1;
-    return this.bookedSeatsAndTicketsStatus?.seats.includes(JSON.stringify({i1, j1}))
-      && !this.bookedSeatsAndTicketsStatus?.ticketsStatus.includes('cancelled');
+    for(let order of this.bookedSeatsAndTicketsStatus!){
+      if(order?.seats === JSON.stringify({i1, j1}) && order?.ticketsStatus !== 'cancelled'){
+        return true;
+      }
+    }
+    return false;
   }
 
   toggleBackgroundColor(i: number, j: number): void {
@@ -223,44 +231,80 @@ export class VenueSeats1Component implements OnInit{
     return this.selectedSeats.length !== this.nrTotal || this.nrTotal === 0;
   }
 
-  openReservationDialog() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = false
-    dialogConfig.disableClose = true
-    dialogConfig.data = {
-      showTiming: this.showTiming,
-      seats: this.selectedSeats,
-      productDetails: this.getProductDetails(),
-      user: this.user
-    };
-    const dialogRef = this.dialog.open(ReservationComponent, dialogConfig)
-    dialogRef.afterClosed().subscribe((result) => {
-        if (result) {
-          this.selectedSeats = []
-          setTimeout(() => {this.ngOnInit()}, 1000)
-        }
+  getProductsStatus(): string {
+    let status = "";
+    if(this.checkBoxSelected){
+      if(this.checkbox1Selected){
+        status = "reserved";
+      } else if(this.checkbox2Selected) {
+        status = "bought";
       }
-    );
+    }
+    return status;
+  }
+
+  openReservationDialog() {
+    let userShowTiming = {
+      userId: this.user.id,
+      showTimingId: this.showTiming?.id!
+    }
+    this.ordersService.getLastOrderCreatedByUserAndShowTiming(userShowTiming).subscribe((date) => {
+      if(date && Math.abs(moment(date).diff(moment(new Date()), 'minutes')) === 0){
+        this.feedbackToolbarService.openSnackBarWithErrorMessage("Wait a minute until you can book another tickets and/or products!");
+        return;
+      }
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.autoFocus = false
+      dialogConfig.disableClose = true
+      dialogConfig.data = {
+        showTiming: this.showTiming,
+        seats: this.selectedSeats,
+        productDetails: this.getProductsStatus() === "" ? [] : this.getProductDetails(),
+        user: this.user,
+        productsStatus: this.getProductsStatus()
+      };
+      const dialogRef = this.dialog.open(ReservationComponent, dialogConfig)
+      dialogRef.afterClosed().subscribe((result) => {
+          if (result) {
+            this.selectedSeats = []
+            setTimeout(() => {this.ngOnInit()}, 1000)
+          }
+        }
+      );
+    })
   }
 
   openBuyTicketsDialog() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = false
-    dialogConfig.disableClose = true
-    dialogConfig.data = {
-      showTiming: this.showTiming,
-      seats: this.selectedSeats,
-      productDetails: this.getProductDetails(),
-      user: this.user
-    };
-    const dialogRef = this.dialog.open(BuyTicketsComponent, dialogConfig)
-    dialogRef.afterClosed().subscribe((result) => {
-        if(result){
-          this.selectedSeats = []
-          setTimeout(() => { this.ngOnInit() }, 1000)
-        }
+    let userShowTiming = {
+      userId: this.user.id,
+      showTimingId: this.showTiming?.id!
+    }
+    this.ordersService.getLastOrderCreatedByUserAndShowTiming(userShowTiming).subscribe((date) => {
+      console.log(date);
+      console.log(Math.abs(moment(date).diff(moment(new Date()), 'minutes')));
+      if(date&& Math.abs(moment(date).diff(moment(new Date()), 'minutes')) === 0){
+        this.feedbackToolbarService.openSnackBarWithErrorMessage("Wait a minute until you can book another tickets and/or products!");
+        return;
       }
-    );
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.autoFocus = false
+      dialogConfig.disableClose = true
+      dialogConfig.data = {
+        showTiming: this.showTiming,
+        seats: this.selectedSeats,
+        productDetails: this.getProductsStatus() === "" ? [] : this.getProductDetails(),
+        user: this.user,
+        productsStatus: this.getProductsStatus()
+      };
+      const dialogRef = this.dialog.open(BuyTicketsComponent, dialogConfig)
+      dialogRef.afterClosed().subscribe((result) => {
+          if(result){
+            this.selectedSeats = []
+            setTimeout(() => { this.ngOnInit() }, 1000)
+          }
+        }
+      );
+    })
   }
 
   getImageUrl(poster: any): any{
@@ -396,18 +440,14 @@ export class VenueSeats1Component implements OnInit{
     return prodDetails;
   }
 
-  checkboxChanged(checkboxNumber: number) {
-    console.log(checkboxNumber);
+  checkboxChanged(checkboxNumber: number, event: any) {
+    this.checkBoxSelected = event.checked;
     if (checkboxNumber === 1) {
-      this.checkbox1Selected = !this.checkbox1Selected;
-      //if(this.checkbox2Selected){
-        this.checkbox2Selected = false;
-      //}
+      this.checkbox1Selected = true;
+      this.checkbox2Selected = false;
     } else if (checkboxNumber === 2) {
-      this.checkbox2Selected = !this.checkbox2Selected;
-      //if(this.checkbox1Selected){
-        this.checkbox1Selected = false;
-      //}
+      this.checkbox2Selected = true;
+      this.checkbox1Selected = false;
     }
   }
 }

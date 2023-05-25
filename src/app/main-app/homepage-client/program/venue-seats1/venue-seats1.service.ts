@@ -16,8 +16,8 @@ export interface TicketsProducts {
 }
 
 export interface SeatTicketStatusDto {
-  seats: string[];
-  ticketsStatus: string[];
+  seats: string;
+  ticketsStatus: string;
 }
 
 @Injectable({
@@ -34,7 +34,7 @@ export class VenueSeats1Service {
     return this.http.put<any>(this.url + this.orders, ticketsProducts);
   }
 
-  findSeatsAndTicketsStatusByShowTiming(id: string): Observable<SeatTicketStatusDto>{
-    return this.http.get<SeatTicketStatusDto>(this.url + this.orders + id);
+  findSeatsAndTicketsStatusByShowTiming(id: string): Observable<SeatTicketStatusDto[]>{
+    return this.http.get<SeatTicketStatusDto[]>(this.url + this.orders + id);
   }
 }

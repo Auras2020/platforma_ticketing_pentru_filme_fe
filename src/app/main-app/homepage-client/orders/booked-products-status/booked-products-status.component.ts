@@ -1,6 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {BookedProductsService, Order} from "../booked-products.service";
+import {FeedbackToolbarService} from "../../../../feedback-toolbar/feedback-toolbar.service";
+import {Order, OrdersService} from "../orders.service";
 
 @Component({
   selector: 'app-booked-products-status',
@@ -13,9 +14,10 @@ export class BookedProductsStatusComponent {
   newStatus?: string;
   order?: Order;
 
-  constructor(private bookedProductsService: BookedProductsService,
+  constructor(private ordersService: OrdersService,
               private dialogRef: MatDialogRef<BookedProductsStatusComponent>,
-              @Inject(MAT_DIALOG_DATA) data: any){
+              @Inject(MAT_DIALOG_DATA) data: any,
+              private feedbackToolbarService: FeedbackToolbarService){
     if(data) {
       this.currentStatus = data.currentStatus;
       this.newStatus = data.newStatus;
@@ -28,8 +30,9 @@ export class BookedProductsStatusComponent {
       ...this.order,
       productsStatus: this.newStatus
     }
-    this.bookedProductsService.changeOrderStatus(order).subscribe(() => {
+    this.ordersService.changeOrderStatus(order).subscribe(() => {
       this.dialogRef.close(true);
+      this.feedbackToolbarService.openSnackBarWithSuccessMessage("Booked products status was changed successfully");
     });
   }
 }

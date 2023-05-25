@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {BookedProductsService, Order} from "../booked-products.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {ProductDetails} from "../../../../homepage-admin/products/products.service";
+import {ProductDetails} from "../../../homepage-admin/products/products.service";
+import {Order, OrdersService} from "../orders.service";
 
 @Component({
   selector: 'app-booked-products-details',
@@ -13,7 +13,7 @@ export class BookedProductsDetailsComponent implements OnInit{
   order?: Order;
   products: ProductDetails[] = [];
 
-  constructor(private bookedProductsService: BookedProductsService,
+  constructor(private ordersService: OrdersService,
               private dialogRef: MatDialogRef<BookedProductsDetailsComponent>,
               @Inject(MAT_DIALOG_DATA) data: any){
     if(data) {
@@ -22,7 +22,7 @@ export class BookedProductsDetailsComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.bookedProductsService.getBookedProductsDetails(this.order!).subscribe((prods) => {
+    this.ordersService.getBookedProductsDetails(this.order!).subscribe((prods) => {
       this.products = prods;
     })
   }

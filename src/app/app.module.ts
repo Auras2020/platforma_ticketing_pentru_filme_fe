@@ -72,14 +72,11 @@ import { ProductsComponent } from './main-app/homepage-admin/products/products.c
 import { AddProductComponent } from './main-app/homepage-admin/products/add-product/add-product.component';
 import { DeleteProductComponent } from './main-app/homepage-admin/products/delete-product/delete-product.component';
 import { VenueSeats2Component } from './main-app/homepage-admin/theatres/theatre-details/venue-seats2/venue-seats2.component';
-import { BookedProductsComponent } from './main-app/homepage-client/orders/booked-products/booked-products.component';
-import { BookedTicketsComponent } from './main-app/homepage-client/orders/booked-tickets/booked-tickets.component';
-import { BookedProductsStatusComponent } from './main-app/homepage-client/orders/booked-products/booked-products-status/booked-products-status.component';
-import { BookedTicketsStatusComponent } from './main-app/homepage-client/orders/booked-tickets/booked-tickets-status/booked-tickets-status.component';
+import { BookedProductsStatusComponent } from './main-app/homepage-client/orders/booked-products-status/booked-products-status.component';
 import {DatePipe} from "@angular/common";
-import { BookedProductsDetailsComponent } from './main-app/homepage-client/orders/booked-products/booked-products-details/booked-products-details.component';
-import { TicketsStatusComponent } from './main-app/homepage-client/orders/booked-products/tickets-status/tickets-status.component';
-import { TicketsDetailsComponent } from './main-app/homepage-client/orders/booked-products/tickets-details/tickets-details.component';
+import { BookedProductsDetailsComponent } from './main-app/homepage-client/orders/booked-products-details/booked-products-details.component';
+import { TicketsStatusComponent } from './main-app/homepage-client/orders/tickets-status/tickets-status.component';
+import { TicketsDetailsComponent } from './main-app/homepage-client/orders/tickets-details/tickets-details.component';
 
 @NgModule({
   declarations: [
@@ -128,10 +125,7 @@ import { TicketsDetailsComponent } from './main-app/homepage-client/orders/booke
     AddProductComponent,
     DeleteProductComponent,
     VenueSeats2Component,
-    BookedProductsComponent,
-    BookedTicketsComponent,
     BookedProductsStatusComponent,
-    BookedTicketsStatusComponent,
     BookedProductsDetailsComponent,
     TicketsStatusComponent,
     TicketsDetailsComponent

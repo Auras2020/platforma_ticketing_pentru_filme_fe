@@ -227,11 +227,11 @@
       <div class="products-buttons">
         <div class="reserve-form">
           <label class="product-button-style">Reserve</label>
-          <mat-checkbox [(ngModel)]="checkbox1Selected" (change)="checkboxChanged(1)"></mat-checkbox>
+          <mat-checkbox [(ngModel)]="checkbox1Selected" (change)="checkboxChanged(1, $event)"></mat-checkbox>
         </div>
         <div>
           <label class="product-button-style">Buy</label>
-          <mat-checkbox [(ngModel)]="checkbox2Selected" (change)="checkboxChanged(2)"></mat-checkbox>
+          <mat-checkbox [(ngModel)]="checkbox2Selected" (change)="checkboxChanged(2, $event)"></mat-checkbox>
         </div>
       </div>
     </div>

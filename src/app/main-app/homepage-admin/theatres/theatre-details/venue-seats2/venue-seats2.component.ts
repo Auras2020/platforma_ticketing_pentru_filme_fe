@@ -19,7 +19,7 @@ export class VenueSeats2Component implements OnInit{
   array1: number[] = [];
   array2: number[] = [];
   theatreId: number = -1;
-  bookedSeatsAndTicketsStatus?: SeatTicketStatusDto;
+  bookedSeatsAndTicketsStatus?: SeatTicketStatusDto[];
   originalColor: any[] = [];
   originalBackgroundColor: any[] = [];
 
@@ -62,7 +62,11 @@ export class VenueSeats2Component implements OnInit{
   isSeatBooked(i: number, j: number): boolean | undefined{
     let i1 = i + 1;
     let j1 = j + 1;
-    return this.bookedSeatsAndTicketsStatus?.seats.includes(JSON.stringify({i1, j1}))
-      && !this.bookedSeatsAndTicketsStatus?.ticketsStatus.includes('cancelled');
+    for(let order of this.bookedSeatsAndTicketsStatus!){
+      if(order?.seats === JSON.stringify({i1, j1}) && order?.ticketsStatus !== 'cancelled'){
+        return true;
+      }
+    }
+    return false;
   }
 }

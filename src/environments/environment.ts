@@ -49,7 +49,8 @@ export const environment = {
     ordersPageFilter: "orders/page/filter",
     ordersStatus: "orders/status",
     ordersTicketsDetails: "orders/tickets-details",
-    ordersProductsDetails: "orders/products-details"
+    ordersProductsDetails: "orders/products-details",
+    ordersDate: "orders/last-created-date"
   }
 };
 
