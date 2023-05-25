@@ -229,7 +229,6 @@ export class OrdersComponent implements OnInit{
       showTimingId: order.showTiming?.id!
     }
     this.ordersService.getLastOrderCreatedByUserAndShowTiming(userShowTiming).subscribe((date) => {
-      console.log(this.calculateMinutesDifference(date, new Date()));
       if(!this.calculateMinutesDifference(date, new Date())){
         this.getAllOrders();
         this.feedbackToolbarService.openSnackBarWithErrorMessage("Wait a minute until you can change tickets status again!");
@@ -261,7 +260,6 @@ export class OrdersComponent implements OnInit{
       showTimingId: order.showTiming?.id!
     }
     this.ordersService.getLastOrderCreatedByUserAndShowTiming(userShowTiming).subscribe((date) => {
-      console.log(this.calculateMinutesDifference(date, new Date()));
       if(!this.calculateMinutesDifference(date, new Date())){
         this.getAllOrders();
         this.feedbackToolbarService.openSnackBarWithErrorMessage("Wait a minute until you can change products status again!");

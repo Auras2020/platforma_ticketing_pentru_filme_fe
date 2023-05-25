@@ -53,7 +53,6 @@ export class ResetPasswordComponent {
       email: email,
       password: this.form.controls['password'].value
     }
-    console.log(email)
     this.resetPasswordService.resetPassword(resetPassword1).subscribe();
   }
 }

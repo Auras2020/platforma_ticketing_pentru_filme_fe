@@ -78,7 +78,6 @@ export class MoviesComponent implements OnInit{
 
       this.moviesService.getMoviesByFiltersPage(movieFilteredPage).subscribe(
         moviePage => {
-          console.log(moviePage);
           this.handleSuccess(moviePage)
         },
         () => {

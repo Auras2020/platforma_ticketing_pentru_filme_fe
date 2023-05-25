@@ -280,8 +280,6 @@ export class VenueSeats1Component implements OnInit{
       showTimingId: this.showTiming?.id!
     }
     this.ordersService.getLastOrderCreatedByUserAndShowTiming(userShowTiming).subscribe((date) => {
-      console.log(date);
-      console.log(Math.abs(moment(date).diff(moment(new Date()), 'minutes')));
       if(date&& Math.abs(moment(date).diff(moment(new Date()), 'minutes')) === 0){
         this.feedbackToolbarService.openSnackBarWithErrorMessage("Wait a minute until you can book another tickets and/or products!");
         return;
