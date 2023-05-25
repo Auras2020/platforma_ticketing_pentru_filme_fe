@@ -1,0 +1,29 @@
+<div class="dialog-margins">
+  <div class="delete-item-dialog-title">
+    <div class="title-label" *ngIf="newStatus === 'bought'">
+      Buy tickets
+    </div>
+    <div class="title-label" *ngIf="newStatus === 'reserved'">
+      Reserve tickets
+    </div>
+    <div class="title-label" *ngIf="newStatus === 'cancelled'">
+      Cancel tickets
+    </div>
+    <div class="empty-div"></div>
+    <div class="close-button">
+      <button mat-icon-button mat-dialog-close class="dialog-close-button">
+        <mat-icon class="close-icon">close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="dialog-content" *ngIf="this.newStatus !== 'cancelled'">
+    Are you sure you want to change status of tickets from {{this.currentStatus}} to {{this.newStatus}}?
+  </div>
+  <div class="dialog-content" *ngIf="this.newStatus === 'cancelled'">
+    Are you sure you want to change status of tickets from {{this.currentStatus}} to {{this.newStatus}}? Once you cancel tickets you will not be able to change status of tickets or products.
+  </div>
+  <div mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close class="cancel-button">Cancel</button>
+    <button mat-raised-button (click)="changeTicketsStatus()" class="delete-device-button">Confirm</button>
+  </div>
+</div>
