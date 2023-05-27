@@ -77,6 +77,9 @@ import {DatePipe} from "@angular/common";
 import { BookedProductsDetailsComponent } from './main-app/homepage-client/orders/booked-products-details/booked-products-details.component';
 import { TicketsStatusComponent } from './main-app/homepage-client/orders/tickets-status/tickets-status.component';
 import { TicketsDetailsComponent } from './main-app/homepage-client/orders/tickets-details/tickets-details.component';
+import { MovieDetails3Component } from './main-app/homepage-client/reviews/movie-details3/movie-details3.component';
+import { AddReviewComponent } from './main-app/homepage-client/reviews/add-review/add-review.component';
+import { DeleteReviewComponent } from './main-app/homepage-client/reviews/delete-review/delete-review.component';
 
 @NgModule({
   declarations: [
@@ -128,7 +131,10 @@ import { TicketsDetailsComponent } from './main-app/homepage-client/orders/ticke
     BookedProductsStatusComponent,
     BookedProductsDetailsComponent,
     TicketsStatusComponent,
-    TicketsDetailsComponent
+    TicketsDetailsComponent,
+    MovieDetails3Component,
+    AddReviewComponent,
+    DeleteReviewComponent
   ],
     imports: [
         BrowserModule,

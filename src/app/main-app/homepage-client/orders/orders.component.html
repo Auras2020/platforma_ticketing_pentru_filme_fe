@@ -162,7 +162,7 @@
           <th mat-header-cell *matHeaderCellDef class="status-header"><span>Tickets status</span></th>
           <td mat-cell *matCellDef="let row" class="status-column" [style.color] = "row.ticketsStatus === 'cancelled' || compareWithCurrentDate(row) ? 'gray' : '#213555'">
             <div class="align-status" *ngIf="row.ticketsStatus">
-              <mat-icon class="material-icons-outlined" [ngStyle]="{'color': getStatusColor(row.ticketsStatus)}" >{{getStatusIcon()}}</mat-icon>
+              <mat-icon class="material-icons-outlined-1" [ngStyle]="{'color': getStatusColor(row.ticketsStatus)}" >{{getStatusIcon()}}</mat-icon>
               <mat-select [disabled] = "row.ticketsStatus === 'cancelled' || compareWithCurrentDate(row)" (selectionChange)="editTicketsStatus($event, row)" [ngModel]="row.ticketsStatus" [ngStyle]="{'width': '85%'}" class="status-align">
                 <mat-option *ngFor="let status of statuses" [value]="status" class="option-width">
                   {{status}}
@@ -176,7 +176,7 @@
           <th mat-header-cell *matHeaderCellDef class="status-header"><span>Products status</span></th>
           <td mat-cell *matCellDef="let row" class="status-column" [style.color] = "compareWithCurrentDate(row) ? 'gray' : '#213555'">
             <div class="align-status" *ngIf="row.productsStatus">
-              <mat-icon class="material-icons-outlined" [ngStyle]="{'color': getStatusColor(row.productsStatus)}" >{{getStatusIcon()}}</mat-icon>
+              <mat-icon class="material-icons-outlined-1" [ngStyle]="{'color': getStatusColor(row.productsStatus)}" >{{getStatusIcon()}}</mat-icon>
               <mat-select [disabled] = "row.productsStatus === 'cancelled' || compareWithCurrentDate(row)" (selectionChange)="editProductsStatus($event, row)" [ngModel]="row.productsStatus" [ngStyle]="{'width': '85%'}" class="status-align">
                 <mat-option *ngFor="let status of statuses" [value]="status">
                   {{status}}

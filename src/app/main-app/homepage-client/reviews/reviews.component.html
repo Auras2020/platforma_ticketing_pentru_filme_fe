@@ -1,1 +1,222 @@
-<p>reviews works!</p>
+<div class="page-content">
+  <mat-card class="filter-card">
+    <div class="line-style">
+      <div class="header-style">
+        <div class="title-and-filter-icon">
+          <label class="title-style">
+            Reviews
+          </label>
+
+          <mat-icon mat-list-icon class="filter-list">
+            filter_list
+            <div class="notification-bubble" [ngClass]="{notification: filterActive()}">
+            </div>
+          </mat-icon>
+        </div>
+
+        <div class="user-filter">
+          <mat-checkbox (change)="checkboxChanged($event)"></mat-checkbox>
+          <label class="product-button-style">Show only my reviews</label>
+        </div>
+
+        <div class="search-box">
+          <span class="fa fa-search"><mat-icon>search</mat-icon></span>
+          <input (keyup)="getAllReviews()"
+                 [(ngModel)]="searchString"
+                 matInput
+                 placeholder="Search movie...">
+          <span *ngIf="searchString" class="fa fa-search-close" (click)="searchString = '';getAllReviews()"><mat-icon>close</mat-icon></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="filters-row">
+      <div class="filters" fxFlex="60">
+        <div class="forms-display">
+          <div>
+            <div class="input-label">Movie name</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <input matInput [(ngModel)]="filters.movieName" [ngModelOptions]="{updateOn:'change'}"
+                     (ngModelChange)="getAllReviews()" class="form-input">
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="input-label">Category</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <mat-select
+                [(ngModel)]="filters.recommendedAge"
+                (selectionChange)="getAllReviews()"
+                class="form-input"
+              >
+                <mat-option *ngFor="let ageRestrict of ageRestricts" [value]="ageRestrict">
+                  {{ ageRestrict }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="input-label">Genre</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <mat-select
+                [(ngModel)]="filters.genre"
+                (selectionChange)="getAllReviews()"
+                class="form-input"
+              >
+                <mat-option *ngFor="let genre of genres" [value]="genre">
+                  {{ genre }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="input-label">Review name</div>
+            <mat-form-field appearance="outline" class="filter-form review-input">
+              <input matInput [(ngModel)]="filters.reviewName" [ngModelOptions]="{updateOn:'change'}"
+                     (ngModelChange)="getAllReviews()" class="form-input">
+            </mat-form-field>
+          </div>
+
+          <div class="review-opinion">
+            <div class="input-label">Review opinion</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <mat-select
+                [(ngModel)]="filters.reviewOpinion"
+                (selectionChange)="getAllReviews()"
+                class="form-input"
+              >
+                <mat-option *ngFor="let opinion of opinions" [value]="opinion">
+                  {{ opinion }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="empty-div"></div>
+
+      <div class="reset-div">
+        <button mat-button class="reset-button" (click)="resetFilters()">Reset filters</button>
+      </div>
+    </div>
+  </mat-card>
+
+  <div *ngFor="let movieReview of movieReviews">
+    <mat-card class="movie-card">
+      <div class="movie-content">
+        <div class="movie-details">
+          <div>
+            <img *ngIf="movieReview.movie.poster"
+                 [src]="getImageUrl(movieReview.movie.poster)"
+                 class="movie-poster"
+                 alt="Poster"/>
+          </div>
+          <div class="main-details">
+            <div class="movie-name" (click)="clickOnMovieRow(movieReview.movie.id)">
+              {{movieReview.movie.name}}
+            </div>
+            <div class="movie-age">
+              Category: {{movieReview.movie.recommendedAge}}
+            </div>
+            <div class="movie-age">
+              Duration: {{formatDuration(movieReview.movie.duration)}}
+            </div>
+            <div class="movie-genre">
+              Genre: {{movieReview.movie.genre}}
+            </div>
+            <div class="movie-note">
+              Note: {{getNumber(movieReview.movie.note)}}
+            </div>
+            <div class="movie-rating">
+              Rating: {{getNumber(movieReview.movie.rating)}}
+            </div>
+          </div>
+        </div>
+        <div class="empty-div"></div>
+        <div class="reviews-section">
+          <div class="reviews-header">
+            <div class="review-title-div">
+              <label class="review-title">
+                Reviews
+              </label>
+            </div>
+            <div class="empty-div"></div>
+            <div class="add-review-button-div">
+              <button mat-raised-button class="add-review-button" (click)="openAddReviewDialog(movieReview.movie)">Add review</button>
+            </div>
+          </div>
+          <div *ngFor="let review of movieReview.reviews">
+            <div class="review-border">
+              <div class="review-details">
+                <div class="review-details-left">
+                  <label class="review-details-margin review-name">
+                    {{review.user.name}}
+                  </label>
+                  <label class="review-opinion-margin star-label">
+                    <label *ngFor="let star of calculateStarRating(review.note)">
+                      <mat-icon class="star-color">{{star}}</mat-icon>
+                    </label>
+                  </label>
+                  <label class="review-opinion-margin opinion-icon" *ngIf="review.opinion === 'Very good'">
+                    <mat-icon [matTooltip]="'Very good'"
+                              aria-label="Edit"
+                              matTooltipPosition="above">sentiment_very_satisfied</mat-icon>
+                  </label>
+                  <label class="review-opinion-margin opinion-icon" *ngIf="review.opinion === 'Good'">
+                    <mat-icon [matTooltip]="'Good'"
+                              aria-label="Edit"
+                              matTooltipPosition="above">sentiment_satisfied</mat-icon>
+                  </label>
+                  <label class="review-opinion-margin opinion-icon" *ngIf="review.opinion === 'Bad'">
+                    <mat-icon [matTooltip]="'Bad'"
+                              aria-label="Edit"
+                              matTooltipPosition="above">sentiment_dissatisfied</mat-icon>
+                  </label>
+                  <label class="review-opinion-margin opinion-icon" *ngIf="review.opinion === 'Very bad'">
+                    <mat-icon [matTooltip]="'Very bad'"
+                              aria-label="Edit"
+                              matTooltipPosition="above">sentiment_very_dissatisfied</mat-icon>
+                  </label>
+                </div>
+                <div class="empty-div"></div>
+                <div class="review-details-right">
+                  <label class="review-details-margin review-date">
+                    {{review.createdDate | date: "dd/MM/yyyy HH:mm"}}
+                  </label>
+                  <button mat-icon-button
+                          [matTooltip]="'Edit review'"
+                          aria-label="Edit"
+                          matTooltipPosition="above"
+                          *ngIf="review.user?.id === this.user?.id"
+                          (click)="openEditReviewDialog(movieReview.movie, review)">
+                    <mat-icon class="edit-button material-icons-outlined">
+                      edit
+                    </mat-icon>
+                  </button>
+                  <button mat-icon-button
+                          [matTooltip]="'Delete review'"
+                          aria-label="Delete"
+                          matTooltipPosition="above"
+                          *ngIf="review.user?.id === this.user?.id"
+                          (click)="openDeleteReviewDialog(movieReview.movie.id, review)">
+                    <mat-icon class="delete-button material-icons-outlined">
+                      delete
+                    </mat-icon>
+                  </button>
+                </div>
+              </div>
+              <div class="review-content-div">
+                <label class="review-content">
+                  {{review.name}}
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

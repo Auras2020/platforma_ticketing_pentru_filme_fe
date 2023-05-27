@@ -46,6 +46,10 @@ export const environment = {
     ordersStatus: "orders/status",
     ordersTicketsDetails: "orders/tickets-details",
     ordersProductsDetails: "orders/products-details",
-    ordersDate: "orders/last-created-date"
+    ordersDate: "orders/last-created-date",
+    reviews: "reviews/",
+    filteredReviews: "reviews/filtered",
+    reviewMovie: "reviews/movie/",
+    filteredReviewsByUser: "reviews/filtered-by-user"
   }
 };
