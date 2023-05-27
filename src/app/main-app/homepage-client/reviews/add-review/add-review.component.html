@@ -1,0 +1,88 @@
+<div [formGroup]="form" class="dialog-content">
+  <div class="delete-item-dialog-title">
+    <div class="dialog-title">
+      {{title}}
+    </div>
+    <div class="empty-div"></div>
+    <div class="close-button">
+      <button mat-icon-button mat-dialog-close class="dialog-close-button">
+        <mat-icon class="close-icon">close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div>
+    <div class="form-padding form-content">
+      <div fxLayout="row wrap" fxLayout.xs="column">
+        <div class="form-row form-margin" fxFlex>
+          <div class="name-label-padding">
+            <label class="name-label" [ngClass]="{'asterisk': noteControl.hasError('required')}">Note for this movie</label>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" class="mat-form">
+              <mat-select formControlName="note">
+                <mat-option *ngFor="let note of notes" [value]="note">
+                  {{note}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div
+              *ngIf="noteControl.touched && noteControl.hasError('required')" class="error">
+              Note is required!
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row" fxFlex>
+          <div class="name-label-padding">
+            <label class="name-label" [ngClass]="{'asterisk': opinionControl.hasError('required')}">Opinion about this movie</label>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" class="mat-form">
+              <mat-select formControlName="opinion">
+                <mat-option *ngFor="let opinion of opinions" [value]="opinion">{{
+                  opinion
+                  }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div
+              *ngIf="opinionControl.touched && opinionControl.hasError('required')" class="error">
+              Opinion is required!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div fxLayout="row wrap" fxLayout.xs="column">
+        <div class="form-row reviews-form-div" fxFlex>
+          <div class="name-label-padding">
+            <label class="name-label" [ngClass]="{'asterisk': nameControl.hasError('required')}">Review</label>
+          </div>
+          <div>
+            <mat-form-field class="reviews-form" appearance="outline">
+              <textarea
+                #txtarea
+                matInput
+                [maxLength]="2000"
+                formControlName="name"
+                [placeholder]="'Your review here...'"
+                cdkTextareaAutosize>
+              </textarea>
+              <mat-hint align="end">{{ txtarea.value.length || 0 }}/2000</mat-hint>
+            </mat-form-field>
+            <div
+              *ngIf="nameControl.touched && nameControl.hasError('required')" class="error">
+              Review is required!
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div mat-dialog-actions align="end" class="close-actions">
+      <button mat-button mat-dialog-close class="cancel-button">Cancel</button>
+      <button mat-raised-button type="submit" [disabled]="!form.valid" (click)="saveReview()" class="save-user-button">Save</button>
+    </div>
+  </div>
+</div>

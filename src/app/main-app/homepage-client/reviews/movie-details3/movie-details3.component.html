@@ -1,0 +1,103 @@
+<div class="page-content">
+  <mat-card class="trailer-card">
+    <div class="title">
+      <button mat-icon-button class="arrow-color"
+              [matTooltip]="'Back to program page'"
+              matTooltipPosition="above"
+              (click)="navigateBackToMoviesPage()">
+        <mat-icon>
+          {{'chevron_left'}}
+        </mat-icon>
+      </button>
+      <label class="title-style">
+        Movie details
+      </label>
+    </div>
+    <div class="main-container">
+      <div fxFlex="45%" class="left-column">
+        <div class="movie-details">
+          <label class="movie-name">
+            {{movie?.name}}
+          </label>
+          <label class="movie-age">
+            {{movie?.recommendedAge}}
+          </label>
+        </div>
+        <video width="540" height="360" controls *ngIf="movie?.trailerName !== null && movie?.trailerName !== 'null'" class="video-position">
+          <source [src]="'http://localhost:8080/movies/videos/' + movie?.trailerName" type="video/mp4">
+        </video>
+      </div>
+      <mat-divider [vertical]="true" class="divider-style"></mat-divider>
+      <div fxFlex="55%" class="right-column">
+        <div class="movie-details-section">
+          <div class="movie-details-left">
+            <div class="genre-value">
+              {{movie?.genre}}
+            </div>
+            <div class="genre-label">
+              Genre
+            </div>
+            <div class="duration-value">
+              {{movie?.duration}} minutes
+            </div>
+            <div class="duration-label">
+              Duration
+            </div>
+            <div class="actors-value">
+              {{movie?.actors}}
+            </div>
+            <div class="actors-label">
+              Actors
+            </div>
+            <div class="director-value">
+              {{movie?.director}}
+            </div>
+            <div class="director-label">
+              Director
+            </div>
+            <div *ngIf="!movie?.rating" class="rating-value-null">
+              \
+            </div>
+            <div *ngIf="movie?.rating" class="rating-style">
+              <mat-icon class="star-style">star</mat-icon>
+              <div class="rating-value">
+                {{movie?.rating}}
+              </div>
+            </div>
+            <div class="rating-label">
+              Rating
+            </div>
+            <div class="note-value-null" *ngIf="!movie?.note">
+              \
+            </div>
+            <div *ngIf="movie?.note" class="note-style">
+              <mat-icon class="star-style">star</mat-icon>
+              <div class="note-value">
+                {{movie?.note}}
+              </div>
+            </div>
+            <div class="note-label">
+              Note
+            </div>
+          </div>
+          <div class="empty-div"></div>
+          <div class="movie-details-right">
+            <img *ngIf="movie?.poster"
+                 [src]="getImageUrl(movie?.poster)"
+                 class="poster"
+                 alt="Poster"/>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="synopsis-padding" *ngIf="movie?.synopsis">
+      <div class="synopsis-label">
+        Synopsis
+      </div>
+      <div class="synopsis-text">
+        {{movie?.synopsis}}
+      </div>
+    </div>
+  </mat-card>
+</div>
+
