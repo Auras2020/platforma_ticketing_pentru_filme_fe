@@ -50,6 +50,7 @@ export const environment = {
     reviews: "reviews/",
     filteredReviews: "reviews/filtered",
     reviewMovie: "reviews/movie/",
-    filteredReviewsByUser: "reviews/filtered-by-user"
+    filteredReviewsByUser: "reviews/filtered-by-user",
+    peoplePromotions: "promotions/people/"
   }
 };

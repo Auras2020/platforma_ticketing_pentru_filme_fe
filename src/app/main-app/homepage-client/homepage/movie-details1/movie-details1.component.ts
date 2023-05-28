@@ -30,4 +30,8 @@ export class MovieDetails1Component implements OnInit{
   getImageUrl(poster: any): any{
     return 'data:image/*;base64,' + poster;
   }
+
+  showNumberWithFirstDecimal(num: any): any{
+    return (num + '').substring(0, 3);
+  }
 }

@@ -61,7 +61,7 @@
             <div *ngIf="movie?.rating" class="rating-style">
               <mat-icon class="star-style">star</mat-icon>
               <div class="rating-value">
-                {{movie?.rating}}
+                {{showNumberWithFirstDecimal(movie?.rating)}}
               </div>
             </div>
             <div class="rating-label">
@@ -73,7 +73,7 @@
             <div *ngIf="movie?.note" class="note-style">
               <mat-icon class="star-style">star</mat-icon>
               <div class="note-value">
-                {{movie?.note}}
+                {{showNumberWithFirstDecimal(movie?.note)}}
               </div>
             </div>
             <div class="note-label">

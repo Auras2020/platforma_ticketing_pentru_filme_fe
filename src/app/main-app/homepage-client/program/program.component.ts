@@ -4,7 +4,6 @@ import {Router} from "@angular/router";
 import {Theatre, TheatresService} from "../../homepage-admin/theatres/theatres.service";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {TheatreDetails1Component} from "./theatre-details1/theatre-details1.component";
-import {Venue, VenuesService} from "../../homepage-admin/venues/venues.service";
 import {ShowTimingsService} from "../../homepage-admin/show-timings/show-timings.service";
 
 @Component({
@@ -204,6 +203,10 @@ export class ProgramComponent implements OnInit{
 
   navigateToVenueSeatsPage(id: any): any{
     this.router.navigate(['client', 'program', 'venue', id]);
+  }
+
+  showNumberWithFirstDecimal(num: any): any{
+    return (num + '').substring(0, 3);
   }
 
 }

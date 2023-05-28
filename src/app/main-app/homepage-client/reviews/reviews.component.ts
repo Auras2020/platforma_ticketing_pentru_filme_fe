@@ -1,11 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {User, UserService} from "../../homepage-admin/user/user.service";
+import {UserService} from "../../homepage-admin/user/user.service";
 import {MovieReview, Review, ReviewFilters, ReviewsService} from "./reviews.service";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {AddReviewComponent} from "./add-review/add-review.component";
-import {Movie} from "../../homepage-admin/movies/movies.service";
-import {DeleteMovieComponent} from "../../homepage-admin/movies/delete-movie/delete-movie.component";
 import {DeleteReviewComponent} from "./delete-review/delete-review.component";
 
 @Component({
@@ -32,6 +30,7 @@ export class ReviewsComponent implements OnInit{
   movieReviews?: MovieReview[];
   user?: any;
   checkBoxSelected = false;
+  searchDebounceTimer: any;
 
   ngOnInit(): void {
     this.getAllReviews();
@@ -78,7 +77,24 @@ export class ReviewsComponent implements OnInit{
     this.getAllReviews();
   }
 
+  onSearchInput() {
+    if (this.searchDebounceTimer) {
+      clearTimeout(this.searchDebounceTimer);
+    }
+    this.searchDebounceTimer = setTimeout(() => {
+      this.getAllReviews();
+    }, 1000);
+  }
+
   getAllReviews(): void{
+    if(this.checkBoxSelected){
+      this.getAllReviewsByUser();
+    } else {
+      this.getAllExistingReviews();
+    }
+  }
+
+  getAllExistingReviews(): void{
     this.getAllByFilters();
     this.reviewsService.getAllFilteredReviews(this.filteredData).subscribe((movieReviews) => {
       this.movieReviews = movieReviews;
@@ -123,44 +139,44 @@ export class ReviewsComponent implements OnInit{
     this.router.navigate(['client', 'reviews', 'movies', id]);
   }
 
-  openAddReviewDialog(movie: any) {
+  openAddReviewDialog(movieReview: any) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = false
     dialogConfig.disableClose = true
     dialogConfig.data = {
       user: this.user,
-      movie: movie
+      movieReview: movieReview
     };
 
-    this.openReviewDialog(movie, dialogConfig);
+    this.openReviewDialog(movieReview, dialogConfig);
   }
 
-  openEditReviewDialog(movie: any, review: Review) {
+  openEditReviewDialog(movieReview: any, review: any) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = false
     dialogConfig.disableClose = true
     dialogConfig.data = {
       user: this.user,
-      movie: movie,
+      movieReview: movieReview,
       review: review
     };
 
-    this.openReviewDialog(movie, dialogConfig);
+    this.openReviewDialog(movieReview, dialogConfig);
   }
 
-  openReviewDialog(movie: any, dialogConfig: any){
+  openReviewDialog(movieReview: any, dialogConfig: any){
     const dialogRef = this.dialog.open(AddReviewComponent, dialogConfig)
     dialogRef.afterClosed().subscribe(
       () => {
-        this.getAllExistingReviewsByMovieId(movie?.id);
+        this.getAllExistingReviewsByMovieId(movieReview?.movie?.id);
       }
     );
   }
 
-  openDeleteReviewDialog(movieId: any, review: Review) {
+  openDeleteReviewDialog(movieReview: any, review: Review) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
-      movieId: movieId,
+      movieReview: movieReview,
       review: review
     };
 
@@ -171,7 +187,7 @@ export class ReviewsComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe(
       () => {
-        this.getAllExistingReviewsByMovieId(movieId);
+        this.getAllExistingReviewsByMovieId(movieReview.movie.id);
       }
     );
   }
@@ -198,11 +214,23 @@ export class ReviewsComponent implements OnInit{
 
   checkboxChanged(event: any) {
     this.checkBoxSelected = event.checked;
-    console.log(event.checked);
     if(event.checked){
       this.getAllReviewsByUser();
     } else {
       this.getAllReviews();
     }
+  }
+
+  checkIfMovieContainsCurrentUserReviews(movieReview: any): boolean{
+    for(let review of movieReview.reviews){
+      if(review.user.id === this.user.id){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  showNumberWithFirstDecimal(num: any): any{
+    return (num + '').substring(0, 3);
   }
 }

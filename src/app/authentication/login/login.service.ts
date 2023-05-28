@@ -45,7 +45,7 @@ export class LoginService {
     if(data.role === 'ADMIN'){
       this.router.navigate(['/admin/dashboard']);
     } else if(data.role === 'DISTRIBUITOR') {
-      this.router.navigate(['/distribuitor']);
+      this.router.navigate(['/distributor/promotions']);
     } else if(data.role === 'CLIENT') {
       this.router.navigate(['/client/home']);
     } else {

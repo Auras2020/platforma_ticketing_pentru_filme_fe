@@ -1,1 +1,20 @@
-<p>homepage-distribuitor works!</p>
+<mat-toolbar class="mat-elevation-z4">
+
+  <div class="toolbar-style">
+    <div class="title-style">
+      <label class="oval-button">HotMoviesCenter</label>
+    </div>
+    <div class="empty-div">
+      <button mat-button [class]="btn1" (click)="onClickUtilizatoriBtn()">Promotions</button>
+      <button mat-button [class]="btn2" (click)="onClickAnunturiBtn()">Statistics</button>
+    </div>
+    <div class="container">
+      <div class="logout-button">
+        <button mat-button class="logout" (click)="openLogoutDialog()">Log out</button>
+      </div>
+      <label class="admin">Distributor</label>
+    </div>
+  </div>
+</mat-toolbar>
+
+<router-outlet></router-outlet>

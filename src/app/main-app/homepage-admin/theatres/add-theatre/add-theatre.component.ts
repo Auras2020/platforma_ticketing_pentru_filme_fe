@@ -2,7 +2,6 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {TheatresService} from "../theatres.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {SafeUrl} from "@angular/platform-browser";
 import {FeedbackToolbarService} from "../../../../feedback-toolbar/feedback-toolbar.service";
 
 @Component({

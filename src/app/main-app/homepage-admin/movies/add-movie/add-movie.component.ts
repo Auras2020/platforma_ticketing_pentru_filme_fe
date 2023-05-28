@@ -16,6 +16,12 @@ export class AddMovieComponent implements OnInit{
       recommendedAge: new FormControl('', Validators.required),
       genre: new FormControl('', Validators.required),
       duration: new FormControl('', Validators.required),
+      note: new FormControl(null, {
+        validators: [Validators.min(0), Validators.max(10)]
+      }),
+      rating: new FormControl(null, {
+        validators: [Validators.min(0), Validators.max(10)]
+      }),
       actors: new FormControl('', Validators.required),
       director: new FormControl('', Validators.required),
       synopsis: new FormControl('')
@@ -75,13 +81,18 @@ export class AddMovieComponent implements OnInit{
     else if(this.isVideoType === false){
       this.feedbackToolbarService.openSnackBarWithErrorMessage("Trailer must be of video type");
     } else {
+      const formValue = {
+        ...this.form.value,
+        note: (this.noteValue() + '').substring(0, 3),
+        rating: (this.ratingValue() + '').substring(0, 3)
+      }
       if(this.posterPath){
-        this.moviesService.createMovie(this.posterPath, this.trailerFileName, this.form.value).subscribe(() => {
+        this.moviesService.createMovie(this.posterPath, this.trailerFileName, formValue).subscribe(() => {
           this.dialogRef.close(true);
           this.feedbackToolbarService.openSnackBarWithSuccessMessage(this.msg);
         })
       } else {
-        this.moviesService.createMovie(null, this.trailerFileName, this.form.value).subscribe(() => {
+        this.moviesService.createMovie(null, this.trailerFileName, formValue).subscribe(() => {
           this.dialogRef.close(true);
           this.feedbackToolbarService.openSnackBarWithSuccessMessage(this.msg);
         })
@@ -128,6 +139,22 @@ export class AddMovieComponent implements OnInit{
 
   get durationControl(){
     return this.form.controls['duration']
+  }
+
+  get noteControl(){
+    return this.form.controls['note']
+  }
+
+  noteValue(): any{
+    return this.form.controls['note'].value
+  }
+
+  get ratingControl(){
+    return this.form.controls['rating']
+  }
+
+  ratingValue(): any{
+    return this.form.controls['rating'].value
   }
 
   get actorsControl(){

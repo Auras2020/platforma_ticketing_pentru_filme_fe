@@ -67,7 +67,7 @@
       <div [formGroup]="form" class="right-header-content">
         <div class="form-margins">
           <div class="name-label-padding">
-            <label class="name-label">Adult tickets({{showTiming?.price}} RON)</label>
+            <label class="name-label">Adult tickets({{this.peoplePromotion ? this.peoplePromotion.adult : showTiming?.price}} RON)</label>
           </div>
           <mat-form-field appearance="outline" class="mat-form">
             <mat-select
@@ -84,7 +84,7 @@
         </div>
         <div class="form-margins-1">
           <div class="name-label-padding">
-            <label class="name-label">Student tickets({{showTiming?.price! - 5}} RON)</label>
+            <label class="name-label">Student tickets({{this.peoplePromotion ? this.peoplePromotion.student : showTiming?.price}} RON)</label>
           </div>
           <mat-form-field appearance="outline" class="mat-form">
             <mat-select
@@ -101,7 +101,7 @@
         </div>
         <div class="form-margins-1">
           <div class="name-label-padding">
-            <label class="name-label">Child tickets({{showTiming?.price! - 7}} RON)</label>
+            <label class="name-label">Child tickets({{this.peoplePromotion ? this.peoplePromotion.child : showTiming?.price}} RON)</label>
           </div>
           <mat-form-field appearance="outline" class="mat-form">
             <mat-select

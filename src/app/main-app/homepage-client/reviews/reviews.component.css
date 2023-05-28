@@ -305,7 +305,6 @@
 }
 
 .add-review-button{
-  background-color: #DC4E2A;
   color: #FFFFFF;
   margin-right: 24px;
   font-weight: bold;
@@ -350,12 +349,7 @@
   background-color: #F6F8F8;
   color: #213555;
   padding: 10px;
-  width: inherit;
-  display: flex;
-}
-
-.review-content-div{
-  width: inherit;
+  word-wrap: break-word;
 }
 
 .review-border{
@@ -381,4 +375,11 @@
 .user-filter{
   margin-left: 10px;
   margin-top: 4px;
+}
+
+.reviews-height{
+  max-height: 350px;
+  overflow-x: auto;
+  margin-top: 20px;
+  padding-right: 20px;
 }

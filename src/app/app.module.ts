@@ -80,6 +80,12 @@ import { TicketsDetailsComponent } from './main-app/homepage-client/orders/ticke
 import { MovieDetails3Component } from './main-app/homepage-client/reviews/movie-details3/movie-details3.component';
 import { AddReviewComponent } from './main-app/homepage-client/reviews/add-review/add-review.component';
 import { DeleteReviewComponent } from './main-app/homepage-client/reviews/delete-review/delete-review.component';
+import { PromotionsComponent } from './main-app/homepage-distribuitor/promotions/promotions.component';
+import { StatisticsComponent } from './main-app/homepage-distribuitor/statistics/statistics.component';
+import { AddPeoplePromotionsComponent } from './main-app/homepage-distribuitor/promotions/add-people-promotions/add-people-promotions.component';
+import { AddTicketsPromotionsComponent } from './main-app/homepage-distribuitor/promotions/add-tickets-promotions/add-tickets-promotions.component';
+import { AddProductsPromotionsComponent } from './main-app/homepage-distribuitor/promotions/add-products-promotions/add-products-promotions.component';
+import { PromotionsDetailsComponent } from './main-app/homepage-distribuitor/promotions/promotions-details/promotions-details.component';
 
 @NgModule({
   declarations: [
@@ -134,7 +140,13 @@ import { DeleteReviewComponent } from './main-app/homepage-client/reviews/delete
     TicketsDetailsComponent,
     MovieDetails3Component,
     AddReviewComponent,
-    DeleteReviewComponent
+    DeleteReviewComponent,
+    PromotionsComponent,
+    StatisticsComponent,
+    AddPeoplePromotionsComponent,
+    AddTicketsPromotionsComponent,
+    AddProductsPromotionsComponent,
+    PromotionsDetailsComponent
   ],
     imports: [
         BrowserModule,

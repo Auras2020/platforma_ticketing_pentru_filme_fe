@@ -7,7 +7,7 @@ import {ShowTimings, ShowTimingsService} from "../../../homepage-admin/show-timi
 import {SeatTicketStatusDto, VenueSeats1Service} from "./venue-seats1.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {FeedbackToolbarService} from "../../../../feedback-toolbar/feedback-toolbar.service";
-import {User, UserService} from "../../../homepage-admin/user/user.service";
+import {UserService} from "../../../homepage-admin/user/user.service";
 import {
   Product, ProductDetails,
   ProductFilter, ProductsService,
@@ -16,6 +16,7 @@ import {
 } from "../../../homepage-admin/products/products.service";
 import {OrdersService} from "../../orders/orders.service";
 import * as moment from "moment/moment";
+import {PromotionsService} from "../../../homepage-distribuitor/promotions/promotions.service";
 
 @Component({
   selector: 'app-venue-seats1',
@@ -72,6 +73,7 @@ export class VenueSeats1Component implements OnInit{
   )
 
   selectedProducts: number[] = [];
+  peoplePromotion: any;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -81,7 +83,8 @@ export class VenueSeats1Component implements OnInit{
               private feedbackToolbarService: FeedbackToolbarService,
               private userService: UserService,
               private productsService: ProductsService,
-              private ordersService: OrdersService) {
+              private ordersService: OrdersService,
+              private promotionsService: PromotionsService) {
   }
 
   ngOnInit(): void {
@@ -90,6 +93,9 @@ export class VenueSeats1Component implements OnInit{
     this.initializeSeats(id);
     this.showTimingsService.getShowTiming(id).subscribe((showTiming) => {
       this.showTiming = showTiming;
+      this.promotionsService.getPeoplePromotionByShowTimingId(showTiming?.id).subscribe((peoplePromotion) => {
+        this.peoplePromotion = peoplePromotion;
+      })
       this.getAllProductsFromTheatre();
       this.dayOfWeek = this.daysOfWeek[new Date(showTiming?.day).getDay()!];
       this.initializeColors();

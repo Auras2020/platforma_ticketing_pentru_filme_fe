@@ -1,0 +1,93 @@
+<div [formGroup]="form" class="dialog-content">
+  <div class="delete-item-dialog-title">
+    <div class="dialog-title">
+      {{title}}
+    </div>
+    <div class="empty-div"></div>
+    <div class="close-button">
+      <button mat-icon-button mat-dialog-close class="dialog-close-button">
+        <mat-icon class="close-icon">close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div>
+    <div class="content">
+
+      <div>
+        <div class="name-label-padding">
+          <label class="name-label" [ngClass]="{'asterisk': adultControl.hasError('required')}">Adult ticket price</label>
+        </div>
+        <div>
+          <mat-form-field appearance="outline" class="mat-form">
+            <input matInput type="number" formControlName="adult">
+          </mat-form-field>
+          <div
+            *ngIf="adultControl.touched && adultControl.hasError('required')" class="error">
+            Adult ticket price is required!
+          </div>
+          <div
+            *ngIf="adultControl.touched && !adultControl.hasError('required') && adultValue() <= 0" class="error">
+            Adult ticket price must be a positive number!
+          </div>
+          <div
+            *ngIf="adultControl.touched && !adultControl.hasError('required') && adultValue() > 0 && !checkIfAdultInteger()" class="error">
+            Adult ticket price must be an integer number!
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="name-label-padding">
+          <label class="name-label" [ngClass]="{'asterisk': studentControl.hasError('required')}">Student ticket price</label>
+        </div>
+        <div>
+          <mat-form-field appearance="outline" class="mat-form">
+            <input matInput type="number" formControlName="student">
+          </mat-form-field>
+          <div
+            *ngIf="studentControl.touched && studentControl.hasError('required')" class="error">
+            Student ticket price is required!
+          </div>
+          <div
+            *ngIf="studentControl.touched && !studentControl.hasError('required') && studentValue() <= 0" class="error">
+            Student ticket price must be a positive number!
+          </div>
+          <div
+            *ngIf="studentControl.touched && !studentControl.hasError('required') && studentValue() > 0 && !checkIfStudentInteger()" class="error">
+            Student ticket price must be an integer number!
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="name-label-padding">
+          <label class="name-label" [ngClass]="{'asterisk': childControl.hasError('required')}">Child ticket price</label>
+        </div>
+        <div>
+          <mat-form-field appearance="outline" class="mat-form">
+            <input matInput type="number" formControlName="child">
+          </mat-form-field>
+          <div
+            *ngIf="childControl.touched && childControl.hasError('required')" class="error">
+            Child ticket price is required!
+          </div>
+          <div
+            *ngIf="childControl.touched && !childControl.hasError('required') && childValue() <= 0" class="error">
+            Child ticket price must be a positive number!
+          </div>
+          <div
+            *ngIf="childControl.touched && !childControl.hasError('required') && childValue() > 0 && !checkIfChildInteger()" class="error">
+            Child ticket price must be an integer number!
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div mat-dialog-actions align="end" class="close-actions">
+      <button mat-button mat-dialog-close class="cancel-button">Cancel</button>
+      <button mat-raised-button type="submit" [disabled]="!form.valid || checkIfSameData()" (click)="savePromotion()" class="save-user-button">Save</button>
+    </div>
+  </div>
+</div>

@@ -2,8 +2,8 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FeedbackToolbarService} from "../../../../feedback-toolbar/feedback-toolbar.service";
-import {ReviewsService} from "../reviews.service";
-import {Movie} from "../../../homepage-admin/movies/movies.service";
+import {MovieReview, ReviewsService} from "../reviews.service";
+import {Movie, MoviesService} from "../../../homepage-admin/movies/movies.service";
 import {User} from "../../../homepage-admin/user/user.service";
 
 @Component({
@@ -29,18 +29,21 @@ export class AddReviewComponent implements OnInit{
   notes: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   opinions: string[] = ['Very good', 'Good', 'Bad', 'Very bad'];
   user?: User;
-  movie?: Movie;
+  movieReview: any;
+  note = 0;
 
   constructor(private reviewsService: ReviewsService,
               private dialogRef: MatDialogRef<AddReviewComponent>,
               @Inject(MAT_DIALOG_DATA) data: any,
-              private feedbackToolbarService: FeedbackToolbarService) {
+              private feedbackToolbarService: FeedbackToolbarService,
+              private moviesService: MoviesService) {
     this.edit = false
     this.user = data.user;
-    this.movie = data.movie;
+    this.movieReview = data.movieReview;
     if(data.review){
       this.edit = true;
       this.form.patchValue(data.review);
+      this.note = data.review.note;
     } else {
       this.edit = false;
     }
@@ -60,9 +63,19 @@ export class AddReviewComponent implements OnInit{
       ...this.form.value,
       createdDate: new Date(),
       user: this.user,
-      movie: this.movie
+      movie: this.movieReview.movie
     }
     this.reviewsService.createReview(parsedValue).subscribe(() => {
+      if(this.note){
+        this.movieReview.movie.note = (this.movieReview.movie.note * (this.movieReview.reviews?.length! + 1)
+            + this.form.controls.note.value! - this.note) /
+          (this.movieReview.reviews?.length! + 1);
+      } else {
+        this.movieReview.movie.note = this.movieReview.movie.note ?
+          (this.movieReview.movie.note * (this.movieReview.reviews?.length! + 1) + this.form.controls.note.value!) /
+          (this.movieReview.reviews?.length! + 2) : this.form.controls.note.value!;
+      }
+      this.moviesService.createMovie(null, this.movieReview.movie.trailerName, this.movieReview.movie).subscribe();
       this.dialogRef.close(true);
       this.feedbackToolbarService.openSnackBarWithSuccessMessage(this.msg);
     });

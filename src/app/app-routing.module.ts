@@ -30,6 +30,8 @@ import {
   VenueSeats2Component
 } from "./main-app/homepage-admin/theatres/theatre-details/venue-seats2/venue-seats2.component";
 import {MovieDetails3Component} from "./main-app/homepage-client/reviews/movie-details3/movie-details3.component";
+import {PromotionsComponent} from "./main-app/homepage-distribuitor/promotions/promotions.component";
+import {StatisticsComponent} from "./main-app/homepage-distribuitor/statistics/statistics.component";
 
 const routes: Routes = [
   {path: 'login', component: MainAppComponent},
@@ -54,7 +56,14 @@ const routes: Routes = [
       {path: 'products/:id', component: ProductsComponent, canActivate: [AuthGuard, AdminGuard]},
       {path: 'theatres/venue/:id', component: VenueSeats2Component, canActivate: [AuthGuard, AdminGuard]}
   ]},
-  {path: 'distribuitor', component: HomepageDistribuitorComponent, canActivate: [AuthGuard, DistribuitorGuard]},
+  {
+    path: 'distributor',
+    component: HomepageDistribuitorComponent,
+    canActivate: [AuthGuard, DistribuitorGuard],
+    children: [
+      {path: 'promotions', component: PromotionsComponent, canActivate: [AuthGuard, DistribuitorGuard]},
+      {path: 'statistics', component: StatisticsComponent, canActivate: [AuthGuard, DistribuitorGuard]}
+    ]},
   {
     path: 'client',
     component: HomepageClientComponent,

@@ -145,4 +145,8 @@ export class HomepageComponent implements OnInit{
   public clickOnMovieRow(id: any) {
     this.router.navigate(['client', 'home', 'movies', id]);
   }
+
+  showNumberWithFirstDecimal(num: any): any{
+    return (num + '').substring(0, 3);
+  }
 }

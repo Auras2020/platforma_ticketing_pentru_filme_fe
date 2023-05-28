@@ -172,14 +172,14 @@ export class MoviesComponent implements OnInit{
   openAddMovieDialog(event: MouseEvent) {
     event.stopPropagation();
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.height = "95%";
+    dialogConfig.height = "100%";
     this.openMovieDialog(dialogConfig);
   }
 
   openEditMovieDialog(event: MouseEvent, movie: Movie) {
     event.stopPropagation();
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.height = "95%";
+    dialogConfig.height = "100%";
     dialogConfig.data = {
       movie
     };

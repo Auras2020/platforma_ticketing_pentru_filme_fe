@@ -1,0 +1,103 @@
+mat-toolbar {
+  height: 80px;
+  position: relative;
+  background-color: #0047ab;
+  align-content: center;
+}
+
+.container{
+  display: flex;
+  justify-content: right;
+  align-self: flex-end;
+}
+
+.logout{
+  background-color: yellow;
+  color: black;
+  width: 125px;
+  margin-right: 25px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.logout-button{
+  padding-bottom: 7px;
+}
+
+.admin{
+  color: white;
+  width: 125px;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  display: flex;
+  font-size: 18px;
+  font-weight: 600;
+  padding-bottom: 7px;
+}
+
+.oval-button{
+  border-radius: 50%;
+  background-color: white;
+  height: 50px;
+  width: 150px;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  display: flex;
+  margin-right: 1%;
+  font-style: italic;
+  font-weight: 700;
+  color: #00133F;
+}
+
+.empty-div{
+  align-self: flex-end;
+}
+
+.toolbar-style{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.title-style{
+  align-self: flex-start;
+}
+
+.btn-default {
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 100%;
+  color: black;
+  font-weight: bold;
+  font-size: 16px;
+  border-width: 0;
+  border-radius: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.btn-default:hover {
+  background-color: yellow;
+  border-bottom: 3px solid white;
+  border-radius: 0;
+}
+
+.btn-selected {
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 100%;
+  color: black;
+  border-width: 0;
+  border-bottom: 4px solid white;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.btn-selected:hover{
+  background-color: yellow;
+}

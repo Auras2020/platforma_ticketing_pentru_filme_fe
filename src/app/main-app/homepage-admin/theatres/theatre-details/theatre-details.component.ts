@@ -168,4 +168,8 @@ export class TheatreDetailsComponent implements OnInit{
     this.router.navigate(['admin', 'theatres', 'venue', id]);
   }
 
+  showNumberWithFirstDecimal(num: any): any{
+    return (num + '').substring(0, 3);
+  }
+
 }
