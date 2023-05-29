@@ -2,6 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FeedbackToolbarService} from "../../../../feedback-toolbar/feedback-toolbar.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {PromotionsService} from "../promotions.service";
 
 @Component({
   selector: 'app-add-tickets-promotions',
@@ -12,14 +13,19 @@ export class AddTicketsPromotionsComponent {
 
   form: any;
   title: string = 'Add new tickets promotion';
+  msg = 'Tickets promotion was added successfully'
+  showTiming: any;
 
   constructor(
     private dialogRef: MatDialogRef<AddTicketsPromotionsComponent>,
     @Inject(MAT_DIALOG_DATA) data: any,
-    private feedbackToolbarService: FeedbackToolbarService) {
+    private feedbackToolbarService: FeedbackToolbarService,
+    private promotionsService: PromotionsService) {
+    this.showTiming = data.showTiming;
     this.form = new FormGroup({
-        nr: new FormControl('', [Validators.required, Validators.min(0)]),
-        reduction: new FormControl('', [Validators.required, Validators.min(1), Validators.max(99)])
+        id: new FormControl(''),
+        nrTickets: new FormControl(null, [Validators.required, Validators.min(0)]),
+        reduction: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(99)])
       }
     )
     //this.edit = false
@@ -31,20 +37,31 @@ export class AddTicketsPromotionsComponent {
     }*/
   }
 
+  savePromotion() {
+    const promotion = {
+      ...this.form.value,
+      showTiming: this.showTiming
+    }
+    this.promotionsService.createTicketsPromotion(promotion).subscribe(() => {
+      // this.dialogRef.close(true);
+      this.feedbackToolbarService.openSnackBarWithSuccessMessage(this.msg);
+    });
+  }
+
   checkIfSameData(): boolean{
     return !this.form.dirty;
   }
 
-  nrValue(): any{
-    return this.form.controls['nr'].value
+  nrTicketsValue(): any{
+    return this.form.controls['nrTickets'].value
   }
 
-  get nrControl(): any{
-    return this.form.controls['nr']
+  get nrTicketsControl(): any{
+    return this.form.controls['nrTickets']
   }
 
-  checkIfNrInteger(): any{
-    return Number.isInteger(this.form.controls['nr'].value)
+  checkIfNrTicketsInteger(): any{
+    return Number.isInteger(this.form.controls['nrTickets'].value)
   }
 
   reductionValue(): any{

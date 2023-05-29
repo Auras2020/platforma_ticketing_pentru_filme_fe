@@ -6,7 +6,6 @@ import {
   ShowTimingsService
 } from "../../homepage-admin/show-timings/show-timings.service";
 import {MatTableDataSource} from "@angular/material/table";
-import {AddTheatreComponent} from "../../homepage-admin/theatres/add-theatre/add-theatre.component";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {AddPeoplePromotionsComponent} from "./add-people-promotions/add-people-promotions.component";
 import {AddTicketsPromotionsComponent} from "./add-tickets-promotions/add-tickets-promotions.component";
@@ -159,9 +158,12 @@ export class PromotionsComponent implements OnInit{
     this.dialog.open(AddTicketsPromotionsComponent, dialogConfig);
   }
 
-  openAddTicketsDialog(event: MouseEvent) {
+  openAddTicketsDialog(event: MouseEvent, showTiming: any) {
     event.stopPropagation();
     const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      showTiming
+    };
     this.openTicketsDialog(dialogConfig);
   }
 
@@ -171,9 +173,12 @@ export class PromotionsComponent implements OnInit{
     this.dialog.open(AddProductsPromotionsComponent, dialogConfig);
   }
 
-  openAddProductsDialog(event: MouseEvent) {
+  openAddProductsDialog(event: MouseEvent, showTiming: any) {
     event.stopPropagation();
     const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      showTiming
+    };
     this.openProductsDialog(dialogConfig);
   }
 }

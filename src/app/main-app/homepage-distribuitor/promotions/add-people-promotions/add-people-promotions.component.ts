@@ -1,6 +1,5 @@
-import {Component, Inject} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {TheatresService} from "../../../homepage-admin/theatres/theatres.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FeedbackToolbarService} from "../../../../feedback-toolbar/feedback-toolbar.service";
 import {PromotionsService} from "../promotions.service";
@@ -10,12 +9,13 @@ import {PromotionsService} from "../promotions.service";
   templateUrl: './add-people-promotions.component.html',
   styleUrls: ['./add-people-promotions.component.css']
 })
-export class AddPeoplePromotionsComponent {
+export class AddPeoplePromotionsComponent implements OnInit{
 
   form: any;
   title: string = 'Add new people promotion';
-  msg = 'People promotion was added successfully'
+  msg: any;
   showTiming: any;
+  peoplePromotion: any;
 
   constructor(
               private dialogRef: MatDialogRef<AddPeoplePromotionsComponent>,
@@ -30,13 +30,25 @@ export class AddPeoplePromotionsComponent {
         child: new FormControl(data.showTiming.price, [Validators.required, Validators.min(0)])
       }
     )
-    //this.edit = false
-    /*if(data){
-      this.edit = true
-      this.form.patchValue(data.theatre);
-    } else {
-      this.edit = false;
-    }*/
+  }
+
+  ngOnInit(): void {
+    this.promotionsService.getPeoplePromotionByShowTimingId(this.showTiming?.id).subscribe((peoplePromotion) => {
+      this.peoplePromotion = peoplePromotion;
+      if(peoplePromotion) {
+        this.title = "Edit people promotion"
+        this.msg = "People promotion was updated successfully"
+        this.form = new FormGroup({
+            id: new FormControl(this.peoplePromotion.id),
+            adult: new FormControl(this.peoplePromotion.adult, [Validators.required, Validators.min(0)]),
+            student: new FormControl(this.peoplePromotion.student, [Validators.required, Validators.min(0)]),
+            child: new FormControl(this.peoplePromotion.child, [Validators.required, Validators.min(0)])
+          }
+        )
+      } else {
+        this.msg = "People promotion was added successfully"
+      }
+    })
   }
 
   savePromotion() {

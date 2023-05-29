@@ -18,6 +18,13 @@ export class ReservationComponent {
   productDetails?: ProductDetails[];
   user?: User;
   productsStatus?: string;
+  nrAdults: number = 0;
+  nrStudents: number = 0;
+  nrChilds: number = 0;
+  ticketsPrice: number = 0;
+  ticketsDiscount: number = 0;
+  productsPrice: number = 0;
+  productsDiscount: number = 0;
 
   constructor(private dialogRef: MatDialogRef<ReservationComponent>,
               @Inject(MAT_DIALOG_DATA) data: any,
@@ -30,6 +37,13 @@ export class ReservationComponent {
       this.productDetails = data.productDetails;
       this.user = data.user;
       this.productsStatus = data.productsStatus;
+      this.nrAdults = data.nrAdults;
+      this.nrStudents = data.nrStudents;
+      this.nrChilds = data.nrChilds;
+      this.ticketsPrice = data.ticketsPrice;
+      this.ticketsDiscount = data.ticketsDiscount;
+      this.productsPrice = data.productsPrice;
+      this.productsDiscount = data.productsDiscount;
     }
   }
 
@@ -40,7 +54,14 @@ export class ReservationComponent {
       productDetails: this.productDetails!,
       user: this.user,
       ticketStatus: 'reserved',
-      productStatus: this.productsStatus
+      productStatus: this.productsStatus,
+      nrAdults: this.nrAdults,
+      nrStudents: this.nrStudents,
+      nrChilds: this.nrChilds,
+      ticketsPrice: this.ticketsPrice,
+      ticketsDiscount: this.ticketsDiscount,
+      productsPrice: this.productsPrice,
+      productsDiscount: this.productsDiscount
     }
 
     for(let p of this.productDetails!){

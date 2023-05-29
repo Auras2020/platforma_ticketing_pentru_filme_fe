@@ -138,12 +138,16 @@ export class ProgramComponent implements OnInit{
     this.setDatesOfWeek(7);
   }
 
+  private nrDaysDiff(): number{
+    return (this.auxDate.getTime() - this.currentDate.getTime()) / (1000 * 60 * 60 * 24)
+  }
+
   disablePrevButton(): boolean {
-    return this.auxDate.getDate() <= this.currentDate.getDate();
+    return this.nrDaysDiff() <= 0;
   }
 
   disableNextButton(): boolean {
-    return this.auxDate.getDate() - this.currentDate.getDate() >= 21;
+    return this.nrDaysDiff() >= 21;
   }
 
   onButtonClick(index: number) {

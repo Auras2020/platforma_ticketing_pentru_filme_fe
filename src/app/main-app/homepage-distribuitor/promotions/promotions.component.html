@@ -178,7 +178,7 @@
               [matTooltip]="'Add tickets promotions'"
               aria-label="Ticket"
               matTooltipPosition="above"
-              (click)="openAddTicketsDialog($event)"
+              (click)="openAddTicketsDialog($event, row)"
             >
               <mat-icon class="edit-button">
                 theaters
@@ -195,7 +195,7 @@
               [matTooltip]="'Add products promotions'"
               aria-label="Product"
               matTooltipPosition="above"
-              (click)="openAddProductsDialog($event)"
+              (click)="openAddProductsDialog($event, row)"
             >
               <mat-icon class="edit-button">
                 fastfood

@@ -51,6 +51,8 @@ export const environment = {
     filteredReviews: "reviews/filtered",
     reviewMovie: "reviews/movie/",
     filteredReviewsByUser: "reviews/filtered-by-user",
-    peoplePromotions: "promotions/people/"
+    peoplePromotions: "promotions/people/",
+    ticketsPromotions: "promotions/tickets/",
+    productsPromotions: "promotions/products/"
   }
 };

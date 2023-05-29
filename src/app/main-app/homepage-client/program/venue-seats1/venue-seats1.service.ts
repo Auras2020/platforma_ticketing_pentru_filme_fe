@@ -13,6 +13,13 @@ export interface TicketsProducts {
   user: User;
   ticketStatus: string;
   productStatus: string;
+  nrAdults: number;
+  nrStudents: number;
+  nrChilds: number;
+  ticketsPrice: number;
+  ticketsDiscount: number;
+  productsPrice: number;
+  productsDiscount: number;
 }
 
 export interface SeatTicketStatusDto {

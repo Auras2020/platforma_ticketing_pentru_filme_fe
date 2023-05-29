@@ -1,17 +1,34 @@
 <div class="page-content">
   <mat-card class="movie-details-card">
-    <div class="title">
-      <button mat-icon-button class="arrow-color"
-              [matTooltip]="'Back to program page'"
-              matTooltipPosition="above"
-              (click)="navigateBackToProgramPage()">
-        <mat-icon>
-          {{'chevron_left'}}
-        </mat-icon>
-      </button>
-      <label class="title-style">
-        Tickets
-      </label>
+    <div class="header-align">
+      <div class="title">
+        <button mat-icon-button class="arrow-color"
+                [matTooltip]="'Back to program page'"
+                matTooltipPosition="above"
+                (click)="navigateBackToProgramPage()">
+          <mat-icon>
+            {{'chevron_left'}}
+          </mat-icon>
+        </button>
+        <label class="title-style">
+          Tickets
+        </label>
+      </div>
+
+      <div class="discounts-align">
+        <div>
+          <label *ngIf="getTicketsDiscountsLength()">
+            {{getTicketsDiscounts()}}
+          </label>
+        </div>
+        <div>
+          <label *ngIf="getProductsDiscountsLength()">
+            {{getProductsDiscounts()}}
+          </label>
+        </div>
+      </div>
+
+      <div class="empty-div"></div>
     </div>
 
     <div class="header-section">
@@ -53,6 +70,14 @@
         <div class="nr-total">
           <label class="nr-tickets">
             Total number of selected tickets: {{nrTotal}}
+          </label>
+        </div>
+        <div class="price-total">
+          <label class="nr-tickets" *ngIf="getReductionForTickets()">
+            Total price of selected tickets: {{this.getTotalPrice() - (getReductionForTickets() / 100) * this.getTotalPrice()}} RON({{getReductionForTickets()}}% discount)
+          </label>
+          <label class="nr-tickets" *ngIf="!getReductionForTickets()">
+            Total price of selected tickets: {{getTotalPrice()}} RON
           </label>
         </div>
       </div>
@@ -218,7 +243,10 @@
           </label>
         </div>
         <div class="total-price">
-          <label class="total-price-style">
+          <label class="total-price-style" *ngIf="getReductionForProducts()">
+            Price of all selected products is: {{calculatePriceOfProducts() - (getReductionForProducts() / 100) * calculatePriceOfProducts()}} RON({{getReductionForProducts()}}% discount)
+          </label>
+          <label class="total-price-style" *ngIf="!getReductionForProducts()">
             Price of all selected products is: {{calculatePriceOfProducts()}} RON
           </label>
         </div>

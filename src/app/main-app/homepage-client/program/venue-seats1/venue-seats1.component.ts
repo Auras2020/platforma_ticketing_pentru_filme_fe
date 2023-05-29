@@ -74,6 +74,8 @@ export class VenueSeats1Component implements OnInit{
 
   selectedProducts: number[] = [];
   peoplePromotion: any;
+  productsPromotions: any;
+  ticketsPromotions: any;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -96,6 +98,12 @@ export class VenueSeats1Component implements OnInit{
       this.promotionsService.getPeoplePromotionByShowTimingId(showTiming?.id).subscribe((peoplePromotion) => {
         this.peoplePromotion = peoplePromotion;
       })
+      this.promotionsService.getTicketsPromotionByShowTimingId(showTiming?.id).subscribe((ticketsPromotions) => {
+        this.ticketsPromotions = ticketsPromotions;
+      })
+      this.promotionsService.getProductsPromotionByShowTimingId(showTiming?.id).subscribe((productsPromotions) => {
+        this.productsPromotions = productsPromotions;
+      })
       this.getAllProductsFromTheatre();
       this.dayOfWeek = this.daysOfWeek[new Date(showTiming?.day).getDay()!];
       this.initializeColors();
@@ -105,6 +113,121 @@ export class VenueSeats1Component implements OnInit{
     this.userService.getUserByEmail(this.currentUserEmail()).subscribe((user) => {
       this.user = user;
     })
+  }
+
+  getTicketsDiscountsLength(): number{
+    return this.ticketsPromotions?.length;
+  }
+
+  getProductsDiscountsLength(): number{
+    return this.productsPromotions?.length;
+  }
+
+  getTotalPrice(): number{
+    const nr = this.peoplePromotion?.adult * this.nrAdults + this.peoplePromotion?.student * this.nrStudents +
+      this.peoplePromotion?.child * this.nrChilds;
+    return Number.isNaN(
+      nr) ? 0 : nr;
+  }
+
+  getMaxNrTicketsDiscounts(): any{
+    if(this.getTicketsDiscountsLength()){
+      let max = -1;
+      let prom: any;
+      for(let ticketsPromotion of this.ticketsPromotions){
+        if(ticketsPromotion.nrTickets > max){
+          max = ticketsPromotion.nrTickets;
+          prom = ticketsPromotion;
+        }
+      }
+      return prom;
+    }
+    return 0;
+  }
+
+  getMaxNrProductsDiscounts(): any{
+    if(this.getProductsDiscountsLength()){
+      let max = -1;
+      let prom: any;
+      for(let productsPromotion of this.productsPromotions){
+        if(productsPromotion.nrProducts > max){
+          max = productsPromotion.nrProducts;
+          prom = productsPromotion;
+        }
+      }
+      return prom;
+    }
+    return 0;
+  }
+
+  getReductionForTickets(): any{
+    if(this.getTicketsDiscountsLength()){
+      for(let ticketsPromotion of this.ticketsPromotions){
+        if(ticketsPromotion.nrTickets === this.nrTotal && this.nrTotal){
+          return ticketsPromotion.reduction;
+        }
+      }
+      if(this.getMaxNrTicketsDiscounts() && this.nrTotal > this.getMaxNrTicketsDiscounts().nrTickets){
+        return this.getMaxNrTicketsDiscounts().reduction;
+      }
+    }
+    return 0;
+  }
+
+  getReductionForProducts(): any{
+    if(this.getProductsDiscountsLength()){
+      for(let productsPromotion of this.productsPromotions){
+        if(productsPromotion.nrProducts === this.calculateSumOfProducts() && this.calculateSumOfProducts()){
+          return productsPromotion.reduction;
+        }
+      }
+      if(this.getMaxNrProductsDiscounts() && this.calculateSumOfProducts() > this.getMaxNrProductsDiscounts().nrProducts){
+        return this.getMaxNrProductsDiscounts().reduction;
+      }
+    }
+    return 0;
+  }
+
+  getTotalTicketsPrice(): number{
+    return this.getReductionForTickets()
+      ? this.getTotalPrice() - (this.getReductionForTickets() / 100) * this.getTotalPrice()
+      : this.getTotalPrice();
+  }
+
+  getTotalProductsPrice(): number{
+    return this.getReductionForProducts()
+      ? this.calculatePriceOfProducts() - (this.getReductionForProducts() / 100) * this.calculatePriceOfProducts()
+      : this.calculatePriceOfProducts();
+  }
+
+  getTicketsDiscounts(): string{
+    if(this.getTicketsDiscountsLength()){
+      let s = 'Tickets discounts: ';
+      for(let ticketsPromotion of this.ticketsPromotions) {
+        if(this.ticketsPromotions.indexOf(ticketsPromotion) === this.ticketsPromotions.length - 1){
+          s += ' >=' + ticketsPromotion.nrTickets +  ' tickets (' + ticketsPromotion.reduction  + '%)';
+        } else {
+          s += ticketsPromotion.nrTickets +  ' tickets (' + ticketsPromotion.reduction  + '%),';
+        }
+      }
+      return s;
+    }
+    return '';
+  }
+
+  getProductsDiscounts(): string{
+    if(this.getProductsDiscountsLength()){
+      let s = 'Products discounts: ';
+      for(let productsPromotion of this.productsPromotions) {
+        if(this.productsPromotions.indexOf(productsPromotion) === this.productsPromotions.length - 1){
+          s += ' >=' + productsPromotion.nrProducts +  ' products (' + productsPromotion.reduction  + '%)';
+        } else {
+          s += productsPromotion.nrProducts  +  ' products (' + productsPromotion.reduction  + '%),';
+        }
+      }
+      return s;
+    }
+    return '';
   }
 
   getAllProductsFromTheatre() : void{
@@ -267,7 +390,14 @@ export class VenueSeats1Component implements OnInit{
         seats: this.selectedSeats,
         productDetails: this.getProductsStatus() === "" ? [] : this.getProductDetails(),
         user: this.user,
-        productsStatus: this.getProductsStatus()
+        productsStatus: this.getProductsStatus(),
+        nrAdults: this.nrAdults,
+        nrStudents: this.nrStudents,
+        nrChilds: this.nrChilds,
+        ticketsPrice: this.getTotalTicketsPrice(),
+        ticketsDiscount: this.getReductionForTickets(),
+        productsPrice: this.getTotalProductsPrice(),
+        productsDiscount: this.getReductionForProducts()
       };
       const dialogRef = this.dialog.open(ReservationComponent, dialogConfig)
       dialogRef.afterClosed().subscribe((result) => {
@@ -298,7 +428,14 @@ export class VenueSeats1Component implements OnInit{
         seats: this.selectedSeats,
         productDetails: this.getProductsStatus() === "" ? [] : this.getProductDetails(),
         user: this.user,
-        productsStatus: this.getProductsStatus()
+        productsStatus: this.getProductsStatus(),
+        nrAdults: this.nrAdults,
+        nrStudents: this.nrStudents,
+        nrChilds: this.nrChilds,
+        ticketsPrice: this.getTotalTicketsPrice(),
+        ticketsDiscount: this.getReductionForTickets(),
+        productsPrice: this.getTotalProductsPrice(),
+        productsDiscount: this.getReductionForProducts()
       };
       const dialogRef = this.dialog.open(BuyTicketsComponent, dialogConfig)
       dialogRef.afterClosed().subscribe((result) => {
