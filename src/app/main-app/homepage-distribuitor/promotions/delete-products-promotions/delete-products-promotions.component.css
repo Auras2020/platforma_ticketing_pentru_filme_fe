@@ -1,0 +1,59 @@
+.delete-item-dialog-title{
+  color: #FA3F3F;
+  border-bottom: 2px solid #FFA6AD;
+  font-size: 24px;
+  margin-bottom: 16px;
+  padding-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.title-label, .empty-div{
+  align-items: flex-start;
+  font-weight: bold;
+}
+
+.title-label, .close-button{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.close-button{
+  align-items: flex-end;
+}
+
+.delete-item-button {
+  background-color: #DC4E2A;
+  border-radius: 0;
+  color: #FFFFFF;
+  width: 125px;
+  font-weight: bold;
+}
+
+.cancel-button{
+  color: #DC4E2A;
+  font-weight: bold;
+}
+
+.dialog-content{
+  width: 350px;
+  color: #3E5F8D;
+}
+
+.dialog-close-button{
+  height: 30px;
+  width: 30px;
+}
+
+.dialog-margins{
+  padding: 24px 24px 10px 24px;
+}
+
+.close-icon{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
