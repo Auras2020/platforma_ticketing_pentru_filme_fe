@@ -32,6 +32,9 @@ import {
 import {MovieDetails3Component} from "./main-app/homepage-client/reviews/movie-details3/movie-details3.component";
 import {PromotionsComponent} from "./main-app/homepage-distribuitor/promotions/promotions.component";
 import {StatisticsComponent} from "./main-app/homepage-distribuitor/statistics/statistics.component";
+import {
+  PromotionsDetailsComponent
+} from "./main-app/homepage-distribuitor/promotions/promotions-details/promotions-details.component";
 
 const routes: Routes = [
   {path: 'login', component: MainAppComponent},
@@ -62,6 +65,7 @@ const routes: Routes = [
     canActivate: [AuthGuard, DistribuitorGuard],
     children: [
       {path: 'promotions', component: PromotionsComponent, canActivate: [AuthGuard, DistribuitorGuard]},
+      {path: 'promotions/:id', component: PromotionsDetailsComponent, canActivate: [AuthGuard, DistribuitorGuard]},
       {path: 'statistics', component: StatisticsComponent, canActivate: [AuthGuard, DistribuitorGuard]}
     ]},
   {

@@ -1,0 +1,94 @@
+.page-content{
+  margin-bottom: 100px;
+}
+
+.promotions-details-card{
+  margin: 24px;
+}
+
+.title{
+  display: inline-flex;
+  border-bottom: 2px solid #AABFDF;
+}
+
+.arrow-color{
+  color: #DC4E2A;
+}
+
+.title-style{
+  font-size: 21px;
+  color: #213555;
+  font-weight: bold;
+  align-self: center;
+}
+
+.people-promotions-title{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 24px;
+}
+
+.people-promotions-title-style{
+  font-weight: bold;
+  color: #213555;
+  font-size: 18px;
+}
+
+.people-promotions{
+  margin-left: 24px;
+  background-color: #FFF3E0;
+  padding: 10px;
+  width: 20%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tickets-promotions-card{
+  margin-left: 24px;
+  background-color: #FFF3E0;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.people-promotions-details{
+  align-self: flex-start;
+}
+
+.people-promotions-style{
+  font-weight: bold;
+  color: #213555;
+}
+
+.people-promotions-section{
+  padding-bottom: 20px;
+  border-bottom: 2px solid #FDD5BD;
+}
+
+.tickets-promotions-section{
+  border-bottom: 2px solid #FDD5BD;
+}
+
+.products-promotions-section{
+  border-bottom: 2px solid #FDD5BD;
+  margin-bottom: 20px;
+}
+
+.people-promotions-buttons{
+  display: inline-flex;
+  align-self: flex-start;
+}
+
+.empty-div{
+  align-self: flex-start;
+}
+
+.edit-button, .delete-button {
+  color: #DC4E2A;
+}
+
+.tickets-promotions{
+  display: inline-flex;
+  flex-wrap: wrap;
+}

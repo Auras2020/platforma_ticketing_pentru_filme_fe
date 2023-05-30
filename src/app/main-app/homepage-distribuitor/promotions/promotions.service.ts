@@ -46,6 +46,10 @@ export class PromotionsService {
     return this.http.get<PeoplePromotion>(this.url + this.peoplePromotions + id);
   }
 
+  deletePeople(id: number | undefined): Observable<null> {
+    return this.http.delete<null>(this.url + this.peoplePromotions + id)
+  }
+
   createTicketsPromotion(ticketsPromotion: any): Observable<TicketsPromotion> {
     return this.http.put<TicketsPromotion>(this.url + this.ticketsPromotions, ticketsPromotion);
   }
@@ -54,11 +58,19 @@ export class PromotionsService {
     return this.http.get<TicketsPromotion[]>(this.url + this.ticketsPromotions + id);
   }
 
+  deleteTickets(id: number | undefined): Observable<null> {
+    return this.http.delete<null>(this.url + this.ticketsPromotions + id)
+  }
+
   createProductsPromotion(productsPromotion: any): Observable<ProductsPromotion> {
     return this.http.put<ProductsPromotion>(this.url + this.productsPromotions, productsPromotion);
   }
 
   getProductsPromotionByShowTimingId(id?: number): Observable<ProductsPromotion[]> {
     return this.http.get<ProductsPromotion[]>(this.url + this.productsPromotions + id);
+  }
+
+  deleteProducts(id: number | undefined): Observable<null> {
+    return this.http.delete<null>(this.url + this.productsPromotions + id)
   }
 }

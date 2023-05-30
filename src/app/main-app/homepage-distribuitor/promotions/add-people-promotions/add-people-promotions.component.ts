@@ -12,10 +12,11 @@ import {PromotionsService} from "../promotions.service";
 export class AddPeoplePromotionsComponent implements OnInit{
 
   form: any;
-  title: string = 'Add new people promotion';
+  title: string = '';
   msg: any;
   showTiming: any;
   peoplePromotion: any;
+  edit?: boolean;
 
   constructor(
               private dialogRef: MatDialogRef<AddPeoplePromotionsComponent>,
@@ -30,14 +31,24 @@ export class AddPeoplePromotionsComponent implements OnInit{
         child: new FormControl(data.showTiming.price, [Validators.required, Validators.min(0)])
       }
     )
+    if(data.people){
+      this.title = 'Edit people promotion';
+      this.msg = 'People promotion was updated successfully';
+      this.edit = true
+      this.form.patchValue(data.people);
+    } else {
+      this.title = 'Add new people promotion';
+      this.msg = 'People promotion was added successfully';
+      this.edit = false;
+    }
   }
 
   ngOnInit(): void {
     this.promotionsService.getPeoplePromotionByShowTimingId(this.showTiming?.id).subscribe((peoplePromotion) => {
       this.peoplePromotion = peoplePromotion;
       if(peoplePromotion) {
-        this.title = "Edit people promotion"
-        this.msg = "People promotion was updated successfully"
+        //this.title = "Edit people promotion"
+        //this.msg = "People promotion was updated successfully"
         this.form = new FormGroup({
             id: new FormControl(this.peoplePromotion.id),
             adult: new FormControl(this.peoplePromotion.adult, [Validators.required, Validators.min(0)]),
@@ -45,9 +56,9 @@ export class AddPeoplePromotionsComponent implements OnInit{
             child: new FormControl(this.peoplePromotion.child, [Validators.required, Validators.min(0)])
           }
         )
-      } else {
+      } /*else {
         this.msg = "People promotion was added successfully"
-      }
+      }*/
     })
   }
 

@@ -12,9 +12,10 @@ import {PromotionsService} from "../promotions.service";
 export class AddProductsPromotionsComponent {
 
   form: any;
-  title: string = 'Add new products promotion';
-  msg = 'Products promotion was added successfully'
+  title: string = '';
+  msg = ''
   showTiming: any;
+  edit?: boolean;
 
   constructor(
     private dialogRef: MatDialogRef<AddProductsPromotionsComponent>,
@@ -23,17 +24,21 @@ export class AddProductsPromotionsComponent {
     private promotionsService: PromotionsService) {
     this.showTiming = data.showTiming;
     this.form = new FormGroup({
+        id: new FormControl(''),
         nrProducts: new FormControl(null, [Validators.required, Validators.min(0)]),
         reduction: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(99)])
       }
     )
-    //this.edit = false
-    /*if(data){
+    if(data.product){
+      this.title = 'Edit products promotion';
+      this.msg = 'Products promotion was updated successfully';
       this.edit = true
-      this.form.patchValue(data.theatre);
+      this.form.patchValue(data.product);
     } else {
+      this.title = 'Add new products promotion';
+      this.msg = 'Products promotion was added successfully';
       this.edit = false;
-    }*/
+    }
   }
 
   savePromotion() {
@@ -42,7 +47,9 @@ export class AddProductsPromotionsComponent {
       showTiming: this.showTiming
     }
     this.promotionsService.createProductsPromotion(promotion).subscribe(() => {
-      // this.dialogRef.close(true);
+      if(this.edit){
+        this.dialogRef.close(true);
+      }
       this.feedbackToolbarService.openSnackBarWithSuccessMessage(this.msg);
     });
   }

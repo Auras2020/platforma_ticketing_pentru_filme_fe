@@ -8,7 +8,9 @@ import {StatisticsService} from "./statistics.service";
 })
 export class StatisticsComponent implements OnInit{
 
-  ticketsNrdata: any[] = [];
+  ticketsNrData: any[] = [];
+  ticketsPriceData: any[] = [];
+  productsNrData: any[] = [];
 
   showXAxis = true;
   showYAxis = true;
@@ -16,20 +18,41 @@ export class StatisticsComponent implements OnInit{
   showLegend = false;
   showXAxisLabel = true;
   xAxisLabel = 'Movie name';
+  xAxisLabel1 = 'Product name';
   showYAxisLabel = true;
-  yAxisLabel = 'Number of tickets';
+  yAxisLabel = 'Price of tickets';
+  yAxisLabel1 = 'Number of products';
 
   constructor(private statisticsService: StatisticsService) {
   }
 
   ngOnInit(): void {
-    this.findEnergiesForDevice();
+    this.findNumberOfTicketsPerMovie();
+    this.findPriceOfTicketsPerMovie();
+    this.findNumberOfProductsSold();
   }
 
-  findEnergiesForDevice(){
+  calculateTicketsPercentage(value: number): string {
+    const total = this.ticketsNrData.reduce((sum, dataPoint) => sum + dataPoint.value, 0);
+    const percentage = (value / total) * 100;
+    return percentage.toFixed(2);
+  }
+
+  findNumberOfTicketsPerMovie(){
     this.statisticsService.getTicketsNumber().subscribe((res) => {
-      this.ticketsNrdata = JSON.parse(JSON.stringify(res));
-      console.log(JSON.parse(JSON.stringify(res)));
+      this.ticketsNrData = JSON.parse(JSON.stringify(res));
+    })
+  }
+
+  findPriceOfTicketsPerMovie(){
+    this.statisticsService.getTicketsPrice().subscribe((res) => {
+      this.ticketsPriceData = JSON.parse(JSON.stringify(res));
+    })
+  }
+
+  findNumberOfProductsSold(){
+    this.statisticsService.getProductsNumber().subscribe((res) => {
+      this.productsNrData = JSON.parse(JSON.stringify(res));
     })
   }
 }

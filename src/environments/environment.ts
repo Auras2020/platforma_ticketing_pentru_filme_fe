@@ -58,7 +58,9 @@ export const environment = {
     peoplePromotions: "promotions/people/",
     ticketsPromotions: "promotions/tickets/",
     productsPromotions: "promotions/products/",
-    ticketsNrChart: "orders/tickets-number-chart"
+    ticketsNrChart: "orders/tickets-number-chart",
+    ticketsPriceChart: "orders/tickets-price-chart",
+    productsNrChart: "orders/products-number-chart"
   }
 };
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {LogoutComponent} from "../homepage-admin/logout/logout.component";
 import {Router} from "@angular/router";
@@ -8,7 +8,7 @@ import {Router} from "@angular/router";
   templateUrl: './homepage-distribuitor.component.html',
   styleUrls: ['./homepage-distribuitor.component.css']
 })
-export class HomepageDistribuitorComponent {
+export class HomepageDistribuitorComponent implements OnInit{
 
   btn1?: string = 'btn-selected';
   btn2?: string = 'btn-default';
@@ -24,15 +24,19 @@ export class HomepageDistribuitorComponent {
     this.dialog.open(LogoutComponent, dialogConfig)
   }
 
-  onClickUtilizatoriBtn() {
+  onClickPromotionsBtn() {
     this.btn1 = 'btn-selected';
     this.btn2 = 'btn-default';
     this.router.navigate(['distributor', 'promotions']);
   }
 
-  onClickAnunturiBtn() {
+  onClickStatisticsBtn() {
     this.btn1 = 'btn-default';
     this.btn2 = 'btn-selected';
     this.router.navigate(['distributor', 'statistics']);
+  }
+
+  ngOnInit(): void {
+    this.router.navigate(['distributor', 'promotions']);
   }
 }

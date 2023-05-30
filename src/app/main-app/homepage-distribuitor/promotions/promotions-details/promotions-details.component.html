@@ -1,1 +1,167 @@
-<p>promotions-details works!</p>
+<div class="page-content">
+  <mat-card class="promotions-details-card">
+    <div class="title">
+      <button mat-icon-button class="arrow-color"
+              [matTooltip]="'Back to promotions page'"
+              matTooltipPosition="above"
+              (click)="navigateBackToPromotionsPage()">
+        <mat-icon>
+          {{'chevron_left'}}
+        </mat-icon>
+      </button>
+      <label class="title-style">
+        Promotions
+      </label>
+    </div>
+
+    <div class="people-promotions-section" *ngIf="peoplePromotion">
+      <div class="people-promotions-title">
+        <label class="people-promotions-title-style">
+          People promotions
+        </label>
+      </div>
+      <div class="people-promotions">
+        <div class="people-promotions-details">
+          <div>
+            <label class="people-promotions-style">
+              Adult ticket price: {{this.peoplePromotion?.adult}}
+            </label>
+          </div>
+          <div>
+            <label class="people-promotions-style">
+              Student ticket price: {{this.peoplePromotion?.student}}
+            </label>
+          </div>
+          <div>
+            <label class="people-promotions-style">
+              Child ticket price: {{this.peoplePromotion?.child}}
+            </label>
+          </div>
+        </div>
+
+        <div class="empty-div"></div>
+
+        <div class="people-promotions-buttons">
+          <button mat-icon-button
+                  [matTooltip]="'Edit promotion'"
+                  aria-label="Edit"
+                  matTooltipPosition="above"
+                  (click)="openEditPeopleDialog(peoplePromotion)">
+            <mat-icon class="edit-button">
+              edit
+            </mat-icon>
+          </button>
+          <button mat-icon-button
+                  [matTooltip]="'Delete promotion'"
+                  aria-label="Delete"
+                  matTooltipPosition="above"
+                  (click)="openDeletePeopleDialog(peoplePromotion)">
+            <mat-icon class="delete-button">
+              delete
+            </mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tickets-promotions-section" *ngIf="ticketsPromotions?.length!">
+      <div class="people-promotions-title">
+        <label class="people-promotions-title-style">
+          Tickets promotions
+        </label>
+      </div>
+
+      <div class="tickets-promotions">
+        <div *ngFor="let ticketsPromotion of ticketsPromotions">
+          <div class="tickets-promotions-card">
+            <div class="people-promotions-details">
+              <div>
+                <label class="people-promotions-style">
+                  Number of tickets: {{ticketsPromotion?.nrTickets}}
+                </label>
+              </div>
+              <div>
+                <label class="people-promotions-style">
+                  Discount: {{ticketsPromotion?.reduction}}
+                </label>
+              </div>
+            </div>
+
+            <div class="empty-div"></div>
+
+            <div class="people-promotions-buttons">
+              <button mat-icon-button
+                      [matTooltip]="'Edit promotion'"
+                      aria-label="Edit"
+                      matTooltipPosition="above"
+                      (click)="openEditTicketsDialog(ticketsPromotion)">
+                <mat-icon class="edit-button">
+                  edit
+                </mat-icon>
+              </button>
+              <button mat-icon-button
+                      [matTooltip]="'Delete promotion'"
+                      aria-label="Delete"
+                      matTooltipPosition="above"
+                      (click)="openDeleteTicketDialog(ticketsPromotion)">
+                <mat-icon class="delete-button">
+                  delete
+                </mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="products-promotions-section" *ngIf="productsPromotions?.length!">
+      <div class="people-promotions-title">
+        <label class="people-promotions-title-style">
+          Products promotions
+        </label>
+      </div>
+
+      <div class="tickets-promotions">
+        <div *ngFor="let productsPromotion of productsPromotions">
+          <div class="tickets-promotions-card">
+            <div class="people-promotions-details">
+              <div>
+                <label class="people-promotions-style">
+                  Number of products: {{productsPromotion?.nrProducts}}
+                </label>
+              </div>
+              <div>
+                <label class="people-promotions-style">
+                  Discount: {{productsPromotion?.reduction}}
+                </label>
+              </div>
+            </div>
+
+            <div class="empty-div"></div>
+
+            <div class="people-promotions-buttons">
+              <button mat-icon-button
+                      [matTooltip]="'Edit promotion'"
+                      aria-label="Edit"
+                      matTooltipPosition="above"
+                      (click)="openEditProductsDialog(productsPromotion)">
+                <mat-icon class="edit-button">
+                  edit
+                </mat-icon>
+              </button>
+              <button mat-icon-button
+                      [matTooltip]="'Delete promotion'"
+                      aria-label="Delete"
+                      matTooltipPosition="above"
+                      (click)="openDeleteProductDialog(productsPromotion)">
+                <mat-icon class="delete-button">
+                  delete
+                </mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>

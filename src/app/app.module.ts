@@ -87,6 +87,9 @@ import { AddTicketsPromotionsComponent } from './main-app/homepage-distribuitor/
 import { AddProductsPromotionsComponent } from './main-app/homepage-distribuitor/promotions/add-products-promotions/add-products-promotions.component';
 import { PromotionsDetailsComponent } from './main-app/homepage-distribuitor/promotions/promotions-details/promotions-details.component';
 import {NgxChartsModule} from "@swimlane/ngx-charts";
+import { DeletePeoplePromotionsComponent } from './main-app/homepage-distribuitor/promotions/delete-people-promotions/delete-people-promotions.component';
+import { DeleteProductsPromotionsComponent } from './main-app/homepage-distribuitor/promotions/delete-products-promotions/delete-products-promotions.component';
+import { DeleteTicketsPromotionsComponent } from './main-app/homepage-distribuitor/promotions/delete-tickets-promotions/delete-tickets-promotions.component';
 
 @NgModule({
   declarations: [
@@ -147,36 +150,39 @@ import {NgxChartsModule} from "@swimlane/ngx-charts";
     AddPeoplePromotionsComponent,
     AddTicketsPromotionsComponent,
     AddProductsPromotionsComponent,
-    PromotionsDetailsComponent
+    PromotionsDetailsComponent,
+    DeletePeoplePromotionsComponent,
+    DeleteProductsPromotionsComponent,
+    DeleteTicketsPromotionsComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        ReactiveFormsModule,
-        MatInputModule,
-        MatDialogModule,
-        MatButtonModule,
-        MatIconModule,
-        HttpClientModule,
-        MatCheckboxModule,
-        MatToolbarModule,
-        FlexLayoutModule,
-        MatSidenavModule,
-        MatListModule,
-        MatCardModule,
-        FormsModule,
-        MatOptionModule,
-        MatSelectModule,
-        MatTableModule,
-        MatSortModule,
-        MatPaginatorModule,
-        MatTooltipModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatSnackBarModule,
-        NgxChartsModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatIconModule,
+    HttpClientModule,
+    MatCheckboxModule,
+    MatToolbarModule,
+    FlexLayoutModule,
+    MatSidenavModule,
+    MatListModule,
+    MatCardModule,
+    FormsModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatTooltipModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSnackBarModule,
+    NgxChartsModule
+  ],
   providers: [AuthGuard, AdminGuard, DistribuitorGuard, ClientGuard,
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 3000}}, DatePipe],
   bootstrap: [AppComponent]

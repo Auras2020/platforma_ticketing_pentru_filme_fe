@@ -199,6 +199,10 @@ mat-table {
   border: 2px solid #213555;
 }
 
+.row{
+  cursor: pointer;
+}
+
 .row:hover{
   background-color: #FFF3E0 !important;
 }

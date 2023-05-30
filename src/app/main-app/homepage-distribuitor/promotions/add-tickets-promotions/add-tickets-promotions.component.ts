@@ -15,6 +15,7 @@ export class AddTicketsPromotionsComponent {
   title: string = 'Add new tickets promotion';
   msg = 'Tickets promotion was added successfully'
   showTiming: any;
+  edit?: any;
 
   constructor(
     private dialogRef: MatDialogRef<AddTicketsPromotionsComponent>,
@@ -28,13 +29,16 @@ export class AddTicketsPromotionsComponent {
         reduction: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(99)])
       }
     )
-    //this.edit = false
-    /*if(data){
+    if(data.ticket){
+      this.title = 'Edit tickets promotion';
+      this.msg = 'Tickets promotion was updated successfully';
       this.edit = true
-      this.form.patchValue(data.theatre);
+      this.form.patchValue(data.ticket);
     } else {
+      this.title = 'Add tickets promotion';
+      this.msg = 'Tickets promotion was added successfully';
       this.edit = false;
-    }*/
+    }
   }
 
   savePromotion() {
@@ -43,7 +47,9 @@ export class AddTicketsPromotionsComponent {
       showTiming: this.showTiming
     }
     this.promotionsService.createTicketsPromotion(promotion).subscribe(() => {
-      // this.dialogRef.close(true);
+      if(this.edit){
+        this.dialogRef.close(true);
+      }
       this.feedbackToolbarService.openSnackBarWithSuccessMessage(this.msg);
     });
   }

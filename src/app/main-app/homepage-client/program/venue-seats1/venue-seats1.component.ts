@@ -124,8 +124,13 @@ export class VenueSeats1Component implements OnInit{
   }
 
   getTotalPrice(): number{
-    const nr = this.peoplePromotion?.adult * this.nrAdults + this.peoplePromotion?.student * this.nrStudents +
-      this.peoplePromotion?.child * this.nrChilds;
+    let nr = 0;
+    if(this.peoplePromotion){
+      nr = this.peoplePromotion?.adult * this.nrAdults + this.peoplePromotion?.student * this.nrStudents +
+        this.peoplePromotion?.child * this.nrChilds;
+    } else {
+      nr = this.showTiming?.price! * this.nrTotal;
+    }
     return Number.isNaN(
       nr) ? 0 : nr;
   }

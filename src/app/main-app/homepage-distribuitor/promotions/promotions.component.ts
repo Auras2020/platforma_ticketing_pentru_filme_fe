@@ -10,6 +10,7 @@ import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {AddPeoplePromotionsComponent} from "./add-people-promotions/add-people-promotions.component";
 import {AddTicketsPromotionsComponent} from "./add-tickets-promotions/add-tickets-promotions.component";
 import {AddProductsPromotionsComponent} from "./add-products-promotions/add-products-promotions.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-promotions',
@@ -54,7 +55,8 @@ export class PromotionsComponent implements OnInit{
   }
 
   constructor(private showTimingsService: ShowTimingsService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private router: Router) {
   }
 
   handleSuccess(showTimingsPage: ShowTimingsPage){
@@ -180,5 +182,9 @@ export class PromotionsComponent implements OnInit{
       showTiming
     };
     this.openProductsDialog(dialogConfig);
+  }
+
+  public clickOnRow(id: string) {
+    this.router.navigate(['distributor', 'promotions', id]);
   }
 }
