@@ -69,7 +69,6 @@ mat-toolbar {
   margin-left: 10px;
   margin-right: 10px;
   height: 100%;
-  color: black;
   font-weight: bold;
   font-size: 16px;
   border-width: 0;
@@ -79,7 +78,6 @@ mat-toolbar {
 }
 
 .btn-default:hover {
-  background-color: yellow;
   border-bottom: 3px solid white;
   border-radius: 0;
 }
@@ -88,7 +86,7 @@ mat-toolbar {
   margin-left: 10px;
   margin-right: 10px;
   height: 100%;
-  color: black;
+  color: white !important;
   border-width: 0;
   border-bottom: 4px solid white;
   font-weight: bold;
@@ -96,8 +94,4 @@ mat-toolbar {
   border-radius: 0;
   padding-top: 10px;
   padding-bottom: 10px;
-}
-
-.btn-selected:hover{
-  background-color: yellow;
 }

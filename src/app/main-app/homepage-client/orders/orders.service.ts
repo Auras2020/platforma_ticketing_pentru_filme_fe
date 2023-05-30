@@ -13,6 +13,8 @@ export interface Order{
   ticketsStatus?: string;
   productsCount?: number;
   productsStatus?: string;
+  ticketsPrice?: number;
+  productsPrice?: number;
   createdDate?: Date;
 }
 
@@ -96,4 +98,6 @@ export class OrdersService {
   getLastOrderCreatedByUserAndShowTiming(userShowTiming: UserShowTiming): Observable<Date>{
     return this.http.post<Date>(this.url + this.ordersDate, userShowTiming);
   }
+
+
 }

@@ -46,7 +46,9 @@ export class OrdersComponent implements OnInit{
     'location',
     'movie',
     'day',
-    'time'
+    'time',
+    'ticketsPrice',
+    'productsPrice'
   ];
 
   user?: User;

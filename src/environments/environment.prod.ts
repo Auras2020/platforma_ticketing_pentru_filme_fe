@@ -53,6 +53,7 @@ export const environment = {
     filteredReviewsByUser: "reviews/filtered-by-user",
     peoplePromotions: "promotions/people/",
     ticketsPromotions: "promotions/tickets/",
-    productsPromotions: "promotions/products/"
+    productsPromotions: "promotions/products/",
+    ticketsNrChart: "orders/tickets-number-chart"
   }
 };

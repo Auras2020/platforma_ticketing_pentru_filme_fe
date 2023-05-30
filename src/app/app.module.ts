@@ -86,6 +86,7 @@ import { AddPeoplePromotionsComponent } from './main-app/homepage-distribuitor/p
 import { AddTicketsPromotionsComponent } from './main-app/homepage-distribuitor/promotions/add-tickets-promotions/add-tickets-promotions.component';
 import { AddProductsPromotionsComponent } from './main-app/homepage-distribuitor/promotions/add-products-promotions/add-products-promotions.component';
 import { PromotionsDetailsComponent } from './main-app/homepage-distribuitor/promotions/promotions-details/promotions-details.component';
+import {NgxChartsModule} from "@swimlane/ngx-charts";
 
 @NgModule({
   declarations: [
@@ -173,7 +174,8 @@ import { PromotionsDetailsComponent } from './main-app/homepage-distribuitor/pro
         MatTooltipModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        NgxChartsModule
     ],
   providers: [AuthGuard, AdminGuard, DistribuitorGuard, ClientGuard,
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 3000}}, DatePipe],

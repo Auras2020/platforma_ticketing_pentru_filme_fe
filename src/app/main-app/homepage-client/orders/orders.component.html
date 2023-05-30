@@ -223,6 +223,20 @@
           </td>
         </ng-container>
 
+        <ng-container matColumnDef="ticketsPrice">
+          <th mat-header-cell *matHeaderCellDef class="data-header"><span>Tickets price(RON)</span></th>
+          <td mat-cell *matCellDef="let row" class="name-column" [style.color] = "row.ticketsStatus === 'cancelled' || compareWithCurrentDate(row) ? 'gray' : '#213555'"
+          ><span class="ellipsis">{{ row.ticketsPrice }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="productsPrice">
+          <th mat-header-cell *matHeaderCellDef class="data-header"><span>Products price(RON)</span></th>
+          <td mat-cell *matCellDef="let row" class="name-column" [style.color] = "row.ticketsStatus === 'cancelled' || compareWithCurrentDate(row) ? 'gray' : '#213555'"
+          ><span class="ellipsis" *ngIf="row.productsPrice">{{ row.productsPrice }}</span>
+          </td>
+        </ng-container>
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header"></tr>
         <tr mat-row
             *matRowDef="let odd = odd; columns: displayedColumns"
