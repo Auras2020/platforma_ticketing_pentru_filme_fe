@@ -90,6 +90,8 @@ import {NgxChartsModule} from "@swimlane/ngx-charts";
 import { DeletePeoplePromotionsComponent } from './main-app/homepage-distribuitor/promotions/delete-people-promotions/delete-people-promotions.component';
 import { DeleteProductsPromotionsComponent } from './main-app/homepage-distribuitor/promotions/delete-products-promotions/delete-products-promotions.component';
 import { DeleteTicketsPromotionsComponent } from './main-app/homepage-distribuitor/promotions/delete-tickets-promotions/delete-tickets-promotions.component';
+import { Reviews1Component } from './main-app/homepage-admin/reviews1/reviews1.component';
+import { DeleteReview1Component } from './main-app/homepage-admin/reviews1/delete-review1/delete-review1.component';
 
 @NgModule({
   declarations: [
@@ -153,7 +155,9 @@ import { DeleteTicketsPromotionsComponent } from './main-app/homepage-distribuit
     PromotionsDetailsComponent,
     DeletePeoplePromotionsComponent,
     DeleteProductsPromotionsComponent,
-    DeleteTicketsPromotionsComponent
+    DeleteTicketsPromotionsComponent,
+    Reviews1Component,
+    DeleteReview1Component
   ],
   imports: [
     BrowserModule,

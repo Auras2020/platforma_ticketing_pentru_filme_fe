@@ -14,11 +14,6 @@
           </mat-icon>
         </div>
 
-        <div class="user-filter">
-          <mat-checkbox (change)="checkboxChanged($event)"></mat-checkbox>
-          <label class="product-button-style">Show only my reviews</label>
-        </div>
-
         <div class="search-box">
           <span class="fa fa-search"><mat-icon>search</mat-icon></span>
           <input (keyup)="getAllReviews()"
@@ -115,10 +110,7 @@
                  alt="Poster"/>
           </div>
           <div class="main-details">
-            <div class="movie-name"
-                 matTooltip="Click here for movie details"
-                 matTooltipPosition="above"
-                 (click)="clickOnMovieRow(movieReview.movie.id)">
+            <div class="movie-name">
               {{movieReview.movie.name}}
             </div>
             <div class="movie-age">
@@ -147,11 +139,6 @@
               </label>
             </div>
             <div class="empty-div"></div>
-            <div class="add-review-button-div">
-              <button mat-raised-button [disabled]="checkIfMovieContainsCurrentUserReviews(movieReview)"
-                      [style.background-color]="checkIfMovieContainsCurrentUserReviews(movieReview) ? 'gray':  '#DC4E2A'"
-                      class="add-review-button" (click)="openAddReviewDialog(movieReview)">Add review</button>
-            </div>
           </div>
           <div class="reviews-height">
             <div *ngFor="let review of movieReview.reviews">
@@ -193,20 +180,9 @@
                       {{review.createdDate | date: "dd/MM/yyyy HH:mm"}}
                     </label>
                     <button mat-icon-button
-                            [matTooltip]="'Edit review'"
-                            aria-label="Edit"
-                            matTooltipPosition="above"
-                            *ngIf="review.user?.id === this.user?.id"
-                            (click)="openEditReviewDialog(movieReview, review)">
-                      <mat-icon class="edit-button material-icons-outlined">
-                        edit
-                      </mat-icon>
-                    </button>
-                    <button mat-icon-button
                             [matTooltip]="'Delete review'"
                             aria-label="Delete"
                             matTooltipPosition="above"
-                            *ngIf="review.user?.id === this.user?.id"
                             (click)="openDeleteReviewDialog(movieReview, review)">
                       <mat-icon class="delete-button material-icons-outlined">
                         delete

@@ -35,6 +35,7 @@ import {StatisticsComponent} from "./main-app/homepage-distribuitor/statistics/s
 import {
   PromotionsDetailsComponent
 } from "./main-app/homepage-distribuitor/promotions/promotions-details/promotions-details.component";
+import {Reviews1Component} from "./main-app/homepage-admin/reviews1/reviews1.component";
 
 const routes: Routes = [
   {path: 'login', component: MainAppComponent},
@@ -57,7 +58,8 @@ const routes: Routes = [
       {path: 'movies/:id', component: MovieDetailsComponent, canActivate: [AuthGuard, AdminGuard]},
       {path: 'show-timings', component: ShowTimingsComponent, canActivate: [AuthGuard, AdminGuard]},
       {path: 'products/:id', component: ProductsComponent, canActivate: [AuthGuard, AdminGuard]},
-      {path: 'theatres/venue/:id', component: VenueSeats2Component, canActivate: [AuthGuard, AdminGuard]}
+      {path: 'theatres/venue/:id', component: VenueSeats2Component, canActivate: [AuthGuard, AdminGuard]},
+      {path: 'reviews', component: Reviews1Component, canActivate: [AuthGuard, AdminGuard]},
   ]},
   {
     path: 'distributor',

@@ -26,7 +26,7 @@ export class TheatresComponent implements OnInit{
   filteredData?: TheatreFilters | null
   currentPage: number = 0
   pageSize:number = 10
-  pageSizeOptions:number[] = [2, 5, 10, 15, 20]
+  pageSizeOptions:number[] = [5, 10, 15, 20]
   dataSource = new MatTableDataSource<Theatre>([]);
 
   public displayedColumns = [

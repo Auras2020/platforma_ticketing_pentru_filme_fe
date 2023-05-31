@@ -7,6 +7,9 @@ export interface Dashboard{
   theatres: number;
   movies: number;
   users: number;
+  tickets: number;
+  products: number;
+  reviews: number;
 }
 
 @Injectable({

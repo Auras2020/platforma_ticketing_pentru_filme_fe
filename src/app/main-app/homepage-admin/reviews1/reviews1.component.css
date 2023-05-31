@@ -58,7 +58,7 @@
 }
 
 .title-and-filter-icon{
-  padding-top: 15px;
+  padding-top: 10px;
 }
 
 .filter-list{
@@ -91,8 +91,8 @@
   font-size: 18px;
 }
 
-.state{
-  margin-top: 10px;
+.review-opinion{
+  margin-left: 233px;
 }
 
 .filter-form {
@@ -101,16 +101,14 @@
   padding: 0;
 }
 
-.filter-state-form {
-  font-size: 18px;
-  margin-left: 20px;
-  padding: 0;
-}
-
 .form-input{
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+}
+
+.review-input{
+  width: 191%;
 }
 
 .reset-button {
@@ -135,7 +133,7 @@
   right: 0;
 }
 
-.forms-display, .movies-display{
+.forms-display{
   display: inline-flex;
   flex-wrap: wrap;
 }
@@ -157,20 +155,13 @@
   min-height: 32px;
 }
 
-.filters-row{
-  display: flex;
-  justify-content: space-between;
-}
-
-.empty-div, .filters{
+.empty-div{
   align-items: flex-start;
 }
 
 .movie-card {
-  margin: 24px;
+  margin: 24px 24px 24px 24px;
   padding-bottom: 24px;
-  min-height: 250px;
-  width: 430px;
 }
 
 .movie-poster{
@@ -195,20 +186,56 @@
   font-weight: bold;
   font-size: 20px;
   padding-bottom: 40px;
-  text-decoration: none;
-  display: inline-block;
-}
-
-.movie-name:hover{
-  color: orange;
-  text-decoration: underline;
-  cursor: pointer;
 }
 
 .movie-age, .movie-genre{
   color: #213555;
   font-size: 16px;
   font-weight: 600;
+}
+
+.time-style{
+  background-color: #DC4E2A;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px 20px 10px 20px;
+  margin-right: 10px;
+}
+
+.movie-content{
+  display: flex;
+  justify-content: space-between;
+}
+
+.actors-and-director{
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.actors-div, .director-div{
+  text-align: right;
+}
+
+.actors, .director{
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-top: 15px;
+  padding-right: 20px;
+}
+
+.director-value, .actors-value{
+  color: #213555;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.director-label, .actors-label{
+  color: #9DA9AE;
+  font-size: 16px;
 }
 
 .movie-note{
@@ -224,21 +251,124 @@
   font-weight: 600;
 }
 
-.times-display{
-  display: inline-flex;
-  padding-top: 20px;
+.info-icon{
+  color: #213555;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
 }
 
-.time-style{
-  background-color: #DC4E2A;
-  color: white;
+.info-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 7px;
+}
+
+.review-title{
   font-weight: bold;
   font-size: 16px;
-  padding: 10px 20px 10px 20px;
-  margin-right: 10px;
+  color: #213555;
 }
 
-.movie-content{
+.reviews-header{
   display: flex;
   justify-content: space-between;
+  border-bottom: 2px solid #CBDAF0;
+  padding-bottom: 20px;
+}
+
+.review-title-div{
+  align-self: flex-start;
+  padding-top: 14px;
+}
+
+.add-review-button-div{
+  align-self: flex-start;
+}
+
+.reviews-section{
+  width: 60%;
+  margin-top: 30px;
+  margin-right: 30px;
+}
+
+.add-review-button{
+  color: #FFFFFF;
+  margin-right: 24px;
+  font-weight: bold;
+  width: 100%;
+}
+
+.review-details{
+  display: flex;
+  justify-content: space-between;
+}
+
+.review-details-left, .review-details-right{
+  align-self: flex-start;
+  display: inline-flex;
+  flex-wrap: wrap;
+}
+
+.review-details-margin{
+  margin-top: 15px;
+}
+
+.review-opinion-margin{
+  margin-top: 10px;
+}
+
+.edit-button{
+  color: #213555;
+}
+
+.delete-button, .opinion-icon{
+  color: #DC4E2A;
+}
+
+.review-name, .review-date{
+  font-size: 14px;
+  color: #213555;
+  font-weight: 600;
+  margin-right: 15px;
+}
+
+.review-content{
+  background-color: #F6F8F8;
+  color: #213555;
+  padding: 10px;
+  word-wrap: break-word;
+}
+
+.review-border{
+  border-bottom: 2px solid #FDD5BD;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+.star-color{
+  color: yellow;
+}
+
+.star-label{
+  margin-right: 15px;
+}
+
+.product-button-style{
+  font-size: 16px;
+  font-weight: bold;
+  color: #213555;
+}
+
+.user-filter{
+  margin-left: 10px;
+  margin-top: 4px;
+}
+
+.reviews-height{
+  max-height: 350px;
+  overflow-x: auto;
+  margin-top: 20px;
+  padding-right: 20px;
 }

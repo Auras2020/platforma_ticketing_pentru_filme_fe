@@ -315,6 +315,10 @@ button:disabled {
   margin-right: 10px;
 }
 
+.time-style:hover{
+  text-decoration: underline;
+}
+
 .movie-content{
   display: flex;
   justify-content: space-between;
@@ -374,6 +378,7 @@ button:disabled {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 13.33px;
 }
 
 .reset-div{

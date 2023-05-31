@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 100px;
   margin-bottom: 100px;
 }
 
@@ -42,7 +41,7 @@
   padding-right: 20px;
 }
 
-.theatres-number{
+.theatres-number, .reviews-number{
   width: 200px;
   height: 160px;
   border: 6px solid red;
@@ -52,10 +51,20 @@
   justify-content: center;
 }
 
-.users-number{
+.users-number, .products-number{
   width: 200px;
   height: 160px;
   border: 6px solid green;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.tickets-number{
+  width: 200px;
+  height: 160px;
+  border: 6px solid lightblue;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -72,7 +81,7 @@
   justify-content: center;
 }
 
-.theatres-label{
+.theatres-label, .reviews-label{
   height: 40px;
   width: 200px;
   background-color: red;
@@ -98,7 +107,7 @@
   border: 6px solid #F0E68C;
 }
 
-.users-label{
+.users-label, .products-label{
   height: 40px;
   width: 200px;
   background-color: green;
@@ -111,14 +120,27 @@
   border: 6px solid green;
 }
 
-.theatre-icon{
+.tickets-label{
+  height: 40px;
+  width: 200px;
+  background-color: lightblue;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 6px solid lightblue;
+}
+
+.theatre-icon, .reviews-icon{
   height: 70px;
   width: 70px;
   font-size: 70px;
   color: red;
 }
 
-.user-icon{
+.user-icon, .products-icon{
   height: 70px;
   width: 70px;
   font-size: 70px;
@@ -132,7 +154,14 @@
   color: #F0E68C;
 }
 
-.theatres-number-label{
+.tickets-icon{
+  height: 70px;
+  width: 70px;
+  font-size: 70px;
+  color: lightblue;
+}
+
+.theatres-number-label, .reviews-number-label{
   color: red;
   font-weight: bold;
   font-size: 30px;
@@ -144,8 +173,14 @@
   font-size: 30px;
 }
 
-.users-number-label{
+.users-number-label, .products-number-label{
   color: green;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.tickets-number-label{
+  color: lightblue;
   font-weight: bold;
   font-size: 30px;
 }

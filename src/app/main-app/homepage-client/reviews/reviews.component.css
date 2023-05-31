@@ -187,9 +187,11 @@
   font-size: 20px;
   padding-bottom: 40px;
   text-decoration: none;
+  display: inline-block;
 }
 
 .movie-name:hover{
+  color: orange;
   text-decoration: underline;
   cursor: pointer;
 }

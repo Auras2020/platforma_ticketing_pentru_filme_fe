@@ -114,6 +114,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 13.33px;
 }
 
 .reset-div{
@@ -286,9 +287,11 @@ button:disabled {
   font-size: 20px;
   padding-bottom: 40px;
   text-decoration: none;
+  display: inline-block;
 }
 
 .movie-name:hover{
+  color: orange;
   text-decoration: underline;
   cursor: pointer;
 }
@@ -302,6 +305,11 @@ button:disabled {
 .times-display{
   display: inline-flex;
   padding-top: 20px;
+}
+
+.times-display:hover{
+  text-decoration: underline;
+  color: white;
 }
 
 .time-style{

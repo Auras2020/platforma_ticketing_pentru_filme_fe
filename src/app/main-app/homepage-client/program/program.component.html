@@ -181,7 +181,10 @@
                  alt="Poster"/>
           </div>
           <div class="main-details">
-            <div class="movie-name" (click)="clickOnMovieRow(movieTime.movie.id)">
+            <div class="movie-name"
+                 matTooltip="Click here for movie details"
+                 matTooltipPosition="above"
+                 (click)="clickOnMovieRow(movieTime.movie.id)">
               {{movieTime.movie.name}}
             </div>
             <div class="movie-age">

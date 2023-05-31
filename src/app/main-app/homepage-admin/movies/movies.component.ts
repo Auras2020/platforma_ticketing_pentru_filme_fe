@@ -30,7 +30,7 @@ export class MoviesComponent implements OnInit{
   filteredData?: MovieFilters | null
   currentPage: number = 0
   pageSize:number = 10
-  pageSizeOptions:number[] = [2, 5, 10, 15, 20]
+  pageSizeOptions:number[] = [5, 10, 15, 20]
   dataSource = new MatTableDataSource<Movie>([]);
 
   public displayedColumns = [

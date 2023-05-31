@@ -23,9 +23,12 @@ export class DeleteVenueComponent {
   }
 
   deleteVenue(){
-    this.venuesService.deleteVenue(this.venue?.id).subscribe(()=>{
+    this.venuesService.deleteVenue(this.venue?.id).subscribe((res)=>{
       this.dialogRef.close(true);
       this.feedbackToolbarService.openSnackBarWithSuccessMessage("Venue was deleted successfully");
+    }, () => {
+      this.dialogRef.close(true);
+      this.feedbackToolbarService.openSnackBarWithErrorMessage("Venue is reserved for a show timing!")
     })
   }
 }
