@@ -16,7 +16,7 @@ export class ProgramComponent implements OnInit{
   filters: MovieFilters = {
     name: '',
     recommendedAge: '',
-    genre: '',
+    genre: [],
     duration: '',
     actors: '',
     director: '',
@@ -28,7 +28,7 @@ export class ProgramComponent implements OnInit{
 
   ageRestricts = ['AG', 'AP12', 'N15', 'IM18']
   durationIntervals = ['<1h30m', '1h30m-2h0m', '2h0m-2h30m', '>2h30m'];
-  genres = ['Action', 'Adventure', 'Comedy', 'Drama', 'Horror', 'Romance', 'SF', 'Thriller', 'Western'];
+  genres: any /*= ['Action', 'Adventure', 'Comedy', 'Drama', 'Horror', 'Romance', 'SF', 'Thriller', 'Western']*/;
 
   daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   datesOfWeek: Date[] = [];
@@ -45,6 +45,7 @@ export class ProgramComponent implements OnInit{
   curDate?: Date;
 
   ngOnInit(): void {
+    this.getGenres();
     this.theatresService.getAllTheatresLocations().subscribe((locations) => {
       this.locations = locations;
     })
@@ -75,7 +76,7 @@ export class ProgramComponent implements OnInit{
     let isActive: boolean;
     isActive = !((this.filters.name === '') &&
       (this.filters.recommendedAge === '') &&
-      (this.filters.genre === '') &&
+      (this.filters.genre.length === 0) &&
       (this.filters.duration === '') &&
       (this.filters.actors === '') &&
       (this.filters.director === '') &&
@@ -86,7 +87,7 @@ export class ProgramComponent implements OnInit{
   resetFilters(): void {
     this.filters.name =  '';
     this.filters.recommendedAge = '';
-    this.filters.genre = '';
+    this.filters.genre = [];
     this.filters.duration = '';
     this.filters.actors = '';
     this.filters.director = '';
@@ -160,6 +161,9 @@ export class ProgramComponent implements OnInit{
     }
     this.moviesService.getAllMoviesFromATheatreAtAGivenDay(theatreDay).subscribe((movieTimes) => {
       this.movieTimes = movieTimes;
+      for(let m of movieTimes){
+        this.getMoviesGenres(m.movie);
+      }
     })
     this.index = index;
   }
@@ -211,6 +215,22 @@ export class ProgramComponent implements OnInit{
 
   showNumberWithFirstDecimal(num: any): any{
     return (num + '').substring(0, 3);
+  }
+
+  public getGenres(): void {
+    this.moviesService.getAllGenres().subscribe((genres) => {
+      this.genres = genres.map(genre => genre.name);
+    });
+  }
+
+  getMoviesGenres(movie: any): void{
+    this.moviesService.getMovieGenres(movie?.id).subscribe((genres) => {
+      movie.genres = genres;
+    })
+  }
+
+  getMovieGenres(genres: any): any{
+    return genres.map((genre: any) => genre.name);
   }
 
 }

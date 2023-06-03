@@ -13,7 +13,7 @@ export class HomepageComponent implements OnInit{
   filters: MovieFilters = {
     name: '',
     recommendedAge: '',
-    genre: '',
+    genre: [],
     duration: '',
     actors: '',
     director: '',
@@ -26,13 +26,14 @@ export class HomepageComponent implements OnInit{
   states = ['currently playing', 'playing soon', 'recommended movies']
   ageRestricts = ['AG', 'AP12', 'N15', 'IM18']
   durationIntervals = ['<1h30m', '1h30m-2h0m', '2h0m-2h30m', '>2h30m'];
-  genres = ['Action', 'Adventure', 'Comedy', 'Drama', 'Horror', 'Romance', 'SF', 'Thriller', 'Western'];
+  genres: any /*= ['Action', 'Adventure', 'Comedy', 'Drama', 'Horror', 'Romance', 'SF', 'Thriller', 'Western']*/;
   movies?: Movie[];
   selectedValue?: any;
   age?: number;
 
   ngOnInit(): void {
     this.getAllMovies();
+    this.getGenres();
     const currentUser = JSON.parse(localStorage.getItem("user") + '');
     this.userService.getUserByEmail(currentUser.username).subscribe((user) => {
       this.age = user?.age;
@@ -61,7 +62,7 @@ export class HomepageComponent implements OnInit{
     let isActive: boolean;
     isActive = !((this.filters.name === '') &&
       (this.filters.recommendedAge === '') &&
-      (this.filters.genre === '') &&
+      (this.filters.genre.length === 0 ) &&
       (this.filters.duration === '') &&
       (this.filters.actors === '') &&
       (this.filters.director === '') &&
@@ -72,7 +73,7 @@ export class HomepageComponent implements OnInit{
   resetFilters(): void {
     this.filters.name =  '';
     this.filters.recommendedAge = '';
-    this.filters.genre = '';
+    this.filters.genre = [];
     this.filters.duration = '';
     this.filters.actors = '';
     this.filters.director = '';
@@ -109,6 +110,9 @@ export class HomepageComponent implements OnInit{
     this.getAllByFilters();
     this.moviesService.getAllMoviesCurrentlyRunning(this.filteredData).subscribe((movies) => {
       this.movies = movies;
+      for(let m of movies){
+        this.getMoviesGenres(m);
+      }
     })
   }
 
@@ -116,6 +120,9 @@ export class HomepageComponent implements OnInit{
     this.getAllByFilters();
     this.moviesService.getAllMoviesRunningSoon(this.filteredData).subscribe((movies) => {
       this.movies = movies;
+      for(let m of movies){
+        this.getMoviesGenres(m);
+      }
     })
   }
 
@@ -127,6 +134,9 @@ export class HomepageComponent implements OnInit{
     }
     this.moviesService.getRecomendedMovies(movieFiltersAge).subscribe((movies) => {
       this.movies = movies;
+      for(let m of movies){
+        this.getMoviesGenres(m);
+      }
     })
   }
 
@@ -148,5 +158,21 @@ export class HomepageComponent implements OnInit{
 
   showNumberWithFirstDecimal(num: any): any{
     return (num + '').substring(0, 3);
+  }
+
+  public getGenres(): void {
+    this.moviesService.getAllGenres().subscribe((genres) => {
+      this.genres = genres.map(genre => genre.name);
+    });
+  }
+
+  getMoviesGenres(movie: any): void{
+    this.moviesService.getMovieGenres(movie?.id).subscribe((genres) => {
+      movie.genres = genres;
+    })
+  }
+
+  getMovieGenres(genres: any): any{
+    return genres.map((genre: any) => genre.name);
   }
 }

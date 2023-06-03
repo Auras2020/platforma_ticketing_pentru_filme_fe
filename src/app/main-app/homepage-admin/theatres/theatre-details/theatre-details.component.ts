@@ -23,7 +23,7 @@ export class TheatreDetailsComponent implements OnInit{
   filters: MovieFilters = {
     name: '',
     recommendedAge: '',
-    genre: '',
+    genre: [],
     duration: '',
     actors: '',
     director: '',
@@ -34,7 +34,8 @@ export class TheatreDetailsComponent implements OnInit{
   filteredData?: MovieFilters | null
 
   ageRestricts = ['AG', 'AP12', 'N15', 'IM18']
-  genres = ['Action', 'Adventure', 'Comedy', 'Drama', 'Horror', 'Romance', 'SF', 'Thriller', 'Western'];
+  genres: any /*= ['Action', 'Adventure', 'Comedy', 'Drama', 'Horror', 'Romance', 'SF', 'Thriller', 'Western']*/;
+  //movieGenres: any;
 
   constructor(private theatresService: TheatresService,
               private router: Router,
@@ -45,6 +46,7 @@ export class TheatreDetailsComponent implements OnInit{
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
+    this.getGenres();
     this.theatresService.getTheatre(this.id).subscribe((theatre) => {
       this.theatre = theatre;
     })
@@ -56,7 +58,7 @@ export class TheatreDetailsComponent implements OnInit{
     let isActive: boolean;
     isActive = !((this.filters.name === '') &&
       (this.filters.recommendedAge === '') &&
-      (this.filters.genre === '') &&
+      (this.filters.genre.length === 0) &&
       (this.filters.duration === '') &&
       (this.filters.actors === '') &&
       (this.filters.director === '') &&
@@ -67,7 +69,7 @@ export class TheatreDetailsComponent implements OnInit{
   resetFilters(): void {
     this.filters.name =  '';
     this.filters.recommendedAge = '';
-    this.filters.genre = '';
+    this.filters.genre = [];
     this.filters.duration = '';
     this.filters.actors = '';
     this.filters.director = '';
@@ -132,6 +134,9 @@ export class TheatreDetailsComponent implements OnInit{
     }
     this.moviesService.getAllMoviesFromATheatreAtAGivenDay(theatreDay).subscribe((movieTimes) => {
       this.movieTimes = movieTimes;
+      for(let m of movieTimes){
+        this.getMoviesGenres(m.movie);
+      }
     })
     this.index = index;
   }
@@ -170,6 +175,22 @@ export class TheatreDetailsComponent implements OnInit{
 
   showNumberWithFirstDecimal(num: any): any{
     return (num + '').substring(0, 3);
+  }
+
+  public getGenres(): void {
+    this.moviesService.getAllGenres().subscribe((genres) => {
+      this.genres = genres.map(genre => genre.name);
+    });
+  }
+
+  getMoviesGenres(movie: any): void{
+    this.moviesService.getMovieGenres(movie?.id).subscribe((genres) => {
+      movie.genres = genres;
+    })
+  }
+
+  getMovieGenres(genres: any): any{
+    return genres.map((genre: any) => genre.name);
   }
 
 }

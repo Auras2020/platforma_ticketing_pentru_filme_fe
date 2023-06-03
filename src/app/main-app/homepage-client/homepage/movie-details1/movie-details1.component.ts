@@ -10,6 +10,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class MovieDetails1Component implements OnInit{
 
   movie?: Movie;
+  genres: string = '';
 
   constructor(private moviesService: MoviesService,
               private router: Router,
@@ -21,6 +22,7 @@ export class MovieDetails1Component implements OnInit{
     this.moviesService.getMovie(id).subscribe((movie) => {
       this.movie = movie;
     })
+    this.getMovieGenres(id);
   }
 
   navigateBackToMoviesPage(): void{
@@ -33,5 +35,11 @@ export class MovieDetails1Component implements OnInit{
 
   showNumberWithFirstDecimal(num: any): any{
     return (num + '').substring(0, 3);
+  }
+
+  getMovieGenres(id: any): void{
+    this.moviesService.getMovieGenres(id).subscribe((genres) => {
+      this.genres = genres.map((genre: any) => genre.name);
+    })
   }
 }

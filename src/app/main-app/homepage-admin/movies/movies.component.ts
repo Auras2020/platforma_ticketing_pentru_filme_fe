@@ -19,7 +19,7 @@ export class MoviesComponent implements OnInit{
   filters: MovieFilters = {
     name: '',
     recommendedAge: '',
-    genre: '',
+    genre: [],
     duration: '',
     actors: '',
     director: '',
@@ -37,22 +37,29 @@ export class MoviesComponent implements OnInit{
     'edit',
     'name',
     'poster',
-    'genre',
+    /*'genre',*/
     'duration',
     'director',
     'delete'
   ];
   ageRestricts = ['AG', 'AP12', 'N15', 'IM18']
   durationIntervals = ['<1h30m', '1h30m-2h0m', '2h0m-2h30m', '>2h30m'];
-  genres = ['Action', 'Adventure', 'Comedy', 'Drama', 'Horror', 'Romance', 'SF', 'Thriller', 'Western'];
+  genres: any /*= ['Action', 'Adventure', 'Comedy', 'Drama', 'Horror', 'Romance', 'SF', 'Thriller', 'Western']*/;
 
   ngOnInit(): void {
     this.getAllMovies();
+    this.getGenres();
   }
 
   constructor(private moviesService: MoviesService,
               private dialog: MatDialog,
               private router: Router) {
+  }
+
+  public getGenres(): void {
+    this.moviesService.getAllGenres().subscribe((genres) => {
+      this.genres = genres.map(genre => genre.name);
+    });
   }
 
   handleSuccess(moviePage: MoviePage){
@@ -69,7 +76,7 @@ export class MoviesComponent implements OnInit{
 
   getAllMovies() {
     this.getAllByFilters();
-    if (this.filterActive()) {
+    if (this.filteredData) {
       let movieFilteredPage: MovieFilteredPage={
         dto: this.filteredData!,
         size: this.pageSize,
@@ -113,7 +120,7 @@ export class MoviesComponent implements OnInit{
     let isActive: boolean;
     isActive = !((this.filters.name === '') &&
       (this.filters.recommendedAge === '') &&
-      (this.filters.genre === '') &&
+      (!this.filters.genre.length) &&
       (this.filters.duration === '') &&
       (this.filters.actors === '') &&
       (this.filters.director === '') &&
@@ -124,7 +131,7 @@ export class MoviesComponent implements OnInit{
   resetFilters(): void {
     this.filters.name =  '';
     this.filters.recommendedAge = '';
-    this.filters.genre = '';
+    this.filters.genre = [];
     this.filters.duration = '';
     this.filters.actors = '';
     this.filters.director = '';

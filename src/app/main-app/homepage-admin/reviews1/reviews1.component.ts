@@ -5,6 +5,7 @@ import {UserService} from "../user/user.service";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {AddReviewComponent} from "../../homepage-client/reviews/add-review/add-review.component";
 import {DeleteReviewComponent} from "../../homepage-client/reviews/delete-review/delete-review.component";
+import {MoviesService} from "../movies/movies.service";
 
 @Component({
   selector: 'app-reviews1',
@@ -16,7 +17,7 @@ export class Reviews1Component implements OnInit{
   filters: ReviewFilters = {
     movieName: '',
     recommendedAge: '',
-    genre: '',
+    genre: [],
     reviewName: '',
     reviewOpinion: '',
     searchString: ''
@@ -25,7 +26,7 @@ export class Reviews1Component implements OnInit{
   filteredData?: ReviewFilters | null
 
   ageRestricts = ['AG', 'AP12', 'N15', 'IM18']
-  genres = ['Action', 'Adventure', 'Comedy', 'Drama', 'Horror', 'Romance', 'SF', 'Thriller', 'Western'];
+  genres: any /*= ['Action', 'Adventure', 'Comedy', 'Drama', 'Horror', 'Romance', 'SF', 'Thriller', 'Western']*/;
   opinions: string[] = ['Very good', 'Good', 'Bad', 'Very bad'];
   movieReviews?: MovieReview[];
   user?: any;
@@ -34,6 +35,7 @@ export class Reviews1Component implements OnInit{
 
   ngOnInit(): void {
     this.getAllReviews();
+    this.getGenres();
     const currentUser = JSON.parse(localStorage.getItem("user") + '');
     this.userService.getUserByEmail(currentUser.username).subscribe((user) => {
       this.user = user;
@@ -43,7 +45,8 @@ export class Reviews1Component implements OnInit{
   constructor(private reviewsService: ReviewsService,
               private router: Router,
               private userService: UserService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private moviesService: MoviesService) {
   }
 
   getAllByFilters(): void {
@@ -61,8 +64,7 @@ export class Reviews1Component implements OnInit{
     let isActive: boolean;
     isActive = !((this.filters.movieName === '') &&
       (this.filters.recommendedAge === '') &&
-      (this.filters.genre === '') &&
-      (this.filters.genre === '') &&
+      (!this.filters.genre.length) &&
       (this.filters.reviewName === '') &&
       (this.filters.reviewOpinion === ''));
     return isActive;
@@ -71,7 +73,7 @@ export class Reviews1Component implements OnInit{
   resetFilters(): void {
     this.filters.movieName =  '';
     this.filters.recommendedAge = '';
-    this.filters.genre = '';
+    this.filters.genre = [];
     this.filters.reviewName = '';
     this.filters.reviewOpinion = '';
     this.getAllReviews();
@@ -98,6 +100,9 @@ export class Reviews1Component implements OnInit{
     this.getAllByFilters();
     this.reviewsService.getAllFilteredReviews(this.filteredData).subscribe((movieReviews) => {
       this.movieReviews = movieReviews;
+      for(let m of movieReviews){
+        this.getMoviesGenres(m.movie);
+      }
     })
   }
 
@@ -109,6 +114,9 @@ export class Reviews1Component implements OnInit{
     }
     this.reviewsService.getAllFilteredReviewsByUser(reviewsByUser).subscribe((movieReviews) => {
       this.movieReviews = movieReviews;
+      for(let m of movieReviews){
+        this.getMoviesGenres(m.movie);
+      }
     })
   }
 
@@ -133,31 +141,6 @@ export class Reviews1Component implements OnInit{
 
   getNumber(num: any): any{
     return !num ? '-' : num;
-  }
-
-  openAddReviewDialog(movieReview: any) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = false
-    dialogConfig.disableClose = true
-    dialogConfig.data = {
-      user: this.user,
-      movieReview: movieReview
-    };
-
-    this.openReviewDialog(movieReview, dialogConfig);
-  }
-
-  openEditReviewDialog(movieReview: any, review: any) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = false
-    dialogConfig.disableClose = true
-    dialogConfig.data = {
-      user: this.user,
-      movieReview: movieReview,
-      review: review
-    };
-
-    this.openReviewDialog(movieReview, dialogConfig);
   }
 
   openReviewDialog(movieReview: any, dialogConfig: any){
@@ -208,25 +191,23 @@ export class Reviews1Component implements OnInit{
     return stars;
   }
 
-  checkboxChanged(event: any) {
-    this.checkBoxSelected = event.checked;
-    if(event.checked){
-      this.getAllReviewsByUser();
-    } else {
-      this.getAllReviews();
-    }
-  }
-
-  checkIfMovieContainsCurrentUserReviews(movieReview: any): boolean{
-    for(let review of movieReview.reviews){
-      if(review.user.id === this.user.id){
-        return true;
-      }
-    }
-    return false;
-  }
-
   showNumberWithFirstDecimal(num: any): any{
     return (num + '').substring(0, 3);
+  }
+
+  public getGenres(): void {
+    this.moviesService.getAllGenres().subscribe((genres) => {
+      this.genres = genres.map(genre => genre.name);
+    });
+  }
+
+  getMoviesGenres(movie: any): void{
+    this.moviesService.getMovieGenres(movie?.id).subscribe((genres) => {
+      movie.genres = genres;
+    })
+  }
+
+  getMovieGenres(genres: any): any{
+    return genres.map((genre: any) => genre.name);
   }
 }

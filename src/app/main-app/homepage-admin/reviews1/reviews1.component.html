@@ -58,6 +58,7 @@
                 [(ngModel)]="filters.genre"
                 (selectionChange)="onSearchInput()"
                 class="form-input"
+                multiple
               >
                 <mat-option *ngFor="let genre of genres" [value]="genre">
                   {{ genre }}
@@ -120,7 +121,7 @@
               Duration: {{formatDuration(movieReview.movie.duration)}}
             </div>
             <div class="movie-genre">
-              Genre: {{movieReview.movie.genre}}
+              Genre: {{getMovieGenres(movieReview.movie.genres)}}
             </div>
             <div class="movie-note">
               Note: {{showNumberWithFirstDecimal(getNumber(movieReview.movie.note))}}

@@ -1,7 +1,7 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {MoviesService} from "../movies.service";
+import {Genre, MoviesService} from "../movies.service";
 import {FeedbackToolbarService} from "../../../../feedback-toolbar/feedback-toolbar.service";
 
 @Component({
@@ -9,12 +9,12 @@ import {FeedbackToolbarService} from "../../../../feedback-toolbar/feedback-tool
   templateUrl: './add-movie.component.html',
   styleUrls: ['./add-movie.component.css']
 })
-export class AddMovieComponent implements OnInit{
+export class AddMovieComponent implements OnInit, AfterViewInit, AfterContentInit{
   form = new FormGroup({
       id: new FormControl(''),
       name: new FormControl('', Validators.required),
       recommendedAge: new FormControl('', Validators.required),
-      genre: new FormControl('', Validators.required),
+      genres: new FormControl([], Validators.required),
       duration: new FormControl('', Validators.required),
       note: new FormControl(null, {
         validators: [Validators.min(0), Validators.max(10)]
@@ -37,23 +37,32 @@ export class AddMovieComponent implements OnInit{
   isImageType?: boolean;
 
   ageRestricts = ['AG', 'AP12', 'N15', 'IM18'];
-  genres = ['Action', 'Adventure', 'Comedy', 'Drama', 'Horror', 'Romance', 'SF', 'Thriller', 'Western'];
+  // genres = ['Action', 'Adventure', 'Comedy', 'Drama', 'Horror', 'Romance', 'SF', 'Thriller', 'Western'];
   msg: string = '';
   okToSave?: boolean;
   posterSelected: boolean = false;
   trailerSelected: boolean = false;
 
+  genres: Genre[] = [];
+  selectedGenres: Genre[] = [];
+  movieId?: any;
+
   constructor(private moviesService: MoviesService,
               private dialogRef: MatDialogRef<AddMovieComponent>,
               @Inject(MAT_DIALOG_DATA) data: any,
-              private feedbackToolbarService: FeedbackToolbarService) {
+              private feedbackToolbarService: FeedbackToolbarService,
+              private cdr: ChangeDetectorRef) {
     this.edit = false
     if(data){
       this.edit = true
       this.okToSave = true;
       this.form.patchValue(data.movie);
+      this.movieId = data.movie.id;
       this.posterFileName = data.movie.posterName;
       this.trailerFileName = data.movie.trailerName;
+      this.moviesService.getMovieGenres(this.movieId).subscribe((genres) => {
+        this.form.controls['genres'].setValue(genres);
+      })
     } else {
       this.edit = false;
       this.posterFileName = null;
@@ -62,12 +71,51 @@ export class AddMovieComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.getGenres();
     if(this.edit) {
       this.title = "Edit movie"
       this.msg = "Movie was updated successfully"
     } else {
       this.msg = "Movie was added successfully"
     }
+    //console.log(this.movieId);
+   /* this.moviesService.getMovieGenres(this.movieId).subscribe((genres) => {
+      console.log(genres);
+      this.selectedGenres = genres;
+    })*/
+  }
+
+  ngAfterViewInit(): void {
+  }
+
+  ngAfterContentInit(): void {
+    //if(this.movieId){
+
+    //}
+  }
+
+ /* public getGenre(e: any, i: number): void {
+    if (e.checked) {
+      this.selectedGenres.push(this.genres[i]);
+    } else {
+      this.selectedGenres = this.selectedGenres.filter(
+        (genre) => genre.id !== this.genres[i].id
+      );
+    }
+  }*/
+
+  public getGenres(): void {
+    this.moviesService.getAllGenres().subscribe((genres) => {
+      this.genres = genres;
+    });
+  }
+
+ /* public isCheckedGenre(genre: any): boolean {
+    return this.selectedGenres.some((e) => e.id === genre.id);
+  }*/
+
+  public compareGenresId(g1: Genre, g2: Genre): boolean {
+    return g1?.id === g2?.id;
   }
 
   checkIfSameData(): boolean{
@@ -133,8 +181,8 @@ export class AddMovieComponent implements OnInit{
     return this.form.controls['recommendedAge']
   }
 
-  get genreControl(){
-    return this.form.controls['genre']
+  get genresControl(){
+    return this.form.controls['genres']
   }
 
   get durationControl(){

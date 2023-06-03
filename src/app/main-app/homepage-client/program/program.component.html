@@ -90,6 +90,7 @@
                 [(ngModel)]="filters.genre"
                 (selectionChange)="onButtonClick(index)"
                 class="form-input"
+                multiple
               >
                 <mat-option *ngFor="let genre of genres" [value]="genre">
                   {{ genre }}
@@ -191,7 +192,7 @@
               {{movieTime.movie.recommendedAge}}, {{formatDuration(movieTime.movie.duration)}}
             </div>
             <div class="movie-genre">
-              {{movieTime.movie.genre}}
+              {{this.getMovieGenres(movieTime.movie.genres)}}
             </div>
             <div *ngFor="let time of movieTime.times" class="times-display">
               <button mat-raised-button

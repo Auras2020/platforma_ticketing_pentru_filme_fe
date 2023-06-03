@@ -17,7 +17,7 @@ export interface Review{
 export interface ReviewFilters{
   movieName: string;
   recommendedAge: string;
-  genre: string;
+  genre: string[];
   reviewName: string;
   reviewOpinion: string;
   searchString: string;

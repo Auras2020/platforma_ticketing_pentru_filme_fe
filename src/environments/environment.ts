@@ -22,6 +22,7 @@ export const environment = {
     moviePage:"movies/page",
     moviePageFilter:"movies/page/filter",
     movieTheatreDay: "movies/movies-and-times",
+    movieGenres: "movies/genres/",
     showTimings: "show-timings/",
     showTimingsPage:"show-timings/page",
     showTimingsPageFilter:"show-timings/page/filter",

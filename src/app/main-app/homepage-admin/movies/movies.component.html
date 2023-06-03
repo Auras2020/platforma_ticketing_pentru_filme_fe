@@ -59,6 +59,7 @@
                 [(ngModel)]="filters.genre"
                 (selectionChange)="getAllMovies()"
                 class="form-input"
+                multiple
               >
                 <mat-option *ngFor="let genre of genres" [value]="genre">
                   {{ genre }}
@@ -152,12 +153,12 @@
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="genre">
+       <!-- <ng-container matColumnDef="genre">
           <th mat-header-cell *matHeaderCellDef class="data-header"><span>Genre</span></th>
           <td mat-cell *matCellDef="let row" class="name-column"
           ><span class="ellipsis">{{ row.genre }}</span>
           </td>
-        </ng-container>
+        </ng-container>-->
 
         <ng-container matColumnDef="duration">
           <th mat-header-cell *matHeaderCellDef class="data-header"><span>Duration</span></th>

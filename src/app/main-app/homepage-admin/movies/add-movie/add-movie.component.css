@@ -137,3 +137,10 @@
 .evaluation-padding{
   margin-top: 10px;
 }
+
+.genre{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100px;
+}

@@ -56,10 +56,10 @@
       <div class="form form-content" fxLayout="row wrap" fxLayout.xs="column">
         <div class="form-row form-margin" fxFlex>
           <div class="name-label-padding">
-            <label class="name-label" [ngClass]="{'asterisk': genreControl.hasError('required')}">Genre</label>
+            <label class="name-label" [ngClass]="{'asterisk': genresControl.hasError('required')}">Genre</label>
           </div>
           <div>
-            <mat-form-field appearance="outline" class="mat-form">
+            <!--<mat-form-field appearance="outline" class="mat-form">
               <mat-select
                 formControlName="genre"
               >
@@ -67,10 +67,23 @@
                   {{ genre }}
                 </mat-option>
               </mat-select>
+            </mat-form-field>-->
+            <mat-form-field appearance="outline" class="mat-form">
+              <mat-select
+                multiple
+                formControlName="genres"
+                [compareWith]="compareGenresId"
+                disableOptionCentering
+              >
+                <mat-option *ngFor="let genre of genres" [value]="genre">
+                  {{ genre.name }}
+                </mat-option>
+              </mat-select>
             </mat-form-field>
+
             <div
-              *ngIf="genreControl.touched && genreControl.hasError('required')" class="error">
-              Genre is required!
+              *ngIf="genresControl.touched && genresControl.hasError('required')" class="error">
+              Genres are required!
             </div>
           </div>
         </div>
