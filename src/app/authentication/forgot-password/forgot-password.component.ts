@@ -40,8 +40,8 @@ export class ForgotPasswordComponent {
 
   sendForgotPasswordEmail(): void{
     const email: Email = {
-      subject: 'forgot password message',
-      body: 'your reset password link is here: http://localhost:4200/reset-password',
+      subject: 'Forgot Password Message',
+      body: 'Your reset password link is here: http://localhost:4200/reset-password',
       email: this.form.controls['email'].value
     }
 

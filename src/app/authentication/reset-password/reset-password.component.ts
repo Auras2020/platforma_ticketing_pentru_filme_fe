@@ -11,9 +11,11 @@ import {ResetPassword, ResetPasswordService} from "./reset-password.service";
 })
 export class ResetPasswordComponent {
 
+  PASSWORD_VALIDATION_PATTERN = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
   form = new FormGroup({
-      password: new FormControl('', Validators.required),
-      rePassword: new FormControl('', Validators.required)
+      password: new FormControl('', [Validators.required, Validators.pattern(this.PASSWORD_VALIDATION_PATTERN)]),
+      rePassword: new FormControl('', [Validators.required, Validators.pattern(this.PASSWORD_VALIDATION_PATTERN)])
     }
   );
 
@@ -48,8 +50,8 @@ export class ResetPasswordComponent {
     this.reset = true;
     let email = localStorage.getItem("forgotPassword")
     const resetPassword1: ResetPassword = {
-      subject: 'reset password message',
-      body: 'your password was successfully changed',
+      subject: 'Reset Password Message',
+      body: 'Your password was successfully changed!',
       email: email,
       password: this.form.controls['password'].value
     }

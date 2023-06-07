@@ -30,7 +30,8 @@
 .error{
   margin-top: -20px;
   margin-bottom: 10px;
-  color: red
+  color: red;
+  width: 300px;
 }
 
 .submit-button {
@@ -54,8 +55,15 @@
   padding-top: 10px;
 }
 
+.password-align{
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
 .register-option{
   color: gray;
+  padding-bottom: 20px;
 }
 
 .register-color{

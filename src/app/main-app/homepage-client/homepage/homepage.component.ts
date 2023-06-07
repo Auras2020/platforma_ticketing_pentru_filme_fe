@@ -23,13 +23,14 @@ export class HomepageComponent implements OnInit{
   searchString: string = '';
   filteredData?: MovieFilters | null
 
-  states = ['currently playing', 'playing soon', 'recommended movies']
+  states = ['current weak', 'starting next weak', 'recommended movies']
   ageRestricts = ['AG', 'AP12', 'N15', 'IM18']
   durationIntervals = ['<1h30m', '1h30m-2h0m', '2h0m-2h30m', '>2h30m'];
-  genres: any /*= ['Action', 'Adventure', 'Comedy', 'Drama', 'Horror', 'Romance', 'SF', 'Thriller', 'Western']*/;
+  genres: any;
   movies?: Movie[];
   selectedValue?: any;
   age?: number;
+  date?: Date;
 
   ngOnInit(): void {
     this.getAllMovies();
@@ -37,6 +38,7 @@ export class HomepageComponent implements OnInit{
     const currentUser = JSON.parse(localStorage.getItem("user") + '');
     this.userService.getUserByEmail(currentUser.username).subscribe((user) => {
       this.age = user?.age;
+      this.date = user?.createdDate;
     })
   }
 
@@ -130,7 +132,8 @@ export class HomepageComponent implements OnInit{
     this.getAllByFilters();
     const movieFiltersAge = {
       movieFilter: this.filteredData,
-      age: this.age
+      age: this.age,
+      createdDate: this.date
     }
     this.moviesService.getRecomendedMovies(movieFiltersAge).subscribe((movies) => {
       this.movies = movies;

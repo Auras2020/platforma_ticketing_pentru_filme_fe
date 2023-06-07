@@ -28,7 +28,7 @@ export class DeleteVenueComponent {
       this.feedbackToolbarService.openSnackBarWithSuccessMessage("Venue was deleted successfully");
     }, () => {
       this.dialogRef.close(true);
-      this.feedbackToolbarService.openSnackBarWithErrorMessage("Venue is reserved for a show timing!")
+      this.feedbackToolbarService.openSnackBarWithErrorMessage("Venue is reserved for a show schedule!")
     })
   }
 }

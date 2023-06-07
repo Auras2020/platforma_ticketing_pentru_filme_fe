@@ -160,6 +160,10 @@
               <mat-datepicker-toggle matSuffix [for]="daypicker"></mat-datepicker-toggle>
               <mat-datepicker #daypicker></mat-datepicker>
             </mat-form-field>
+            <div
+              *ngIf="!dayControl.touched && inPast(dayControl.value)" class="error">
+              Day must be in present or future!
+            </div>
             <div *ngIf="(!startDateControl.value || !endDateControl.value) &&
             dayControl.touched && !dayControl.hasError('required')" class="error error-width">
               Please select start date and end date first!

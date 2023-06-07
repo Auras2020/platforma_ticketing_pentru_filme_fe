@@ -13,14 +13,15 @@ import {UserService} from "../../main-app/homepage-admin/user/user.service";
 export class RegisterComponent{
 
   EMAIL_VALIDATION_PATTERN = '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$';
+  PASSWORD_VALIDATION_PATTERN = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
   form = new FormGroup({
       name: new FormControl('', Validators.required),
       age: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required,
         Validators.pattern(this.EMAIL_VALIDATION_PATTERN)]),
-      password: new FormControl('', Validators.required),
-      rePassword: new FormControl('', Validators.required)
+      password: new FormControl('', [Validators.required, Validators.pattern(this.PASSWORD_VALIDATION_PATTERN)]),
+      rePassword: new FormControl('', [Validators.required, Validators.pattern(this.PASSWORD_VALIDATION_PATTERN)])
     }
   );
 

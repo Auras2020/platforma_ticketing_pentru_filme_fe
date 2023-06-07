@@ -4,7 +4,7 @@
       <div class="header-style">
         <div class="title-and-filter-icon">
           <label class="title-style">
-            Show timings
+            Show schedule
           </label>
 
           <mat-icon mat-list-icon class="filter-list">
@@ -21,9 +21,13 @@
                  matInput
                  placeholder="Search...">
           <span *ngIf="searchString" class="fa fa-search-close" (click)="searchString = '';getAllShowTimings()"><mat-icon>close</mat-icon></span>
-          <button mat-raised-button class="add-theatre-button" (click)="openAddShowTimingDialog($event)">Add show timing</button>
+          <button mat-raised-button class="add-theatre-button" (click)="openAddShowTimingDialog($event)">Add show schedule</button>
         </div>
       </div>
+    </div>
+
+    <div class="filter-style">
+      <label class="filter-label">Filter by...</label>
     </div>
 
     <div class="filters-row">
@@ -103,7 +107,7 @@
           <th mat-header-cell *matHeaderCellDef class="action-header"><span></span></th>
           <td mat-cell *matCellDef="let row" class="edit-column">
             <button mat-icon-button
-                    [matTooltip]="'Edit show timing'"
+                    [matTooltip]="'Edit show schedule'"
                     aria-label="Edit"
                     matTooltipPosition="before"
                     (click)="openEditShowTimingDialog($event, row)">
@@ -186,7 +190,7 @@
             <button
               (click)="openDeleteShowTimingDialog(row)"
               mat-icon-button
-              [matTooltip]="'Delete show timing'"
+              [matTooltip]="'Delete show schedule'"
               aria-label="Delete"
               matTooltipPosition="before"
             >

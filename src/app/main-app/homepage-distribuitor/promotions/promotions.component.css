@@ -259,3 +259,20 @@ mat-table {
   width: 5%;
   vertical-align: middle;
 }
+
+.filter-style{
+  padding: 6px 10px 6px 10px;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  background-color: #213555;
+  text-align: center;
+  width: 100px;
+  display: block;
+}
+
+.filter-label{
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+}

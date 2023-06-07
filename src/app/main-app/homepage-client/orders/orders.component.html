@@ -25,8 +25,12 @@
       </div>
     </div>
 
+    <div class="filter-style">
+      <label class="filter-label">Filter by...</label>
+    </div>
+
     <div class="filters-row">
-      <div class="filters" fxFlex="80">
+      <div class="filters" fxFlex="70">
         <div class="forms-display">
           <div>
             <div class="input-label">Theatre location</div>
@@ -145,7 +149,7 @@
               <span class="nr-centered">{{ row.productsCount }}</span>
               <button
                 mat-icon-button
-                [matTooltip]="'View products'"
+                [matTooltip]="'Food & drinks'"
                 aria-label="Products"
                 matTooltipPosition="above"
                 (click)="viewBookedProductsDetails(row)"

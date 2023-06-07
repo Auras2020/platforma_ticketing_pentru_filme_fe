@@ -10,6 +10,7 @@ export interface User{
   password: string;
   token: string;
   role: string;
+  createdDate: Date;
 }
 
 export interface UserFilters{

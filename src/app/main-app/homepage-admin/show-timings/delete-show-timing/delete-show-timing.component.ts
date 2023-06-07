@@ -25,7 +25,7 @@ export class DeleteShowTimingComponent {
   deleteShowTiming(){
     this.showTimingsService.deleteShowTiming(this.showTiming?.id).subscribe(()=>{
       this.dialogRef.close(true);
-      this.feedbackToolbarService.openSnackBarWithSuccessMessage("Show timing was deleted successfully");
+      this.feedbackToolbarService.openSnackBarWithSuccessMessage("Show schedule was deleted successfully");
     })
   }
 }

@@ -7,6 +7,7 @@ import {Theatre, TheatresService} from "../../theatres/theatres.service";
 import {rangeValidator, startDateValidator} from "./date-validator";
 import {FeedbackToolbarService} from "../../../../feedback-toolbar/feedback-toolbar.service";
 import {Venue, VenuesService} from "../../venues/venues.service";
+import * as moment from "moment";
 
 @Component({
   selector: 'app-add-show-timing',
@@ -44,7 +45,7 @@ export class AddShowTimingComponent implements OnInit{
   )
 
   edit?: boolean;
-  title: string = 'Add new show timing';
+  title: string = 'Add new show schedule';
   msg: string = '';
   prevParsedValue?: any;
 
@@ -67,6 +68,10 @@ export class AddShowTimingComponent implements OnInit{
     }
   }
 
+  inPast(date: any): boolean{
+    return moment(date).diff(moment(new Date())) < 0;
+  }
+
   public compareMovieOptions(m1: Movie, m2: Movie): boolean {
     return m1?.id === m2?.id;
   }
@@ -85,10 +90,10 @@ export class AddShowTimingComponent implements OnInit{
 
   ngOnInit(): void {
     if(this.edit) {
-      this.title = "Edit show timing"
-      this.msg = "Show timing was updated successfully"
+      this.title = "Edit show schedule"
+      this.msg = "Show schedule was updated successfully"
     } else {
-      this.msg = "Show timing was added successfully"
+      this.msg = "Show schedule was added successfully"
     }
     this.theatresService.getAllTheatres().subscribe((theatres) => {
       this.theatres = theatres;
@@ -100,7 +105,7 @@ export class AddShowTimingComponent implements OnInit{
 
   public getVenuesByTheatreId() {
     this.venuesService.getAllVenueNumbersOfGivenTheatre(this.theatreControl.value.id).subscribe((venues) => {
-      this.venues = venues;
+      this.venues = venues.sort((a, b) => a.venueNumber - b.venueNumber);
     })
   }
 

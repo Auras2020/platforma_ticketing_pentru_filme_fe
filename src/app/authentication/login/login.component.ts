@@ -15,11 +15,12 @@ import {User, UserService} from "../../main-app/homepage-admin/user/user.service
 export class LoginComponent{
 
   EMAIL_VALIDATION_PATTERN = '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$';
+  PASSWORD_VALIDATION_PATTERN = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
   form = new FormGroup({
       email: new FormControl('', [Validators.required,
         Validators.pattern(this.EMAIL_VALIDATION_PATTERN)]),
-      password: new FormControl('', Validators.required),
+      password: new FormControl('', [Validators.required, Validators.pattern(this.PASSWORD_VALIDATION_PATTERN)]),
       rememberMe: new FormControl(false)
     }
   );

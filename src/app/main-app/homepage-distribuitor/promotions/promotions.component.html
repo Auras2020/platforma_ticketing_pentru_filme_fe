@@ -4,7 +4,7 @@
       <div class="header-style">
         <div class="title-and-filter-icon">
           <label class="title-style">
-            Show timings
+            Show schedule
           </label>
 
           <mat-icon mat-list-icon class="filter-list">
@@ -23,6 +23,10 @@
           <span *ngIf="searchString" class="fa fa-search-close" (click)="searchString = '';getAllShowTimings()"><mat-icon>close</mat-icon></span>
         </div>
       </div>
+    </div>
+
+    <div class="filter-style">
+      <label class="filter-label">Filter by...</label>
     </div>
 
     <div class="filters-row">

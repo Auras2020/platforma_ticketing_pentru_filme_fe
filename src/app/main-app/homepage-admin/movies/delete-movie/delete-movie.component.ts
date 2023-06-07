@@ -12,7 +12,7 @@ import {FeedbackToolbarService} from "../../../../feedback-toolbar/feedback-tool
 export class DeleteMovieComponent {
 
   movie?:Movie;
-  errorMsg: string = 'Movie is reserved for show timing';
+  errorMsg: string = 'Movie is reserved for show schedule';
 
   constructor(private moviesService: MoviesService,
               private dialogRef: MatDialogRef<DeleteMovieComponent>,

@@ -30,6 +30,10 @@
       </div>
     </div>
 
+    <div class="filter-style">
+      <label class="filter-label">Filter by...</label>
+    </div>
+
     <div class="filters-row">
       <div class="filters" fxFlex="60">
         <div class="forms-display">
@@ -73,7 +77,7 @@
           </div>
 
           <div>
-            <div class="input-label">Review name</div>
+            <div class="input-label">Review text</div>
             <mat-form-field appearance="outline" class="filter-form review-input">
               <input matInput [(ngModel)]="filters.reviewName" [ngModelOptions]="{updateOn:'change'}"
                      (ngModelChange)="onSearchInput()" class="form-input">

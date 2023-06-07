@@ -26,6 +26,10 @@
       </div>
     </div>
 
+    <div class="filter-style">
+      <label class="filter-label">Filter by...</label>
+    </div>
+
     <div class="filters-row">
       <div class="filters" fxFlex="80">
         <div class="forms-display">
@@ -72,7 +76,7 @@
           <th mat-header-cell *matHeaderCellDef class="action-header"></th>
           <td mat-cell *matCellDef="let row" class="products-column">
             <button mat-icon-button
-                    [matTooltip]="'View products'"
+                    [matTooltip]="'Food & drinks'"
                     aria-label="Products"
                     matTooltipPosition="before"
                     (click)="clickOnProductsButtonRow(row.id)">
