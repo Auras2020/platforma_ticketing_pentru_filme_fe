@@ -50,7 +50,7 @@
                 class="form-input"
               >
                 <mat-option *ngFor="let ageRestrict of ageRestricts" [value]="ageRestrict">
-                  {{ ageRestrict }}
+                  {{ getMovieCategoryMeaning(ageRestrict) }}
                 </mat-option>
               </mat-select>
             </mat-form-field>

@@ -205,7 +205,7 @@
   cursor: pointer;
 }
 
-.movie-age, .movie-genre{
+.movie-age, .movie-genre, .movie-duration{
   color: #213555;
   font-size: 16px;
   font-weight: 600;

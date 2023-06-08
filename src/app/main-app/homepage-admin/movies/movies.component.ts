@@ -204,4 +204,25 @@ export class MoviesComponent implements OnInit{
   public clickOnMovieRow(id: string) {
     this.router.navigate(['admin', 'movies', id]);
   }
+
+  getMovieCategoryMeaning(category: string): string{
+    let description = '';
+    switch (category){
+      case "AG":
+        description = 'General admission';
+        break;
+      case "AP12":
+        description = 'Parental guidance for children under the age of 12';
+        break;
+      case "N15":
+        description = 'Not recommended under the age of 15';
+        break;
+      case "IM18":
+        description = 'Prohibited for minors under the age of 18';
+        break;
+      default:
+        description = '';
+    }
+    return description;
+  }
 }

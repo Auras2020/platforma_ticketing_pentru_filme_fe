@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {ReservationComponent} from "./reservation/reservation.component";
-import {BuyTicketsComponent} from "./buy-tickets/buy-tickets.component";
 import {ShowTimings, ShowTimingsService} from "../../../homepage-admin/show-timings/show-timings.service";
 import {SeatTicketStatusDto, VenueSeats1Service} from "./venue-seats1.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
@@ -17,6 +16,8 @@ import {
 import {OrdersService} from "../../orders/orders.service";
 import * as moment from "moment/moment";
 import {PromotionsService} from "../../../homepage-distribuitor/promotions/promotions.service";
+import {animate} from "@angular/animations";
+import {PaymentDetailsComponent} from "./payment-details/payment-details.component";
 
 @Component({
   selector: 'app-venue-seats1',
@@ -402,10 +403,16 @@ export class VenueSeats1Component implements OnInit{
         ticketsPrice: this.getTotalTicketsPrice(),
         ticketsDiscount: this.getReductionForTickets(),
         productsPrice: this.getTotalProductsPrice(),
-        productsDiscount: this.getReductionForProducts()
+        productsDiscount: this.getReductionForProducts(),
+        ticketsStatus: 'reserved'
       };
-      const dialogRef = this.dialog.open(ReservationComponent, dialogConfig)
-      dialogRef.afterClosed().subscribe((result) => {
+      let dialogRef: any;
+      if(this.getProductsStatus() === 'bought' && this.getProductDetails().length > 0){
+        dialogRef = this.dialog.open(PaymentDetailsComponent, dialogConfig)
+      } else {
+        dialogRef = this.dialog.open(ReservationComponent, dialogConfig)
+      }
+      dialogRef.afterClosed().subscribe((result: any) => {
           if (result) {
             this.selectedSeats = []
             setTimeout(() => {this.ngOnInit()}, 1000)
@@ -440,9 +447,10 @@ export class VenueSeats1Component implements OnInit{
         ticketsPrice: this.getTotalTicketsPrice(),
         ticketsDiscount: this.getReductionForTickets(),
         productsPrice: this.getTotalProductsPrice(),
-        productsDiscount: this.getReductionForProducts()
+        productsDiscount: this.getReductionForProducts(),
+        ticketsStatus: 'bought'
       };
-      const dialogRef = this.dialog.open(BuyTicketsComponent, dialogConfig)
+      const dialogRef = this.dialog.open(PaymentDetailsComponent, dialogConfig)
       dialogRef.afterClosed().subscribe((result) => {
           if(result){
             this.selectedSeats = []
@@ -595,5 +603,26 @@ export class VenueSeats1Component implements OnInit{
       this.checkbox2Selected = true;
       this.checkbox1Selected = false;
     }
+  }
+
+  getMovieCategoryMeaning(category: any): string{
+    let description = '';
+    switch (category){
+      case "AG":
+        description = 'General admission';
+        break;
+      case "AP12":
+        description = 'Parental guidance for children under the age of 12';
+        break;
+      case "N15":
+        description = 'Not recommended under the age of 15';
+        break;
+      case "IM18":
+        description = 'Prohibited for minors under the age of 18';
+        break;
+      default:
+        description = '';
+    }
+    return description;
   }
 }

@@ -67,7 +67,6 @@ import { DeleteVenueComponent } from './main-app/homepage-admin/venues/delete-ve
 import { VenueSeatsComponent } from './main-app/homepage-admin/venues/venue-seats/venue-seats.component';
 import { VenueSeats1Component } from './main-app/homepage-client/program/venue-seats1/venue-seats1.component';
 import { ReservationComponent } from './main-app/homepage-client/program/venue-seats1/reservation/reservation.component';
-import { BuyTicketsComponent } from './main-app/homepage-client/program/venue-seats1/buy-tickets/buy-tickets.component';
 import { ProductsComponent } from './main-app/homepage-admin/products/products.component';
 import { AddProductComponent } from './main-app/homepage-admin/products/add-product/add-product.component';
 import { DeleteProductComponent } from './main-app/homepage-admin/products/delete-product/delete-product.component';
@@ -92,6 +91,7 @@ import { DeleteProductsPromotionsComponent } from './main-app/homepage-distribui
 import { DeleteTicketsPromotionsComponent } from './main-app/homepage-distribuitor/promotions/delete-tickets-promotions/delete-tickets-promotions.component';
 import { Reviews1Component } from './main-app/homepage-admin/reviews1/reviews1.component';
 import { DeleteReview1Component } from './main-app/homepage-admin/reviews1/delete-review1/delete-review1.component';
+import { PaymentDetailsComponent } from './main-app/homepage-client/program/venue-seats1/payment-details/payment-details.component';
 
 @NgModule({
   declarations: [
@@ -135,7 +135,6 @@ import { DeleteReview1Component } from './main-app/homepage-admin/reviews1/delet
     VenueSeatsComponent,
     VenueSeats1Component,
     ReservationComponent,
-    BuyTicketsComponent,
     ProductsComponent,
     AddProductComponent,
     DeleteProductComponent,
@@ -157,7 +156,8 @@ import { DeleteReview1Component } from './main-app/homepage-admin/reviews1/delet
     DeleteProductsPromotionsComponent,
     DeleteTicketsPromotionsComponent,
     Reviews1Component,
-    DeleteReview1Component
+    DeleteReview1Component,
+    PaymentDetailsComponent
   ],
   imports: [
     BrowserModule,

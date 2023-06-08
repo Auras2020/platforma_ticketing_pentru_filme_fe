@@ -1,0 +1,92 @@
+<div [formGroup]="form" class="dialog-content">
+  <div class="delete-item-dialog-title">
+    <div class="dialog-title">
+      Payment details
+    </div>
+    <div class="empty-div"></div>
+    <div class="close-button">
+      <button mat-icon-button mat-dialog-close class="dialog-close-button">
+        <mat-icon class="close-icon">close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div>
+    <div class="form-padding form-content">
+      <div fxLayout="row wrap" fxLayout.xs="column">
+        <div class="form-row" fxFlex>
+          <div class="name-label-padding">
+            <label class="name-label" [ngClass]="{'asterisk': cardControl.hasError('required')}">Card number</label>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" class="card-number-mat-form">
+              <input matInput
+                     placeholder="1111 1111 1111 1111"
+                     formControlName="cardNumber">
+            </mat-form-field>
+            <div
+              *ngIf="cardControl.touched && cardControl.hasError('required')" class="error">
+              Card number is required!
+            </div>
+            <div
+              *ngIf="cardControl.touched && !cardControl.hasError('required')
+               && cardControl.hasError('pattern')" class="error">
+              Please insert a valid card number of 16 digits with spaces between!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div fxLayout="row wrap" fxLayout.xs="column">
+        <div class="form-row form-margin" fxFlex>
+          <div class="name-label-padding">
+            <label class="name-label" [ngClass]="{'asterisk': dateControl.hasError('required')}">Expiration date</label>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" class="mat-form">
+              <input matInput
+                     placeholder="MM/YY"
+                     formControlName="expirationDate">
+            </mat-form-field>
+            <div
+              *ngIf="dateControl.touched && dateControl.hasError('required')" class="error error-width">
+              Expiration date is required!
+            </div>
+            <div
+              *ngIf="dateControl.touched && !dateControl.hasError('required')
+               && dateControl.hasError('pattern')" class="error error-width">
+              Please insert a valid expiration date!
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row" fxFlex>
+          <div class="name-label-padding">
+            <label class="name-label" [ngClass]="{'asterisk': cvvControl.hasError('required')}">CVV code</label>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" class="mat-form">
+              <input matInput
+                     placeholder="111"
+                     formControlName="cvv">
+            </mat-form-field>
+            <div
+              *ngIf="cvvControl.touched && cvvControl.hasError('required')" class="error error-width">
+              CVV code is required!
+            </div>
+            <div
+              *ngIf="cvvControl.touched && !cvvControl.hasError('required')
+               && cvvControl.hasError('pattern')" class="error error-width">
+              Please insert a cvv code number of 3 digits!
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div mat-dialog-actions align="end" class="close-actions">
+      <button mat-button mat-dialog-close class="cancel-button">Cancel</button>
+      <button mat-raised-button type="submit" [disabled]="!form.valid" (click)="buyTicketsConfirmation()" class="save-user-button">Confirm</button>
+    </div>
+  </div>
+</div>

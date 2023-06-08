@@ -108,7 +108,7 @@
                 class="form-input"
               >
                 <mat-option *ngFor="let ageRestrict of ageRestricts" [value]="ageRestrict">
-                  {{ ageRestrict }}
+                  {{ getMovieCategoryMeaning(ageRestrict) }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -188,7 +188,7 @@
               {{movieTime.movie.name}}
             </div>
             <div class="movie-age">
-              {{movieTime.movie.recommendedAge}}, {{formatDuration(movieTime.movie.duration)}}
+              {{getMovieCategoryMeaning(movieTime.movie.recommendedAge)}}, {{formatDuration(movieTime.movie.duration)}}
             </div>
             <div class="movie-genre">
               {{getMovieGenres(movieTime.movie.genres)}}

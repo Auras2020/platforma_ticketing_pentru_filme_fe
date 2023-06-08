@@ -277,11 +277,8 @@
 
 .movie-age{
   align-self: center;
-  border-radius: 50%;
   font-size: 16px;
   font-weight: bold;
-  height: 20px;
-  width: 50px;
   border: 2px solid #DC4E2A;
   color: #213555;
   background-color: #FFF3E0;
@@ -289,6 +286,7 @@
   align-content: center;
   justify-content: center;
   display: flex;
+  padding: 5px;
 }
 
 .day-style{

@@ -20,7 +20,7 @@
             {{movie?.name}}
           </label>
           <label class="movie-age">
-            {{movie?.recommendedAge}}
+            {{getMovieCategoryMeaning(movie?.recommendedAge)}}
           </label>
         </div>
         <video width="540" height="360" controls *ngIf="movie?.trailerName !== null && movie?.trailerName !== 'null'" class="video-position">

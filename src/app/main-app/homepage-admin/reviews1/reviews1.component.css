@@ -280,7 +280,6 @@
 
 .review-title-div{
   align-self: flex-start;
-  padding-top: 14px;
 }
 
 .add-review-button-div{
@@ -289,6 +288,7 @@
 
 .reviews-section{
   width: 60%;
+  margin-left: 30px;
   margin-top: 30px;
   margin-right: 30px;
 }
