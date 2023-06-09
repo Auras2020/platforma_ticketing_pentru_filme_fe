@@ -1,4 +1,4 @@
-import {Component, Inject} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FeedbackToolbarService} from "../../../../../feedback-toolbar/feedback-toolbar.service";
 import {VenueSeats1Service} from "../venue-seats1.service";
@@ -11,7 +11,7 @@ import {ProductDetails, ProductsService} from "../../../../homepage-admin/produc
   templateUrl: './reservation.component.html',
   styleUrls: ['./reservation.component.css']
 })
-export class ReservationComponent {
+export class ReservationComponent{
 
   showTiming?: ShowTimings;
   seats?: string[];
@@ -78,5 +78,12 @@ export class ReservationComponent {
     } else {
       this.feedbackToolbarService.openSnackBarWithSuccessMessage("Tickets booked successfully! You will receive an email with tickets");
     }
+  }
+
+  getMessage(): string{
+    if(this.productDetails?.length! > 0 && this.productsStatus === 'reserved'){
+      return 'Are you sure you want to reserve selected seats and products?';
+    }
+    return 'Are you sure you want to reserve selected seats?';
   }
 }

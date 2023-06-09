@@ -119,6 +119,7 @@
 
 .close-actions{
   padding-top: 10px;
+  align-self: flex-end;
 }
 
 .mat-mdc-raised-button.mat-unthemed {
@@ -164,4 +165,19 @@
 
 .reviews-form-div{
   margin-bottom: 20px;
+}
+
+.footer-section{
+  display: flex;
+  justify-content: space-between;
+}
+
+.anonymous-checkbox{
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.anonymous-label{
+  color: #3E5F8D;
 }

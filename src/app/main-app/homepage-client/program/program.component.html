@@ -176,7 +176,7 @@
   </mat-card>
 
   <div *ngFor="let movieTime of movieTimes">
-    <mat-card class="movie-card">
+    <mat-card class="movie-card" *ngIf="movieTime.times.length">
       <div class="movie-content">
         <div class="movie-details">
           <div>
@@ -208,10 +208,10 @@
               </button>
             </div>
             <div class="movie-note">
-              Note {{showNumberWithFirstDecimal(getNumber(movieTime.movie.note))}}
+              User rating {{showNumberWithFirstDecimal(getNumber(movieTime.movie.note))}}
             </div>
             <div class="movie-rating">
-              Rating {{showNumberWithFirstDecimal(getNumber(movieTime.movie.rating))}}
+              Critics rating {{showNumberWithFirstDecimal(getNumber(movieTime.movie.rating))}}
             </div>
           </div>
         </div>

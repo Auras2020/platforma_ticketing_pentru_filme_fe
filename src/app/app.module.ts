@@ -92,6 +92,8 @@ import { DeleteTicketsPromotionsComponent } from './main-app/homepage-distribuit
 import { Reviews1Component } from './main-app/homepage-admin/reviews1/reviews1.component';
 import { DeleteReview1Component } from './main-app/homepage-admin/reviews1/delete-review1/delete-review1.component';
 import { PaymentDetailsComponent } from './main-app/homepage-client/program/venue-seats1/payment-details/payment-details.component';
+import { AnonymousDialogComponent } from './main-app/homepage-client/reviews/add-review/anonymous-dialog/anonymous-dialog.component';
+import { Statistics1Component } from './main-app/homepage-admin/statistics1/statistics1.component';
 
 @NgModule({
   declarations: [
@@ -157,7 +159,9 @@ import { PaymentDetailsComponent } from './main-app/homepage-client/program/venu
     DeleteTicketsPromotionsComponent,
     Reviews1Component,
     DeleteReview1Component,
-    PaymentDetailsComponent
+    PaymentDetailsComponent,
+    AnonymousDialogComponent,
+    Statistics1Component
   ],
   imports: [
     BrowserModule,

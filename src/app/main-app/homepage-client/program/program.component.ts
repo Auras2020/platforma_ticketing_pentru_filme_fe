@@ -230,7 +230,7 @@ export class ProgramComponent implements OnInit{
   }
 
   getMovieGenres(genres: any): any{
-    return genres.map((genre: any) => genre.name);
+    return genres?.map((genre: any) => genre?.name);
   }
 
   getMovieCategoryMeaning(category: any): string{

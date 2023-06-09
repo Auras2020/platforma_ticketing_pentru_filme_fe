@@ -12,6 +12,7 @@ export interface Review{
   createdDate: Date;
   user: any;
   movie: Movie;
+  anonymous: boolean;
 }
 
 export interface ReviewFilters{

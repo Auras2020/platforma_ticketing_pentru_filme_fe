@@ -91,6 +91,17 @@ export class PaymentDetailsComponent {
     }
   }
 
+  getMessage(): string{
+    if(this.productDetails?.length! > 0){
+      if(this.productsStatus === 'bought'){
+        return 'Are you sure you want to buy tickets and products?';
+      } else if(this.productsStatus === 'reserved'){
+        return 'Are you sure you want to buy tickets and reserve products?';
+      }
+    }
+    return 'Are you sure you want to buy tickets?';
+  }
+
   get cardControl(): any{
     return this.form.controls['cardNumber']
   }

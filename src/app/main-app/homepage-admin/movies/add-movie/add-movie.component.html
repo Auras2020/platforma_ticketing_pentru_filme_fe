@@ -59,15 +59,6 @@
             <label class="name-label" [ngClass]="{'asterisk': genresControl.hasError('required')}">Genre</label>
           </div>
           <div>
-            <!--<mat-form-field appearance="outline" class="mat-form">
-              <mat-select
-                formControlName="genre"
-              >
-                <mat-option *ngFor="let genre of genres" [value]="genre">
-                  {{ genre }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>-->
             <mat-form-field appearance="outline" class="mat-form">
               <mat-select
                 multiple
@@ -115,7 +106,7 @@
       <div fxLayout="row wrap" fxLayout.xs="column" class="evaluation-padding">
         <div class="form-row form-margin" fxFlex>
           <div class="name-label-padding">
-            <label class="name-label">Note</label>
+            <label class="name-label">User rating</label>
           </div>
           <div>
             <mat-form-field appearance="outline" class="mat-form">
@@ -123,14 +114,14 @@
             </mat-form-field>
             <div
               *ngIf="noteControl.touched && noteValue() && (noteValue() < 1 || noteValue() > 10)" class="error error-width">
-              Note must be between 1 and 10!
+              User rating must be between 1 and 10!
             </div>
           </div>
         </div>
 
         <div class="form-row" fxFlex>
           <div class="name-label-padding">
-            <label class="name-label">Rating</label>
+            <label class="name-label">Critics rating</label>
           </div>
           <div>
             <mat-form-field appearance="outline" class="mat-form">
@@ -138,7 +129,7 @@
             </mat-form-field>
             <div
               *ngIf="ratingControl.touched && ratingValue() && (ratingValue() < 1 || ratingValue() > 10)" class="error error-width">
-              Rating must be between 1 and 10!
+              Critics rating must be between 1 and 10!
             </div>
           </div>
         </div>

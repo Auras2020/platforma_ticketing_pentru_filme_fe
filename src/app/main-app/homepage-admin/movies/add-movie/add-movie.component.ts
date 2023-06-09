@@ -44,7 +44,6 @@ export class AddMovieComponent implements OnInit, AfterViewInit, AfterContentIni
   trailerSelected: boolean = false;
 
   genres: Genre[] = [];
-  selectedGenres: Genre[] = [];
   movieId?: any;
 
   constructor(private moviesService: MoviesService,

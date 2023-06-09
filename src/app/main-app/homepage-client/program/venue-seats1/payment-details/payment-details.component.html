@@ -84,6 +84,10 @@
       </div>
     </div>
 
+    <div class="message-style">
+      {{this.getMessage()}}
+    </div>
+
     <div mat-dialog-actions align="end" class="close-actions">
       <button mat-button mat-dialog-close class="cancel-button">Cancel</button>
       <button mat-raised-button type="submit" [disabled]="!form.valid" (click)="buyTicketsConfirmation()" class="save-user-button">Confirm</button>

@@ -1,7 +1,7 @@
 <div class="dialog-margins">
   <div class="delete-item-dialog-title">
     <div class="title-label">
-      Reservation
+      Anonymous review
     </div>
     <div class="empty-div"></div>
     <div class="close-button">
@@ -11,10 +11,10 @@
     </div>
   </div>
   <div class="dialog-content">
-    {{this.getMessage()}}
+    Would you prefer this review to be anonymous?
   </div>
   <div mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close class="cancel-button">No</button>
-    <button mat-raised-button class="delete-device-button" (click)="reservationConfirmation()">Yes</button>
+    <button mat-button mat-dialog-close class="cancel-button" (click)="saveReview(false)">No</button>
+    <button mat-raised-button class="delete-device-button" (click)="saveReview(true)">Yes</button>
   </div>
 </div>

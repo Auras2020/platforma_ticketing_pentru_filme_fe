@@ -80,6 +80,15 @@
         <mat-icon class="material-icons-outlined-1">groups_black</mat-icon>
         <mat-label class="menu-page">{{ "Users" }}</mat-label>
       </button>
+      <button
+        mat-raised-button
+        class="menu-button"
+        routerLink="statistics"
+        routerLinkActive="is-active"
+      >
+        <mat-icon class="material-icons-outlined-1">bar_chart</mat-icon>
+        <mat-label class="menu-page">{{ "Statistics" }}</mat-label>
+      </button>
     </mat-nav-list>
   </mat-sidenav>
   <button mat-icon-button class="button-toggle" (click)="drawer.toggle()">

@@ -26,7 +26,7 @@ export class ReviewsComponent implements OnInit{
   filteredData?: ReviewFilters | null
 
   ageRestricts = ['AG', 'AP12', 'N15', 'IM18']
-  genres: any /*= ['Action', 'Adventure', 'Comedy', 'Drama', 'Horror', 'Romance', 'SF', 'Thriller', 'Western']*/;
+  genres: any;
   opinions: string[] = ['Very good', 'Good', 'Bad', 'Very bad'];
   movieReviews?: MovieReview[];
   user?: any;
@@ -255,7 +255,7 @@ export class ReviewsComponent implements OnInit{
   }
 
   getMovieGenres(genres: any): any{
-    return genres.map((genre: any) => genre.name);
+    return genres?.map((genre: any) => genre?.name);
   }
 
   getMovieCategoryMeaning(category: any): string{
@@ -277,5 +277,9 @@ export class ReviewsComponent implements OnInit{
         description = '';
     }
     return description;
+  }
+
+  getUserName(review: any): string{
+    return !review.anonymous ? review.user.name : 'Anonymous'
   }
 }

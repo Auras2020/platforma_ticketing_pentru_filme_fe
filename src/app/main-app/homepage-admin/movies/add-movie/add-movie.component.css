@@ -62,6 +62,10 @@
   color: red
 }
 
+.error-width{
+  max-width: 200px;
+}
+
 .cancel-button{
   color: #DC4E2A;
   font-weight: bold;

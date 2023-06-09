@@ -136,10 +136,10 @@
               Genre: {{getMovieGenres(movieReview.movie.genres)}}
             </div>
             <div class="movie-note">
-              Note: {{showNumberWithFirstDecimal(getNumber(movieReview.movie.note))}}
+              User rating: {{showNumberWithFirstDecimal(getNumber(movieReview.movie.note))}}
             </div>
             <div class="movie-rating">
-              Rating: {{showNumberWithFirstDecimal(getNumber(movieReview.movie.rating))}}
+              Critics rating: {{showNumberWithFirstDecimal(getNumber(movieReview.movie.rating))}}
             </div>
           </div>
         </div>
@@ -164,7 +164,7 @@
                 <div class="review-details">
                   <div class="review-details-left">
                     <label class="review-details-margin review-name">
-                      {{review.user.name}}
+                      {{getUserName(review)}}
                     </label>
                     <label class="review-opinion-margin star-label">
                       <label *ngFor="let star of calculateStarRating(review.note)">

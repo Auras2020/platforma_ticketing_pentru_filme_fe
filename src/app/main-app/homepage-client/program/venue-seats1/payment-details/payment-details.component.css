@@ -163,3 +163,10 @@
 .form-padding{
   padding-top: 10px;
 }
+
+.message-style{
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  color: #213555;
+}

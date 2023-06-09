@@ -16,7 +16,7 @@
       <div fxLayout="row wrap" fxLayout.xs="column">
         <div class="form-row form-margin" fxFlex>
           <div class="name-label-padding">
-            <label class="name-label" [ngClass]="{'asterisk': noteControl.hasError('required')}">Note for this movie</label>
+            <label class="name-label" [ngClass]="{'asterisk': noteControl.hasError('required')}">Mark for this movie</label>
           </div>
           <div>
             <mat-form-field appearance="outline" class="mat-form">
@@ -80,9 +80,16 @@
       </div>
     </div>
 
-    <div mat-dialog-actions align="end" class="close-actions">
-      <button mat-button mat-dialog-close class="cancel-button">Cancel</button>
-      <button mat-raised-button type="submit" [disabled]="!form.valid" (click)="saveReview()" class="save-user-button">Save</button>
+    <div class="footer-section">
+      <div class="anonymous-checkbox">
+        <mat-checkbox [(ngModel)]="anonymous" [ngModelOptions]="{standalone: true}"></mat-checkbox>
+        <label class="anonymous-label">Anonymous review</label>
+      </div>
+      <div class="empty-div"></div>
+      <div mat-dialog-actions class="close-actions">
+        <button mat-button mat-dialog-close class="cancel-button">Cancel</button>
+        <button mat-raised-button type="submit" [disabled]="!form.valid" (click)="saveReview()" class="save-user-button">Save</button>
+      </div>
     </div>
   </div>
 </div>

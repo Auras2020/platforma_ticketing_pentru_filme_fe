@@ -185,14 +185,28 @@ export class OrdersComponent implements OnInit{
     const hourNumber2 = parseInt(hour2, 10);
     const minuteNumber2 = parseInt(minute2, 10);
 
-    return hourNumber1 < hourNumber2 || (hourNumber1 === hourNumber2 && minuteNumber1 < minuteNumber2);
+    return hourNumber1 < hourNumber2 + 2 || (hourNumber1 === hourNumber2 + 2 && minuteNumber1 < minuteNumber2);
   }
 
   public compareWithCurrentDate(row: Order): boolean{
     let time = new Date().getHours() + ":" + new Date().getMinutes();
-    return this.compareDays(new Date(row.showTiming?.day!), new Date()) ||
+    let checkIfLaterThanCurrentDate = this.compareDays(new Date(row.showTiming?.day!), new Date()) ||
       (this.checkIfSameDays(new Date(row.showTiming?.day!), new Date()) &&
         this.compareHourAndMinute(row.showTiming?.time!, time));
+
+    if(checkIfLaterThanCurrentDate){
+      if(row.ticketsStatus === 'reserved' || row.productsStatus === 'reserved'){
+        if(row.ticketsStatus === 'reserved'){
+          row.ticketsStatus = 'cancelled';
+        }
+        if(row.productsStatus === 'reserved'){
+          row.productsStatus = 'cancelled';
+        }
+        this.ordersService.changeOrderStatus(row).subscribe(() => this.getAllOrders());
+      }
+    }
+
+    return checkIfLaterThanCurrentDate;
   }
 
   public viewTicketsDetails(order: any): void{
