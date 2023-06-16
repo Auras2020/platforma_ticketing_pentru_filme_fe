@@ -44,7 +44,9 @@ export class LoginService {
     this.tokenStorage.login(true);
     if(data.role === 'ADMIN'){
       this.router.navigate(['/admin/dashboard']);
-    } else if(data.role === 'DISTRIBUITOR') {
+    } else if(data.role === 'THEATRE_MANAGER'){
+      this.router.navigate(['/theatre-manager/dashboard']);
+    } else if(data.role === 'DISTRIBUTOR') {
       this.router.navigate(['/distributor/promotions']);
     } else if(data.role === 'CLIENT') {
       this.router.navigate(['/client/home']);

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../../../environments/environment";
+import {Theatre} from "../theatres/theatres.service";
 
 export interface User{
   name: string;
@@ -11,6 +12,7 @@ export interface User{
   token: string;
   role: string;
   createdDate: Date;
+  theatre: Theatre;
 }
 
 export interface UserFilters{

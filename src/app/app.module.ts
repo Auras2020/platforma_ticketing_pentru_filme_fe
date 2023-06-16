@@ -94,6 +94,17 @@ import { DeleteReview1Component } from './main-app/homepage-admin/reviews1/delet
 import { PaymentDetailsComponent } from './main-app/homepage-client/program/venue-seats1/payment-details/payment-details.component';
 import { AnonymousDialogComponent } from './main-app/homepage-client/reviews/add-review/anonymous-dialog/anonymous-dialog.component';
 import { Statistics1Component } from './main-app/homepage-admin/statistics1/statistics1.component';
+import { HomepageTheatreManagerComponent } from './main-app/homepage-theatre-manager/homepage-theatre-manager.component';
+import { Dashboard1Component } from './main-app/homepage-theatre-manager/dashboard1/dashboard1.component';
+import { Venues3Component } from './main-app/homepage-theatre-manager/venues3/venues3.component';
+import { VenueSeats3Component } from './main-app/homepage-theatre-manager/venues3/venue-seats3/venue-seats3.component';
+import { Movies1Component } from './main-app/homepage-theatre-manager/movies1/movies1.component';
+import { MovieDetails4Component } from './main-app/homepage-theatre-manager/movies1/movie-details4/movie-details4.component';
+import { ShowTimings1Component } from './main-app/homepage-theatre-manager/show-timings1/show-timings1.component';
+import { Products1Component } from './main-app/homepage-theatre-manager/products1/products1.component';
+import { Statistics2Component } from './main-app/homepage-theatre-manager/statistics2/statistics2.component';
+import { VenueSeats4Component } from './main-app/homepage-theatre-manager/theatre-details2/venue-seats4/venue-seats4.component';
+import { TheatreDetails2Component } from './main-app/homepage-theatre-manager/theatre-details2/theatre-details2.component';
 
 @NgModule({
   declarations: [
@@ -161,7 +172,18 @@ import { Statistics1Component } from './main-app/homepage-admin/statistics1/stat
     DeleteReview1Component,
     PaymentDetailsComponent,
     AnonymousDialogComponent,
-    Statistics1Component
+    Statistics1Component,
+    HomepageTheatreManagerComponent,
+    Dashboard1Component,
+    Venues3Component,
+    VenueSeats3Component,
+    Movies1Component,
+    MovieDetails4Component,
+    ShowTimings1Component,
+    Products1Component,
+    Statistics2Component,
+    VenueSeats4Component,
+    TheatreDetails2Component
   ],
   imports: [
     BrowserModule,

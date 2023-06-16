@@ -37,6 +37,24 @@ import {
 } from "./main-app/homepage-distribuitor/promotions/promotions-details/promotions-details.component";
 import {Reviews1Component} from "./main-app/homepage-admin/reviews1/reviews1.component";
 import {Statistics1Component} from "./main-app/homepage-admin/statistics1/statistics1.component";
+import {TheatreManagerGuard} from "./authentication/guard/theatre-manager.guard";
+import {HomepageTheatreManagerComponent} from "./main-app/homepage-theatre-manager/homepage-theatre-manager.component";
+import {Dashboard1Component} from "./main-app/homepage-theatre-manager/dashboard1/dashboard1.component";
+import {Venues3Component} from "./main-app/homepage-theatre-manager/venues3/venues3.component";
+import {VenueSeats3Component} from "./main-app/homepage-theatre-manager/venues3/venue-seats3/venue-seats3.component";
+import {Movies1Component} from "./main-app/homepage-theatre-manager/movies1/movies1.component";
+import {
+  TheatreDetails2Component
+} from "./main-app/homepage-theatre-manager/theatre-details2/theatre-details2.component";
+import {
+  MovieDetails4Component
+} from "./main-app/homepage-theatre-manager/movies1/movie-details4/movie-details4.component";
+import {ShowTimings1Component} from "./main-app/homepage-theatre-manager/show-timings1/show-timings1.component";
+import {Products1Component} from "./main-app/homepage-theatre-manager/products1/products1.component";
+import {
+  VenueSeats4Component
+} from "./main-app/homepage-theatre-manager/theatre-details2/venue-seats4/venue-seats4.component";
+import {Statistics2Component} from "./main-app/homepage-theatre-manager/statistics2/statistics2.component";
 
 const routes: Routes = [
   {path: 'login', component: MainAppComponent},
@@ -63,6 +81,22 @@ const routes: Routes = [
       {path: 'reviews', component: Reviews1Component, canActivate: [AuthGuard, AdminGuard]},
       {path: 'statistics', component: Statistics1Component, canActivate: [AuthGuard, AdminGuard]}
   ]},
+  {
+    path: 'theatre-manager',
+    component: HomepageTheatreManagerComponent,
+    canActivate: [AuthGuard, TheatreManagerGuard],
+    children: [
+      {path: 'dashboard', component: Dashboard1Component, canActivate: [AuthGuard, TheatreManagerGuard]},
+      {path: 'venues', component: Venues3Component, canActivate: [AuthGuard, TheatreManagerGuard]},
+      {path: 'venues/:id', component: VenueSeats3Component, canActivate: [AuthGuard, TheatreManagerGuard]},
+      {path: 'theatres/:id', component: TheatreDetails2Component, canActivate: [AuthGuard, TheatreManagerGuard]},
+      {path: 'movies', component: Movies1Component, canActivate: [AuthGuard, TheatreManagerGuard]},
+      {path: 'movies/:id', component: MovieDetails4Component, canActivate: [AuthGuard, TheatreManagerGuard]},
+      {path: 'show-timings', component: ShowTimings1Component, canActivate: [AuthGuard, TheatreManagerGuard]},
+      {path: 'products/:id', component: Products1Component, canActivate: [AuthGuard, TheatreManagerGuard]},
+      {path: 'theatres/venue/:id', component: VenueSeats4Component, canActivate: [AuthGuard, TheatreManagerGuard]},
+      {path: 'statistics', component: Statistics2Component, canActivate: [AuthGuard, TheatreManagerGuard]}
+    ]},
   {
     path: 'distributor',
     component: HomepageDistribuitorComponent,

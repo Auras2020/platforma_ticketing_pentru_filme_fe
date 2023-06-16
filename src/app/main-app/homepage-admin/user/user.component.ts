@@ -29,7 +29,7 @@ export class UserComponent implements OnInit{
   dataSource = new MatTableDataSource<User>([]);
   /*currentUser?:User;*/
 
-  roles = ['ADMIN', 'CLIENT', 'DISTRIBUITOR']
+  roles = ['ADMIN', 'CLIENT', 'DISTRIBUTOR', 'THEATRE_MANAGER']
   ageIntervals = ['<12', '12-15', '15-18', '>=18']
   public displayedColumns = [
     'name',

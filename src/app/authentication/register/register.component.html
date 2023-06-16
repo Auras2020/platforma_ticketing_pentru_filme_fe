@@ -102,6 +102,48 @@
     </div>
 
     <div class="content">
+      <div>
+        <mat-form-field appearance="outline" class="mat-form">
+          <mat-select
+            formControlName="role"
+            (selectionChange)="checkUserRole($event)"
+            disableOptionCentering
+            placeholder="Role"
+          >
+            <mat-option *ngFor="let role of roles" [value]="role">
+              {{ role }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div
+          *ngIf="roleControl.touched && roleControl.hasError('required')" class="error">
+          User role is required!
+        </div>
+      </div>
+    </div>
+
+    <div class="content" *ngIf="this.roleControl.value === 'THEATRE_MANAGER'">
+      <div>
+        <mat-form-field appearance="outline" class="mat-form">
+          <mat-select
+            formControlName="theatre"
+            [compareWith]="compareTheatreOptions"
+            placeholder="Theatre"
+          >
+            <mat-option *ngFor="let theatre of theatres" [value]="theatre">
+              {{theatre.name}}, {{theatre.location}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div
+          *ngIf="theatreControl.touched && theatreControl.hasError('required')" class="error">
+          Theatre is required!
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
       <button mat-raised-button [disabled]="!form.valid || rePasswordControlLength() < 5 || rePasswordControlLength() < 5
                                      || passwordControl.value !== rePasswordControl.value || ageValue() <= 0
                                      || !checkIfInteger()" class="submit-button"

@@ -1,4 +1,4 @@
-import {AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Genre, MoviesService} from "../movies.service";
@@ -9,7 +9,7 @@ import {FeedbackToolbarService} from "../../../../feedback-toolbar/feedback-tool
   templateUrl: './add-movie.component.html',
   styleUrls: ['./add-movie.component.css']
 })
-export class AddMovieComponent implements OnInit, AfterViewInit, AfterContentInit{
+export class AddMovieComponent implements OnInit{
   form = new FormGroup({
       id: new FormControl(''),
       name: new FormControl('', Validators.required),
@@ -37,7 +37,6 @@ export class AddMovieComponent implements OnInit, AfterViewInit, AfterContentIni
   isImageType?: boolean;
 
   ageRestricts = ['AG', 'AP12', 'N15', 'IM18'];
-  // genres = ['Action', 'Adventure', 'Comedy', 'Drama', 'Horror', 'Romance', 'SF', 'Thriller', 'Western'];
   msg: string = '';
   okToSave?: boolean;
   posterSelected: boolean = false;
@@ -71,48 +70,19 @@ export class AddMovieComponent implements OnInit, AfterViewInit, AfterContentIni
 
   ngOnInit(): void {
     this.getGenres();
-    if(this.edit) {
+    if (this.edit) {
       this.title = "Edit movie"
       this.msg = "Movie was updated successfully"
     } else {
       this.msg = "Movie was added successfully"
     }
-    //console.log(this.movieId);
-   /* this.moviesService.getMovieGenres(this.movieId).subscribe((genres) => {
-      console.log(genres);
-      this.selectedGenres = genres;
-    })*/
   }
-
-  ngAfterViewInit(): void {
-  }
-
-  ngAfterContentInit(): void {
-    //if(this.movieId){
-
-    //}
-  }
-
- /* public getGenre(e: any, i: number): void {
-    if (e.checked) {
-      this.selectedGenres.push(this.genres[i]);
-    } else {
-      this.selectedGenres = this.selectedGenres.filter(
-        (genre) => genre.id !== this.genres[i].id
-      );
-    }
-  }*/
 
   public getGenres(): void {
     this.moviesService.getAllGenres().subscribe((genres) => {
       this.genres = genres;
     });
   }
-
- /* public isCheckedGenre(genre: any): boolean {
-    return this.selectedGenres.some((e) => e.id === genre.id);
-  }*/
-
   public compareGenresId(g1: Genre, g2: Genre): boolean {
     return g1?.id === g2?.id;
   }
