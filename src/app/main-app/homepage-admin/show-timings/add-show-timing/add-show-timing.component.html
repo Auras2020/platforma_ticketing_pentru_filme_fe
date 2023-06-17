@@ -20,7 +20,16 @@
           </div>
           <div>
             <mat-form-field appearance="outline" class="mat-form">
-              <mat-select formControlName="theatre" (selectionChange)="getVenuesByTheatreId()" [compareWith]="compareTheatreOptions">
+              <mat-select formControlName="theatre"
+                          *ngIf="this.theatre">
+                <mat-option [value]="theatre">
+                  {{theatre.name}}, {{theatre.location}}
+                </mat-option>
+              </mat-select>
+              <mat-select formControlName="theatre"
+                          *ngIf="!this.theatre"
+                          (selectionChange)="getVenuesByTheatreId()"
+                          [compareWith]="compareTheatreOptions">
                 <mat-option *ngFor="let theatre of theatres" [value]="theatre">
                   {{theatre.name}}, {{theatre.location}}
                 </mat-option>

@@ -1,1 +1,231 @@
-<p>theatre-details2 works!</p>
+<div class="page-content">
+  <mat-card class="calendar-card">
+    <div class="header-section">
+      <div class="left-header-content">
+        <div class="title">
+          <label class="title-style">
+            {{theatre?.name}}
+          </label>
+          <mat-icon mat-list-icon class="filter-list">
+            filter_list
+            <div class="notification-bubble" [ngClass]="{notification: filterActive()}">
+            </div>
+          </mat-icon>
+        </div>
+        <div>
+          <label class="theatre-details">
+            Theatre details here
+          </label>
+        </div>
+        <div class="address">
+          <label class="address-value">
+            {{theatre?.address}}
+          </label>
+          <label class="address-label">
+            Address
+          </label>
+        </div>
+        <div class="email">
+          <label class="email-value">
+            {{theatre?.email}}
+          </label>
+          <label class="email-label">
+            Email
+          </label>
+        </div>
+      </div>
+
+      <div class="poster-div">
+        <img *ngIf="theatre?.poster"
+             [src]="getImageUrl(theatre?.poster)"
+             class="theatre-poster"
+             alt="Poster"/>
+      </div>
+
+      <div class="right-header-content">
+        <div class="search-box">
+          <span class="fa fa-search"><mat-icon>search</mat-icon></span>
+          <input (keyup)="onButtonClick(index)"
+                 [(ngModel)]="searchString"
+                 matInput
+                 placeholder="Search...">
+          <span *ngIf="searchString" class="fa fa-search-close" (click)="searchString = '';onButtonClick(index)"><mat-icon>close</mat-icon></span>
+        </div>
+        <div class="location">
+          <div class="location-align">
+            <label class="location-icon">
+              <mat-icon> location_on</mat-icon>
+            </label>
+            <label class="location-value">
+              {{theatre?.location}}
+            </label>
+          </div>
+          <label class="location-label">
+            Location
+          </label>
+        </div>
+        <div class="phone">
+          <div class="phone-align">
+            <label class="phone-icon">
+              <mat-icon> phone</mat-icon>
+            </label>
+            <label class="phone-value">
+              {{theatre?.phone}}
+            </label>
+          </div>
+          <label class="phone-label">
+            Phone
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="filters-row">
+      <div class="filters" fxFlex="80">
+        <div class="forms-display">
+          <div>
+            <div class="input-label">Name</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <input matInput [(ngModel)]="filters.name" [ngModelOptions]="{updateOn:'change'}"
+                     (ngModelChange)="onButtonClick(index)" class="form-input">
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="input-label">Category</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <mat-select
+                [(ngModel)]="filters.recommendedAge"
+                (selectionChange)="onButtonClick(index)"
+                class="form-input"
+              >
+                <mat-option *ngFor="let ageRestrict of ageRestricts" [value]="ageRestrict">
+                  {{ getMovieCategoryMeaning(ageRestrict) }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="input-label">Genre</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <mat-select
+                [(ngModel)]="filters.genre"
+                (selectionChange)="onButtonClick(index)"
+                class="form-input"
+                multiple
+              >
+                <mat-option *ngFor="let genre of genres" [value]="genre">
+                  {{ genre }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="input-label">Synopsis</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <input matInput [(ngModel)]="filters.synopsis" [ngModelOptions]="{updateOn:'change'}"
+                     (ngModelChange)="onButtonClick(index)"
+                     class="form-input">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="empty-div"></div>
+
+      <div class="reset-div">
+        <button mat-button class="reset-button" (click)="resetFilters()">Reset filters</button>
+      </div>
+    </div>
+
+    <div class="calendar-container">
+      <div class="calendar-display">
+        <button class="chevron-style-left" [disabled]="this.disablePrevButton()" (click)="previousWeek()">
+          <mat-icon class="mat-icon-rtl-mirror">
+            {{'chevron_left'}}
+          </mat-icon>
+        </button>
+        <div *ngFor="let day of daysOfWeek; let i = index">
+          <button class="date-display" (click)="onButtonClick(i)"
+                  [ngClass]="{'bg-color': i === index}">
+            <label class="date-1">{{ daysOfWeek[dayIndex(i)] }}</label>
+            <label class="date-2">{{ datesOfWeek[i] | date: "dd"}}</label>
+            <label class="date-3">{{ datesOfWeek[i] | date: "MMM" | uppercase}}</label>
+          </button>
+        </div>
+        <button class="chevron-style-right" [disabled]="this.disableNextButton()" (click)="nextWeek()">
+          <mat-icon class="mat-icon-rtl-mirror">
+            {{'chevron_right'}}
+          </mat-icon>
+        </button>
+      </div>
+    </div>
+
+  </mat-card>
+
+  <div *ngFor="let movieTime of movieTimes">
+    <mat-card class="movie-card">
+      <div class="movie-content">
+        <div class="movie-details">
+          <div>
+            <img *ngIf="movieTime.movie.poster"
+                 [src]="getImageUrl(movieTime.movie.poster)"
+                 class="movie-poster"
+                 alt="Poster"/>
+          </div>
+          <div class="main-details">
+            <div class="movie-name">
+              {{movieTime.movie.name}}
+            </div>
+            <div class="movie-age">
+              {{getMovieCategoryMeaning(movieTime.movie.recommendedAge)}}, {{formatDuration(movieTime.movie.duration)}}
+            </div>
+            <div class="movie-genre">
+              {{getMovieGenres(movieTime.movie.genres)}}
+            </div>
+            <div *ngFor="let time of movieTime.times" class="times-display">
+              <button mat-raised-button
+                      [matTooltip]="'View venue seats'"
+                      matTooltipPosition="above"
+                      (click)="findVenueByShowTimingDetails(movieTime?.movie, time)"
+                      class="time-style" >
+                {{time}}
+              </button>
+            </div>
+            <div class="movie-note">
+              User rating {{showNumberWithFirstDecimal(getNumber(movieTime.movie.note))}}
+            </div>
+            <div class="movie-rating">
+              Critics rating {{showNumberWithFirstDecimal(getNumber(movieTime.movie.rating))}}
+            </div>
+          </div>
+        </div>
+        <div class="empty-div"></div>
+        <div class="actors-and-director">
+          <div class="director">
+            <div class="director-div">
+              <label class="director-value">
+                {{movieTime.movie.director}}
+              </label>
+            </div>
+            <label class="director-label">
+              Director
+            </label>
+          </div>
+          <div class="actors">
+            <div class="actors-div">
+              <label class="actors-value">
+                {{movieTime.movie.actors}}
+              </label>
+            </div>
+            <label class="actors-label">
+              Actors
+            </label>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

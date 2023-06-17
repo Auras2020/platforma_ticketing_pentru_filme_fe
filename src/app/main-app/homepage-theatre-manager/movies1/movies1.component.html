@@ -1,1 +1,220 @@
-<p>movies1 works!</p>
+<div class="page-content">
+  <mat-card class="filter-card">
+    <div class="line-style">
+      <div class="header-style">
+        <div class="title-and-filter-icon">
+          <label class="title-style">
+            Movies
+          </label>
+
+          <mat-icon mat-list-icon class="filter-list">
+            filter_list
+            <div class="notification-bubble" [ngClass]="{notification: filterActive()}">
+            </div>
+          </mat-icon>
+        </div>
+
+        <div class="search-box">
+          <span class="fa fa-search"><mat-icon>search</mat-icon></span>
+          <input (keyup)="getAllMovies(this.theatreId)"
+                 [(ngModel)]="searchString"
+                 matInput
+                 placeholder="Search...">
+          <span *ngIf="searchString" class="fa fa-search-close" (click)="searchString = '';getAllMovies(this.theatreId)"><mat-icon>close</mat-icon></span>
+          <button mat-raised-button class="add-theatre-button" (click)="openAddMovieDialog($event)">Add movie</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-style">
+      <label class="filter-label">Filter by...</label>
+    </div>
+
+    <div class="filters-row">
+      <div class="filters" fxFlex="80">
+        <div class="forms-display">
+          <div>
+            <div class="input-label">Name</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <input matInput [(ngModel)]="filters.name" [ngModelOptions]="{updateOn:'change'}"
+                     (ngModelChange)="getAllMovies(this.theatreId)" class="form-input">
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="input-label">Category</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <mat-select
+                [(ngModel)]="filters.recommendedAge"
+                (selectionChange)="getAllMovies(this.theatreId)"
+                class="form-input"
+              >
+                <mat-option *ngFor="let ageRestrict of ageRestricts" [value]="ageRestrict">
+                  {{ getMovieCategoryMeaning(ageRestrict) }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="input-label">Genre</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <mat-select
+                [(ngModel)]="filters.genre"
+                (selectionChange)="getAllMovies(this.theatreId)"
+                class="form-input"
+                multiple
+              >
+                <mat-option *ngFor="let genre of genres" [value]="genre">
+                  {{ genre }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="input-label">Duration</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <mat-select
+                [(ngModel)]="filters.duration"
+                (selectionChange)="getAllMovies(this.theatreId)"
+                class="form-input"
+              >
+                <mat-option *ngFor="let durationInterval of durationIntervals" [value]="durationInterval">
+                  {{ durationInterval }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="input-label">Actors</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <input matInput [(ngModel)]="filters.actors" [ngModelOptions]="{updateOn:'change'}"
+                     (ngModelChange)="getAllMovies(this.theatreId)" class="form-input">
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="input-label">Director</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <input matInput [(ngModel)]="filters.director" [ngModelOptions]="{updateOn:'change'}"
+                     (ngModelChange)="getAllMovies(this.theatreId)" class="form-input">
+            </mat-form-field>
+          </div>
+
+          <div>
+            <div class="input-label">Synopsis</div>
+            <mat-form-field appearance="outline" class="filter-form">
+              <input matInput [(ngModel)]="filters.synopsis" [ngModelOptions]="{updateOn:'change'}"
+                     (ngModelChange)="getAllMovies(this.theatreId)" class="form-input">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="empty-div"></div>
+
+      <div class="reset-div">
+        <button mat-button class="reset-button" (click)="resetFilters()">Reset filters</button>
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card class="table-card">
+    <div class="container" >
+
+      <mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef class="action-header"><span></span></th>
+          <td mat-cell *matCellDef="let row" class="edit-column">
+            <button mat-icon-button
+                    [matTooltip]="'Edit movie'"
+                    aria-label="Edit"
+                    matTooltipPosition="before"
+                    (click)="openEditMovieDialog($event, row)">
+              <mat-icon class="edit-button">
+                edit
+              </mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef class="data-header"><span>Name</span></th>
+          <td mat-cell *matCellDef="let row" class="name-column"
+          ><span class="ellipsis">{{ row.name }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="poster">
+          <th mat-header-cell *matHeaderCellDef class="data-header"><span>Poster</span></th>
+          <td mat-cell *matCellDef="let row" class="name-column">
+            <img *ngIf="row.poster"
+                 [src]="getImageUrl(row.poster)"
+                 class="poster"
+                 alt="Poster"/>
+          </td>
+        </ng-container>
+
+        <!-- <ng-container matColumnDef="genre">
+           <th mat-header-cell *matHeaderCellDef class="data-header"><span>Genre</span></th>
+           <td mat-cell *matCellDef="let row" class="name-column"
+           ><span class="ellipsis">{{ row.genre }}</span>
+           </td>
+         </ng-container>-->
+
+        <ng-container matColumnDef="duration">
+          <th mat-header-cell *matHeaderCellDef class="data-header"><span>Duration</span></th>
+          <td mat-cell *matCellDef="let row" class="name-column"
+          ><span class="ellipsis">{{ formatDuration(row.duration) }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="director">
+          <th mat-header-cell *matHeaderCellDef class="data-header"><span>Director</span></th>
+          <td mat-cell *matCellDef="let row" class="name-column"
+          ><span class="ellipsis">{{ row.director }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef class="action-header"></th>
+          <td mat-cell
+              (click)="$event.stopPropagation()"
+              *matCellDef="let row"
+              class="delete-column"
+          >
+            <button
+              (click)="openDeleteMovieDialog(row)"
+              mat-icon-button
+              [matTooltip]="'Delete movie'"
+              aria-label="Delete"
+              matTooltipPosition="before"
+            >
+              <mat-icon
+              >delete
+              </mat-icon
+              >
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header"></tr>
+        <tr mat-row
+            *matRowDef="let odd = odd; let row; columns: displayedColumns"
+            [ngClass]="{ 'gray-row': odd }"
+            (click)="clickOnMovieRow(row.id)"
+            class="row"
+        ></tr>
+      </mat-table>
+      <mat-paginator [pageSizeOptions]="pageSizeOptions"
+                     [pageSize]="pageSize"
+                     (page)="pageChanged($event)"
+                     showFirstLastButtons>
+      </mat-paginator>
+    </div>
+
+  </mat-card>
+
+</div>

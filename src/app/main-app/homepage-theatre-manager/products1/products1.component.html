@@ -1,1 +1,89 @@
-<p>products1 works!</p>
+<div class="page-content">
+  <mat-card class="filter-card">
+    <div class="header-style">
+      <div class="title">
+        <label class="title-style">
+          Products
+        </label>
+      </div>
+
+      <mat-form-field appearance="outline" class="filter-product-form product">
+        <mat-select
+          [placeholder]="'Select type of product..'"
+          (selectionChange)="getCategoryByEvent($event)"
+          class="form-input"
+        >
+          <mat-option *ngFor="let type of types" [value]="type">
+            {{ type }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="search-box">
+        <span class="fa fa-search"><mat-icon>search</mat-icon></span>
+        <input (keyup)="getAllProducts()"
+               [(ngModel)]="searchString"
+               matInput
+               [ngModelOptions]="{standalone: true}"
+               placeholder="Search...">
+        <span *ngIf="searchString" class="fa fa-search-close" (click)="searchString = '';getAllProducts()"><mat-icon>close</mat-icon></span>
+        <button mat-raised-button class="add-product-button" (click)="openAddProductDialog($event)">Add product</button>
+      </div>
+    </div>
+  </mat-card>
+
+  <div class="products-display">
+    <div *ngFor="let product of products">
+      <mat-card class="product-card">
+        <div class="product-content">
+          <div class="product-details">
+            <div>
+              <img *ngIf="product.image"
+                   [src]="getImageUrl(product.image)"
+                   class="product-poster"
+                   alt="Poster"/>
+            </div>
+            <div class="main-details">
+              <div class="product-name">
+                <label class="product-name-label">
+                  {{product.name}}
+                </label>
+                <button
+                  (click)="openEditProductDialog(product)"
+                  mat-icon-button
+                  [matTooltip]="'Edit product'"
+                  aria-label="Edit"
+                  matTooltipPosition="above"
+                >
+                  <mat-icon class="edit-button">
+                    edit
+                  </mat-icon>
+                </button>
+                <button
+                  (click)="openDeleteProductDialog(product)"
+                  mat-icon-button
+                  [matTooltip]="'Delete product'"
+                  aria-label="Delete"
+                  matTooltipPosition="above"
+                >
+                  <mat-icon class="delete-button">
+                    delete
+                  </mat-icon>
+                </button>
+              </div>
+              <div class="movie-age">
+                Price: {{product.price}} RON
+              </div>
+              <div class="movie-genre">
+                Quantity: {{product.quantity}}g
+              </div>
+              <div class="movie-note">
+                Number: {{product.number}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

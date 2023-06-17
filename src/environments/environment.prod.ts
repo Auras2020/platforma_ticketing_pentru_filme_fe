@@ -55,8 +55,13 @@ export const environment = {
     peoplePromotions: "promotions/people/",
     ticketsPromotions: "promotions/tickets/",
     productsPromotions: "promotions/products/",
-    ticketsNrChart: "orders/tickets-number-chart",
-    ticketsPriceChart: "orders/tickets-price-chart",
-    productsNrChart: "orders/products-number-chart"
+    ticketsNrChart: "orders/tickets-number-chart/",
+    ticketsPriceChart: "orders/tickets-price-chart/",
+    productsNrChart: "orders/products-number-chart/",
+    theatreManagerDashboard: "users/theatre-manager/dashboard/",
+    theatreManagerMovies: "movies/theatre-manager/movies",
+    theatreManagerMoviesFiltered: "movies/theatre-manager/movies/filtered",
+    theatreManagerShowTimings: "show-timings/theatre-manager/show-timings",
+    theatreManagerShowTimingsFiltered: "show-timings/theatre-manager/show-timings/filtered"
   }
 };

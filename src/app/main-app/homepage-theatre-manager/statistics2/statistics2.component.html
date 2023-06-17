@@ -1,1 +1,85 @@
-<p>statistics2 works!</p>
+<div class="display-cards">
+  <div class="card-1">
+    <mat-card class="general-details-card-1">
+      <div class="nr-tickets-chart">
+        <ngx-charts-pie-chart
+          [results]="ticketsNrData">
+          <ng-template #tooltipTemplate let-model="model">
+            <h1>
+              {{model.name}}
+            </h1>
+            <h2>{{calculateTicketsPercentage(model.value)}}%</h2>
+          </ng-template>
+        </ngx-charts-pie-chart>
+      </div>
+      <div class="nr-tickets">
+        <label class="nr-tickets-style">
+          Number of tickets chart
+        </label>
+      </div>
+    </mat-card>
+  </div>
+
+  <div class="card-2">
+    <mat-card class="general-details-card-2">
+      <div class="tickets-price-div">
+        <ngx-charts-bar-vertical
+          [view]="[700, 400]"
+          [results]="ticketsPriceData"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [legend]="showLegend"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel">
+          <ng-template #tooltipTemplate let-model="model">
+            <h1>
+              {{model.name}}
+            </h1>
+            <h2>{{model.value}} RON</h2>
+          </ng-template>
+        </ngx-charts-bar-vertical>
+      </div>
+      <div class="price-tickets">
+        <label class="price-tickets-style">
+          Tickets sales chart
+        </label>
+      </div>
+    </mat-card>
+  </div>
+</div>
+
+<div class="card-3">
+  <mat-card class="general-details-card-3">
+    <div class="products-number-div">
+      <ngx-charts-bar-vertical
+        [view]="[700, 400]"
+        [results]="productsNrData"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel1"
+        [yAxisLabel]="yAxisLabel1">
+        <ng-template #tooltipTemplate let-model="model">
+          <h1>
+            {{model.name}}
+          </h1>
+          <h2>{{model.value}}</h2>
+        </ng-template>
+      </ngx-charts-bar-vertical>
+    </div>
+    <div class="price-tickets">
+      <label class="price-tickets-style">
+        Number of products chart
+      </label>
+    </div>
+  </mat-card>
+</div>
+
+<div class="page-content"></div>
+

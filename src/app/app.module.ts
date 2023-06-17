@@ -105,6 +105,8 @@ import { Products1Component } from './main-app/homepage-theatre-manager/products
 import { Statistics2Component } from './main-app/homepage-theatre-manager/statistics2/statistics2.component';
 import { VenueSeats4Component } from './main-app/homepage-theatre-manager/theatre-details2/venue-seats4/venue-seats4.component';
 import { TheatreDetails2Component } from './main-app/homepage-theatre-manager/theatre-details2/theatre-details2.component';
+import {TheatreManagerGuard} from "./authentication/guard/theatre-manager.guard";
+import { PendingRegistrationsComponent } from './main-app/homepage-admin/pending-registrations/pending-registrations.component';
 
 @NgModule({
   declarations: [
@@ -183,7 +185,8 @@ import { TheatreDetails2Component } from './main-app/homepage-theatre-manager/th
     Products1Component,
     Statistics2Component,
     VenueSeats4Component,
-    TheatreDetails2Component
+    TheatreDetails2Component,
+    PendingRegistrationsComponent
   ],
   imports: [
     BrowserModule,
@@ -213,7 +216,7 @@ import { TheatreDetails2Component } from './main-app/homepage-theatre-manager/th
     MatSnackBarModule,
     NgxChartsModule
   ],
-  providers: [AuthGuard, AdminGuard, DistribuitorGuard, ClientGuard,
+  providers: [AuthGuard, AdminGuard, DistribuitorGuard, ClientGuard, TheatreManagerGuard,
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 3000}}, DatePipe],
   bootstrap: [AppComponent]
 })

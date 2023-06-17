@@ -1,1 +1,72 @@
-<p>dashboard1 works!</p>
+<div class="page-content">
+  <mat-card class="dashboard-card">
+    <div class="header-style">
+      <label class="welcome-label">
+        Welcome
+      </label>
+      <label class="admin-name">
+        {{this.userName}}
+      </label>
+    </div>
+
+    <div class="cards-display">
+      <div class="theatres">
+        <div class="movie-number">
+          <label>
+            <mat-icon class="material-icons-outlined-1 movie-icon">movie_creation</mat-icon>
+          </label>
+          <label class="movies-number-label">
+            {{info?.movies}}
+          </label>
+        </div>
+        <div class="movies-label">
+          Movies
+        </div>
+      </div>
+
+      <div class="theatres">
+        <div class="venues-number">
+          <label>
+            <mat-icon class="material-icons-outlined-1 venues-icon">event_seat</mat-icon>
+          </label>
+          <label class="venues-number-label">
+            {{info?.venues}}
+          </label>
+        </div>
+        <div class="venues-label">
+          Venues
+        </div>
+      </div>
+    </div>
+
+    <div class="cards-display">
+      <div class="theatres">
+        <div class="tickets-number">
+          <label>
+            <mat-icon class="material-icons-outlined-1 tickets-icon">theaters</mat-icon>
+          </label>
+          <label class="tickets-number-label">
+            {{info?.tickets}}
+          </label>
+        </div>
+        <div class="tickets-label">
+          Tickets
+        </div>
+      </div>
+
+      <div class="theatres">
+        <div class="products-number">
+          <label>
+            <mat-icon class="material-icons-outlined-1 products-icon">fastfood</mat-icon>
+          </label>
+          <label class="products-number-label">
+            {{info?.products}}
+          </label>
+        </div>
+        <div class="products-label">
+          Products
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>

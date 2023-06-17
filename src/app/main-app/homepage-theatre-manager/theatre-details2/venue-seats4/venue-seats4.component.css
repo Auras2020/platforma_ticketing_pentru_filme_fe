@@ -1,0 +1,137 @@
+.page-content{
+  margin-bottom: 100px;
+}
+
+.filter-card{
+  margin: 24px;
+}
+
+.title{
+  display: inline-flex;
+  border-bottom: 2px solid #AABFDF;
+}
+
+.arrow-color{
+  color: #DC4E2A;
+}
+
+.title-style{
+  color: #213555;
+  font-weight: bold;
+  font-size: 25px;
+  align-self: center;
+}
+
+.seat-style{
+  background-color: green;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  height: 48px;
+  width: 64px;
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.row-display{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.venue-display{
+  align-self: flex-start;
+  flex-direction: column;
+}
+
+.index-style{
+  color: black;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.index-margin{
+  margin-bottom: 35px;
+}
+
+.index-style-left, .index-style-right{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.row-seats{
+  display: inline-flex;
+  align-self: flex-start;
+}
+
+.seats-align{
+  display: flex;
+  justify-content: space-between;
+}
+
+.empty-div{
+  align-self: flex-start;
+}
+
+.seat-display{
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.seats-margin-bottom{
+  margin-bottom: 40px;
+}
+
+.seats-width{
+  width: 85%;
+}
+
+.screen-style{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: gray;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  letter-spacing: 5px;
+}
+
+.info-display{
+  margin-top: 20px;
+  display: inline-flex;
+  justify-content: center;
+}
+
+.green-seat-style{
+  height: 20px;
+  width: 20px;
+  background-color: green;
+  margin-right: 10px;
+}
+
+.green-seat-label{
+  font-size: 20px;
+  font-weight: bold;
+  color: #213555;
+  margin-right: 30px;
+}
+
+.red-seat-style{
+  height: 20px;
+  width: 20px;
+  background-color: red;
+  margin-right: 10px;
+}
+
+.red-seat-label{
+  font-size: 20px;
+  font-weight: bold;
+  color: #213555;
+}

@@ -37,14 +37,13 @@ export class MoviesComponent implements OnInit{
     'edit',
     'name',
     'poster',
-    /*'genre',*/
     'duration',
     'director',
     'delete'
   ];
   ageRestricts = ['AG', 'AP12', 'N15', 'IM18']
   durationIntervals = ['<1h30m', '1h30m-2h0m', '2h0m-2h30m', '>2h30m'];
-  genres: any /*= ['Action', 'Adventure', 'Comedy', 'Drama', 'Horror', 'Romance', 'SF', 'Thriller', 'Western']*/;
+  genres: any;
 
   ngOnInit(): void {
     this.getAllMovies();

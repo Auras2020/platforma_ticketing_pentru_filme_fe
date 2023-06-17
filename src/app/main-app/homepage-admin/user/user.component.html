@@ -119,6 +119,13 @@
         </td>
       </ng-container>
 
+      <ng-container matColumnDef="theatre">
+        <th mat-header-cell *matHeaderCellDef><span>Theatre</span></th>
+        <td mat-cell *matCellDef="let row" class="theatre-column"
+        ><span class="ellipsis" *ngIf="row.theatre">{{ row.theatre?.name }}, {{ row.theatre?.location }}</span>
+        </td>
+      </ng-container>
+
       <ng-container matColumnDef="delete">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell

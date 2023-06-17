@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {Observable} from "rxjs";
 import {environment} from "../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
 
 export interface TicketsNr {
   name: string;
@@ -21,7 +21,7 @@ export interface ProductsNr {
 @Injectable({
   providedIn: 'root'
 })
-export class StatisticsService {
+export class Statistics2Service {
 
   url = environment.apiUrl
   ticketsNrChart = environment.apiEndpoints.ticketsNrChart
@@ -30,15 +30,15 @@ export class StatisticsService {
 
   constructor(private http: HttpClient) { }
 
-  getTicketsNumber(): Observable<TicketsNr[]>{
-    return this.http.get<TicketsNr[]>(this.url + this.ticketsNrChart);
+  getTicketsNumberFromGivenTheatre(id: number): Observable<TicketsNr[]>{
+    return this.http.get<TicketsNr[]>(this.url + this.ticketsNrChart + id);
   }
 
-  getTicketsPrice(): Observable<TicketsPrice[]>{
-    return this.http.get<TicketsPrice[]>(this.url + this.ticketsPriceChart);
+  getTicketsPriceFromGivenTheatre(id: number): Observable<TicketsPrice[]>{
+    return this.http.get<TicketsPrice[]>(this.url + this.ticketsPriceChart + id);
   }
 
-  getProductsNumber(): Observable<ProductsNr[]>{
-    return this.http.get<ProductsNr[]>(this.url + this.productsNrChart);
+  getProductsNumberFromGivenTheatre(id: number): Observable<ProductsNr[]>{
+    return this.http.get<ProductsNr[]>(this.url + this.productsNrChart + id);
   }
 }

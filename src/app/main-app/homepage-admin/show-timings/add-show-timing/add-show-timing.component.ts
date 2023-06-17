@@ -19,6 +19,7 @@ export class AddShowTimingComponent implements OnInit{
   theatres?: Theatre[];
   movies?: Movie[];
   venues?: Venue[];
+  theatre: any;
 
   form = new FormGroup({
       id: new FormControl(''),
@@ -58,10 +59,15 @@ export class AddShowTimingComponent implements OnInit{
               private venuesService: VenuesService) {
     this.edit = false
     if(data){
-      this.edit = true;
-      this.form.controls['hour'].setValue(data.showTiming.time.substring(0, 2));
-      this.form.controls['minute'].setValue(data.showTiming.time.substring(3, 5));
-      this.form.patchValue(data.showTiming);
+      if(data.showTiming){
+        this.edit = true;
+        this.form.controls['hour'].setValue(data.showTiming.time.substring(0, 2));
+        this.form.controls['minute'].setValue(data.showTiming.time.substring(3, 5));
+        this.form.patchValue(data.showTiming);
+      }
+      if(data.theatre){
+        this.theatre = data.theatre;
+      }
       this.getVenuesByTheatreId();
     } else {
       this.edit = false;
@@ -89,6 +95,9 @@ export class AddShowTimingComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    if(this.theatre){
+      this.theatreControl.setValue(this.theatre);
+    }
     if(this.edit) {
       this.title = "Edit show schedule"
       this.msg = "Show schedule was updated successfully"
@@ -104,7 +113,7 @@ export class AddShowTimingComponent implements OnInit{
   }
 
   public getVenuesByTheatreId() {
-    this.venuesService.getAllVenueNumbersOfGivenTheatre(this.theatreControl.value.id).subscribe((venues) => {
+    this.venuesService.getAllVenueNumbersOfGivenTheatre(this.theatre ? this.theatre.id : this.theatreControl.value.id).subscribe((venues) => {
       this.venues = venues.sort((a, b) => a.venueNumber - b.venueNumber);
     })
   }

@@ -27,6 +27,7 @@ export class AddVenueComponent implements OnInit{
   theatres?: Theatre[];
   venues?: Venue[];
   venueExists?: boolean;
+  theatre: any;
 
   constructor(private venuesService: VenuesService,
               private dialogRef: MatDialogRef<AddVenueComponent>,
@@ -37,12 +38,18 @@ export class AddVenueComponent implements OnInit{
     if(data){
       this.edit = true;
       this.form.patchValue(data.venue);
+      if(data.theatre){
+        this.theatre = data.theatre;
+      }
     } else {
       this.edit = false;
     }
   }
 
   ngOnInit(): void {
+    if(this.theatre){
+      this.theatreControl.setValue(this.theatre);
+    }
     this.theatresService.getAllTheatres().subscribe((theatres) => {
       this.theatres = theatres;
     })

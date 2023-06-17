@@ -55,6 +55,9 @@ import {
   VenueSeats4Component
 } from "./main-app/homepage-theatre-manager/theatre-details2/venue-seats4/venue-seats4.component";
 import {Statistics2Component} from "./main-app/homepage-theatre-manager/statistics2/statistics2.component";
+import {
+  PendingRegistrationsComponent
+} from "./main-app/homepage-admin/pending-registrations/pending-registrations.component";
 
 const routes: Routes = [
   {path: 'login', component: MainAppComponent},
@@ -79,7 +82,8 @@ const routes: Routes = [
       {path: 'products/:id', component: ProductsComponent, canActivate: [AuthGuard, AdminGuard]},
       {path: 'theatres/venue/:id', component: VenueSeats2Component, canActivate: [AuthGuard, AdminGuard]},
       {path: 'reviews', component: Reviews1Component, canActivate: [AuthGuard, AdminGuard]},
-      {path: 'statistics', component: Statistics1Component, canActivate: [AuthGuard, AdminGuard]}
+      {path: 'statistics', component: Statistics1Component, canActivate: [AuthGuard, AdminGuard]},
+      {path: 'pending-registrations', component: PendingRegistrationsComponent, canActivate: [AuthGuard, AdminGuard]}
   ]},
   {
     path: 'theatre-manager',

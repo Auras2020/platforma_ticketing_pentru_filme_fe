@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Theatre, TheatresService} from "../theatres.service";
 import {MovieFilters, MoviesService} from "../../movies/movies.service";
-import {ShowTimings, ShowTimingsService} from "../../show-timings/show-timings.service";
+import {ShowTimingsService} from "../../show-timings/show-timings.service";
 
 @Component({
   selector: 'app-theatre-details',

@@ -1,10 +1,72 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Venue, VenuesService} from "../../../homepage-admin/venues/venues.service";
+import {ShowTimings, ShowTimingsService} from "../../../homepage-admin/show-timings/show-timings.service";
+import {
+  SeatTicketStatusDto,
+  VenueSeats1Service
+} from "../../../homepage-client/program/venue-seats1/venue-seats1.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-venue-seats4',
   templateUrl: './venue-seats4.component.html',
   styleUrls: ['./venue-seats4.component.css']
 })
-export class VenueSeats4Component {
+export class VenueSeats4Component implements OnInit{
 
+  venue?: Venue;
+  showTiming?: ShowTimings;
+  array1: number[] = [];
+  array2: number[] = [];
+  theatreId: number = -1;
+  bookedSeatsAndTicketsStatus?: SeatTicketStatusDto[];
+  originalColor: any[] = [];
+  originalBackgroundColor: any[] = [];
+
+  constructor(private venuesService: VenuesService,
+              private showTimingsService: ShowTimingsService,
+              private router: Router,
+              private route: ActivatedRoute,
+              private venueSeats1Service: VenueSeats1Service) {
+  }
+
+  navigateBackToTheatreDetailsPage(): void{
+    this.router.navigate(['theatre-manager', 'theatres', this.theatreId]);
+  }
+
+  ngOnInit(): void {
+    let id = this.route.snapshot.params['id'];
+    this.initializeSeats(id);
+    this.showTimingsService.getShowTiming(id).subscribe((showTiming) => {
+      this.theatreId = showTiming?.theatre?.id;
+      this.initializeColors();
+      this.venuesService.getVenue(showTiming?.venue?.id + "").subscribe((venue) => {
+        this.venue = venue;
+        this.array1 = Array.from({ length: this.venue?.rowsNumber! }, (_, i) => i + 1);
+        this.array2 = Array.from({ length: this.venue?.columnsNumber! }, (_, i) => i + 1);
+      })
+    })
+  }
+
+  initializeSeats(id: any): void{
+    this.venueSeats1Service.findSeatsAndTicketsStatusByShowTiming(id).subscribe((seats) => {
+      this.bookedSeatsAndTicketsStatus = seats;
+    })
+  }
+
+  initializeColors(): void{
+    this.originalColor = ['white'];
+    this.originalBackgroundColor = ['green'];
+  }
+
+  isSeatBooked(i: number, j: number): boolean | undefined{
+    let i1 = i + 1;
+    let j1 = j + 1;
+    for(let order of this.bookedSeatsAndTicketsStatus!){
+      if(order?.seats === JSON.stringify({i1, j1}) && order?.ticketsStatus !== 'cancelled'){
+        return true;
+      }
+    }
+    return false;
+  }
 }
