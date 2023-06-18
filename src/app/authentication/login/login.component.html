@@ -57,6 +57,11 @@
     <div *ngIf="form.valid && !this.account && this.login" class="error1">
       Account not found!
     </div>
+    <div *ngIf="form.valid && this.account && this.login && this.account.pending" class="error1">
+      <label>
+        Your registration is in pending, please wait for admin approval!
+      </label>
+    </div>
     <div class="content">
       <label class="register-option">Dont't have account? Click <a routerLink="register" class="register-color" (click)="openRegisterDialog()">Register</a></label>
     </div>

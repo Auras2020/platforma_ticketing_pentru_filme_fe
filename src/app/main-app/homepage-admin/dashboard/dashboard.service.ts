@@ -19,10 +19,15 @@ export class DashboardService {
 
   url = environment.apiUrl
   dashboard = environment.apiEndpoints.dashboard
+  checkForPendingRegistrations = environment.apiEndpoints.checkForPendingRegistrations
 
   constructor(private http: HttpClient) { }
 
   getCurrentInfo(): Observable<Dashboard>{
     return this.http.get<Dashboard>(this.url + this.dashboard);
+  }
+
+  checkIfThereArePendingRequests(): Observable<number>{
+    return this.http.get<number>(this.url + this.checkForPendingRegistrations);
   }
 }

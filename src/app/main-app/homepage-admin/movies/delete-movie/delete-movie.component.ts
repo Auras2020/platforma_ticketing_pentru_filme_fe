@@ -12,7 +12,6 @@ import {FeedbackToolbarService} from "../../../../feedback-toolbar/feedback-tool
 export class DeleteMovieComponent {
 
   movie?:Movie;
-  errorMsg: string = 'Movie is reserved for show schedule';
 
   constructor(private moviesService: MoviesService,
               private dialogRef: MatDialogRef<DeleteMovieComponent>,
@@ -27,8 +26,6 @@ export class DeleteMovieComponent {
     this.moviesService.deleteMovie(this.movie?.id).subscribe(()=>{
       this.dialogRef.close(true);
       this.feedbackToolbarService.openSnackBarWithSuccessMessage("Movie was deleted successfully");
-    }, () => {
-      this.feedbackToolbarService.openSnackBarWithErrorMessage(this.errorMsg);
     })
   }
 }

@@ -28,7 +28,7 @@ export class HomepageComponent implements OnInit{
   durationIntervals = ['<1h30m', '1h30m-2h0m', '2h0m-2h30m', '>2h30m'];
   genres: any;
   movies?: Movie[];
-  selectedValue?: any;
+  selectedValue = this.states[0];
   age?: number;
   date?: Date;
 

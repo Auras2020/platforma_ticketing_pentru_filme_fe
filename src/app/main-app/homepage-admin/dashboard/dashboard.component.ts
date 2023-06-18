@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Dashboard, DashboardService} from "./dashboard.service";
 import {UserService} from "../user/user.service";
+import {PendingRegistrationsComponent} from "../pending-registrations/pending-registrations.component";
+import {PendingRegistrationsService} from "../pending-registrations/pending-registrations.service";
+import {FeedbackToolbarService} from "../../../feedback-toolbar/feedback-toolbar.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -13,10 +16,16 @@ export class DashboardComponent implements OnInit{
   userName?: string;
 
   constructor(private dashboardService: DashboardService,
-              private userService: UserService) {
+              private userService: UserService,
+              private feedbackToolbarService: FeedbackToolbarService) {
   }
 
   ngOnInit(): void {
+    this.dashboardService.checkIfThereArePendingRequests().subscribe((checkForPendingRequests) => {
+      if(checkForPendingRequests){
+        this.feedbackToolbarService.openSnackBarWithSuccessMessage('There are pending registrations for ' + checkForPendingRequests + ' user' + (checkForPendingRequests > 1 ? 's' : ''));
+      }
+    })
     this.dashboardService.getCurrentInfo().subscribe((results) => {
       this.info = results;
     })

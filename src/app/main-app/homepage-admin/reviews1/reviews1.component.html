@@ -41,7 +41,7 @@
           </div>
 
           <div>
-            <div class="input-label">Category</div>
+            <div class="input-label">Age restrictions</div>
             <mat-form-field appearance="outline" class="filter-form">
               <mat-select
                 [(ngModel)]="filters.recommendedAge"
@@ -119,10 +119,10 @@
               {{movieReview.movie.name}}
             </div>
             <div class="movie-age">
-              Category: {{getMovieCategoryMeaning(movieReview.movie.recommendedAge)}}
+              Age restrictions: {{getMovieCategoryMeaning(movieReview.movie.recommendedAge)}}
             </div>
             <div class="movie-age">
-              Duration: {{formatDuration(movieReview.movie.duration)}}
+              Running time: {{formatDuration(movieReview.movie.duration)}}
             </div>
             <div class="movie-genre">
               Genre: {{getMovieGenres(movieReview.movie.genres)}}

@@ -29,7 +29,7 @@ export class AddProductComponent implements OnInit{
   fileName: string | null | undefined = '';
   isImageType?: boolean;
   imageSelected: boolean = false;
-  types = ['food', 'drink', 'menu'];
+  types = ['food', 'drink'];
   theatre?: Theatre;
 
   constructor(private productsService: ProductsService,

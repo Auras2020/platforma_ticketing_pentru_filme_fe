@@ -13,8 +13,10 @@ export const environment = {
     resetPassword: "reset-password",
     findAccount: "find-account",
     findEmail: "find-email/",
-    userPage:"users/page",
-    userPageFilter:"users/page/filter",
+    activeUserPage:"users/active/page",
+    activeUserPageFilter:"users/active/page/filter",
+    pendingUserPage:"users/pending/page",
+    pendingUserPageFilter:"users/pending/page/filter",
     theatres: "theatres/",
     theatrePage:"theatres/page",
     theatrePageFilter:"theatres/page/filter",
@@ -66,7 +68,9 @@ export const environment = {
     theatreManagerMovies: "movies/theatre-manager/movies",
     theatreManagerMoviesFiltered: "movies/theatre-manager/movies/filtered",
     theatreManagerShowTimings: "show-timings/theatre-manager/show-timings",
-    theatreManagerShowTimingsFiltered: "show-timings/theatre-manager/show-timings/filtered"
+    theatreManagerShowTimingsFiltered: "show-timings/theatre-manager/show-timings/filtered",
+    usersApproveRequest: "users/approve-request/",
+    checkForPendingRegistrations: "users/check-for-pending-registration"
   }
 };
 

@@ -16,7 +16,6 @@ import {
 import {OrdersService} from "../../orders/orders.service";
 import * as moment from "moment/moment";
 import {PromotionsService} from "../../../homepage-distribuitor/promotions/promotions.service";
-import {animate} from "@angular/animations";
 import {PaymentDetailsComponent} from "./payment-details/payment-details.component";
 
 @Component({
@@ -54,7 +53,7 @@ export class VenueSeats1Component implements OnInit{
   }
   searchString: string = '';
   filteredData?: ProductFilter | null
-  types = ['all', 'food', 'drink', 'menu'];
+  types = ['all', 'food', 'drink'];
   products: Product[] = [];
   productsList: number[] = [];
   productsPrices: number[] = [];

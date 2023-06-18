@@ -1,5 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {User, UserFilteredPage, UserFilters, UserPage, UserService} from "./user.service";
+import {
+  AdminUsers,
+  User,
+  UserFilteredPage,
+  UserFilters,
+  UserPResponse,
+  UserService
+} from "./user.service";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
@@ -25,7 +32,7 @@ export class UserComponent implements OnInit{
   filteredData?: UserFilters | null
   currentPage: number = 0
   pageSize:number = 10
-  pageSizeOptions:number[] = [5, 10, 15, 20]
+  pageSizeOptions:number[] = [1, 5, 10, 15, 20]
   dataSource = new MatTableDataSource<User>([]);
 
   roles = ['ADMIN', 'CLIENT', 'DISTRIBUTOR', 'THEATRE_MANAGER']
@@ -52,9 +59,8 @@ export class UserComponent implements OnInit{
     return user.email === currentUser.username && currentUser?.role === 'ADMIN'
   }
 
-  handleSuccess(usersPage: UserPage){
+  handleSuccess(usersPage: UserPResponse){
     this.paginator!.length = usersPage.totalItems
-    this.paginator!.pageIndex = usersPage.currentPage
     this.dataSource.data = usersPage.users
   }
 
@@ -67,13 +73,16 @@ export class UserComponent implements OnInit{
   getAllUsers() {
     this.getAllByFilters();
     if (this.filteredData) {
-      let usersFilteredPage: UserFilteredPage={
-        dto: this.filteredData,
+      let u = {
         size: this.pageSize,
         page: this.currentPage
       }
+      let adminUsers: AdminUsers={
+        userFilterDto: this.filteredData,
+        dto: u
+      }
 
-      this.userService.getUsersByFiltersPage(usersFilteredPage).subscribe(
+      this.userService.getAllFilteredActiveAccounts(adminUsers).subscribe(
         usersPage => {
           this.handleSuccess(usersPage)
         },
@@ -82,7 +91,11 @@ export class UserComponent implements OnInit{
         }
       )
     } else {
-      this.userService.getUsersByPage(this.currentPage, this.pageSize).subscribe(
+      let u = {
+        size: this.pageSize,
+        page: this.currentPage
+      }
+      this.userService.getAllActiveAccounts(u).subscribe(
         usersPage => {
           this.handleSuccess(usersPage)
         },

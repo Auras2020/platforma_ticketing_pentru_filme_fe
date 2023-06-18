@@ -55,7 +55,7 @@ export class LoginComponent{
 
       this.login = true;
 
-      if(user){
+      if(user && !user.pending){
         this.dialogRef.close(true);
         const {email, password, rememberMe} = this.form.value;
         this.loginService.login(email, password, rememberMe).subscribe((data) => {

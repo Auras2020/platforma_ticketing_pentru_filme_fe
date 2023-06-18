@@ -147,13 +147,13 @@ mat-table {
   font-size: 18px;
   font-weight: 600;
   padding-top: 18px;
-  /*width: 25%;*/
+  width: 20%;
 }
 
 .name-column {
   text-align: left;
   font-weight: 600;
-  width: 15%;
+  width: 18%;
   color: #213555;
   font-size: 14px;
   padding-top: 16px;

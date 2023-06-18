@@ -1,0 +1,238 @@
+.filter-card{
+  min-height: 156px;
+  margin: 24px;
+}
+
+.title-style{
+  font-size: 21px;
+  color: #213555;
+  font-weight: bold;
+  margin-right: 12px;
+  float: left;
+  padding-left: 24px;
+}
+
+.search-box {
+  color: #213555;
+  font-size: 16px;
+  position: absolute;
+  right: 0;
+  margin-top: 10px;
+}
+
+.search-box input {
+  padding-left: 15px;
+  margin-right: 24px;
+  border-radius: 20px;
+  border: 2px solid #CBDAF0;
+  background-color: #f8f9ff;
+  width: 250px;
+  height: 30px;
+  color: #213555;
+}
+.search-box input:focus{
+  outline: none !important;
+  border:2px solid #CBDAF0;
+  opacity: 0.5;
+}
+
+.search-box input { text-indent: 25px;}
+.search-box .fa-search {
+  position: absolute;
+  top: 7px;
+  left: 10px;
+}
+.search-box .fa-search-close {
+  position: absolute;
+  top: 7px;
+  left: 235px;
+  color: #213555;
+}
+
+.header-style{
+  display: inline-flex;
+}
+
+.title-and-filter-icon{
+  padding-top: 10px;
+}
+
+.filter-list{
+  color: #DC4E2A;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notification-bubble.notification {
+  background: #E72A2A;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  font-size: 8px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.line-style{
+  padding-bottom: 25px;
+  border-bottom: 2px solid #CBDAF0;
+}
+
+.table-card{
+  margin: 0 24px 24px 24px;
+  padding: 24px;
+}
+
+.input-label {
+  margin: 10px 0 0 20px;
+  color: #3E5F8D;
+  font-size: 18px;
+}
+
+.filter-form {
+  font-size: 14px;
+  margin-left: 20px;
+  padding: 0;
+}
+
+.form-input{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.reset-button {
+  color: #DC4E2A;
+  border: solid #DC4E2A;
+  height: 32px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin: 30px 0 30px 0;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reset-div{
+  align-items: flex-end;
+  align-content: center;
+  text-align: center;
+  margin-right: 24px;
+  position: absolute;
+  right: 0;
+}
+
+.forms-display{
+  display: inline-flex;
+  flex-wrap: wrap;
+}
+
+.mat-form-field {
+  flex: 1 1 calc(20% - 40px);
+  margin-right: 20px;
+}
+
+mat-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.mdc-data-table__header-cell{
+  color: #2F3032;
+  background-color: #CBDAF0 !important;
+  font-size: 18px;
+  font-weight: 600;
+  padding-top: 18px;
+  width: 20%;
+}
+
+.name-column {
+  text-align: left;
+  font-weight: 600;
+  width: 18%;
+  color: #213555;
+  font-size: 14px;
+  padding-top: 16px;
+  vertical-align: top;
+}
+
+.theatre-column {
+  text-align: left;
+  font-weight: 600;
+  width: 20%;
+  color: #213555;
+  font-size: 14px;
+  padding-top: 16px;
+  vertical-align: top;
+}
+
+.delete-column{
+  text-align: left;
+  font-weight: 600;
+  width: 8%;
+  color: #DC4E2A;
+  font-size: 14px;
+}
+
+.gray-row {
+  background-color: #F6F8F8 !important;
+}
+
+.row:hover{
+  background-color: #FFF3E0 !important;
+}
+
+.row, .header{
+  border: 2px solid #213555;
+}
+
+.darker{
+  background-color: #F6F8F8;
+}
+
+.mat-row{
+  align-items: start;
+  padding-top: 13px;
+}
+
+::ng-deep .mat-mdc-select-value{
+  color: #213555;
+}
+
+::ng-deep .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input {
+  color: #213555;
+}
+
+::ng-deep .mat-mdc-form-field-infix {
+  min-height: 32px;
+}
+
+.filters-row{
+  display: flex;
+  justify-content: space-between;
+}
+
+.empty-div, .filters{
+  align-items: flex-start;
+}
+
+.filter-style{
+  padding: 6px 10px 6px 10px;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  background-color: #213555;
+  text-align: center;
+  width: 100px;
+  display: block;
+}
+
+.filter-label{
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+}

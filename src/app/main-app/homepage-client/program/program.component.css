@@ -267,7 +267,7 @@ button:disabled {
 .movie-poster{
   padding-left: 20px;
   padding-top: 30px;
-  height: 230px;
+  height: 275px;
   width: 200px;
 }
 
@@ -327,6 +327,7 @@ button:disabled {
 }
 
 .actors-and-director{
+  width: 30%;
   align-self: center;
   display: flex;
   flex-direction: column;

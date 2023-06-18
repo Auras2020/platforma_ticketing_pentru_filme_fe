@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../../../environments/environment";
 import {Theatre} from "../theatres/theatres.service";
-
 export interface User{
   name: string;
   age: number;
@@ -13,6 +12,7 @@ export interface User{
   role: string;
   createdDate: Date;
   theatre: Theatre;
+  pending: boolean;
 }
 
 export interface UserFilters{
@@ -36,6 +36,21 @@ export interface UserPage{
   totalPages: number;
 }
 
+export class UserP {
+  page?: number;
+  size?: number;
+}
+
+export interface AdminUsers {
+  userFilterDto: UserFilters;
+  dto: UserP;
+}
+
+export interface UserPResponse {
+  users: User[];
+  totalItems: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -43,8 +58,8 @@ export class UserService {
 
   url = environment.apiUrl
   users =  environment.apiEndpoints.users
-  userPage = environment.apiEndpoints.userPage
-  userPageFilter = environment.apiEndpoints.userPageFilter
+  activeUserPage = environment.apiEndpoints.activeUserPage
+  activeUserPageFilter = environment.apiEndpoints.activeUserPageFilter
 
   constructor(private http: HttpClient) { }
 
@@ -56,15 +71,12 @@ export class UserService {
     return this.http.delete<null>(this.url + this.users + email)
   }
 
-  getUsersByPage(page: number, size: number): Observable<UserPage>{
-    let params = new HttpParams();
-    params = params.append('page', page);
-    params = params.append('size', size);
-    return this.http.get<UserPage>(this.url + this.userPage,{ params: params });
+  getAllActiveAccounts(userP: any): Observable<UserPResponse>{
+    return this.http.post<UserPResponse>(this.url + this.activeUserPage, userP);
   }
 
-  getUsersByFiltersPage(usersFilteredPage: UserFilteredPage): Observable<UserPage>{
-    return this.http.post<UserPage>(this.url + this.userPageFilter, usersFilteredPage);
+  getAllFilteredActiveAccounts(adminUsers: any): Observable<UserPResponse>{
+    return this.http.post<UserPResponse>(this.url + this.activeUserPageFilter, adminUsers);
   }
 
   getUserByEmail(email: any): Observable<User>{

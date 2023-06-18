@@ -107,6 +107,8 @@ import { VenueSeats4Component } from './main-app/homepage-theatre-manager/theatr
 import { TheatreDetails2Component } from './main-app/homepage-theatre-manager/theatre-details2/theatre-details2.component';
 import {TheatreManagerGuard} from "./authentication/guard/theatre-manager.guard";
 import { PendingRegistrationsComponent } from './main-app/homepage-admin/pending-registrations/pending-registrations.component';
+import { ApproveRegistrationComponent } from './main-app/homepage-admin/pending-registrations/approve-registration/approve-registration.component';
+import { DeleteRegistrationComponent } from './main-app/homepage-admin/pending-registrations/delete-registration/delete-registration.component';
 
 @NgModule({
   declarations: [
@@ -186,7 +188,9 @@ import { PendingRegistrationsComponent } from './main-app/homepage-admin/pending
     Statistics2Component,
     VenueSeats4Component,
     TheatreDetails2Component,
-    PendingRegistrationsComponent
+    PendingRegistrationsComponent,
+    ApproveRegistrationComponent,
+    DeleteRegistrationComponent
   ],
   imports: [
     BrowserModule,
