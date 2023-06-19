@@ -109,6 +109,8 @@ import {TheatreManagerGuard} from "./authentication/guard/theatre-manager.guard"
 import { PendingRegistrationsComponent } from './main-app/homepage-admin/pending-registrations/pending-registrations.component';
 import { ApproveRegistrationComponent } from './main-app/homepage-admin/pending-registrations/approve-registration/approve-registration.component';
 import { DeleteRegistrationComponent } from './main-app/homepage-admin/pending-registrations/delete-registration/delete-registration.component';
+import { PaymentDetails1Component } from './main-app/homepage-client/orders/payment-details1/payment-details1.component';
+import { PaymentDetails2Component } from './main-app/homepage-client/orders/payment-details2/payment-details2.component';
 
 @NgModule({
   declarations: [
@@ -190,7 +192,9 @@ import { DeleteRegistrationComponent } from './main-app/homepage-admin/pending-r
     TheatreDetails2Component,
     PendingRegistrationsComponent,
     ApproveRegistrationComponent,
-    DeleteRegistrationComponent
+    DeleteRegistrationComponent,
+    PaymentDetails1Component,
+    PaymentDetails2Component
   ],
   imports: [
     BrowserModule,

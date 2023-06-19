@@ -10,6 +10,8 @@ import {BookedProductsStatusComponent} from "./booked-products-status/booked-pro
 import {Order, OrderFilter, OrderFilteredPage, OrderP, OrderPage, OrdersService} from "./orders.service";
 import {FeedbackToolbarService} from "../../../feedback-toolbar/feedback-toolbar.service";
 import * as moment from 'moment';
+import {PaymentDetails1Component} from "./payment-details1/payment-details1.component";
+import {PaymentDetails2Component} from "./payment-details2/payment-details2.component";
 
 @Component({
   selector: 'app-orders',
@@ -261,7 +263,12 @@ export class OrdersComponent implements OnInit{
       dialogConfig.autoFocus = false
       dialogConfig.disableClose = true
 
-      const dialogRef = this.dialog.open(TicketsStatusComponent, dialogConfig)
+      let dialogRef;
+      if(event.value === 'bought'){
+        dialogRef = this.dialog.open(PaymentDetails1Component, dialogConfig)
+      } else {
+        dialogRef = this.dialog.open(TicketsStatusComponent, dialogConfig)
+      }
 
       dialogRef.afterClosed().subscribe(() => {
           this.getAllOrders();
@@ -291,7 +298,12 @@ export class OrdersComponent implements OnInit{
       dialogConfig.autoFocus = false
       dialogConfig.disableClose = true
 
-      const dialogRef = this.dialog.open(BookedProductsStatusComponent, dialogConfig)
+      let dialogRef;
+      if(event.value === 'bought'){
+        dialogRef = this.dialog.open(PaymentDetails2Component, dialogConfig)
+      } else {
+        dialogRef = this.dialog.open(BookedProductsStatusComponent, dialogConfig)
+      }
 
       dialogRef.afterClosed().subscribe(() => {
           this.getAllOrders();
