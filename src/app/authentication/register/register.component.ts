@@ -105,7 +105,6 @@ export class RegisterComponent implements OnInit{
   }
 
   saveUser() {
-    console.log(this.theatreControl.value);
     const parsedValue = {
       ...this.form.value,
       theatre: this.roleControl.value === 'THEATRE_MANAGER' ? this.theatreControl.value : null
