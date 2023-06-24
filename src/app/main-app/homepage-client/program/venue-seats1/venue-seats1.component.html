@@ -223,7 +223,7 @@
                   Price: {{product.price}} RON
                 </div>
                 <div class="product-quantity">
-                  Quantity: {{product.quantity}}g
+                  Quantity: {{product.quantity}}{{product.category === 'food' ? 'g' : 'ml'}}
                 </div>
                 <div class="product-number">
                   Number: {{product.number}}

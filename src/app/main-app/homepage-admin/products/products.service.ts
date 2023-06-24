@@ -37,6 +37,7 @@ export interface ProductDetails{
   price: number;
   quantity: number;
   number: number;
+  category: string;
 }
 
 @Injectable({

@@ -24,7 +24,7 @@ export class Products1Component implements OnInit{
   }
   searchString: string = '';
   filteredData?: ProductFilter | null
-  types = ['all', 'food', 'drink', 'menu'];
+  types = ['all', 'food', 'drink'];
   products?: Product[];
   selectedValue?: any;
   id: number = -1;

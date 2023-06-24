@@ -584,7 +584,8 @@ export class VenueSeats1Component implements OnInit{
           name: prod?.name,
           price: prod?.price,
           quantity: prod?.quantity,
-          number: p
+          number: p,
+          category: prod?.category
         }
         prodDetails.push(details);
       }

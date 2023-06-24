@@ -75,7 +75,7 @@
                 Price: {{product.price}} RON
               </div>
               <div class="movie-genre">
-                Quantity: {{product.quantity}}g
+                Quantity: {{product.quantity}}{{product.category === 'food' ? 'g' : 'ml'}}
               </div>
               <div class="movie-note">
                 Number: {{product.number}}
