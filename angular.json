@@ -13,6 +13,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "rfdc", "moment"
+            ],
             "outputPath": "dist/platforma_ticketing_fe",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -60,10 +63,14 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "platforma_ticketing_fe:build:production"
+              "browserTarget": "platforma_ticketing_fe:build:production",
+              "sslKey": "./ssl/localhost.key",
+              "sslCert": "./ssl/localhost.crt"
             },
             "development": {
-              "browserTarget": "platforma_ticketing_fe:build:development"
+              "browserTarget": "platforma_ticketing_fe:build:development",
+              "sslKey": "./ssl/localhost.key",
+              "sslCert": "./ssl/localhost.crt"
             }
           },
           "defaultConfiguration": "development"

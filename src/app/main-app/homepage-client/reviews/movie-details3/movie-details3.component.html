@@ -24,7 +24,7 @@
           </label>
         </div>
         <video width="540" height="360" controls *ngIf="movie?.trailerName !== null && movie?.trailerName !== 'null'" class="video-position">
-          <source [src]="'http://localhost:8080/movies/videos/' + movie?.trailerName" type="video/mp4">
+          <source [src]="'https://localhost:443/movies/videos/' + movie?.trailerName" type="video/mp4">
         </video>
       </div>
       <mat-divider [vertical]="true" class="divider-style"></mat-divider>
