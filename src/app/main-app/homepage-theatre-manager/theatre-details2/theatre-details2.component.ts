@@ -90,7 +90,7 @@ export class TheatreDetails2Component implements OnInit{
   }
 
   dayIndex(i: number): number{
-    return (i + this.currentDate.getDate() - 1) % 7;
+    return (i + this.currentDate.getDay() - 1) % 7;
   }
 
   previousWeek() {
